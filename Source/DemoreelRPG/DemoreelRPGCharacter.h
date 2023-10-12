@@ -55,7 +55,7 @@ public:
 
 	/** Player Channel */
 	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "Player Channel")
-	UPlayerChannels* PlayerChannels;
+	UPlayerChannels* playerChannels;
 
 protected:
 

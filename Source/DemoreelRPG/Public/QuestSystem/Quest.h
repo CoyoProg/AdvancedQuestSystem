@@ -7,6 +7,7 @@
 #include "Interfaces/Observer.h"
 #include "Enums/ObjectivesType.h"
 #include "Player/PlayerChannels.h"
+#include "BookQuest.h"
 #include "Quest.generated.h"
 
 USTRUCT(Blueprintable, BlueprintType)
@@ -88,13 +89,15 @@ public:
 	// To Do
 
 	UFUNCTION(BlueprintCallable, Category = "Quest")
-	void EnableQuest(UPlayerChannels* playerChannelsP);
+	void EnableQuest(UPlayerChannels* playerChannelsP, UBookQuest* bookQuestP);
 
 	void OnNotify_Implementation(const UObject* entity, ENotifyEventType eventTypeP, int UniqueObjectID = 0);
 
 private:
 	/** Player owner */
 	UPlayerChannels* playerChannels;
+	UBookQuest* BookQuest;
+
 	bool isAllObjectivesComplet = false;
 
 	bool IsSameObject(int objectiveIndexP, const UObject* entityP, int uniqueObjectIdP);

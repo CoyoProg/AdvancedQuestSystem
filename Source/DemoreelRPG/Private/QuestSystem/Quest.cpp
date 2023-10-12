@@ -33,6 +33,8 @@ void UQuest::OnNotify_Implementation(const UObject* entity, ENotifyEventType eve
 		isAllObjectivesComplet = true;
 		RemoveMyObservers();
 	}
+
+	BookQuest->UpdateQuestBook(this);
 }
 
 bool UQuest::IsSameObject(int objectiveIndexP, const UObject* entityP, int uniqueObjectIdP)
@@ -94,9 +96,11 @@ void UQuest::RemoveMyObservers()
 	}
 }
 
-void UQuest::EnableQuest(UObject* playerChannelsP)
+void UQuest::EnableQuest(UPlayerChannels* playerChannelsP, UBookQuest* bookQuestP)
 {
+	BookQuest = bookQuestP;
 	playerChannels = playerChannelsP;
 
 	AddMyObservers();
+	bookQuestP->AddQuest(this);
 }

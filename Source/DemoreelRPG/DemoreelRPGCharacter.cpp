@@ -55,7 +55,7 @@ ADemoreelRPGCharacter::ADemoreelRPGCharacter()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 
 	// Create a player channel
-	PlayerChannels = CreateDefaultSubobject<UPlayerChannels>(TEXT("PlayerChannels"));
+	playerChannels = CreateDefaultSubobject<UPlayerChannels>(TEXT("PlayerChannels"));
 }
 
 void ADemoreelRPGCharacter::BeginPlay()
