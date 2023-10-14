@@ -8,6 +8,7 @@
 #include "Enums/ObjectivesType.h"
 #include "Player/PlayerChannels.h"
 #include "BookQuest.h"
+#include "Misc/Guid.h"
 #include "Quest.generated.h"
 
 USTRUCT(Blueprintable, BlueprintType)
@@ -62,6 +63,8 @@ class DEMOREELRPG_API UQuest : public UObject, public IObserver
 	GENERATED_BODY()
 	
 public:
+	void AssignUniqueQuestID();
+
 	/** Quest specificities */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	FString questDescription;
@@ -69,14 +72,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	FString questTitle;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Quest")
 	int questID;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	TArray<FObjectives> objectives;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Quest")
-	int objectivesCompleted = 0;
+	bool isAllObjectivesComplet = false;
 
 	/** Rewards */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
@@ -89,7 +92,10 @@ public:
 	// To Do
 
 	UFUNCTION(BlueprintCallable, Category = "Quest")
-	void EnableQuest(UPlayerChannels* playerChannelsP, UBookQuest* bookQuestP);
+	void EnableQuest(UPlayerChannels* playerChannels, UBookQuest* bookQuest, UObject* questGiver);
+
+	UFUNCTION(BlueprintCallable, Category = "Quest")
+	void DisableQuest();
 
 	void OnNotify_Implementation(const UObject* entity, ENotifyEventType eventTypeP, int UniqueObjectID = 0);
 
@@ -97,8 +103,9 @@ private:
 	/** Player owner */
 	UPlayerChannels* playerChannels;
 	UBookQuest* BookQuest;
+	UObject* QuestGiver;
 
-	bool isAllObjectivesComplet = false;
+	int objectivesCompleted = 0;
 
 	bool IsSameObject(int objectiveIndexP, const UObject* entityP, int uniqueObjectIdP);
 	bool IsSameEventType(int objectiveIndexP, ENotifyEventType eventTypeP);

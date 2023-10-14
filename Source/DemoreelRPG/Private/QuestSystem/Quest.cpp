@@ -2,6 +2,7 @@
 
 
 #include "QuestSystem/Quest.h"
+#include "FileManagers.h"
 
 void UQuest::OnNotify_Implementation(const UObject* entity, ENotifyEventType eventTypeP, int UniqueObjectID)
 {
@@ -96,11 +97,28 @@ void UQuest::RemoveMyObservers()
 	}
 }
 
-void UQuest::EnableQuest(UPlayerChannels* playerChannelsP, UBookQuest* bookQuestP)
+void UQuest::AssignUniqueQuestID()
+{
+	int LastQuestID = FileManagers::LoadLastQuestID();
+	int NewQuestID = LastQuestID + 1;
+
+	// Save the new LastQuestID
+	FileManagers::SaveLastQuestID(NewQuestID);
+
+	questID = NewQuestID;
+}
+
+void UQuest::EnableQuest(UPlayerChannels* playerChannelsP, UBookQuest* bookQuestP, UObject* questGiverP)
 {
 	BookQuest = bookQuestP;
+	QuestGiver = questGiverP;
 	playerChannels = playerChannelsP;
 
 	AddMyObservers();
 	bookQuestP->AddQuest(this);
+}
+
+void UQuest::DisableQuest()
+{
+	BookQuest->RemoveQuest(this);
 }

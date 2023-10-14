@@ -18,8 +18,11 @@ class DEMOREELRPG_API UBookQuest : public UUserWidget
 	
 public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-	void AddQuest(UQuest* questP);
+	void AddQuest(UQuest* quest);
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-	void UpdateQuestBook(UQuest* questP);
+	void RemoveQuest(UQuest* quest);
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void UpdateQuestBook(UQuest* quest);
 };

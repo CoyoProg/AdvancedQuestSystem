@@ -8,6 +8,24 @@ public class DemoreelRPG : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
-	}
+		PublicDependencyModuleNames.AddRange(new string[] 
+		{ 
+			"Core", 
+			"CoreUObject", 
+			"Engine", 
+			
+			"InputCore", 
+			"EnhancedInput", 
+			
+			//"AssetTools",
+			"UnrealEd",
+		}
+		);
+
+        PrivateDependencyModuleNames.AddRange(new string[] 
+		{ 
+			"AssetTools" 
+		}
+		);
+    }
 }
