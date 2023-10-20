@@ -4,7 +4,6 @@
 
 #include "AssetToolsModule.h"				//AssetTools (Editor only)
 
-#include "Tools/QuestFactory.h"
 #include "QuestSystem/Quest.h"
 #include "Factories/WorldFactory.h"			//UnrealEd   (Editor only)
 #include "Factories/MaterialFactoryNew.h"	//UnrealEd   (Editor only)

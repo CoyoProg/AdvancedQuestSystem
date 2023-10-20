@@ -16,6 +16,5 @@ class DEMOREELRPG_API UQuestFactory : public UFactory
 	
 public:
 	UQuestFactory();
-
 	UObject* FactoryCreateNew(UClass* Class, UObject* InParent, FName Name, EObjectFlags Flags, UObject* Context, FFeedbackContext* Warn) override;
 };
