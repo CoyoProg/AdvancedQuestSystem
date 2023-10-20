@@ -6,8 +6,8 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "CreateAssets.generated.h"
 
-class UFactory;
 class UQuest;
+
 /**
  * 
  */

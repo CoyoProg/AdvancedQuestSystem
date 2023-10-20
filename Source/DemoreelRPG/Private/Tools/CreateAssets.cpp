@@ -2,11 +2,7 @@
 
 #include "Tools/CreateAssets.h"				
 
-#include "AssetToolsModule.h"				//AssetTools (Editor only)
-
 #include "QuestSystem/Quest.h"
-#include "Factories/WorldFactory.h"			//UnrealEd   (Editor only)
-#include "Factories/MaterialFactoryNew.h"	//UnrealEd   (Editor only)
 #include "FileManagers.h"
 
 int UCreateAssets::AssignUniqueQuestID()
