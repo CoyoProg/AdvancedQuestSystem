@@ -5,54 +5,11 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "Interfaces/Observer.h"
-#include "Enums/ObjectivesType.h"
 #include "Player/PlayerChannels.h"
 #include "BookQuest.h"
+#include "QuestData.h"
 #include "Misc/Guid.h"
 #include "Quest.generated.h"
-
-USTRUCT(Blueprintable, BlueprintType)
-struct FObjectives
-{
-	GENERATED_BODY()
-
-	/** Objectives specificities */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	EObjectivesType objectiveType;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	UClass* objectiveTarget;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Quest")
-	FString targetName;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Quest")
-	FString objectiveSummary;
-
-	/** If the goal is a unique target*/
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	bool isUnique = false;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	int uniqueObjectID = 0;
-
-	/** If the goal is timed */
-	//UPROPERTY(BlueprintReadOnly, Category = "Quest")
-	//bool isTimed = false;
-
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	//float timer = 0;
-
-	//UPROPERTY(BlueprintReadOnly, Category = "Quest")
-	//float CurrentTime = 0;
-
-	/** Amount needed to reach to goal */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	int amountNeeded = 1;
-
-	UPROPERTY(BlueprintReadOnly, Category = "Quest")
-	int CurrentAmount = 0;
-};
 	
 /**
  * 
@@ -63,33 +20,13 @@ class DEMOREELRPG_API UQuest : public UObject, public IObserver
 	GENERATED_BODY()
 	
 public:
-	void AssignUniqueQuestID();
-
-	/** Quest specificities */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	FString questDescription;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	FString questTitle;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Quest")
-	int questID;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	TArray<FObjectives> objectives;
+	UQuest();
 
 	UPROPERTY(BlueprintReadOnly, Category = "Quest")
 	bool isAllObjectivesComplet = false;
 
-	/** Rewards */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	int xpReward;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	int goldReward;
-
-	/** Inventory Reward */
-	// To Do
+	UQuestData* myData;
 
 	UFUNCTION(BlueprintCallable, Category = "Quest")
 	void EnableQuest(UPlayerChannels* playerChannels, UBookQuest* bookQuest, UObject* questGiver);

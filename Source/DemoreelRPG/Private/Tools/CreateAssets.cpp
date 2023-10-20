@@ -8,44 +8,15 @@
 #include "QuestSystem/Quest.h"
 #include "Factories/WorldFactory.h"			//UnrealEd   (Editor only)
 #include "Factories/MaterialFactoryNew.h"	//UnrealEd   (Editor only)
+#include "FileManagers.h"
 
-UQuest* UCreateAssets::CreateQuestAsset(FString assetPath, bool& boutSuccess, FString& outInfoMessage)
+int UCreateAssets::AssignUniqueQuestID()
 {
-	/* Get The asset tools module */
-	IAssetTools& AssetTools = FModuleManager::GetModuleChecked<FAssetToolsModule>("AssetTools").Get();
+	int LastQuestID = FileManagers::LoadLastQuestID();
+	int NewQuestID = LastQuestID + 1;
 
-	// Load your custom factory
-	UQuestFactory* CustomFactory = NewObject<UQuestFactory>();
+	// Save the new LastQuestID
+	FileManagers::SaveLastQuestID(NewQuestID);
 
-	UObject* Asset = AssetTools.CreateAsset(
-		FPaths::GetBaseFilename(assetPath),
-		FPaths::GetPath(assetPath),
-		UQuest::StaticClass(),
-		CustomFactory
-	);
-
-	if (Asset == nullptr)
-	{
-		boutSuccess = false;
-		outInfoMessage = FString::Printf(TEXT("Create asset failed - Either path is invalid or asset already exists. '%s'"), *assetPath);
-		return nullptr;
-	}
-
-	// Cast the asset to UQuest
-	UQuest* QuestAsset = Cast<UQuest>(Asset);
-
-	if (QuestAsset)
-	{
-		// Set properties of the UQuest object
-		QuestAsset->questTitle = "My super Custom Quest"; // Example property
-		QuestAsset->AssignUniqueQuestID();
-
-		// You can set any other properties as needed
-
-		boutSuccess = true;
-		outInfoMessage = FString::Printf(TEXT("Create asset succeeded. '%s'"), *assetPath);
-		return QuestAsset;
-	}
-
-	return nullptr;
+	return NewQuestID;
 }

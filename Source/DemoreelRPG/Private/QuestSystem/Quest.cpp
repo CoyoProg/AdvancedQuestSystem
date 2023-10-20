@@ -9,7 +9,7 @@ void UQuest::OnNotify_Implementation(const UObject* entity, ENotifyEventType eve
 	if (isAllObjectivesComplet)
 		return;
 
-	for (int i = 0; i < objectives.Num(); i++)
+	for (int i = 0; i < myData->objectives.Num(); i++)
 	{
 		if (!IsSameObject(i, entity, UniqueObjectID))
 			continue;
@@ -18,10 +18,10 @@ void UQuest::OnNotify_Implementation(const UObject* entity, ENotifyEventType eve
 			continue;
 
 		/** Update Quest */
-		objectives[i].CurrentAmount++;
+		myData->objectives[i].CurrentAmount++;
 
 		/** Check if the objective is completed */
-		if (objectives[i].CurrentAmount >= objectives[i].amountNeeded)
+		if (myData->objectives[i].CurrentAmount >= myData->objectives[i].amountNeeded)
 		{
 			objectivesCompleted++;
 		}
@@ -29,7 +29,7 @@ void UQuest::OnNotify_Implementation(const UObject* entity, ENotifyEventType eve
 
 	/** Check if all the objectives are completed
 		And Remove the Observers if all the objectives are completed*/
-	if (objectivesCompleted >= objectives.Num())
+	if (objectivesCompleted >= myData->objectives.Num())
 	{
 		isAllObjectivesComplet = true;
 		RemoveMyObservers();
@@ -40,15 +40,15 @@ void UQuest::OnNotify_Implementation(const UObject* entity, ENotifyEventType eve
 
 bool UQuest::IsSameObject(int objectiveIndexP, const UObject* entityP, int uniqueObjectIdP)
 {
-	if (objectives[objectiveIndexP].CurrentAmount >= objectives[objectiveIndexP].amountNeeded)
+	if (myData->objectives[objectiveIndexP].CurrentAmount >= myData->objectives[objectiveIndexP].amountNeeded)
 		return false;
 
-	UClass* ObjectiveTargetClass = objectives[objectiveIndexP].objectiveTarget;
+	UClass* ObjectiveTargetClass = myData->objectives[objectiveIndexP].objectiveTarget;
 
 	if (entityP->GetClass() != ObjectiveTargetClass)
 		return false;
 
-	if (objectives[objectiveIndexP].isUnique && uniqueObjectIdP != objectives[objectiveIndexP].uniqueObjectID)
+	if (myData->objectives[objectiveIndexP].isUnique && uniqueObjectIdP != myData->objectives[objectiveIndexP].uniqueObjectID)
 		return false;
 
 	return true;
@@ -59,19 +59,19 @@ bool UQuest::IsSameEventType(int objectiveIndexP, ENotifyEventType eventTypeP)
 	switch (eventTypeP)
 	{
 	case ENotifyEventType::Interact :
-		if (objectives[objectiveIndexP].objectiveType == EObjectivesType::Interact ||
-			objectives[objectiveIndexP].objectiveType == EObjectivesType::InteractUnique)
+		if (myData->objectives[objectiveIndexP].objectiveType == EObjectivesType::Interact ||
+			myData->objectives[objectiveIndexP].objectiveType == EObjectivesType::InteractUnique)
 			return true;
 		break;
 
 	case ENotifyEventType::Collect	:
-		if (objectives[objectiveIndexP].objectiveType == EObjectivesType::Collect ||
-			objectives[objectiveIndexP].objectiveType == EObjectivesType::CollectUnique)
+		if (myData->objectives[objectiveIndexP].objectiveType == EObjectivesType::Collect ||
+			myData->objectives[objectiveIndexP].objectiveType == EObjectivesType::CollectUnique)
 			return true;
 		break;
 	case ENotifyEventType::Kill :
-		if (objectives[objectiveIndexP].objectiveType == EObjectivesType::Kill ||
-			objectives[objectiveIndexP].objectiveType == EObjectivesType::KillUnique)
+		if (myData->objectives[objectiveIndexP].objectiveType == EObjectivesType::Kill ||
+			myData->objectives[objectiveIndexP].objectiveType == EObjectivesType::KillUnique)
 			return true;
 		break;
 	}
@@ -81,7 +81,7 @@ bool UQuest::IsSameEventType(int objectiveIndexP, ENotifyEventType eventTypeP)
 
 void UQuest::AddMyObservers()
 {
-	for (auto const&  myObjectives : objectives)
+	for (auto const&  myObjectives : myData->objectives)
 	{
 		EObjectivesType eventType = myObjectives.objectiveType;
 		playerChannels->AddObserver(this, eventType);
@@ -90,22 +90,17 @@ void UQuest::AddMyObservers()
 
 void UQuest::RemoveMyObservers()
 {
-	for (auto const& myObjectives : objectives)
+	for (auto const& myObjectives : myData->objectives)
 	{
 		EObjectivesType eventType = myObjectives.objectiveType;
 		playerChannels->RemoveObserver(this, eventType);
 	}
 }
 
-void UQuest::AssignUniqueQuestID()
+UQuest::UQuest()
 {
-	int LastQuestID = FileManagers::LoadLastQuestID();
-	int NewQuestID = LastQuestID + 1;
-
-	// Save the new LastQuestID
-	FileManagers::SaveLastQuestID(NewQuestID);
-
-	questID = NewQuestID;
+	// Create a data Quest
+	myData = CreateDefaultSubobject<UQuestData>(TEXT("Quest Data"));
 }
 
 void UQuest::EnableQuest(UPlayerChannels* playerChannelsP, UBookQuest* bookQuestP, UObject* questGiverP)
