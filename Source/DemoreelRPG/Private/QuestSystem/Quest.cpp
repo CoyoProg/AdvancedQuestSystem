@@ -2,6 +2,7 @@
 
 
 #include "QuestSystem/Quest.h"
+#include "QuestSystem/QuestComponent.h"
 #include "FileManagers.h"
 
 void UQuest::OnNotify_Implementation(const UObject* entity, ENotifyEventType eventTypeP, int UniqueObjectID)
@@ -31,11 +32,24 @@ void UQuest::OnNotify_Implementation(const UObject* entity, ENotifyEventType eve
 		And Remove the Observers if all the objectives are completed*/
 	if (objectivesCompleted >= myData->objectives.Num())
 	{
-		isAllObjectivesComplet = true;
+		UpdateQuestComponent();
 		RemoveMyObservers();
 	}
 
 	BookQuest->UpdateQuestBook(this);
+}
+
+void UQuest::UpdateQuestComponent()
+{
+	isAllObjectivesComplet = true;
+	UQuestComponent* questComponent = (UQuestComponent*)QuestGiver;
+
+	if (questComponent)
+	{
+		questComponent->UpdateQuestMarker();
+	}
+	else
+		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Yellow, TEXT("Component not found"));
 }
 
 bool UQuest::IsSameObject(int objectiveIndexP, const UObject* entityP, int uniqueObjectIdP)

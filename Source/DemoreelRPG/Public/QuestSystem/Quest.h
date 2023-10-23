@@ -36,6 +36,8 @@ public:
 
 	void OnNotify_Implementation(const UObject* entity, ENotifyEventType eventTypeP, int UniqueObjectID = 0);
 
+	void UpdateQuestComponent();
+
 private:
 	/** Player owner */
 	UPlayerChannels* playerChannels;

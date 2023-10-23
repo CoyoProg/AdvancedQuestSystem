@@ -19,12 +19,13 @@ public class DemoreelRPG : ModuleRules
 			
 			//"AssetTools",
 			"UnrealEd",
-		}
+			"UMG",
+        }
 		);
 
         PrivateDependencyModuleNames.AddRange(new string[] 
 		{ 
-			"AssetTools" 
+			"AssetTools"
 		}
 		);
     }

@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "UObject/ConstructorHelpers.h"
 #include "Components/WidgetComponent.h"
 #include "QuestSystem/QuestComponent.h"
 #include "QuestSystem/Quest.h"
@@ -19,7 +20,6 @@ void UQuestComponent::BeginPlay()
 	Super::BeginPlay();
 }
 
-
 // Called every frame
 void UQuestComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
@@ -27,28 +27,3 @@ void UQuestComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 
 	// ...
 }
-
-void UQuestComponent::CreateWidget()
-{
-}
-
-void UQuestComponent::UpdateWidget()
-{
-}
-
-void UQuestComponent::HideWidget()
-{
-}
-
-void UQuestComponent::RemoveWidgets()
-{
-}
-
-void UQuestComponent::SetQuestProperties(UQuest* quest)
-{
-}
-
-void UQuestComponent::DisableQuest()
-{
-}
-
