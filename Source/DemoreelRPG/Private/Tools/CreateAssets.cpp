@@ -15,3 +15,29 @@ int UCreateAssets::AssignUniqueQuestID()
 
 	return NewQuestID;
 }
+
+UActorComponent* UCreateAssets::AddComponent(TSubclassOf<class UActorComponent> ComponentClass, AActor* Actor, USceneComponent* ParentComponent, FName Name)
+{
+
+	UActorComponent* Result = nullptr;
+	if (!ComponentClass.Get())
+	{
+		return nullptr;
+	}
+
+	Result = NewObject<UActorComponent>(Actor, ComponentClass.Get(), Name);
+	USceneComponent* AsSceneComponent = Cast<USceneComponent>(Result);
+	if (AsSceneComponent)
+	{
+		AsSceneComponent->AttachToComponent(ParentComponent ? ParentComponent : Actor->GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
+		FTransform T;
+		AsSceneComponent->SetComponentToWorld(T);
+	}
+	Actor->AddInstanceComponent(Result);
+	Result->OnComponentCreated();
+	Result->RegisterComponent();
+
+	Actor->RerunConstructionScripts();
+
+	return Result;
+}
