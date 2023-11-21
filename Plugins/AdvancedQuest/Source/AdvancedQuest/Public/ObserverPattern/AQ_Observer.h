@@ -5,13 +5,13 @@
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
 
-#include "Enums/NotifyEventType.h"
+#include "Enums/AQ_NotifyEventType.h"
 
-#include "Observer.generated.h"
+#include "AQ_Observer.generated.h"
 
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI, BlueprintType)
-class UObserver : public UInterface
+class UAQ_Observer : public UInterface
 {
 	GENERATED_BODY()
 };
@@ -19,12 +19,12 @@ class UObserver : public UInterface
 /**
  * 
  */
-class DEMOREELRPG_API IObserver
+class ADVANCEDQUEST_API IAQ_Observer
 {
 	GENERATED_BODY()
 
-public:
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
+public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
-	void OnNotify(const UObject* entity, ENotifyEventType eventType, int UniqueObjectID = 0);
+	void OnNotify(const UObject* entity, EAQ_NotifyEventType eventType, int UniqueObjectID = 0);
 };

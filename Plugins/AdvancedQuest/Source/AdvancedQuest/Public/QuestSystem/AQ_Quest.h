@@ -4,51 +4,52 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "Interfaces/Observer.h"
-#include "Player/PlayerChannels.h"
-#include "BookQuest.h"
-#include "QuestData.h"
 #include "Misc/Guid.h"
 
-#include "Quest.generated.h"
-	
+#include "ObserverPattern/AQ_Observer.h"
+#include "PlayersChannels/AQ_PlayerChannels.h"
+#include "AQ_BookQuest.h"
+#include "AQ_QuestData.h"
+
+#include "AQ_Quest.generated.h"
+
 /**
  * 
  */
 UCLASS(Blueprintable, BlueprintType)
-class DEMOREELRPG_API UQuest : public UObject, public IObserver
+class ADVANCEDQUEST_API UAQ_Quest : public UObject, public IAQ_Observer
 {
 	GENERATED_BODY()
 	
 public:
-	UQuest();
+	UAQ_Quest();
 
 	UPROPERTY(BlueprintReadOnly, Category = "Quest")
 	bool isAllObjectivesComplet = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	UQuestData* myData;
+	UAQ_QuestData* myData;
 
 	UFUNCTION(BlueprintCallable, Category = "Quest")
-	void EnableQuest(UPlayerChannels* playerChannels, UBookQuest* bookQuest, UObject* questGiver);
+	void EnableQuest(UAQ_PlayerChannels* playerChannels, UAQ_BookQuest* bookQuest, UObject* questGiver);
 
 	UFUNCTION(BlueprintCallable, Category = "Quest")
 	void DisableQuest();
 
-	void OnNotify_Implementation(const UObject* entity, ENotifyEventType eventTypeP, int UniqueObjectID = 0);
+	void OnNotify_Implementation(const UObject* entity, EAQ_NotifyEventType eventTypeP, int UniqueObjectID = 0);
 
 	void UpdateQuestComponent();
 
 private:
 	/** Player owner */
-	UPlayerChannels* playerChannels;
-	UBookQuest* BookQuest;
+	UAQ_PlayerChannels* PlayerChannels;
+	UAQ_BookQuest* BookQuest;
 	UObject* QuestGiver;
 
 	int objectivesCompleted = 0;
 
 	bool IsSameObject(int objectiveIndexP, const UObject* entityP, int uniqueObjectIdP);
-	bool IsSameEventType(int objectiveIndexP, ENotifyEventType eventTypeP);
+	bool IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTypeP);
 
 	void AddMyObservers();
 	void RemoveMyObservers();

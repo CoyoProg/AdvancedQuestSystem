@@ -1,27 +1,31 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-#include "QuestSystem/QuestComponent.h"
 
-#include "UObject/ConstructorHelpers.h"
-#include "Components/WidgetComponent.h"
-#include "QuestSystem/Quest.h"
+
+#include "QuestSystem/AQ_QuestComponent.h"
 
 // Sets default values for this component's properties
-UQuestComponent::UQuestComponent()
+UAQ_QuestComponent::UAQ_QuestComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
+
+	// ...
 }
 
 
 // Called when the game starts
-void UQuestComponent::BeginPlay()
+void UAQ_QuestComponent::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// ...
+	
 }
 
+
 // Called every frame
-void UQuestComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UAQ_QuestComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 

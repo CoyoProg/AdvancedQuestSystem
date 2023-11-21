@@ -4,18 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
-#include "Enums/ObjectivesType.h"
+#include "Enums/AQ_ObjectivesType.h"
 
-#include "QuestData.generated.h"
+#include "AQ_QuestData.generated.h"
 
 USTRUCT(Blueprintable, BlueprintType)
-struct FObjectives
+struct FAQ_Objectives
 {
 	GENERATED_BODY()
 
 	/** Objectives specificities */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	EObjectivesType objectiveType;
+	EAQ_ObjectivesType objectiveType;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	UClass* objectiveTarget;
@@ -55,7 +55,7 @@ struct FObjectives
  * 
  */
 UCLASS(Blueprintable, BlueprintType)
-class DEMOREELRPG_API UQuestData : public UPrimaryDataAsset
+class ADVANCEDQUEST_API UAQ_QuestData : public UPrimaryDataAsset
 {
 	GENERATED_BODY()
 	
@@ -71,7 +71,7 @@ public:
 	int questID;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	TArray<FObjectives> objectives;
+	TArray<FAQ_Objectives> objectives;
 
 	/** Rewards */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")

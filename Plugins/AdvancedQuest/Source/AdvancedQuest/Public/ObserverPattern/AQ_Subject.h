@@ -1,0 +1,37 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "UObject/Interface.h"
+
+#include "Enums/AQ_NotifyEventType.h"
+
+#include "AQ_Subject.generated.h"
+
+// This class does not need to be modified.
+UINTERFACE(MinimalAPI, BlueprintType)
+class UAQ_Subject : public UInterface
+{
+	GENERATED_BODY()
+};
+
+/**
+ * 
+ */
+class ADVANCEDQUEST_API IAQ_Subject
+{
+	GENERATED_BODY()
+
+	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
+public:
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
+	void AddObserver(UObject* observer);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
+	void RemoveObserver(UObject* observer);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Subject")
+	void NotifySubjects(const UObject* entity, EAQ_NotifyEventType eventType, int UniqueObjectID = 0);
+
+};

@@ -1,22 +1,21 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Tools/CreateAssets.h"				
 
-#include "QuestSystem/Quest.h"
-#include "FileManagers.h"
+#include "Tools/AQ_CreateAssets.h"
+#include "External/AQ_FilesManager.h"
 
-int UCreateAssets::AssignUniqueQuestID()
+int UAQ_CreateAssets::AssignUniqueQuestID()
 {
-	int LastQuestID = FileManagers::LoadLastQuestID();
+	int LastQuestID = AQ_FilesManager::LoadLastQuestID();
 	int NewQuestID = LastQuestID + 1;
 
 	// Save the new LastQuestID
-	FileManagers::SaveLastQuestID(NewQuestID);
+	AQ_FilesManager::SaveLastQuestID(NewQuestID);
 
 	return NewQuestID;
 }
 
-UActorComponent* UCreateAssets::AddComponent(TSubclassOf<class UActorComponent> ComponentClass, AActor* Actor, USceneComponent* ParentComponent, FName Name)
+UActorComponent* UAQ_CreateAssets::AddComponent(TSubclassOf<class UActorComponent> ComponentClass, AActor* Actor, USceneComponent* ParentComponent, FName Name)
 {
 	UActorComponent* Result = nullptr;
 	if (!ComponentClass.Get())

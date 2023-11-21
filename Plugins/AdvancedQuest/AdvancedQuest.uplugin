@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Advanced Quest",
+	"Description": "Advanced Quest system using the Observer design pattern. Strongly linked to an advanced interaction system.",
+	"Category": "Other",
+	"CreatedBy": "Coyo",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": true,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "AdvancedQuest",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		}
+	]
+}

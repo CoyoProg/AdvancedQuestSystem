@@ -5,37 +5,37 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 
-#include "Enums/ObjectivesType.h"
+#include "Enums/AQ_ObjectivesType.h"
 
-#include "PlayerChannels.generated.h"
+#include "AQ_PlayerChannels.generated.h"
 
-class UInteractionChannel;
-class UInventoryChannel;
+class UAQ_InteractionChannel;
+class UAQ_InventoryChannel;
 
 /**
- * 
+ *
  */
 UCLASS(BlueprintType, Blueprintable)
-class DEMOREELRPG_API UPlayerChannels : public UObject
+class ADVANCEDQUEST_API UAQ_PlayerChannels : public UObject
 {
 	GENERATED_BODY()
-
+	
 public:
-	UPlayerChannels();
+	UAQ_PlayerChannels();
 
 	/** Interaction Channel */
 	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "Channels")
-	UInteractionChannel* interactionChannel;
+	UAQ_InteractionChannel* interactionChannel;
 
 	/** Inventory Channel */
 	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "Channels")
-	UInventoryChannel* inventoryChannel;
+	UAQ_InventoryChannel* inventoryChannel;
 
 	/** Add Observer to the corresponding channel */
 	UFUNCTION(BlueprintCallable, Category = "Events")
-	void AddObserver(UObject* entity, EObjectivesType eventType);
+	void AddObserver(UObject* entity, EAQ_ObjectivesType eventType);
 
 	/** Remove Observer to the corresponding channel */
 	UFUNCTION(BlueprintCallable, Category = "Events")
-	void RemoveObserver(UObject* entity, EObjectivesType eventType);
+	void RemoveObserver(UObject* entity, EAQ_ObjectivesType eventType);
 };
