@@ -2,6 +2,7 @@
 
 
 #include "External/AQ_FilesManager.h"
+#include "Interfaces/IPluginManager.h"
 
 AQ_FilesManager::AQ_FilesManager()
 {
@@ -14,6 +15,8 @@ AQ_FilesManager::~AQ_FilesManager()
 void AQ_FilesManager::SaveLastQuestID(int LastQuestID)
 {
     FString FilePath = FPaths::ProjectDir() + TEXT("LastQuestID.txt");
+
+    //FString FilePath = FPaths::ProjectDir() + TEXT("/Plugins/AdvancedQuest/") + TEXT("LastQuestID.txt");
     FString QuestIDString = FString::Printf(TEXT("%d"), LastQuestID);
 
     if (FFileHelper::SaveStringToFile(QuestIDString, *FilePath))
@@ -25,6 +28,7 @@ void AQ_FilesManager::SaveLastQuestID(int LastQuestID)
 int AQ_FilesManager::LoadLastQuestID()
 {
     FString FilePath = FPaths::ProjectDir() + TEXT("LastQuestID.txt");
+    //FString FilePath = FPaths::ProjectDir() + TEXT("/Plugins/AdvancedQuest/") + TEXT("LastQuestID.txt");
     FString QuestIDString;
     int LastQuestID = 0;
 

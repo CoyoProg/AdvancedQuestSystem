@@ -10,7 +10,8 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
-#include "Player/PlayerChannels.h"
+
+#include "../Plugins/AdvancedQuest/Source/AdvancedQuest/Public/PlayersChannels/AQ_PlayerChannels.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -55,7 +56,7 @@ ADemoreelRPGCharacter::ADemoreelRPGCharacter()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 
 	// Create a player channel
-	playerChannels = CreateDefaultSubobject<UPlayerChannels>(TEXT("PlayerChannels"));
+	playerChannels = CreateDefaultSubobject<UAQ_PlayerChannels>(TEXT("PlayerChannels"));
 }
 
 void ADemoreelRPGCharacter::BeginPlay()

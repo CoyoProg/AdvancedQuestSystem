@@ -15,7 +15,7 @@ class ADVANCEDQUEST_API UAQ_InventoryChannel : public UAQ_Channels
 	GENERATED_BODY()
 	
 public:
-	UAQ_InventoryChannel() {};
+	UAQ_InventoryChannel();
 
 	UFUNCTION(BlueprintCallable, Category = "Events")
 	void OnInteractionEvent(const UObject* entity, int UniqueObjectID = 0);

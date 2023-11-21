@@ -11,7 +11,7 @@ class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
-class UPlayerChannels;
+class UAQ_PlayerChannels;
 struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
@@ -55,7 +55,7 @@ public:
 
 	/** Player Channel */
 	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "Player Channel")
-	UPlayerChannels* playerChannels;
+	UAQ_PlayerChannels* playerChannels;
 
 protected:
 

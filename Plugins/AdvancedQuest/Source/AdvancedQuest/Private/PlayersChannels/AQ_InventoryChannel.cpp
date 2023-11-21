@@ -3,6 +3,10 @@
 
 #include "PlayersChannels/AQ_InventoryChannel.h"
 
+UAQ_InventoryChannel::UAQ_InventoryChannel()
+{
+}
+
 void UAQ_InventoryChannel::OnInteractionEvent(const UObject* entity, int UniqueObjectID)
 {
 	NotifySubjects_Implementation(entity, EAQ_NotifyEventType::Collect, UniqueObjectID);

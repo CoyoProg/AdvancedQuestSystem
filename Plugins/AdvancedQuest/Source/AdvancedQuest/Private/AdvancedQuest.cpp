@@ -6,6 +6,13 @@
 #include "Misc/MessageDialog.h"
 #include "ToolMenus.h"
 
+
+
+#include "EditorUtilityWidget.h"
+#include "EditorUtilityWidgetBlueprint.h"
+#include "EditorUtilitySubsystem.h"
+
+
 static const FName AdvancedQuestTabName("AdvancedQuest");
 
 #define LOCTEXT_NAMESPACE "FAdvancedQuestModule"
@@ -46,13 +53,35 @@ void FAdvancedQuestModule::ShutdownModule()
 
 void FAdvancedQuestModule::PluginButtonClicked()
 {
-	// Put your "OnButtonClicked" stuff here
-	FText DialogText = FText::Format(
-							LOCTEXT("PluginButtonDialogText", "Add code to {0} in {1} to override this button's actions"),
-							FText::FromString(TEXT("FAdvancedQuestModule::PluginButtonClicked()")),
-							FText::FromString(TEXT("AdvancedQuest.cpp"))
-					   );
-	FMessageDialog::Open(EAppMsgType::Ok, DialogText);
+	const FStringAssetReference widgetAssetPath
+	("/AdvancedQuest/Tools/QuestTool/EUW_CustomQuestTool.EUW_CustomQuestTool");
+
+	UObject* widgetAssetLoaded = widgetAssetPath.TryLoad();
+	if (widgetAssetLoaded == nullptr) {
+		UE_LOG(LogTemp, Warning, TEXT("Missing Expected widget class at :/AdvancedQuest/Tools/QuestTool/EUW_CustomQuestTool.EUW_CustomQuestTool"));
+		return;
+	}
+
+	UEditorUtilityWidgetBlueprint* widget = Cast<UEditorUtilityWidgetBlueprint>(widgetAssetLoaded);
+	if (widget == nullptr) {
+		UE_LOG(LogTemp, Warning, TEXT("Couldnt cast /AdvancedQuest/Tools/QuestTool/EUW_CustomQuestTool.EUW_CustomQuestTool to UEditorUtilityWidgetBlueprint"));
+		return;
+	}
+
+	UEditorUtilitySubsystem* EditorUtilitySubsystem = GEditor->GetEditorSubsystem<UEditorUtilitySubsystem>();
+	EditorUtilitySubsystem->SpawnAndRegisterTab(widget);
+
+
+
+
+	// Very Fancy Dialoge Prompt !!
+	//FText DialogText = FText::Format(
+	//						LOCTEXT("PluginButtonDialogText", "Add code to {0} in {1} to override this button's actions"),
+	//						FText::FromString(TEXT("FAdvancedQuestModule::PluginButtonClicked()")),
+	//						FText::FromString(TEXT("AdvancedQuest.cpp"))
+	//				   );
+	// 
+	//FMessageDialog::Open(EAppMsgType::Ok, DialogText);
 }
 
 void FAdvancedQuestModule::RegisterMenus()

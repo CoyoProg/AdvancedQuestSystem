@@ -17,9 +17,9 @@ public class DemoreelRPG : ModuleRules
 			"InputCore", 
 			"EnhancedInput", 
 			
-			//"AssetTools",
 			"UnrealEd",
 			"UMG",
+            "AdvancedQuest",
         }
 		);
 
