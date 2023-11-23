@@ -1,6 +1,4 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "PlayersChannels/AQ_Channels.h"
 #include "ObserverPattern/AQ_Observer.h"
 
@@ -10,6 +8,10 @@ void UAQ_Channels::AddObserver_Implementation(UObject* observerP)
 	{
 		Observers.AddUnique(observerP);
 	}
+
+	int32 YourIntegerValue = Observers.Num();
+	FString IntegerAsString = FString::Printf(TEXT("%d"), YourIntegerValue);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, *IntegerAsString);
 }
 
 void UAQ_Channels::RemoveObserver_Implementation(UObject* observerP)
@@ -22,18 +24,18 @@ void UAQ_Channels::RemoveObserver_Implementation(UObject* observerP)
 		{
 			if (Observers[Index] == observerP)
 			{
-				ItemIndex = Index;
+				//FScopeLock Lock(&ObserversMutex);
+
+				TFunction<void()> RemoveItemFunction = [this, observerP]()
+					{
+						Observers.RemoveSwap(observerP);
+					};
+
+				Async(EAsyncExecution::TaskGraphMainThread, RemoveItemFunction);
+
 				break;
 			}
 		}
-
-		if (Observers.IsValidIndex(ItemIndex))
-		{
-			Observers.RemoveAt(ItemIndex);
-		}
-
-		//if (Observers.Contains(observerP))
-		//	Observers.Remove(observerP);
 	}
 }
 

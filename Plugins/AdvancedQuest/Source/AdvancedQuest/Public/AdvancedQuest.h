@@ -18,11 +18,9 @@ public:
 	
 	/** This function will be bound to Command. */
 	void PluginButtonClicked();
-	
+
 private:
-
 	void RegisterMenus();
-
 
 private:
 	TSharedPtr<class FUICommandList> PluginCommands;

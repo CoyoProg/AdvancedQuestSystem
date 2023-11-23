@@ -20,4 +20,7 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = "Create Assets")
 	static UActorComponent* AddComponent(TSubclassOf<class UActorComponent> ComponentClass, AActor* Actor, USceneComponent* ParentComponent, FName Name);
+
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest System")
+	static void ShowFormattedDialog(const FString& InFileName);
 };

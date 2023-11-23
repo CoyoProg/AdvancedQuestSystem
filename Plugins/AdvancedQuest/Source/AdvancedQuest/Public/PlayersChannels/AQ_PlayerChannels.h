@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
 
 #include "Enums/AQ_ObjectivesType.h"
 
@@ -15,8 +15,8 @@ class UAQ_InventoryChannel;
 /**
  *
  */
-UCLASS(BlueprintType, Blueprintable)
-class ADVANCEDQUEST_API UAQ_PlayerChannels : public UObject
+UCLASS(ClassGroup = (AdvancedQuest), meta = (BlueprintSpawnableComponent))
+class ADVANCEDQUEST_API UAQ_PlayerChannels : public UActorComponent
 {
 	GENERATED_BODY()
 	

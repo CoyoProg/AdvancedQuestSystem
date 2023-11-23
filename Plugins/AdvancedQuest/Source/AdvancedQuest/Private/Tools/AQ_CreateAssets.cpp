@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "Tools/AQ_CreateAssets.h"
 #include "External/AQ_FilesManager.h"
+
+#define LOCTEXT_NAMESPACE "FAdvancedQuestModule"
 
 int UAQ_CreateAssets::AssignUniqueQuestID()
 {
@@ -38,4 +38,16 @@ UActorComponent* UAQ_CreateAssets::AddComponent(TSubclassOf<class UActorComponen
 	Actor->RerunConstructionScripts();
 
 	return Result;
+}
+
+void UAQ_CreateAssets::ShowFormattedDialog(const FString& InFileName)
+{
+	// Very Fancy Dialoge Prompt !!
+	FText DialogText = FText::Format
+	(
+		LOCTEXT("PluginButtonDialogText", "{0}"),
+		FText::FromString(InFileName)
+	);
+
+	FMessageDialog::Open(EAppMsgType::Ok, DialogText);
 }

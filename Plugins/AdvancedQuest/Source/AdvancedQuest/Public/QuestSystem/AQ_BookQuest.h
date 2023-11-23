@@ -7,7 +7,7 @@
 #include "AQ_BookQuest.generated.h"
 
 class UAQ_Quest;
-
+	
 /**
  *
  */

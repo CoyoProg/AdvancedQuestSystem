@@ -23,5 +23,6 @@ public:
 	virtual void NotifySubjects_Implementation(const UObject* entity, EAQ_NotifyEventType eventTypeP, int UniqueObjectID = 0) override;
 
 private:
+	FCriticalSection ObserversMutex;
 	TArray<UObject*> Observers;
 };

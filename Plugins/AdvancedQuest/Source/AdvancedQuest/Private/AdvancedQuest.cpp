@@ -70,18 +70,6 @@ void FAdvancedQuestModule::PluginButtonClicked()
 
 	UEditorUtilitySubsystem* EditorUtilitySubsystem = GEditor->GetEditorSubsystem<UEditorUtilitySubsystem>();
 	EditorUtilitySubsystem->SpawnAndRegisterTab(widget);
-
-
-
-
-	// Very Fancy Dialoge Prompt !!
-	//FText DialogText = FText::Format(
-	//						LOCTEXT("PluginButtonDialogText", "Add code to {0} in {1} to override this button's actions"),
-	//						FText::FromString(TEXT("FAdvancedQuestModule::PluginButtonClicked()")),
-	//						FText::FromString(TEXT("AdvancedQuest.cpp"))
-	//				   );
-	// 
-	//FMessageDialog::Open(EAppMsgType::Ok, DialogText);
 }
 
 void FAdvancedQuestModule::RegisterMenus()
