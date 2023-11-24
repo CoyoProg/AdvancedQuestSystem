@@ -23,6 +23,7 @@ class ADVANCEDQUEST_API UAQ_Quest : public UObject, public IAQ_Observer
 	
 public:
 	UAQ_Quest();
+	~UAQ_Quest();
 
 	UPROPERTY(BlueprintReadOnly, Category = "Quest")
 	bool isAllObjectivesComplet = false;
@@ -36,10 +37,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Quest")
 	void DisableQuest();
 
-	void OnNotify_Implementation(const UObject* entity, EAQ_NotifyEventType eventTypeP, int UniqueObjectID = 0);
+	void OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP, int UniqueObjectID = 0);
 
 	void UpdateQuestComponent();
 
+	UFUNCTION(BlueprintCallable, Category = "Quest")
+	void EndPlay();
 private:
 	/** Player owner */
 	UAQ_PlayerChannels* PlayerChannels;
@@ -48,7 +51,7 @@ private:
 
 	int objectivesCompleted = 0;
 
-	bool IsSameObject(int objectiveIndexP, const UObject* entityP, int uniqueObjectIdP);
+	bool IsSameObject(int objectiveIndexP,UObject* entityP, int uniqueObjectIdP);
 	bool IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTypeP);
 
 	void AddMyObservers();

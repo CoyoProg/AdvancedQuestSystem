@@ -20,7 +20,7 @@ class ADVANCEDQUEST_API UAQ_Channels : public UObject, public IAQ_Subject
 public:
 	virtual void AddObserver_Implementation(UObject* observerP) override;
 	virtual void RemoveObserver_Implementation(UObject* observerP) override;
-	virtual void NotifySubjects_Implementation(const UObject* entity, EAQ_NotifyEventType eventTypeP, int UniqueObjectID = 0) override;
+	virtual void NotifySubjects_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP, int UniqueObjectID = 0) override;
 
 private:
 	FCriticalSection ObserversMutex;

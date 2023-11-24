@@ -7,7 +7,7 @@ UAQ_InventoryChannel::UAQ_InventoryChannel()
 {
 }
 
-void UAQ_InventoryChannel::OnInteractionEvent(const UObject* entity, int UniqueObjectID)
+void UAQ_InventoryChannel::OnInteractionEvent(UObject* entity, int UniqueObjectID)
 {
 	NotifySubjects_Implementation(entity, EAQ_NotifyEventType::Collect, UniqueObjectID);
 }

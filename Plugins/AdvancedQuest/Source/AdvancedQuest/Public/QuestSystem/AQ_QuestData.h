@@ -21,9 +21,6 @@ struct FAQ_Objectives
 	UClass* objectiveTarget;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Quest")
-	FString targetName;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Quest")
 	FString objectiveSummary;
 
 	/** If the goal is a unique target*/
@@ -32,16 +29,6 @@ struct FAQ_Objectives
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	int uniqueObjectID = 0;
-
-	/** If the goal is timed */
-	//UPROPERTY(BlueprintReadOnly, Category = "Quest")
-	//bool isTimed = false;
-
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	//float timer = 0;
-
-	//UPROPERTY(BlueprintReadOnly, Category = "Quest")
-	//float CurrentTime = 0;
 
 	/** Amount needed to reach to goal */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")

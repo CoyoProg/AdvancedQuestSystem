@@ -16,7 +16,7 @@ class ADVANCEDQUEST_API UAQ_CreateAssets : public UBlueprintFunctionLibrary
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "Create Assets")
-	static int AssignUniqueQuestID();
+	static int AssignUniqueID(const FString& valueName);
 	
 	UFUNCTION(BlueprintCallable, Category = "Create Assets")
 	static UActorComponent* AddComponent(TSubclassOf<class UActorComponent> ComponentClass, AActor* Actor, USceneComponent* ParentComponent, FName Name);

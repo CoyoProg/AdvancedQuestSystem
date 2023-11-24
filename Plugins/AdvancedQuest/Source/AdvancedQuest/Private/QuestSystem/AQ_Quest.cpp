@@ -4,12 +4,17 @@
 #include "QuestSystem/AQ_Quest.h"
 
 #include "QuestSystem/AQ_QuestComponent.h"
+#include "QuestSystem/AQ_UniqueIDComponent.h"
 #include "External/AQ_FilesManager.h"
 
 UAQ_Quest::UAQ_Quest()
 {
 	// Create a data Quest
 	myData = CreateDefaultSubobject<UAQ_QuestData>(TEXT("Quest Data"));
+}
+
+UAQ_Quest::~UAQ_Quest()
+{
 }
 
 void UAQ_Quest::EnableQuest(UAQ_PlayerChannels* playerChannels, UAQ_BookQuest* bookQuest, UObject* questGiver)
@@ -27,7 +32,7 @@ void UAQ_Quest::DisableQuest()
 	BookQuest->RemoveQuest(this);
 }
 
-void UAQ_Quest::OnNotify_Implementation(const UObject* entity, EAQ_NotifyEventType eventTypeP, int UniqueObjectID)
+void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP, int UniqueObjectID)
 {
 	if (isAllObjectivesComplet)
 		return;
@@ -75,7 +80,12 @@ void UAQ_Quest::UpdateQuestComponent()
 
 }
 
-bool UAQ_Quest::IsSameObject(int objectiveIndexP, const UObject* entityP, int uniqueObjectIdP)
+void UAQ_Quest::EndPlay()
+{
+	RemoveMyObservers();
+}
+
+bool UAQ_Quest::IsSameObject(int objectiveIndexP, UObject* entityP, int uniqueObjectIdP)
 {
 	if (myData->objectives[objectiveIndexP].CurrentAmount >= myData->objectives[objectiveIndexP].amountNeeded)
 		return false;
@@ -85,8 +95,20 @@ bool UAQ_Quest::IsSameObject(int objectiveIndexP, const UObject* entityP, int un
 	if (entityP->GetClass() != ObjectiveTargetClass)
 		return false;
 
-	if (myData->objectives[objectiveIndexP].isUnique && uniqueObjectIdP != myData->objectives[objectiveIndexP].uniqueObjectID)
-		return false;
+	AActor* MyActor = Cast<AActor>(entityP);
+	UAQ_UniqueIDComponent* UniqueIDComponent = MyActor->FindComponentByClass<UAQ_UniqueIDComponent>();
+
+	if (myData->objectives[objectiveIndexP].isUnique)
+	{
+		int UniqueID = 0;
+		if (!UniqueIDComponent)
+			return false;
+		
+		UniqueID = UniqueIDComponent->GetUniqueID();
+
+		if (UniqueID != myData->objectives[objectiveIndexP].uniqueObjectID)
+			return false;
+	}
 
 	return true;
 }
@@ -130,6 +152,10 @@ void UAQ_Quest::RemoveMyObservers()
 	for (auto const& myObjectives : myData->objectives)
 	{
 		EAQ_ObjectivesType eventType = myObjectives.objectiveType;
-		PlayerChannels->RemoveObserver(this, eventType);
+
+		if (PlayerChannels)
+		{
+			PlayerChannels->RemoveObserver(this, eventType);
+		}
 	}
 }

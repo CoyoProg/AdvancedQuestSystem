@@ -13,14 +13,3 @@ UAQ_UniqueIDComponent::UAQ_UniqueIDComponent()
 
 	// ...
 }
-
-int UAQ_UniqueIDComponent::AssignUniqueID()
-{
-	int LastUniqueID = AQ_FilesManager::LoadLastQuestID("LastUniqueActorID");
-	int NewUniqueID = LastUniqueID + 1;
-
-	// Save the new LastQuestID
-	AQ_FilesManager::SaveLastQuestID(NewUniqueID, "LastUniqueActorID");
-
-	return NewUniqueID;
-}

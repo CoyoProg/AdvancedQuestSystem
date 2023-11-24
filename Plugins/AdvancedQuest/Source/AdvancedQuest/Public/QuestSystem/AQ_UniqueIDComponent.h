@@ -16,11 +16,12 @@ public:
 	// Sets default values for this component's properties
 	UAQ_UniqueIDComponent();
 
-	UFUNCTION(BlueprintCallable, Category = "Unique ID")
-	static int AssignUniqueID();
+	UFUNCTION(BlueprintCallable, Category = "Unique ID Component")
+	void SetUniqueID(int uniqueID) { UniqueID = uniqueID; }
 
+	UFUNCTION(BlueprintCallable, Category = "Unique ID Component")
 	const int GetUniqueID() const { return UniqueID; }
 
-private:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Unique ID Component")
 	int UniqueID;
 };

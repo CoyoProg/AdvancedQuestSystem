@@ -39,7 +39,7 @@ void UAQ_Channels::RemoveObserver_Implementation(UObject* observerP)
 	}
 }
 
-void UAQ_Channels::NotifySubjects_Implementation(const UObject* entity, EAQ_NotifyEventType eventTypeP, int UniqueObjectID)
+void UAQ_Channels::NotifySubjects_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP, int UniqueObjectID)
 {
 	if (Observers.Num() == 0)
 		return;

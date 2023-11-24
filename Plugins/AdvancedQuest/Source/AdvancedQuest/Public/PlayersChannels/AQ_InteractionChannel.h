@@ -16,7 +16,8 @@ class ADVANCEDQUEST_API UAQ_InteractionChannel : public UAQ_Channels
 	
 public:
 	UAQ_InteractionChannel();
+	~UAQ_InteractionChannel();
 
 	UFUNCTION(BlueprintCallable, Category = "Events")
-	void OnInteractionEvent(const UObject* entity, int UniqueObjectID = 0);
+	void OnInteractionEvent(UObject* entity, int UniqueObjectID = 0);
 };

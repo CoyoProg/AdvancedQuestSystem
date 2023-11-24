@@ -26,5 +26,5 @@ class ADVANCEDQUEST_API IAQ_Observer
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
-	void OnNotify(const UObject* entity, EAQ_NotifyEventType eventType, int UniqueObjectID = 0);
+	void OnNotify(UObject* entity, EAQ_NotifyEventType eventType, int UniqueObjectID = 0);
 };

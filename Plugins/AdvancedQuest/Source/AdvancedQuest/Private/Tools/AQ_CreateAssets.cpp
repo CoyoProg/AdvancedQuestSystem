@@ -4,13 +4,13 @@
 
 #define LOCTEXT_NAMESPACE "FAdvancedQuestModule"
 
-int UAQ_CreateAssets::AssignUniqueQuestID()
+int UAQ_CreateAssets::AssignUniqueID(const FString& valueName)
 {
-	int LastQuestID = AQ_FilesManager::LoadLastQuestID("LastQuestId");
+	int LastQuestID = AQ_FilesManager::LoadLastQuestID(valueName);
 	int NewQuestID = LastQuestID + 1;
 
 	// Save the new LastQuestID
-	AQ_FilesManager::SaveLastQuestID(NewQuestID, "LastQuestId");
+	AQ_FilesManager::SaveLastQuestID(NewQuestID, valueName);
 
 	return NewQuestID;
 }
