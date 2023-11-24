@@ -12,30 +12,74 @@ AQ_FilesManager::~AQ_FilesManager()
 {
 }
 
-void AQ_FilesManager::SaveLastQuestID(int LastQuestID)
+void AQ_FilesManager::SaveLastQuestID(int identificatorP, const FString& ValueName)
 {
-    FString FilePath = FPaths::ProjectDir() + TEXT("LastQuestID.txt");
+    FString FilePath = FPaths::ProjectPluginsDir() / TEXT("AdvancedQuest") / TEXT("UniqueID.txt");
 
-    //FString FilePath = FPaths::ProjectDir() + TEXT("/Plugins/AdvancedQuest/") + TEXT("LastQuestID.txt");
-    FString QuestIDString = FString::Printf(TEXT("%d"), LastQuestID);
+    // Create a formatted string with the key-value pairs
+    FString SaveString = ValueName + FString::Printf(TEXT(": %d"), identificatorP);
 
-    if (FFileHelper::SaveStringToFile(QuestIDString, *FilePath))
+    // Load the existing content of the file
+    FString ExistingContent;
+
+    if (FFileHelper::LoadFileToString(ExistingContent, *FilePath))
     {
-        // Successfully saved the quest ID
+        // Split the file content into lines
+        TArray<FString> Lines;
+        ExistingContent.ParseIntoArrayLines(Lines);
+
+        // Find and replace the lines with the new values
+        for (int32 i = 0; i < Lines.Num(); ++i)
+        {
+            if (Lines[i].StartsWith(ValueName))
+            {
+                Lines[i] = ValueName + FString::Printf(TEXT(": %d"), identificatorP);
+            }
+        }
+
+        // Join the lines back into a single string
+        SaveString = FString::Join(Lines, TEXT("\n"));
     }
+
+    if (FFileHelper::SaveStringToFile(SaveString, *FilePath))
+    {
+        // Succeed to save to file
+    };
 }
 
-int AQ_FilesManager::LoadLastQuestID()
+int AQ_FilesManager::LoadLastQuestID(const FString& ValueName)
 {
-    FString FilePath = FPaths::ProjectDir() + TEXT("LastQuestID.txt");
-    //FString FilePath = FPaths::ProjectDir() + TEXT("/Plugins/AdvancedQuest/") + TEXT("LastQuestID.txt");
-    FString QuestIDString;
-    int LastQuestID = 0;
+    FString FilePath = FPaths::ProjectPluginsDir() / TEXT("AdvancedQuest") / TEXT("UniqueID.txt");
 
+    int identificator = 0;
+
+    FString QuestIDString;
     if (FFileHelper::LoadFileToString(QuestIDString, *FilePath))
     {
-        LastQuestID = FCString::Atoi(*QuestIDString);
+        // Split the file content into lines
+        TArray<FString> Lines;
+        QuestIDString.ParseIntoArrayLines(Lines);
+
+        // Iterate through each line to find the values
+        for (const FString& Line : Lines)
+        {
+            TArray<FString> KeyValues;
+            Line.ParseIntoArray(KeyValues, TEXT(":"));
+
+            if (KeyValues.Num() == 2)
+            {
+                // Trim any whitespace from the key and value
+                FString Key = KeyValues[0].TrimStartAndEnd();
+                FString Value = KeyValues[1].TrimStartAndEnd();
+
+                // Check the key and parse the corresponding value
+                if (Key.Equals(ValueName, ESearchCase::IgnoreCase))
+                {
+                    identificator = FCString::Atoi(*Value);
+                }
+            }
+        }
     }
 
-    return LastQuestID;
+    return identificator;
 }

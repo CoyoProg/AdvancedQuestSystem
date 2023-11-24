@@ -13,6 +13,6 @@ public:
 	AQ_FilesManager();
 	~AQ_FilesManager();
 
-	static void SaveLastQuestID(int LastQuestID);
-	static int LoadLastQuestID();
+	static void SaveLastQuestID(int identificatorP, const FString& ValueName);
+	static int LoadLastQuestID(const FString& ValueName);
 };

@@ -6,11 +6,11 @@
 
 int UAQ_CreateAssets::AssignUniqueQuestID()
 {
-	int LastQuestID = AQ_FilesManager::LoadLastQuestID();
+	int LastQuestID = AQ_FilesManager::LoadLastQuestID("LastQuestId");
 	int NewQuestID = LastQuestID + 1;
 
 	// Save the new LastQuestID
-	AQ_FilesManager::SaveLastQuestID(NewQuestID);
+	AQ_FilesManager::SaveLastQuestID(NewQuestID, "LastQuestId");
 
 	return NewQuestID;
 }
@@ -42,7 +42,7 @@ UActorComponent* UAQ_CreateAssets::AddComponent(TSubclassOf<class UActorComponen
 
 void UAQ_CreateAssets::ShowFormattedDialog(const FString& InFileName)
 {
-	// Very Fancy Dialoge Prompt !!
+	// Very Fancy Dialoge Prompt !
 	FText DialogText = FText::Format
 	(
 		LOCTEXT("PluginButtonDialogText", "{0}"),
