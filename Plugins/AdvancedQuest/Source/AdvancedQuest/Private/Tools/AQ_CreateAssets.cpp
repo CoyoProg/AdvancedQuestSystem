@@ -40,30 +40,18 @@ UActorComponent* UAQ_CreateAssets::AddComponent(TSubclassOf<class UActorComponen
 	return Result;
 }
 
-UActorComponent* UAQ_CreateAssets::RemoveComponent(TSubclassOf<class UActorComponent> ComponentClass, AActor* Actor, USceneComponent* ParentComponent, FName Name)
+void UAQ_CreateAssets::RemoveComponent(UActorComponent* ActorComponent, AActor* Actor)
 {
-	UActorComponent* Result = nullptr;
-	if (!ComponentClass.Get())
-	{
-		return nullptr;
-	}
-
-	Result = NewObject<UActorComponent>(Actor, ComponentClass.Get(), Name);
-	USceneComponent* AsSceneComponent = Cast<USceneComponent>(Result);
-	if (AsSceneComponent)
-	{
-		AsSceneComponent->AttachToComponent(ParentComponent ? ParentComponent : Actor->GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
-		FTransform T;
-		AsSceneComponent->SetComponentToWorld(T);
-	}
-	Actor->RemoveInstanceComponent(Result);
-	Result->OnComponentDestroyed(false);
-	Result->DestroyComponent();
-	Result->UnregisterComponent();
-
+	//USceneComponent* AsSceneComponent = Cast<USceneComponent>(ComponentClass);
+	//if (AsSceneComponent)
+	//{
+	//	AsSceneComponent->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+	//	FTransform T;
+	//	AsSceneComponent->UpdateComponentToWorld();
+	//}
+	Actor->RemoveInstanceComponent(ActorComponent);
+	ActorComponent->DestroyComponent();
 	Actor->RerunConstructionScripts();
-
-	return nullptr;
 }
 
 void UAQ_CreateAssets::ShowFormattedDialog(const FString& InFileName)

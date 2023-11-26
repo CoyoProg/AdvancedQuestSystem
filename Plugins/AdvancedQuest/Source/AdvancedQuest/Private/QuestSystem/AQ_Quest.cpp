@@ -118,19 +118,16 @@ bool UAQ_Quest::IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTy
 	switch (eventTypeP)
 	{
 	case EAQ_NotifyEventType::Interact:
-		if (myData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Interact ||
-			myData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::InteractUnique)
+		if (myData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Interact)
 			return true;
 		break;
 
 	case EAQ_NotifyEventType::Collect:
-		if (myData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Collect ||
-			myData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::CollectUnique)
+		if (myData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Collect)
 			return true;
 		break;
 	case EAQ_NotifyEventType::Kill:
-		if (myData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Kill ||
-			myData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::KillUnique)
+		if (myData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Kill)
 			return true;
 		break;
 	}

@@ -22,7 +22,7 @@ public:
 	static UActorComponent* AddComponent(TSubclassOf<class UActorComponent> ComponentClass, AActor* Actor, USceneComponent* ParentComponent, FName Name);
 
 	UFUNCTION(BlueprintCallable, Category = "Create Assets")
-	static UActorComponent* RemoveComponent(TSubclassOf<class UActorComponent> ComponentClass, AActor* Actor, USceneComponent* ParentComponent, FName Name);
+	static void RemoveComponent(UActorComponent* ActorComponent, AActor* Actors);
 
 	UFUNCTION(BlueprintCallable, Category = "Advanced Quest System")
 	static void ShowFormattedDialog(const FString& InFileName);
