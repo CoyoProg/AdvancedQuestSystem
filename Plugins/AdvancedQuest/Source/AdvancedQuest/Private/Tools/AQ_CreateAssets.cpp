@@ -42,13 +42,6 @@ UActorComponent* UAQ_CreateAssets::AddComponent(TSubclassOf<class UActorComponen
 
 void UAQ_CreateAssets::RemoveComponent(UActorComponent* ActorComponent, AActor* Actor)
 {
-	//USceneComponent* AsSceneComponent = Cast<USceneComponent>(ComponentClass);
-	//if (AsSceneComponent)
-	//{
-	//	AsSceneComponent->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
-	//	FTransform T;
-	//	AsSceneComponent->UpdateComponentToWorld();
-	//}
 	Actor->RemoveInstanceComponent(ActorComponent);
 	ActorComponent->DestroyComponent();
 	Actor->RerunConstructionScripts();

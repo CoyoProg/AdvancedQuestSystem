@@ -6,7 +6,8 @@
 #include "Misc/MessageDialog.h"
 #include "ToolMenus.h"
 
-
+#include "Misc/CoreDelegates.h"
+#include "Editor/EditorEngine.h"
 
 #include "EditorUtilityWidget.h"
 #include "EditorUtilityWidgetBlueprint.h"
@@ -32,9 +33,14 @@ void FAdvancedQuestModule::StartupModule()
 	(
 		FAdvancedQuestCommands::Get().PluginAction,
 		FExecuteAction::CreateRaw(this, &FAdvancedQuestModule::PluginButtonClicked),
-		FCanExecuteAction());
+		FCanExecuteAction()
+	);
 
 	UToolMenus::RegisterStartupCallback(FSimpleMulticastDelegate::FDelegate::CreateRaw(this, &FAdvancedQuestModule::RegisterMenus));
+
+	// Bind the OnBeginPIE & OnEndPIE delegates
+	FEditorDelegates::BeginPIE.AddRaw(this, &FAdvancedQuestModule::OnBeginPIEHandler);
+	FEditorDelegates::EndPIE.AddRaw(this, &FAdvancedQuestModule::OnEndPIEHandler);
 }
 
 void FAdvancedQuestModule::ShutdownModule()
@@ -49,27 +55,51 @@ void FAdvancedQuestModule::ShutdownModule()
 	FAdvancedQuestStyle::Shutdown();
 
 	FAdvancedQuestCommands::Unregister();
+
+	FEditorDelegates::BeginPIE.RemoveAll(this);
+	FEditorDelegates::EndPIE.RemoveAll(this);
+
+	isOpen = false;
 }
 
 void FAdvancedQuestModule::PluginButtonClicked()
 {
+	if (isPIE)
+		return;
+
+	if (isOpen)
+	{
+		ClosePlugin();
+		return;
+	}
+
 	const FStringAssetReference widgetAssetPath
-	("/AdvancedQuest/Tools/QuestTool/EUW_CustomQuestTool.EUW_CustomQuestTool");
+	("/AdvancedQuest/Tools/QuestTool/AQ_EUW_CustomQuestTool.AQ_EUW_CustomQuestTool");
 
 	UObject* widgetAssetLoaded = widgetAssetPath.TryLoad();
 	if (widgetAssetLoaded == nullptr) {
-		UE_LOG(LogTemp, Warning, TEXT("Missing Expected widget class at :/AdvancedQuest/Tools/QuestTool/EUW_CustomQuestTool.EUW_CustomQuestTool"));
+		UE_LOG(LogTemp, Warning, TEXT("Missing Expected widget class at :/AdvancedQuest/Tools/QuestTool/AQ_EUW_CustomQuestTool.AQ_EUW_CustomQuestTool"));
 		return;
 	}
 
 	UEditorUtilityWidgetBlueprint* widget = Cast<UEditorUtilityWidgetBlueprint>(widgetAssetLoaded);
 	if (widget == nullptr) {
-		UE_LOG(LogTemp, Warning, TEXT("Couldnt cast /AdvancedQuest/Tools/QuestTool/EUW_CustomQuestTool.EUW_CustomQuestTool to UEditorUtilityWidgetBlueprint"));
+		UE_LOG(LogTemp, Warning, TEXT("Couldnt cast /AdvancedQuest/Tools/QuestTool/AQ_EUW_CustomQuestTool.AQ_EUW_CustomQuestTool to UEditorUtilityWidgetBlueprint"));
 		return;
 	}
 
 	UEditorUtilitySubsystem* EditorUtilitySubsystem = GEditor->GetEditorSubsystem<UEditorUtilitySubsystem>();
-	EditorUtilitySubsystem->SpawnAndRegisterTab(widget);
+	EditorUtilitySubsystem->SpawnAndRegisterTabAndGetID(widget, widgetID);
+
+	isOpen = true;
+}
+
+void FAdvancedQuestModule::ClosePlugin()
+{
+	UEditorUtilitySubsystem* EditorUtilitySubsystem = GEditor->GetEditorSubsystem<UEditorUtilitySubsystem>();
+	EditorUtilitySubsystem->CloseTabByID(widgetID);
+
+	isOpen = false;
 }
 
 void FAdvancedQuestModule::RegisterMenus()

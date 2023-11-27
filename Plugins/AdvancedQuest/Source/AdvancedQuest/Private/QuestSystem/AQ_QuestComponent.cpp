@@ -14,6 +14,13 @@ UAQ_QuestComponent::UAQ_QuestComponent()
 }
 
 
+void UAQ_QuestComponent::RerunScript()
+{
+	AActor* Actor = GetOwner();
+
+	Actor->RerunConstructionScripts();
+}
+
 // Called when the game starts
 void UAQ_QuestComponent::BeginPlay()
 {

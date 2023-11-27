@@ -22,6 +22,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void UpdateQuestMarker();
 
+	UFUNCTION(BlueprintCallable)
+	void RerunScript();
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;	
