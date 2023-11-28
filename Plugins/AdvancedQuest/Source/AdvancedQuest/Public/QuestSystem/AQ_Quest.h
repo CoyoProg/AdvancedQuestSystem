@@ -1,17 +1,16 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
-
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "Misc/Guid.h"
 
 #include "ObserverPattern/AQ_Observer.h"
-#include "PlayersChannels/AQ_PlayerChannels.h"
-#include "AQ_BookQuest.h"
-#include "AQ_QuestData.h"
 
 #include "AQ_Quest.generated.h"
+
+class UAQ_BookQuest;
+class UAQ_QuestData;
+class UAQ_PlayerChannel;
 
 /**
  * 

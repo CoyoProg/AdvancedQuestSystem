@@ -2,14 +2,15 @@
 
 
 #include "QuestSystem/AQ_Quest.h"
-
+#include "PlayersChannels/AQ_PlayerChannels.h"
+#include "QuestSystem/AQ_BookQuest.h"
+#include "QuestSystem/AQ_QuestData.h"
 #include "QuestSystem/AQ_QuestComponent.h"
 #include "QuestSystem/AQ_UniqueIDComponent.h"
 #include "External/AQ_FilesManager.h"
 
 UAQ_Quest::UAQ_Quest()
 {
-	// Create a data Quest
 	myData = CreateDefaultSubobject<UAQ_QuestData>(TEXT("Quest Data"));
 }
 
