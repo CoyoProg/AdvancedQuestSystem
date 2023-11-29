@@ -18,19 +18,22 @@ UAQ_Quest::~UAQ_Quest()
 {
 }
 
-void UAQ_Quest::EnableQuest(UAQ_PlayerChannels* playerChannels, UAQ_BookQuest* bookQuest, UObject* questGiver)
+void UAQ_Quest::EnableQuest(UAQ_PlayerChannels* playerChannels, UObject* questGiver)
 {
-	BookQuest = bookQuest;
+	//BookQuest = bookQuest;
 	QuestGiver = questGiver;
 	PlayerChannels = playerChannels;
 
 	AddMyObservers();
-	bookQuest->AddQuest(this);
+	//bookQuest->AddQuest(this);
 }
 
 void UAQ_Quest::DisableQuest()
 {
-	BookQuest->RemoveQuest(this);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Disable Quest"));
+
+	if(BookQuest)
+		BookQuest->RemoveQuest(this);
 }
 
 void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP, int UniqueObjectID)
@@ -64,7 +67,8 @@ void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eve
 		RemoveMyObservers();
 	}
 
-	BookQuest->UpdateQuestBook(this);
+	if(BookQuest)
+		BookQuest->UpdateQuestBook(this);
 }
 
 void UAQ_Quest::UpdateQuestComponent()

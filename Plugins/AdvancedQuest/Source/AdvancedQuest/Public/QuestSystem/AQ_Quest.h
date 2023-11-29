@@ -31,7 +31,7 @@ public:
 	UAQ_QuestData* myData;
 
 	UFUNCTION(BlueprintCallable, Category = "Quest")
-	void EnableQuest(UAQ_PlayerChannels* playerChannels, UAQ_BookQuest* bookQuest, UObject* questGiver);
+	void EnableQuest(UAQ_PlayerChannels* playerChannels, UObject* questGiver);
 
 	UFUNCTION(BlueprintCallable, Category = "Quest")
 	void DisableQuest();

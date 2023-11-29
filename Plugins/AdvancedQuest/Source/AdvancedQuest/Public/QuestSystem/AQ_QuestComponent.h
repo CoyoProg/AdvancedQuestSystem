@@ -36,14 +36,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void UpdateQuestMarker();
 
-	/* Show all the quest marker when the tool is open */
-	UFUNCTION(BlueprintCallable)
-	void ShowVisualComponent();
-
-	/* Hide all the quest marker when the tool is open */
-	UFUNCTION(BlueprintCallable)
-	void RemoveVisualComponent();
-
 	UFUNCTION(BlueprintCallable)
 	void RerunScript();
 
@@ -62,7 +54,6 @@ protected:
 private:
 	bool IsQuestEnable{ false };
 	UWidgetComponent* WidgetComponent;
-	UWidgetComponent* VisualWidgetComponent;
 
 	void SetQuestData();
 	void CreateQuestMarkerWidget();

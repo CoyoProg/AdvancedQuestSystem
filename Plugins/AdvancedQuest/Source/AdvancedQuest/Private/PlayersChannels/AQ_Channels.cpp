@@ -6,12 +6,9 @@ void UAQ_Channels::AddObserver_Implementation(UObject* observerP)
 {
 	if (observerP->GetClass()->ImplementsInterface(UAQ_Observer::StaticClass()))
 	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Add Observers"));
 		Observers.AddUnique(observerP);
 	}
-
-	int32 YourIntegerValue = Observers.Num();
-	FString IntegerAsString = FString::Printf(TEXT("%d"), YourIntegerValue);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, *IntegerAsString);
 }
 
 void UAQ_Channels::RemoveObserver_Implementation(UObject* observerP)
@@ -28,6 +25,7 @@ void UAQ_Channels::RemoveObserver_Implementation(UObject* observerP)
 
 				TFunction<void()> RemoveItemFunction = [this, observerP]()
 					{
+						GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Remove Observers"));
 						Observers.RemoveSwap(observerP);
 					};
 

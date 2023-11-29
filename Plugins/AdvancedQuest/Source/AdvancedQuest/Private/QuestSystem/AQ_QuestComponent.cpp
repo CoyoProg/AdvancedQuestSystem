@@ -13,8 +13,7 @@
 UAQ_QuestComponent::UAQ_QuestComponent() :
 	questMarkerClass(nullptr),
 	questData(nullptr),
-	WidgetComponent(nullptr),
-	VisualWidgetComponent(nullptr)
+	WidgetComponent(nullptr)
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
@@ -33,51 +32,9 @@ void UAQ_QuestComponent::UpdateQuestMarker()
 
 	if (widget)
 	{
+		WidgetComponent->SetVisibility(true);
 		widget->SetImageQuest(true);
 	}
-}
-
-void UAQ_QuestComponent::ShowVisualComponent()
-{
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Function Called ?"));
-
-	// Check if the owner already has a UWidgetComponent
-	//VisualWidgetComponent = Cast<UWidgetComponent>(GetOwner()->GetComponentByClass(UWidgetComponent::StaticClass()));
-
-	// If the UWidgetComponent doesn't exist, add it to the owner
-	if (!VisualWidgetComponent)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Widget Empty"));
-
-		VisualWidgetComponent = Cast<UWidgetComponent>(GetOwner()->AddComponentByClass(UWidgetComponent::StaticClass(), false, FTransform(), false));
-
-		// Check if the WidgetComponent was successfully added
-		if (VisualWidgetComponent)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Adding Widget"));
-
-
-			VisualWidgetComponent->AttachToComponent(GetOwner()->GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
-			VisualWidgetComponent->SetWidgetClass(questMarkerClass);
-			VisualWidgetComponent->SetMaterial(0, material);
-			VisualWidgetComponent->SetWidgetSpace(EWidgetSpace::World);
-
-			VisualWidgetComponent->RegisterComponent();
-
-			FVector origin, extent;
-			GetOwner()->GetActorBounds(false, origin, extent);
-
-			VisualWidgetComponent->SetRelativeLocation(FVector(0, 0, extent.Z / 1.5f));
-		}else
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Cant create Widget"));
-
-	}else
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Widget already exist"));
-
-}
-
-void UAQ_QuestComponent::RemoveVisualComponent()
-{
 }
 
 void UAQ_QuestComponent::RerunScript()
@@ -115,7 +72,8 @@ void UAQ_QuestComponent::BeginPlay()
 
 void UAQ_QuestComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-	quest->EndPlay();
+	if(IsQuestEnable)
+		quest->EndPlay();
 }
 
 void UAQ_QuestComponent::SetQuestData()
@@ -156,10 +114,34 @@ void UAQ_QuestComponent::CreateQuestMarkerWidget()
 
 void UAQ_QuestComponent::EnableQuest(UAQ_PlayerChannels* PlayerChannel)
 {
+	WidgetComponent->SetVisibility(false);
+
+	quest->EnableQuest(PlayerChannel, this);
+
+	IsQuestEnable = true;
 }
 
 void UAQ_QuestComponent::DisableQuest(UAQ_PlayerChannels* PlayerChannel)
 {
+	IsQuestEnable = false;
+
+	quest->DisableQuest();
+
+	// Check if the WidgetComponent exists
+	if (WidgetComponent)
+	{
+		// Unregister the component before removing it
+		WidgetComponent->UnregisterComponent();
+
+		// Remove and destroy the WidgetComponent
+		GetOwner()->RemoveOwnedComponent(WidgetComponent);
+		WidgetComponent = nullptr;
+	}
+
+	// If all quest are done
+	UnregisterComponent();
+	GetOwner()->RemoveOwnedComponent(this);
+	DestroyComponent();
 }
 
 
