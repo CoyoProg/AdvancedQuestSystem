@@ -21,11 +21,13 @@ public:
 	~UAQ_QuestChannel();
 
 	UAQ_BookQuest* GetWidget() { return bookQuest; }
-	void SetWidgetClass(TSubclassOf<UUserWidget> widgetClass) { bookQuestWidgetClass = widgetClass; }
-	void AddWidgetToViewport(AActor* ownerP);
+	void SetWidgetClass(TSubclassOf<UUserWidget> widgetClass, AActor* owner) { bookQuestWidgetClass = widgetClass; Owner = owner; }
+	void AddWidgetToViewport();
 
+	TSubclassOf<UUserWidget> bookQuestWidgetClass;
 private:
 	/* Quest Book Widget */
 	UAQ_BookQuest* bookQuest;
-	TSubclassOf<UUserWidget> bookQuestWidgetClass;
+
+	AActor* Owner;
 };

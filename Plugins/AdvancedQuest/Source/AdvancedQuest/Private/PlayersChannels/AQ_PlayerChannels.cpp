@@ -5,12 +5,15 @@
 
 #include "PlayersChannels/AQ_InteractionChannel.h"
 #include "PlayersChannels/AQ_InventoryChannel.h"
+#include "PlayersChannels/AQ_QuestChannel.h"
+#include "QuestSystem/AQ_BookQuest.h"
 
 UAQ_PlayerChannels::UAQ_PlayerChannels()
 {
 	/** Create all channels */
 	interactionChannel = CreateDefaultSubobject<UAQ_InteractionChannel>(TEXT("Interaction Channel"));
 	inventoryChannel = CreateDefaultSubobject<UAQ_InventoryChannel>(TEXT("Inventory Channel"));
+	questChannel = CreateDefaultSubobject<UAQ_QuestChannel>(TEXT("Quest Channel"));
 }
 
 void UAQ_PlayerChannels::AddObserver(UObject* entity, EAQ_ObjectivesType eventType)
@@ -66,5 +69,14 @@ void UAQ_PlayerChannels::RemoveObserver(UObject* entity, EAQ_ObjectivesType even
 		/** Remove Observer from Player Channel */
 	case EAQ_ObjectivesType::Location:
 		break;
+	}
+}
+
+void UAQ_PlayerChannels::BeginPlay()
+{
+	if (bookQuestWidget)
+	{
+		questChannel->SetWidgetClass(bookQuestWidget, GetOwner());
+		questChannel->AddWidgetToViewport();
 	}
 }

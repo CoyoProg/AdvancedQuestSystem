@@ -3,6 +3,7 @@
 
 #include "QuestSystem/AQ_Quest.h"
 #include "PlayersChannels/AQ_PlayerChannels.h"
+#include "PlayersChannels/AQ_QuestChannel.h"
 #include "QuestSystem/AQ_BookQuest.h"
 #include "QuestSystem/AQ_QuestData.h"
 #include "QuestSystem/AQ_QuestComponent.h"
@@ -20,18 +21,18 @@ UAQ_Quest::~UAQ_Quest()
 
 void UAQ_Quest::EnableQuest(UAQ_PlayerChannels* playerChannels, UObject* questGiver)
 {
-	//BookQuest = bookQuest;
+	BookQuest = playerChannels->questChannel->GetWidget();
 	QuestGiver = questGiver;
 	PlayerChannels = playerChannels;
 
+	if (BookQuest)
+		BookQuest->AddQuest(this);
+
 	AddMyObservers();
-	//bookQuest->AddQuest(this);
 }
 
 void UAQ_Quest::DisableQuest()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Disable Quest"));
-
 	if(BookQuest)
 		BookQuest->RemoveQuest(this);
 }
@@ -77,12 +78,7 @@ void UAQ_Quest::UpdateQuestComponent()
 	UAQ_QuestComponent* questComponent = (UAQ_QuestComponent*)QuestGiver;
 
 	if (questComponent)
-	{
 		questComponent->UpdateQuestMarker();
-	}
-	else
-		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Yellow, TEXT("Component not found"));
-
 }
 
 void UAQ_Quest::EndPlay()
