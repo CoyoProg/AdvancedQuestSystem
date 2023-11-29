@@ -18,5 +18,5 @@ public:
 	UAQ_InventoryChannel();
 
 	UFUNCTION(BlueprintCallable, Category = "Events")
-	void OnInteractionEvent(UObject* entity, int UniqueObjectID = 0);
+	void OnInteractionEvent(UObject* entity);
 };

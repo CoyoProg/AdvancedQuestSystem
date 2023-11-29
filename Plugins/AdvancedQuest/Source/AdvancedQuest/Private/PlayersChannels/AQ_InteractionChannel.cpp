@@ -11,7 +11,7 @@ UAQ_InteractionChannel::~UAQ_InteractionChannel()
 {
 }
 
-void UAQ_InteractionChannel::OnInteractionEvent(UObject* entity, int UniqueObjectID)
+void UAQ_InteractionChannel::OnInteractionEvent(UObject* entity)
 {
-	NotifySubjects_Implementation(entity, EAQ_NotifyEventType::Interact, UniqueObjectID);
+	NotifySubjects_Implementation(entity, EAQ_NotifyEventType::Interact);
 }

@@ -3,6 +3,7 @@
 
 #include "QuestSystem/AQ_UniqueIDComponent.h"
 #include "External/AQ_FilesManager.h"
+#include "Tools/AQ_CreateAssets.h"
 
 // Sets default values for this component's properties
 UAQ_UniqueIDComponent::UAQ_UniqueIDComponent()
@@ -12,4 +13,9 @@ UAQ_UniqueIDComponent::UAQ_UniqueIDComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
+}
+
+void UAQ_UniqueIDComponent::GenerateUniqueID()
+{
+	UniqueID = UAQ_CreateAssets::AssignUniqueID("LastUniqueActorID");
 }

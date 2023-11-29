@@ -21,6 +21,8 @@ UAQ_Quest::~UAQ_Quest()
 
 void UAQ_Quest::EnableQuest(UAQ_PlayerChannels* playerChannels, UObject* questGiver)
 {
+	IsEnable = true;
+
 	BookQuest = playerChannels->questChannel->GetWidget();
 	QuestGiver = questGiver;
 	PlayerChannels = playerChannels;
@@ -33,18 +35,20 @@ void UAQ_Quest::EnableQuest(UAQ_PlayerChannels* playerChannels, UObject* questGi
 
 void UAQ_Quest::DisableQuest()
 {
+	IsEnable = false;
+
 	if(BookQuest)
 		BookQuest->RemoveQuest(this);
 }
 
-void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP, int UniqueObjectID)
+void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP)
 {
 	if (isAllObjectivesComplet)
 		return;
 
 	for (int i = 0; i < myData->objectives.Num(); i++)
 	{
-		if (!IsSameObject(i, entity, UniqueObjectID))
+		if (!IsSameObject(i, entity))
 			continue;
 
 		if (!IsSameEventType(i, eventTypeP))
@@ -83,10 +87,11 @@ void UAQ_Quest::UpdateQuestComponent()
 
 void UAQ_Quest::EndPlay()
 {
-	RemoveMyObservers();
+	if(IsEnable)
+		RemoveMyObservers();
 }
 
-bool UAQ_Quest::IsSameObject(int objectiveIndexP, UObject* entityP, int uniqueObjectIdP)
+bool UAQ_Quest::IsSameObject(int objectiveIndexP, UObject* entityP)
 {
 	if (myData->objectives[objectiveIndexP].CurrentAmount >= myData->objectives[objectiveIndexP].amountNeeded)
 		return false;

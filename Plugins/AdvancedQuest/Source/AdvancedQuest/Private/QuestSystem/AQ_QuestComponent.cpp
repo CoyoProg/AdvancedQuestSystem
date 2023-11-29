@@ -46,7 +46,7 @@ void UAQ_QuestComponent::RerunScript()
 
 void UAQ_QuestComponent::Interact(UAQ_PlayerChannels* PlayerChannel)
 {
-	if (!IsQuestEnable)
+	if (!IsQuestsEnabled)
 	{
 		EnableQuest(PlayerChannel);
 		return;
@@ -72,7 +72,7 @@ void UAQ_QuestComponent::BeginPlay()
 
 void UAQ_QuestComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-	if(IsQuestEnable)
+	if(IsQuestsEnabled)
 		quest->EndPlay();
 }
 
@@ -118,12 +118,12 @@ void UAQ_QuestComponent::EnableQuest(UAQ_PlayerChannels* PlayerChannel)
 
 	quest->EnableQuest(PlayerChannel, this);
 
-	IsQuestEnable = true;
+	IsQuestsEnabled = true;
 }
 
 void UAQ_QuestComponent::DisableQuest(UAQ_PlayerChannels* PlayerChannel)
 {
-	IsQuestEnable = false;
+	IsQuestsEnabled = false;
 
 	quest->DisableQuest();
 

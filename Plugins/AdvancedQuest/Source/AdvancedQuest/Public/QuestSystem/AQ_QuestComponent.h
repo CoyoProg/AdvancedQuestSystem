@@ -52,7 +52,7 @@ protected:
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 private:
-	bool IsQuestEnable{ false };
+	bool IsQuestsEnabled{ false };
 	UWidgetComponent* WidgetComponent;
 
 	void SetQuestData();

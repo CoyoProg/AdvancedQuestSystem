@@ -22,6 +22,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Unique ID Component")
 	const int GetUniqueID() const { return UniqueID; }
 
+	UFUNCTION(CallInEditor)
+	void GenerateUniqueID();
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Unique ID Component")
 	int UniqueID;
 };

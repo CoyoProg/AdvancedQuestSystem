@@ -36,7 +36,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Quest")
 	void DisableQuest();
 
-	void OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP, int UniqueObjectID = 0);
+	void OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP);
 
 	void UpdateQuestComponent();
 
@@ -49,8 +49,9 @@ private:
 	UObject* QuestGiver;
 
 	int objectivesCompleted = 0;
+	bool IsEnable = false;
 
-	bool IsSameObject(int objectiveIndexP,UObject* entityP, int uniqueObjectIdP);
+	bool IsSameObject(int objectiveIndexP,UObject* entityP);
 	bool IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTypeP);
 
 	void AddMyObservers();

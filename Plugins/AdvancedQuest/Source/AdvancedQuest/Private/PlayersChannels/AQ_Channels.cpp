@@ -35,13 +35,13 @@ void UAQ_Channels::RemoveObserver_Implementation(UObject* observerP)
 	}
 }
 
-void UAQ_Channels::NotifySubjects_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP, int UniqueObjectID)
+void UAQ_Channels::NotifySubjects_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP)
 {
 	if (Observers.Num() == 0)
 		return;
 
 	for (auto actors : Observers)
 	{
-		IAQ_Observer::Execute_OnNotify(actors, entity, eventTypeP, UniqueObjectID);
+		IAQ_Observer::Execute_OnNotify(actors, entity, eventTypeP);
 	}
 }

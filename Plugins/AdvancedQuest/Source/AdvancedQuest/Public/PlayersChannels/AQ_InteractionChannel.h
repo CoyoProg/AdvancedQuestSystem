@@ -19,5 +19,5 @@ public:
 	~UAQ_InteractionChannel();
 
 	UFUNCTION(BlueprintCallable, Category = "Events")
-	void OnInteractionEvent(UObject* entity, int UniqueObjectID = 0);
+	void OnInteractionEvent(UObject* entity);
 };
