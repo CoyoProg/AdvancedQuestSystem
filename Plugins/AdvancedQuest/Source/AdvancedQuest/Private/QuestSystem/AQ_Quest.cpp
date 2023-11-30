@@ -12,7 +12,7 @@
 
 UAQ_Quest::UAQ_Quest()
 {
-	myData = CreateDefaultSubobject<UAQ_QuestData>(TEXT("Quest Data"));
+	questData = CreateDefaultSubobject<UAQ_QuestData>(TEXT("Quest Data"));
 }
 
 UAQ_Quest::~UAQ_Quest()
@@ -46,7 +46,7 @@ void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eve
 	if (isAllObjectivesComplet)
 		return;
 
-	for (int i = 0; i < myData->objectives.Num(); i++)
+	for (int i = 0; i < questData->objectives.Num(); i++)
 	{
 		if (!IsSameObject(i, entity))
 			continue;
@@ -55,10 +55,10 @@ void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eve
 			continue;
 
 		/** Update Quest */
-		myData->objectives[i].CurrentAmount++;
+		questData->objectives[i].CurrentAmount++;
 
 		/** Check if the objective is completed */
-		if (myData->objectives[i].CurrentAmount >= myData->objectives[i].amountNeeded)
+		if (questData->objectives[i].CurrentAmount >= questData->objectives[i].amountNeeded)
 		{
 			objectivesCompleted++;
 		}
@@ -66,7 +66,7 @@ void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eve
 
 	/** Check if all the objectives are completed
 		And Remove the Observers if all the objectives are completed*/
-	if (objectivesCompleted >= myData->objectives.Num())
+	if (objectivesCompleted >= questData->objectives.Num())
 	{
 		UpdateQuestComponent();
 		RemoveMyObservers();
@@ -93,10 +93,10 @@ void UAQ_Quest::EndPlay()
 
 bool UAQ_Quest::IsSameObject(int objectiveIndexP, UObject* entityP)
 {
-	if (myData->objectives[objectiveIndexP].CurrentAmount >= myData->objectives[objectiveIndexP].amountNeeded)
+	if (questData->objectives[objectiveIndexP].CurrentAmount >= questData->objectives[objectiveIndexP].amountNeeded)
 		return false;
 
-	UClass* ObjectiveTargetClass = myData->objectives[objectiveIndexP].objectiveTarget;
+	UClass* ObjectiveTargetClass = questData->objectives[objectiveIndexP].objectiveTarget;
 
 	if (entityP->GetClass() != ObjectiveTargetClass)
 		return false;
@@ -104,7 +104,7 @@ bool UAQ_Quest::IsSameObject(int objectiveIndexP, UObject* entityP)
 	AActor* MyActor = Cast<AActor>(entityP);
 	UAQ_UniqueIDComponent* UniqueIDComponent = MyActor->FindComponentByClass<UAQ_UniqueIDComponent>();
 
-	if (myData->objectives[objectiveIndexP].isUnique)
+	if (questData->objectives[objectiveIndexP].isUnique)
 	{
 		int UniqueID = 0;
 		if (!UniqueIDComponent)
@@ -112,7 +112,7 @@ bool UAQ_Quest::IsSameObject(int objectiveIndexP, UObject* entityP)
 		
 		UniqueID = UniqueIDComponent->GetUniqueID();
 
-		if (UniqueID != myData->objectives[objectiveIndexP].uniqueObjectID)
+		if (UniqueID != questData->objectives[objectiveIndexP].uniqueObjectID)
 			return false;
 	}
 
@@ -124,16 +124,16 @@ bool UAQ_Quest::IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTy
 	switch (eventTypeP)
 	{
 	case EAQ_NotifyEventType::Interact:
-		if (myData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Interact)
+		if (questData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Interact)
 			return true;
 		break;
 
 	case EAQ_NotifyEventType::Collect:
-		if (myData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Collect)
+		if (questData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Collect)
 			return true;
 		break;
 	case EAQ_NotifyEventType::Kill:
-		if (myData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Kill)
+		if (questData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Kill)
 			return true;
 		break;
 	}
@@ -143,7 +143,7 @@ bool UAQ_Quest::IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTy
 
 void UAQ_Quest::AddMyObservers()
 {
-	for (auto const& myObjectives : myData->objectives)
+	for (auto const& myObjectives : questData->objectives)
 	{
 		EAQ_ObjectivesType eventType = myObjectives.objectiveType;
 		PlayerChannels->AddObserver(this, eventType);
@@ -152,7 +152,7 @@ void UAQ_Quest::AddMyObservers()
 
 void UAQ_Quest::RemoveMyObservers()
 {
-	for (auto const& myObjectives : myData->objectives)
+	for (auto const& myObjectives : questData->objectives)
 	{
 		EAQ_ObjectivesType eventType = myObjectives.objectiveType;
 

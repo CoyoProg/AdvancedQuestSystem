@@ -13,13 +13,12 @@
 UAQ_QuestComponent::UAQ_QuestComponent() :
 	questMarkerClass(nullptr),
 	questData(nullptr),
-	WidgetComponent(nullptr)
+	WidgetComponent(nullptr),
+	quest(nullptr)
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-
-	quest = CreateDefaultSubobject<UAQ_Quest>(TEXT("Quest"));
 }
 
 UAQ_QuestComponent::~UAQ_QuestComponent()
@@ -61,6 +60,8 @@ void UAQ_QuestComponent::BeginPlay()
 {
 	RerunScript();	
 	
+	quest = NewObject<UAQ_Quest>(this, UAQ_Quest::StaticClass());
+
 	if (questData)
 		SetQuestData();
 
@@ -81,7 +82,7 @@ void UAQ_QuestComponent::SetQuestData()
 	if (!quest)
 		return;
 
-	quest->myData = DuplicateObject<UAQ_QuestData>(questData, this);
+	quest->questData = DuplicateObject<UAQ_QuestData>(questData, this);
 }
 
 void UAQ_QuestComponent::CreateQuestMarkerWidget()
@@ -117,7 +118,7 @@ void UAQ_QuestComponent::EnableQuest(UAQ_PlayerChannels* PlayerChannel)
 	WidgetComponent->SetVisibility(false);
 
 	quest->EnableQuest(PlayerChannel, this);
-
+	
 	IsQuestsEnabled = true;
 }
 

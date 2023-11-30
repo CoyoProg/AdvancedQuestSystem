@@ -18,7 +18,7 @@ public:
 	
 	/** This function will be bound to Command. */
 	void PluginButtonClicked();
-	void ClosePlugin();
+	bool ClosePlugin();
 
 	// Delegate handler
 	void OnBeginPIEHandler(bool bIsSimulating)
@@ -41,7 +41,6 @@ private:
 	// Class member variable to store the tab ID
 	FName widgetID;
 	bool isPIE{ false };
-	bool isOpen{ false };
 
 	TSharedPtr<class FUICommandList> PluginCommands;
 };

@@ -42,12 +42,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Interact(UAQ_PlayerChannels* PlayerChannel);
 
-	/* TEMPORARY DEBUG*/
-	UPROPERTY(BlueprintReadOnly, Category = "Quest Component")
-	UAQ_Quest* quest;
-
 protected:
-	// Called when the game starts
 	virtual void BeginPlay() override;	
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
@@ -58,6 +53,7 @@ private:
 	void SetQuestData();
 	void CreateQuestMarkerWidget();
 
+	UAQ_Quest* quest;
 	void EnableQuest(UAQ_PlayerChannels* PlayerChannel);
 	void DisableQuest(UAQ_PlayerChannels* PlayerChannel);
 };

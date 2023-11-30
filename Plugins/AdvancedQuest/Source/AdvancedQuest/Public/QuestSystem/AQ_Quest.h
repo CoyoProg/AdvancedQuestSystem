@@ -28,20 +28,16 @@ public:
 	bool isAllObjectivesComplet = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	UAQ_QuestData* myData;
+	UAQ_QuestData* questData;
 
-	UFUNCTION(BlueprintCallable, Category = "Quest")
 	void EnableQuest(UAQ_PlayerChannels* playerChannels, UObject* questGiver);
-
-	UFUNCTION(BlueprintCallable, Category = "Quest")
 	void DisableQuest();
 
 	void OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP);
 
 	void UpdateQuestComponent();
-
-	UFUNCTION(BlueprintCallable, Category = "Quest")
 	void EndPlay();
+
 private:
 	/** Player owner */
 	UAQ_PlayerChannels* PlayerChannels;

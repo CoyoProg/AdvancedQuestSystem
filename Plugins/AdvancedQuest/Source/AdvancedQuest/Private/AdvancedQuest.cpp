@@ -58,8 +58,6 @@ void FAdvancedQuestModule::ShutdownModule()
 
 	FEditorDelegates::BeginPIE.RemoveAll(this);
 	FEditorDelegates::EndPIE.RemoveAll(this);
-
-	isOpen = false;
 }
 
 void FAdvancedQuestModule::PluginButtonClicked()
@@ -67,11 +65,8 @@ void FAdvancedQuestModule::PluginButtonClicked()
 	if (isPIE)
 		return;
 
-	if (isOpen)
-	{
-		ClosePlugin();
+	if (ClosePlugin())
 		return;
-	}
 
 	const FStringAssetReference widgetAssetPath
 	("/AdvancedQuest/Tools/QuestTool/AQ_EUW_CustomQuestTool.AQ_EUW_CustomQuestTool");
@@ -90,16 +85,13 @@ void FAdvancedQuestModule::PluginButtonClicked()
 
 	UEditorUtilitySubsystem* EditorUtilitySubsystem = GEditor->GetEditorSubsystem<UEditorUtilitySubsystem>();
 	EditorUtilitySubsystem->SpawnAndRegisterTabAndGetID(widget, widgetID);
-
-	isOpen = true;
 }
 
-void FAdvancedQuestModule::ClosePlugin()
+bool FAdvancedQuestModule::ClosePlugin()
 {
 	UEditorUtilitySubsystem* EditorUtilitySubsystem = GEditor->GetEditorSubsystem<UEditorUtilitySubsystem>();
-	EditorUtilitySubsystem->CloseTabByID(widgetID);
-
-	isOpen = false;
+	
+	return EditorUtilitySubsystem->CloseTabByID(widgetID);
 }
 
 void FAdvancedQuestModule::RegisterMenus()
