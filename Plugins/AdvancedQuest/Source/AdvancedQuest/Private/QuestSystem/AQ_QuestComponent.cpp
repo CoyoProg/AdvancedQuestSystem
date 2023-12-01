@@ -16,8 +16,6 @@ UAQ_QuestComponent::UAQ_QuestComponent() :
 	WidgetComponent(nullptr),
 	quest(nullptr)
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
@@ -62,13 +60,25 @@ void UAQ_QuestComponent::BeginPlay()
 	
 	quest = NewObject<UAQ_Quest>(this, UAQ_Quest::StaticClass());
 
-	if (questData)
-		SetQuestData();
+	if (!questData)
+	{
+		RemoveComponent();
+		return;
+	}
 
-	if (questMarkerClass && quest)
+	SetQuestData();
+
+	if (questMarkerClass)
 		CreateQuestMarkerWidget();
 
 	Super::BeginPlay();
+}
+
+void UAQ_QuestComponent::RemoveComponent()
+{
+	UnregisterComponent();
+	GetOwner()->RemoveOwnedComponent(this);
+	DestroyComponent();
 }
 
 void UAQ_QuestComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
@@ -140,9 +150,7 @@ void UAQ_QuestComponent::DisableQuest(UAQ_PlayerChannels* PlayerChannel)
 	}
 
 	// If all quest are done
-	UnregisterComponent();
-	GetOwner()->RemoveOwnedComponent(this);
-	DestroyComponent();
+	RemoveComponent();
 }
 
 
@@ -150,6 +158,4 @@ void UAQ_QuestComponent::DisableQuest(UAQ_PlayerChannels* PlayerChannel)
 void UAQ_QuestComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
 }

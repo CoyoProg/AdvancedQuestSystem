@@ -47,12 +47,12 @@ class ADVANCEDQUEST_API UAQ_QuestData : public UPrimaryDataAsset
 	GENERATED_BODY()
 	
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
+	FString questTitle;
+
 	/** Quest specificities */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	FString questDescription;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	FString questTitle;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	int questID;

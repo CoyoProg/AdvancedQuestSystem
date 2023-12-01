@@ -43,7 +43,7 @@ public:
 	void Interact(UAQ_PlayerChannels* PlayerChannel);
 
 protected:
-	virtual void BeginPlay() override;	
+	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 private:
@@ -56,4 +56,6 @@ private:
 	UAQ_Quest* quest;
 	void EnableQuest(UAQ_PlayerChannels* PlayerChannel);
 	void DisableQuest(UAQ_PlayerChannels* PlayerChannel);
+
+	void RemoveComponent();
 };
