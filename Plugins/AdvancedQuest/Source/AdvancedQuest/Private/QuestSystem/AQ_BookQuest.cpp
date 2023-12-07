@@ -3,3 +3,31 @@
 
 #include "QuestSystem/AQ_BookQuest.h"
 
+void UAQ_BookQuest::OpenJournal()
+{
+	if (!JournalWidget->IsVisible())
+		JournalWidget->SetVisibility(ESlateVisibility::Visible); 
+	else
+		JournalWidget->SetVisibility(ESlateVisibility::Hidden);
+
+	if (QuestGiverWidget->IsVisible())
+		QuestGiverWidget->SetVisibility(ESlateVisibility::Hidden);
+}
+
+void UAQ_BookQuest::OpenQuestGiverSummary()
+{
+	if (!QuestGiverWidget->IsVisible())
+		QuestGiverWidget->SetVisibility(ESlateVisibility::Visible);
+
+	if(JournalWidget->IsVisible())
+		JournalWidget->SetVisibility(ESlateVisibility::Hidden);
+}
+
+void UAQ_BookQuest::CloseAll()
+{
+	if (JournalWidget->IsVisible())
+		JournalWidget->SetVisibility(ESlateVisibility::Hidden);
+
+	if (QuestGiverWidget->IsVisible())
+		QuestGiverWidget->SetVisibility(ESlateVisibility::Hidden);
+}

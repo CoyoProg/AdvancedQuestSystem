@@ -14,6 +14,9 @@ UAQ_PlayerChannels::UAQ_PlayerChannels()
 	interactionChannel = CreateDefaultSubobject<UAQ_InteractionChannel>(TEXT("Interaction Channel"));
 	inventoryChannel = CreateDefaultSubobject<UAQ_InventoryChannel>(TEXT("Inventory Channel"));
 	questChannel = CreateDefaultSubobject<UAQ_QuestChannel>(TEXT("Quest Channel"));
+
+	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bStartWithTickEnabled = true;
 }
 
 void UAQ_PlayerChannels::AddObserver(UObject* entity, EAQ_ObjectivesType eventType)
@@ -74,9 +77,30 @@ void UAQ_PlayerChannels::RemoveObserver(UObject* entity, EAQ_ObjectivesType even
 
 void UAQ_PlayerChannels::BeginPlay()
 {
+	Super::BeginPlay();
+
 	if (bookQuestWidget)
 	{
 		questChannel->SetWidgetClass(bookQuestWidget, GetOwner());
 		questChannel->AddWidgetToViewport();
+	}
+}
+
+void UAQ_PlayerChannels::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	AActor* OwnerActor = GetOwner();
+	if (OwnerActor)
+	{
+		APlayerController* OwnerPlayerController = Cast<APlayerController>(OwnerActor->GetInstigatorController());
+
+		if (OwnerPlayerController)
+		{
+			if (OwnerPlayerController->WasInputKeyJustReleased(EKeys::J))
+			{
+				questChannel->GetWidget()->OpenJournal();
+			}
+		}
 	}
 }

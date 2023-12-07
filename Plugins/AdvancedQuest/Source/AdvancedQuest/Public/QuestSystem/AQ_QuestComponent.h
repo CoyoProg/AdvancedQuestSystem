@@ -48,7 +48,7 @@ protected:
 
 private:
 	bool IsQuestsEnabled{ false };
-	UWidgetComponent* WidgetComponent;
+	UWidgetComponent* QuestMarkerWidget;
 
 	void SetQuestData();
 	void CreateQuestMarkerWidget();

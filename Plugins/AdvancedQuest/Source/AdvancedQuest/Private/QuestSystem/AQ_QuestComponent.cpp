@@ -13,7 +13,7 @@
 UAQ_QuestComponent::UAQ_QuestComponent() :
 	questMarkerClass(nullptr),
 	questData(nullptr),
-	WidgetComponent(nullptr),
+	QuestMarkerWidget(nullptr),
 	quest(nullptr)
 {
 	PrimaryComponentTick.bCanEverTick = true;
@@ -25,11 +25,11 @@ UAQ_QuestComponent::~UAQ_QuestComponent()
 
 void UAQ_QuestComponent::UpdateQuestMarker()
 {
-	UAQ_QuestMarkerWidget* widget = Cast<UAQ_QuestMarkerWidget>(WidgetComponent->GetWidget());
+	UAQ_QuestMarkerWidget* widget = Cast<UAQ_QuestMarkerWidget>(QuestMarkerWidget->GetWidget());
 
 	if (widget)
 	{
-		WidgetComponent->SetVisibility(true);
+		QuestMarkerWidget->SetVisibility(true);
 		widget->SetImageQuest(true);
 	}
 }
@@ -98,34 +98,34 @@ void UAQ_QuestComponent::SetQuestData()
 void UAQ_QuestComponent::CreateQuestMarkerWidget()
 {
     // Check if the owner already has a UWidgetComponent
-    WidgetComponent = Cast<UWidgetComponent>(GetOwner()->GetComponentByClass(UWidgetComponent::StaticClass()));
+	QuestMarkerWidget = Cast<UWidgetComponent>(GetOwner()->GetComponentByClass(UWidgetComponent::StaticClass()));
 
-    // If the UWidgetComponent doesn't exist, add it to the owner
-    if (!WidgetComponent)
-    {
-        WidgetComponent = Cast<UWidgetComponent>(GetOwner()->AddComponentByClass(UWidgetComponent::StaticClass(), false, FTransform(), false));
-
+	// If the UWidgetComponent doesn't exist, add it to the owner
+	if (!QuestMarkerWidget)
+	{
+		QuestMarkerWidget = Cast<UWidgetComponent>(GetOwner()->AddComponentByClass(UWidgetComponent::StaticClass(), false, FTransform(), false));
+		
         // Check if the WidgetComponent was successfully added
-        if (WidgetComponent)
+        if (QuestMarkerWidget)
         {
-			WidgetComponent->AttachToComponent(GetOwner()->GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
-			WidgetComponent->SetWidgetClass(questMarkerClass);
-			WidgetComponent->SetMaterial(0, material);
-			WidgetComponent->SetWidgetSpace(EWidgetSpace::World);
+			QuestMarkerWidget->AttachToComponent(GetOwner()->GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
+			QuestMarkerWidget->SetWidgetClass(questMarkerClass);
+			QuestMarkerWidget->SetMaterial(0, material);
+			QuestMarkerWidget->SetWidgetSpace(EWidgetSpace::World);
 
-			WidgetComponent->RegisterComponent();
+			QuestMarkerWidget->RegisterComponent();
 
 			FVector origin, extent;
 			GetOwner()->GetActorBounds(false, origin, extent);
 
-			WidgetComponent->SetRelativeLocation(FVector(0, 0, extent.Z / 1.5f));
+			QuestMarkerWidget->SetRelativeLocation(FVector(0, 0, extent.Z / 1.5f));
         }
     }
 }
 
 void UAQ_QuestComponent::EnableQuest(UAQ_PlayerChannels* PlayerChannel)
 {
-	WidgetComponent->SetVisibility(false);
+	QuestMarkerWidget->SetVisibility(false);
 
 	quest->EnableQuest(PlayerChannel, this);
 	
@@ -139,14 +139,14 @@ void UAQ_QuestComponent::DisableQuest(UAQ_PlayerChannels* PlayerChannel)
 	quest->DisableQuest();
 
 	// Check if the WidgetComponent exists
-	if (WidgetComponent)
+	if (QuestMarkerWidget)
 	{
 		// Unregister the component before removing it
-		WidgetComponent->UnregisterComponent();
+		QuestMarkerWidget->UnregisterComponent();
 
 		// Remove and destroy the WidgetComponent
-		GetOwner()->RemoveOwnedComponent(WidgetComponent);
-		WidgetComponent = nullptr;
+		GetOwner()->RemoveOwnedComponent(QuestMarkerWidget);
+		QuestMarkerWidget = nullptr;
 	}
 
 	// If all quest are done

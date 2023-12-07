@@ -26,7 +26,6 @@ public:
 
 	TSubclassOf<UUserWidget> bookQuestWidgetClass;
 private:
-	/* Quest Book Widget */
 	UAQ_BookQuest* bookQuest;
 
 	AActor* Owner;

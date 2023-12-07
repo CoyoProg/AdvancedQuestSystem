@@ -17,6 +17,15 @@ class ADVANCEDQUEST_API UAQ_BookQuest : public UUserWidget
 	GENERATED_BODY()
 	
 public:
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "Book Quest Widget")
+	UUserWidget* JournalWidget;
+
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "Book Quest Widget")
+	UUserWidget* QuestGiverWidget;
+
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Book Quest Widget")
+	TArray<UAQ_Quest*> Quests;
+
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void AddQuest(UAQ_Quest* quest);
 
@@ -25,4 +34,8 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void UpdateQuestBook(UAQ_Quest* quest);
+
+	void OpenJournal();
+	void OpenQuestGiverSummary();
+	void CloseAll();
 };
