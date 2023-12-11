@@ -30,6 +30,17 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	UAQ_QuestData* questData;
 
+	/* Display Properties */
+	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
+	bool isDisplayJournal = false;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
+	bool isDisplayQuickJournal = false;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
+	int indexQuickDisplay = 0;
+
+	/* Quest Functions */
 	void EnableQuest(UAQ_PlayerChannels* playerChannels, UObject* questGiver);
 	void DisableQuest();
 
@@ -39,7 +50,7 @@ public:
 	void EndPlay();
 
 private:
-	/** Player owner */
+	/** Quest owner */
 	UAQ_PlayerChannels* PlayerChannels;
 	UAQ_BookQuest* BookQuest;
 	UObject* QuestGiver;

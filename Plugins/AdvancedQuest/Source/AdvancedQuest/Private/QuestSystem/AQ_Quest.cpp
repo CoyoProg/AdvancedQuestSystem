@@ -39,6 +39,9 @@ void UAQ_Quest::DisableQuest()
 
 	if(BookQuest)
 		BookQuest->RemoveQuest(this);
+
+	isDisplayJournal = false;
+	isDisplayQuickJournal = false;
 }
 
 void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP)
