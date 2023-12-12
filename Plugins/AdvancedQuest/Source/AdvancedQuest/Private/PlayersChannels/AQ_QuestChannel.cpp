@@ -6,15 +6,6 @@
 
 #include "Components/WidgetComponent.h"
 
-UAQ_QuestChannel::UAQ_QuestChannel()
-{
-
-}
-
-UAQ_QuestChannel::~UAQ_QuestChannel()
-{
-}
-
 void UAQ_QuestChannel::AddWidgetToViewport()
 {
 	if (!bookQuestWidgetClass)

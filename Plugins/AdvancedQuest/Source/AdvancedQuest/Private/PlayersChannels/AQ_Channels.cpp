@@ -2,6 +2,11 @@
 #include "PlayersChannels/AQ_Channels.h"
 #include "ObserverPattern/AQ_Observer.h"
 
+UAQ_Channels::~UAQ_Channels()
+{
+	Observers.Empty();
+}
+
 void UAQ_Channels::AddObserver_Implementation(UObject* observerP)
 {
 	if (observerP->GetClass()->ImplementsInterface(UAQ_Observer::StaticClass()))

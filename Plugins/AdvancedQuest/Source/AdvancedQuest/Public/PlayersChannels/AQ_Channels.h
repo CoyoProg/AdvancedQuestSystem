@@ -18,6 +18,8 @@ class ADVANCEDQUEST_API UAQ_Channels : public UObject, public IAQ_Subject
 	GENERATED_BODY()
 	
 public:
+	~UAQ_Channels();
+
 	virtual void AddObserver_Implementation(UObject* observerP) override;
 	virtual void RemoveObserver_Implementation(UObject* observerP) override;
 	virtual void NotifySubjects_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP) override;

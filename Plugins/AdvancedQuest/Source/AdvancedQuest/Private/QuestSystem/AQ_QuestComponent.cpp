@@ -11,16 +11,22 @@
 
 // Sets default values for this component's properties
 UAQ_QuestComponent::UAQ_QuestComponent() :
+	quest(nullptr),
 	questMarkerClass(nullptr),
 	questData(nullptr),
 	QuestMarkerWidget(nullptr),
-	quest(nullptr)
+	material(nullptr)
 {
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
 UAQ_QuestComponent::~UAQ_QuestComponent()
 {
+	questMarkerClass = nullptr;
+	QuestMarkerWidget = nullptr;
+	questData = nullptr;
+	quest = nullptr;
+	material = nullptr;
 }
 
 void UAQ_QuestComponent::UpdateQuestMarker()
@@ -66,7 +72,7 @@ void UAQ_QuestComponent::BeginPlay()
 		return;
 	}
 
-	SetQuestData();
+	quest->SetQuestData(questData);
 
 	if (questMarkerClass)
 		CreateQuestMarkerWidget();
@@ -83,16 +89,8 @@ void UAQ_QuestComponent::RemoveComponent()
 
 void UAQ_QuestComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-	if(IsQuestsEnabled)
+	if (IsQuestsEnabled)
 		quest->EndPlay();
-}
-
-void UAQ_QuestComponent::SetQuestData()
-{
-	if (!quest)
-		return;
-
-	quest->questData = DuplicateObject<UAQ_QuestData>(questData, this);
 }
 
 void UAQ_QuestComponent::CreateQuestMarkerWidget()
@@ -141,21 +139,10 @@ void UAQ_QuestComponent::DisableQuest(UAQ_PlayerChannels* PlayerChannel)
 	// Check if the WidgetComponent exists
 	if (QuestMarkerWidget)
 	{
-		// Unregister the component before removing it
 		QuestMarkerWidget->UnregisterComponent();
-
-		// Remove and destroy the WidgetComponent
-		GetOwner()->RemoveOwnedComponent(QuestMarkerWidget);
 		QuestMarkerWidget = nullptr;
 	}
 
 	// If all quest are done
 	RemoveComponent();
-}
-
-
-// Called every frame
-void UAQ_QuestComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }

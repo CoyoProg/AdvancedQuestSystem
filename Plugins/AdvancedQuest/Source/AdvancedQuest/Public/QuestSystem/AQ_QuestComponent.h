@@ -20,8 +20,6 @@ public:
 	UAQ_QuestComponent();
 	~UAQ_QuestComponent();
 
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
 	/* Quest properties */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Component")
 	UAQ_QuestData* questData;
@@ -50,7 +48,6 @@ private:
 	bool IsQuestsEnabled{ false };
 	UWidgetComponent* QuestMarkerWidget;
 
-	void SetQuestData();
 	void CreateQuestMarkerWidget();
 
 	UAQ_Quest* quest;

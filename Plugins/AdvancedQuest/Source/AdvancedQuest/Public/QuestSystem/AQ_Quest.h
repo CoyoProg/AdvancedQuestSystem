@@ -41,6 +41,7 @@ public:
 	int indexQuickDisplay = 0;
 
 	/* Quest Functions */
+	void SetQuestData(UAQ_QuestData* questData);
 	void EnableQuest(UAQ_PlayerChannels* playerChannels, UObject* questGiver);
 	void DisableQuest();
 

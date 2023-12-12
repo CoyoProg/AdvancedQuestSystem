@@ -12,6 +12,13 @@ USTRUCT(Blueprintable, BlueprintType)
 struct FAQ_Objectives
 {
 	GENERATED_BODY()
+	FAQ_Objectives() : objectiveType(EAQ_ObjectivesType::Interact),
+		objectiveTarget(nullptr),
+		objectiveSummary(TEXT("")),
+		isUnique(false),
+		uniqueObjectID(0),
+		amountNeeded(1),
+		CurrentAmount(0) {}
 
 	/** Objectives specificities */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
@@ -25,17 +32,17 @@ struct FAQ_Objectives
 
 	/** If the goal is a unique target*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	bool isUnique = false;
+	bool isUnique;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	int uniqueObjectID = 0;
+	int uniqueObjectID;
 
 	/** Amount needed to reach to goal */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	int amountNeeded = 1;
+	int amountNeeded;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Quest")
-	int CurrentAmount = 0;
+	int CurrentAmount;
 };
 
 /**
@@ -47,6 +54,13 @@ class ADVANCEDQUEST_API UAQ_QuestData : public UPrimaryDataAsset
 	GENERATED_BODY()
 	
 public:
+	UAQ_QuestData() : questTitle(TEXT("")),
+		questDescription(TEXT("")),
+		questID(0),
+		xpReward(0),
+		goldReward(0) {}
+
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	FString questTitle;
 

@@ -10,27 +10,44 @@
 #include "QuestSystem/AQ_UniqueIDComponent.h"
 #include "External/AQ_FilesManager.h"
 
-UAQ_Quest::UAQ_Quest()
+UAQ_Quest::UAQ_Quest():
+	questData(nullptr),
+	PlayerChannels(nullptr),
+	BookQuest(nullptr),
+	QuestGiver(nullptr)
 {
 	questData = CreateDefaultSubobject<UAQ_QuestData>(TEXT("Quest Data"));
 }
 
 UAQ_Quest::~UAQ_Quest()
 {
+	questData = nullptr;
+	PlayerChannels = nullptr;
+	BookQuest = nullptr;
+	QuestGiver = nullptr;
+}
+
+void UAQ_Quest::SetQuestData(UAQ_QuestData* questDataP)
+{
+	//questData = NewObject<UAQ_QuestData>(this, UAQ_Quest::StaticClass());
+	questData = DuplicateObject<UAQ_QuestData>(questDataP, this);
 }
 
 void UAQ_Quest::EnableQuest(UAQ_PlayerChannels* playerChannels, UObject* questGiver)
 {
 	IsEnable = true;
 
-	BookQuest = playerChannels->questChannel->GetWidget();
-	QuestGiver = questGiver;
-	PlayerChannels = playerChannels;
+	if (playerChannels)
+	{
+		BookQuest = playerChannels->questChannel->GetWidget();
+		PlayerChannels = playerChannels;
+		AddMyObservers();
+	}
 
 	if (BookQuest)
 		BookQuest->AddQuest(this);
 
-	AddMyObservers();
+	QuestGiver = questGiver;
 }
 
 void UAQ_Quest::DisableQuest()
@@ -90,8 +107,11 @@ void UAQ_Quest::UpdateQuestComponent()
 
 void UAQ_Quest::EndPlay()
 {
-	if(IsEnable)
+	if (IsEnable)
+	{
+		IsEnable = false;
 		RemoveMyObservers();
+	}
 }
 
 bool UAQ_Quest::IsSameObject(int objectiveIndexP, UObject* entityP)
@@ -149,7 +169,8 @@ void UAQ_Quest::AddMyObservers()
 	for (auto const& myObjectives : questData->objectives)
 	{
 		EAQ_ObjectivesType eventType = myObjectives.objectiveType;
-		PlayerChannels->AddObserver(this, eventType);
+		if (PlayerChannels)
+			PlayerChannels->AddObserver(this, eventType);
 	}
 }
 
@@ -158,10 +179,7 @@ void UAQ_Quest::RemoveMyObservers()
 	for (auto const& myObjectives : questData->objectives)
 	{
 		EAQ_ObjectivesType eventType = myObjectives.objectiveType;
-
 		if (PlayerChannels)
-		{
 			PlayerChannels->RemoveObserver(this, eventType);
-		}
 	}
 }

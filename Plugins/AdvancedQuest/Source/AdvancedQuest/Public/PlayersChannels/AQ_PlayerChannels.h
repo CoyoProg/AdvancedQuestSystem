@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-
 #include "Enums/AQ_ObjectivesType.h"
 
 #include "AQ_PlayerChannels.generated.h"
@@ -24,6 +23,7 @@ class ADVANCEDQUEST_API UAQ_PlayerChannels : public UActorComponent
 	
 public:
 	UAQ_PlayerChannels();
+	~UAQ_PlayerChannels();
 
 	/** Interaction Channel */
 	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "Channels")
@@ -51,6 +51,5 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction);
 };

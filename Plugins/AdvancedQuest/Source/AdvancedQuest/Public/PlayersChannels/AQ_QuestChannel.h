@@ -17,8 +17,8 @@ class ADVANCEDQUEST_API UAQ_QuestChannel : public UAQ_Channels
 	GENERATED_BODY()
 
 public:
-	UAQ_QuestChannel();
-	~UAQ_QuestChannel();
+	UAQ_QuestChannel() : bookQuest(nullptr), Owner(nullptr) {}
+	~UAQ_QuestChannel() { bookQuest = nullptr; Owner = nullptr; }
 
 	UAQ_BookQuest* GetWidget() { return bookQuest; }
 	void SetWidgetClass(TSubclassOf<UUserWidget> widgetClass, AActor* owner) { bookQuestWidgetClass = widgetClass; Owner = owner; }

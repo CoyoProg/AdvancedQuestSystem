@@ -8,7 +8,10 @@
 #include "PlayersChannels/AQ_QuestChannel.h"
 #include "QuestSystem/AQ_BookQuest.h"
 
-UAQ_PlayerChannels::UAQ_PlayerChannels()
+UAQ_PlayerChannels::UAQ_PlayerChannels() :
+	interactionChannel(nullptr),
+	inventoryChannel(nullptr),
+	questChannel(nullptr)
 {
 	/** Create all channels */
 	interactionChannel = CreateDefaultSubobject<UAQ_InteractionChannel>(TEXT("Interaction Channel"));
@@ -17,6 +20,13 @@ UAQ_PlayerChannels::UAQ_PlayerChannels()
 
 	PrimaryComponentTick.bCanEverTick = true;
 	PrimaryComponentTick.bStartWithTickEnabled = true;
+}
+
+UAQ_PlayerChannels::~UAQ_PlayerChannels()
+{
+	interactionChannel = nullptr;
+	inventoryChannel = nullptr;
+	questChannel = nullptr;
 }
 
 void UAQ_PlayerChannels::AddObserver(UObject* entity, EAQ_ObjectivesType eventType)
