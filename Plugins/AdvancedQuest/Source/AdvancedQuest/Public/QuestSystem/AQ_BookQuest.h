@@ -35,6 +35,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void UpdateQuestBook(UAQ_Quest* quest);
 
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void DisplayQuestGiverSummary(const TArray<UAQ_Quest*>& questsToDisplay);
+
 	void OpenJournal();
 	void OpenQuestGiverSummary();
 	void CloseAll();

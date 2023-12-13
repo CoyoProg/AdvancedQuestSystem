@@ -1,2 +1,2 @@
-LastQuestId: 100061
-LastUniqueActorID: 100034
+LastQuestId: 100069
+LastUniqueActorID: 100035

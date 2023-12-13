@@ -22,7 +22,7 @@ public:
 
 	/* Quest properties */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Component")
-	UAQ_QuestData* questData;
+	TArray<UAQ_QuestData*> questsData;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Component")
 	TSubclassOf<UUserWidget> questMarkerClass;
@@ -50,7 +50,7 @@ private:
 
 	void CreateQuestMarkerWidget();
 
-	UAQ_Quest* quest;
+	TArray<UAQ_Quest*> quests;
 	void EnableQuest(UAQ_PlayerChannels* PlayerChannel);
 	void DisableQuest(UAQ_PlayerChannels* PlayerChannel);
 
