@@ -51,7 +51,7 @@ private:
 	void CreateQuestMarkerWidget();
 
 	TArray<UAQ_Quest*> quests;
-	void EnableQuest(UAQ_PlayerChannels* PlayerChannel);
+
 	void DisableQuest(UAQ_PlayerChannels* PlayerChannel);
 
 	void RemoveComponent();

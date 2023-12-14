@@ -27,6 +27,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Quest")
 	bool isAllObjectivesComplet = false;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Quest")
+	bool IsEnable = false;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	UAQ_QuestData* questData;
 
@@ -42,7 +45,11 @@ public:
 
 	/* Quest Functions */
 	void SetQuestData(UAQ_QuestData* questData);
+
+	UFUNCTION(BlueprintCallable)
 	void EnableQuest(UAQ_PlayerChannels* playerChannels, UObject* questGiver);
+
+	UFUNCTION(BlueprintCallable)
 	void DisableQuest();
 
 	void OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP);
@@ -57,7 +64,6 @@ private:
 	UObject* QuestGiver;
 
 	int objectivesCompleted = 0;
-	bool IsEnable = false;
 
 	bool IsSameObject(int objectiveIndexP,UObject* entityP);
 	bool IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTypeP);

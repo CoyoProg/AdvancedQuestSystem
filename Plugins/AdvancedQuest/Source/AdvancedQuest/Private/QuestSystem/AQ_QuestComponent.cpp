@@ -52,42 +52,16 @@ void UAQ_QuestComponent::Interact(UAQ_PlayerChannels* PlayerChannel)
 	// Accept to Enable the quest
 	// "Terminate" if all objectives of the selected quest are completed to disable the selected quest
 	UAQ_BookQuest* bookQuest = PlayerChannel->questChannel->GetWidget();
-	bookQuest->DisplayQuestGiverSummary(quests);
-
-
-
-	/* TEMPORARY
-	It's giving all the quest when interacting for now
-	But we need to show the quest
-	And let the player accept only the one he wants */
-	//if (!IsQuestsEnabled)
-	//{
-	//	for (auto quest : quests)
-	//	{
-	//		quest->EnableQuest(PlayerChannel, this);
-	//	}
-	//
-	//	QuestMarkerWidget->SetVisibility(false);
-	//	IsQuestsEnabled = true;
-	//
-	//	return;
-	//}
-	//
-	//for (auto quest : quests)
-	//{
-	//	if (quest->isAllObjectivesComplet)
-	//	{
-	//		quest->DisableQuest();
-	//		if (QuestMarkerWidget)
-	//			QuestMarkerWidget->SetVisibility(false);
-	//	}
-	//}
+	bookQuest->DisplayQuestGiverSummary(quests, this, PlayerChannel);
 }
 
 // Called when the game starts
 void UAQ_QuestComponent::BeginPlay()
 {
 	RerunScript();
+
+	if (questsData.IsEmpty())
+		RemoveComponent();
 
 	for (auto questData : questsData)
 	{
@@ -111,9 +85,6 @@ void UAQ_QuestComponent::RemoveComponent()
 
 void UAQ_QuestComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-	//if (IsQuestsEnabled)
-	//	quest->EndPlay();
-
 	for (auto quest : quests)
 	{
 		quest->EndPlay();
@@ -148,22 +119,8 @@ void UAQ_QuestComponent::CreateQuestMarkerWidget()
 	}
 }
 
-void UAQ_QuestComponent::EnableQuest(UAQ_PlayerChannels* PlayerChannel)
-{
-	if (QuestMarkerWidget)
-		QuestMarkerWidget->SetVisibility(false);
-
-	//quest->EnableQuest(PlayerChannel, this);
-
-	IsQuestsEnabled = true;
-}
-
 void UAQ_QuestComponent::DisableQuest(UAQ_PlayerChannels* PlayerChannel)
 {
-	IsQuestsEnabled = false;
-
-	//quest->DisableQuest();
-
 	// Check if the WidgetComponent exists
 	if (QuestMarkerWidget)
 	{
@@ -171,6 +128,5 @@ void UAQ_QuestComponent::DisableQuest(UAQ_PlayerChannels* PlayerChannel)
 		QuestMarkerWidget = nullptr;
 	}
 
-	// If all quest are done
 	RemoveComponent();
 }

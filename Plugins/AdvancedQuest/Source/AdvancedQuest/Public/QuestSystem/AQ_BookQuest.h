@@ -36,7 +36,7 @@ public:
 	void UpdateQuestBook(UAQ_Quest* quest);
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-	void DisplayQuestGiverSummary(const TArray<UAQ_Quest*>& questsToDisplay);
+	void DisplayQuestGiverSummary(const TArray<UAQ_Quest*>& questsToDisplay, UObject* questGiverOwner, UAQ_PlayerChannels* PlayerChannel);
 
 	void OpenJournal();
 	void OpenQuestGiverSummary();
