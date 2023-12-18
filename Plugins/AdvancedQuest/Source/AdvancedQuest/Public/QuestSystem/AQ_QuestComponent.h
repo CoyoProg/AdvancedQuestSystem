@@ -32,7 +32,7 @@ public:
 	UMaterialInterface* material;
 
 	UFUNCTION(BlueprintCallable)
-	void UpdateQuestMarker();
+	void UpdateQuestMarker(bool isMarkerVisible, bool isQuestValid);
 
 	UFUNCTION(BlueprintCallable)
 	void RerunScript();
@@ -40,19 +40,20 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Interact(UAQ_PlayerChannels* PlayerChannel);
 
+	void RemoveQuestFromArray(UAQ_Quest* questToRemove);
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 private:
-	bool IsQuestsEnabled{ false };
 	UWidgetComponent* QuestMarkerWidget;
-
-	void CreateQuestMarkerWidget();
-
 	TArray<UAQ_Quest*> quests;
 
-	void DisableQuest(UAQ_PlayerChannels* PlayerChannel);
 
+	void CreateQuestMarkerWidget();
+	bool CheckForDisplayableQuest();
+
+	void DisableQuest(UAQ_PlayerChannels* PlayerChannel);
 	void RemoveComponent();
 };

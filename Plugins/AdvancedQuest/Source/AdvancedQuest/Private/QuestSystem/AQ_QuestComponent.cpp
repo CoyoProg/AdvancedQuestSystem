@@ -27,14 +27,14 @@ UAQ_QuestComponent::~UAQ_QuestComponent()
 	material = nullptr;
 }
 
-void UAQ_QuestComponent::UpdateQuestMarker()
+void UAQ_QuestComponent::UpdateQuestMarker(bool isMarkerVisible, bool isQuestValid)
 {
 	UAQ_QuestMarkerWidget* widget = Cast<UAQ_QuestMarkerWidget>(QuestMarkerWidget->GetWidget());
 
 	if (widget)
 	{
-		QuestMarkerWidget->SetVisibility(true);
-		widget->SetImageQuest(true);
+		QuestMarkerWidget->SetVisibility(isMarkerVisible);
+		widget->SetImageQuest(isQuestValid);
 	}
 }
 
@@ -47,12 +47,34 @@ void UAQ_QuestComponent::RerunScript()
 
 void UAQ_QuestComponent::Interact(UAQ_PlayerChannels* PlayerChannel)
 {
-	// Show Quest Summarys
-	// Select quests
-	// Accept to Enable the quest
-	// "Terminate" if all objectives of the selected quest are completed to disable the selected quest
+	if (!CheckForDisplayableQuest())
+		return;
+
 	UAQ_BookQuest* bookQuest = PlayerChannel->questChannel->GetWidget();
-	bookQuest->DisplayQuestGiverSummary(quests, this, PlayerChannel);
+
+	if (bookQuest)
+	{
+		bookQuest->DisplayQuestGiverSummary(quests, this, PlayerChannel);
+		return;
+	}
+
+	// If no book quest, enable all the quest ?
+}
+
+void UAQ_QuestComponent::RemoveQuestFromArray(UAQ_Quest* questToRemove)
+{
+	quests.Remove(questToRemove);
+}
+
+bool UAQ_QuestComponent::CheckForDisplayableQuest()
+{
+	for (auto quest : quests)
+	{
+		if (!quest->IsEnable || quest->isAllObjectivesComplet)
+			return true;
+	}
+
+	return false;
 }
 
 // Called when the game starts

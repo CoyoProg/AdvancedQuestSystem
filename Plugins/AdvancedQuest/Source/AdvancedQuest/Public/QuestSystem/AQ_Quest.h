@@ -47,7 +47,7 @@ public:
 	void SetQuestData(UAQ_QuestData* questData);
 
 	UFUNCTION(BlueprintCallable)
-	void EnableQuest(UAQ_PlayerChannels* playerChannels, UObject* questGiver);
+	void EnableQuest(UAQ_PlayerChannels* playerChannels, UAQ_QuestComponent* questGiver);
 
 	UFUNCTION(BlueprintCallable)
 	void DisableQuest();
@@ -61,7 +61,7 @@ private:
 	/** Quest owner */
 	UAQ_PlayerChannels* PlayerChannels;
 	UAQ_BookQuest* BookQuest;
-	UObject* QuestGiver;
+	UAQ_QuestComponent* QuestGiverComponent;
 
 	int objectivesCompleted = 0;
 

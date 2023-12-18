@@ -14,7 +14,7 @@ UAQ_Quest::UAQ_Quest():
 	questData(nullptr),
 	PlayerChannels(nullptr),
 	BookQuest(nullptr),
-	QuestGiver(nullptr)
+	QuestGiverComponent(nullptr)
 {
 	questData = CreateDefaultSubobject<UAQ_QuestData>(TEXT("Quest Data"));
 }
@@ -24,16 +24,15 @@ UAQ_Quest::~UAQ_Quest()
 	questData = nullptr;
 	PlayerChannels = nullptr;
 	BookQuest = nullptr;
-	QuestGiver = nullptr;
+	QuestGiverComponent = nullptr;
 }
 
 void UAQ_Quest::SetQuestData(UAQ_QuestData* questDataP)
 {
-	//questData = NewObject<UAQ_QuestData>(this, UAQ_Quest::StaticClass());
 	questData = DuplicateObject<UAQ_QuestData>(questDataP, this);
 }
 
-void UAQ_Quest::EnableQuest(UAQ_PlayerChannels* playerChannels, UObject* questGiver)
+void UAQ_Quest::EnableQuest(UAQ_PlayerChannels* playerChannels, UAQ_QuestComponent* questGiver)
 {
 	IsEnable = true;
 
@@ -47,7 +46,7 @@ void UAQ_Quest::EnableQuest(UAQ_PlayerChannels* playerChannels, UObject* questGi
 	if (BookQuest)
 		BookQuest->AddQuest(this);
 
-	QuestGiver = questGiver;
+	QuestGiverComponent = questGiver;
 }
 
 void UAQ_Quest::DisableQuest()
@@ -56,6 +55,9 @@ void UAQ_Quest::DisableQuest()
 
 	if(BookQuest)
 		BookQuest->RemoveQuest(this);
+
+	if (QuestGiverComponent)
+		QuestGiverComponent->RemoveQuestFromArray(this);
 
 	isDisplayJournal = false;
 	isDisplayQuickJournal = false;
@@ -99,10 +101,10 @@ void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eve
 void UAQ_Quest::UpdateQuestComponent()
 {
 	isAllObjectivesComplet = true;
-	UAQ_QuestComponent* questComponent = (UAQ_QuestComponent*)QuestGiver;
+	//UAQ_QuestComponent* questComponent = (UAQ_QuestComponent*)QuestGiver;
 
-	if (questComponent)
-		questComponent->UpdateQuestMarker();
+	if (QuestGiverComponent)
+		QuestGiverComponent->UpdateQuestMarker(true, true);
 }
 
 void UAQ_Quest::EndPlay()
