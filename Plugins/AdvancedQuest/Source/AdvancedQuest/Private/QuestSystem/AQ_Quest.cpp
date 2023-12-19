@@ -34,7 +34,7 @@ void UAQ_Quest::SetQuestData(UAQ_QuestData* questDataP)
 
 void UAQ_Quest::EnableQuest(UAQ_PlayerChannels* playerChannels, UAQ_QuestComponent* questGiver)
 {
-	IsEnable = true;
+	questState = EAQ_QuestState::Active;
 
 	if (playerChannels)
 	{
@@ -51,7 +51,7 @@ void UAQ_Quest::EnableQuest(UAQ_PlayerChannels* playerChannels, UAQ_QuestCompone
 
 void UAQ_Quest::DisableQuest()
 {
-	IsEnable = false;
+	questState = EAQ_QuestState::Archive;
 
 	if(BookQuest)
 		BookQuest->RemoveQuest(this);
@@ -63,9 +63,40 @@ void UAQ_Quest::DisableQuest()
 	isDisplayQuickJournal = false;
 }
 
+void UAQ_Quest::ResetQuest()
+{
+	questState = EAQ_QuestState::Pending;
+
+	/* Remove the quest from the journal */
+	if (BookQuest)
+		BookQuest->RemoveQuest(this);
+
+	isDisplayJournal = false;
+	isDisplayQuickJournal = false;
+
+	/* Remove the Observers*/
+	RemoveMyObservers();
+
+	/* Reset all the quest properties */
+	for (int i = 0; i < questData->objectives.Num(); i++)
+	{
+		questData->objectives[i].CurrentAmount = 0;
+	}
+
+	objectivesCompleted = 0;
+	indexQuickDisplay = 0;
+
+	/* Reset all references */
+	PlayerChannels = nullptr;
+	BookQuest = nullptr;
+
+	if (QuestGiverComponent)
+		QuestGiverComponent->UpdateQuestMarker();
+}
+
 void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP)
 {
-	if (isAllObjectivesComplet)
+	if (questState == EAQ_QuestState::Valid)
 		return;
 
 	for (int i = 0; i < questData->objectives.Num(); i++)
@@ -90,6 +121,8 @@ void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eve
 		And Remove the Observers if all the objectives are completed*/
 	if (objectivesCompleted >= questData->objectives.Num())
 	{
+		questState = EAQ_QuestState::Valid;
+
 		UpdateQuestComponent();
 		RemoveMyObservers();
 	}
@@ -100,18 +133,16 @@ void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eve
 
 void UAQ_Quest::UpdateQuestComponent()
 {
-	isAllObjectivesComplet = true;
-	//UAQ_QuestComponent* questComponent = (UAQ_QuestComponent*)QuestGiver;
-
 	if (QuestGiverComponent)
-		QuestGiverComponent->UpdateQuestMarker(true, true);
+		QuestGiverComponent->SetQuestMarker(true, true);
 }
 
 void UAQ_Quest::EndPlay()
 {
-	if (IsEnable)
+	/* TEMPORARY */
+	if (questState == EAQ_QuestState::Active)
 	{
-		IsEnable = false;
+		questState = EAQ_QuestState::Pending;
 		RemoveMyObservers();
 	}
 }

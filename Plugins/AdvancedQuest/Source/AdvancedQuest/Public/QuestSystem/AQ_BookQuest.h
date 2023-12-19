@@ -39,7 +39,12 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void DisplayQuestGiverSummary(const TArray<UAQ_Quest*>& questsToDisplay, UAQ_QuestComponent* questGiverOwner, UAQ_PlayerChannels* PlayerChannel);
 
+	UFUNCTION(BlueprintCallable)
 	void OpenJournal();
+
+	UFUNCTION(BlueprintCallable)
 	void OpenQuestGiverSummary();
+
+	UFUNCTION(BlueprintCallable)
 	void CloseAll();
 };

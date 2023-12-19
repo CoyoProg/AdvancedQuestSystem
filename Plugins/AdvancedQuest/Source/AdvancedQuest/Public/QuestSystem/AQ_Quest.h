@@ -13,6 +13,19 @@ class UAQ_QuestData;
 class UAQ_PlayerChannel;
 
 /**
+ *
+ */
+UENUM(BlueprintType)
+enum class EAQ_QuestState : uint8
+{
+	Active				UMETA(DisplayName = "Active"),
+	Pending				UMETA(DisplayName = "Pending"),
+	Valid				UMETA(DisplayName = "Valid"),
+	Archive				UMETA(DisplayName = "Archive")
+};
+
+
+/**
  * 
  */
 UCLASS(Blueprintable, BlueprintType)
@@ -25,10 +38,7 @@ public:
 	~UAQ_Quest();
 
 	UPROPERTY(BlueprintReadOnly, Category = "Quest")
-	bool isAllObjectivesComplet = false;
-
-	UPROPERTY(BlueprintReadOnly, Category = "Quest")
-	bool IsEnable = false;
+	EAQ_QuestState questState = EAQ_QuestState::Pending;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	UAQ_QuestData* questData;
@@ -51,6 +61,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void DisableQuest();
+
+	UFUNCTION(BlueprintCallable)
+	void ResetQuest();
 
 	void OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP);
 

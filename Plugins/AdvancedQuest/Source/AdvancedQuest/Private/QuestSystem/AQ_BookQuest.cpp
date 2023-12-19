@@ -10,17 +10,15 @@ void UAQ_BookQuest::OpenJournal()
 	else
 		JournalWidget->SetVisibility(ESlateVisibility::Hidden);
 
-	if (QuestGiverWidget->IsVisible())
-		QuestGiverWidget->SetVisibility(ESlateVisibility::Hidden);
+	QuestGiverWidget->SetVisibility(ESlateVisibility::Hidden);
 }
 
 void UAQ_BookQuest::OpenQuestGiverSummary()
 {
-	if (!QuestGiverWidget->IsVisible())
-		QuestGiverWidget->SetVisibility(ESlateVisibility::Visible);
+	QuestGiverWidget->SetVisibility(ESlateVisibility::Visible);
 
-	if(JournalWidget->IsVisible())
-		JournalWidget->SetVisibility(ESlateVisibility::Hidden);
+
+	JournalWidget->SetVisibility(ESlateVisibility::Hidden);
 }
 
 void UAQ_BookQuest::CloseAll()

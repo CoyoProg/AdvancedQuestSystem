@@ -27,7 +27,7 @@ UAQ_QuestComponent::~UAQ_QuestComponent()
 	material = nullptr;
 }
 
-void UAQ_QuestComponent::UpdateQuestMarker(bool isMarkerVisible, bool isQuestValid)
+void UAQ_QuestComponent::SetQuestMarker(bool isMarkerVisible, bool isQuestValid)
 {
 	UAQ_QuestMarkerWidget* widget = Cast<UAQ_QuestMarkerWidget>(QuestMarkerWidget->GetWidget());
 
@@ -36,6 +36,29 @@ void UAQ_QuestComponent::UpdateQuestMarker(bool isMarkerVisible, bool isQuestVal
 		QuestMarkerWidget->SetVisibility(isMarkerVisible);
 		widget->SetImageQuest(isQuestValid);
 	}
+}
+
+void UAQ_QuestComponent::UpdateQuestMarker()
+{
+	bool isAnyQuestPending = false;
+
+	for (auto quest : quests)
+	{
+		if (quest->questState == EAQ_QuestState::Valid)
+		{
+			SetQuestMarker(true, true);
+			return;
+		}
+
+		if(quest->questState == EAQ_QuestState::Pending)
+		{
+			SetQuestMarker(true, false);
+			isAnyQuestPending = true;
+		}
+	}
+
+	if(!isAnyQuestPending)
+		SetQuestMarker(false, false);
 }
 
 void UAQ_QuestComponent::RerunScript()
@@ -70,7 +93,7 @@ bool UAQ_QuestComponent::CheckForDisplayableQuest()
 {
 	for (auto quest : quests)
 	{
-		if (!quest->IsEnable || quest->isAllObjectivesComplet)
+		if (quest->questState == EAQ_QuestState::Pending || quest->questState == EAQ_QuestState::Valid)
 			return true;
 	}
 

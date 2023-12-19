@@ -32,7 +32,10 @@ public:
 	UMaterialInterface* material;
 
 	UFUNCTION(BlueprintCallable)
-	void UpdateQuestMarker(bool isMarkerVisible, bool isQuestValid);
+	void SetQuestMarker(bool isMarkerVisible, bool isQuestValid);
+	
+	UFUNCTION(BlueprintCallable)
+	void UpdateQuestMarker();
 
 	UFUNCTION(BlueprintCallable)
 	void RerunScript();
