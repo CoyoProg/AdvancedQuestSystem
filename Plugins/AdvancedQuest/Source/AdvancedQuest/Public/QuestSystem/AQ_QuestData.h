@@ -37,7 +37,7 @@ struct FAQ_Objectives
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	int uniqueObjectID;
 
-	/** Amount needed to reach to goal */
+	/** Amount needed to complete the objective */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	int amountNeeded;
 

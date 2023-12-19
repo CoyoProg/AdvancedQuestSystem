@@ -83,4 +83,6 @@ private:
 
 	void AddMyObservers();
 	void RemoveMyObservers();
+
+	bool TriggerEndPlayOnce = false;
 };

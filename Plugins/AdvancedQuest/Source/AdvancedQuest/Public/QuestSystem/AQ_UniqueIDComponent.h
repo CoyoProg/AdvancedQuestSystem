@@ -12,8 +12,7 @@ class ADVANCEDQUEST_API UAQ_UniqueIDComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
-	// Sets default values for this component's properties
+public:
 	UAQ_UniqueIDComponent();
 
 	UFUNCTION(BlueprintCallable, Category = "Unique ID Component")

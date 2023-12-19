@@ -29,6 +29,9 @@ UAQ_QuestComponent::~UAQ_QuestComponent()
 
 void UAQ_QuestComponent::SetQuestMarker(bool isMarkerVisible, bool isQuestValid)
 {
+	if (!questMarkerClass)
+		return;
+
 	UAQ_QuestMarkerWidget* widget = Cast<UAQ_QuestMarkerWidget>(QuestMarkerWidget->GetWidget());
 
 	if (widget)
@@ -40,6 +43,9 @@ void UAQ_QuestComponent::SetQuestMarker(bool isMarkerVisible, bool isQuestValid)
 
 void UAQ_QuestComponent::UpdateQuestMarker()
 {
+	if (!questMarkerClass)
+		return;
+
 	bool isAnyQuestPending = false;
 
 	for (auto quest : quests)

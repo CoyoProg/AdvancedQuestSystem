@@ -17,24 +17,16 @@ void UAQ_Channels::AddObserver_Implementation(UObject* observerP)
 
 void UAQ_Channels::RemoveObserver_Implementation(UObject* observerP)
 {
+	int Range = Observers.Num() - 1;
+
 	if (observerP->GetClass()->ImplementsInterface(UAQ_Observer::StaticClass()))
 	{
-		int32 ItemIndex = -1;
-
-		for (int32 Index = 0; Index < Observers.Num(); Index++)
+		for (int Index = Range; Index > -1; Index--)
 		{
 			if (Observers[Index] == observerP)
 			{
-				//FScopeLock Lock(&ObserversMutex);
-
-				TFunction<void()> RemoveItemFunction = [this, observerP]()
-					{
-						Observers.RemoveSwap(observerP);
-					};
-
-				Async(EAsyncExecution::TaskGraphMainThread, RemoveItemFunction);
-
-				break;
+				Observers.Remove(observerP);
+				return;
 			}
 		}
 	}
@@ -45,8 +37,8 @@ void UAQ_Channels::NotifySubjects_Implementation(UObject* entity, EAQ_NotifyEven
 	if (Observers.Num() == 0)
 		return;
 
-	for (auto actors : Observers)
+	for (int Index = 0; Index < Observers.Num(); ++Index)
 	{
-		IAQ_Observer::Execute_OnNotify(actors, entity, eventTypeP);
+		IAQ_Observer::Execute_OnNotify(Observers[Index], entity, eventTypeP);
 	}
 }

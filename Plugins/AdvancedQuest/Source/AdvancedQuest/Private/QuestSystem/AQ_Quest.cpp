@@ -36,13 +36,14 @@ void UAQ_Quest::EnableQuest(UAQ_PlayerChannels* playerChannels, UAQ_QuestCompone
 {
 	questState = EAQ_QuestState::Active;
 
-	if (playerChannels)
-	{
-		BookQuest = playerChannels->questChannel->GetWidget();
-		PlayerChannels = playerChannels;
-		AddMyObservers();
-	}
+	/* Keep track of the PlayerChannel component */
+	BookQuest = playerChannels->questChannel->GetWidget();
+	PlayerChannels = playerChannels;
 
+	/* Add the obervers to the appropriate channel */
+	AddMyObservers();
+
+	/* Add the Quest to the UI (if any) */
 	if (BookQuest)
 		BookQuest->AddQuest(this);
 
@@ -51,20 +52,25 @@ void UAQ_Quest::EnableQuest(UAQ_PlayerChannels* playerChannels, UAQ_QuestCompone
 
 void UAQ_Quest::DisableQuest()
 {
+	/* When a QuestState is Archive, we need to keep track of
+	   it in the QuestChannel associated with the PlayerChannel */
 	questState = EAQ_QuestState::Archive;
 
+	/* Remove the Quest from the UI (if any) */
 	if(BookQuest)
 		BookQuest->RemoveQuest(this);
 
-	if (QuestGiverComponent)
-		QuestGiverComponent->RemoveQuestFromArray(this);
+	/* Remove the Quest from the Quest Giver when the quest is done */
+	QuestGiverComponent->RemoveQuestFromArray(this);
 
+	/* Reset display properties */
 	isDisplayJournal = false;
 	isDisplayQuickJournal = false;
 }
 
 void UAQ_Quest::ResetQuest()
 {
+	/* Reset to initial state */
 	questState = EAQ_QuestState::Pending;
 
 	/* Remove the quest from the journal */
@@ -90,15 +96,18 @@ void UAQ_Quest::ResetQuest()
 	PlayerChannels = nullptr;
 	BookQuest = nullptr;
 
-	if (QuestGiverComponent)
-		QuestGiverComponent->UpdateQuestMarker();
+	QuestGiverComponent->UpdateQuestMarker();
 }
 
 void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP)
 {
+	/* If the quest is already valid we dont need to do anything */
 	if (questState == EAQ_QuestState::Valid)
 		return;
 
+	/* Go through each Objectives and:
+	   Check if the Objective Target is the same as the entity notified
+	   Check if the Objective Type is the same as the eventType notified */
 	for (int i = 0; i < questData->objectives.Num(); i++)
 	{
 		if (!IsSameObject(i, entity))
@@ -107,67 +116,72 @@ void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eve
 		if (!IsSameEventType(i, eventTypeP))
 			continue;
 
-		/** Update Quest */
+		/** Update the currentAmount of the Objective if both checks are valid */
 		questData->objectives[i].CurrentAmount++;
 
-		/** Check if the objective is completed */
+		/** Check if the Objective is completed */
 		if (questData->objectives[i].CurrentAmount >= questData->objectives[i].amountNeeded)
-		{
-			objectivesCompleted++;
-		}
+			objectivesCompleted++; // Keep track of all objectives completed
 	}
 
-	/** Check if all the objectives are completed
-		And Remove the Observers if all the objectives are completed*/
+	/** Check if all the objectives are completed */
 	if (objectivesCompleted >= questData->objectives.Num())
 	{
 		questState = EAQ_QuestState::Valid;
 
+		/* Remove the Observers & Update the Quest Giver */
 		UpdateQuestComponent();
 		RemoveMyObservers();
 	}
 
+	/* Update the UI (if any) */
 	if(BookQuest)
 		BookQuest->UpdateQuestBook(this);
 }
 
 void UAQ_Quest::UpdateQuestComponent()
 {
-	if (QuestGiverComponent)
-		QuestGiverComponent->SetQuestMarker(true, true);
+	/* Set the Quest Marker to the Question Mark Sprite
+	   to show that the quest is valid */
+	QuestGiverComponent->SetQuestMarker(true, true);
 }
 
 void UAQ_Quest::EndPlay()
 {
-	/* TEMPORARY */
-	if (questState == EAQ_QuestState::Active)
+	/* TEMPORARY, DEBUG ONLY */
+	if (questState == EAQ_QuestState::Active && !TriggerEndPlayOnce)
 	{
-		questState = EAQ_QuestState::Pending;
+		TriggerEndPlayOnce = true;
 		RemoveMyObservers();
 	}
 }
 
 bool UAQ_Quest::IsSameObject(int objectiveIndexP, UObject* entityP)
 {
+	/* Check if there is already the right amount */
 	if (questData->objectives[objectiveIndexP].CurrentAmount >= questData->objectives[objectiveIndexP].amountNeeded)
 		return false;
 
+	/* Check if the entity Class is the same as the ObjectiveTarget Class */
 	UClass* ObjectiveTargetClass = questData->objectives[objectiveIndexP].objectiveTarget;
-
 	if (entityP->GetClass() != ObjectiveTargetClass)
 		return false;
 
-	AActor* MyActor = Cast<AActor>(entityP);
-	UAQ_UniqueIDComponent* UniqueIDComponent = MyActor->FindComponentByClass<UAQ_UniqueIDComponent>();
-
+	/* Check if the Objective is a Unique Objective */
 	if (questData->objectives[objectiveIndexP].isUnique)
 	{
+		/* Check if the entity has a Unique ID */
+		AActor* MyActor = Cast<AActor>(entityP);
+		UAQ_UniqueIDComponent* UniqueIDComponent = MyActor->FindComponentByClass<UAQ_UniqueIDComponent>();
+
 		int UniqueID = 0;
 		if (!UniqueIDComponent)
 			return false;
 		
+		/* Get the entity's UniqueID*/
 		UniqueID = UniqueIDComponent->GetUniqueID();
 
+		/* And compare it with the Objective UniqueID*/
 		if (UniqueID != questData->objectives[objectiveIndexP].uniqueObjectID)
 			return false;
 	}
@@ -177,6 +191,7 @@ bool UAQ_Quest::IsSameObject(int objectiveIndexP, UObject* entityP)
 
 bool UAQ_Quest::IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTypeP)
 {
+	/* Check if the eventType notified is the same as the ObjectiveType*/
 	switch (eventTypeP)
 	{
 	case EAQ_NotifyEventType::Interact:
