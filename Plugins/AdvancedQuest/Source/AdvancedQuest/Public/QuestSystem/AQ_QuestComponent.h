@@ -44,7 +44,7 @@ public:
 	void Interact(UAQ_PlayerChannels* PlayerChannel);
 
 	void RemoveQuestFromArray(UAQ_Quest* questToRemove);
-
+	void CreateQuests(UAQ_QuestChannel* questChannel);
 protected:
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;

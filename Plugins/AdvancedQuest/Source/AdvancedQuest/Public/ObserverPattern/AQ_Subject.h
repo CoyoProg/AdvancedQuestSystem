@@ -33,5 +33,4 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Subject")
 	void NotifySubjects(UObject* entity, EAQ_NotifyEventType eventType);
-
 };

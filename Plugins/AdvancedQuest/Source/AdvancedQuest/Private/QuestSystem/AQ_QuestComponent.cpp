@@ -92,8 +92,6 @@ void UAQ_QuestComponent::Interact(UAQ_PlayerChannels* PlayerChannel)
 		bookQuest->DisplayQuestGiverSummary(quests, this, PlayerChannel);
 		return;
 	}
-
-	// If no book quest, enable all the quest ?
 }
 
 void UAQ_QuestComponent::RemoveQuestFromArray(UAQ_Quest* questToRemove)
@@ -101,25 +99,34 @@ void UAQ_QuestComponent::RemoveQuestFromArray(UAQ_Quest* questToRemove)
 	quests.Remove(questToRemove);
 }
 
-// Called when the game starts
-void UAQ_QuestComponent::BeginPlay()
+void UAQ_QuestComponent::CreateQuests(UAQ_QuestChannel* questChannel)
 {
-	RerunScript();
-
 	for (auto questDataReceiver : quests_DataReceiver)
 	{
+		if (questDataReceiver.Key->isImplemented)
+			continue;
+
 		UAQ_Quest* questTemp = NewObject<UAQ_Quest>(this, UAQ_Quest::StaticClass());
 		questTemp->SetQuestData(questDataReceiver.Key);
 
 		UAQ_QuestComponent* questReceiver = questDataReceiver.Value->GetComponentByClass<UAQ_QuestComponent>();
 		questTemp->SetQuestReceiver(questReceiver);
 		questTemp->SetQuestGiver(this);
+		questChannel->AddObserver_Implementation(questTemp);
 
 		quests.Add(questTemp);
 
-		if(questReceiver != this)
+		if (questReceiver != this)
 			questReceiver->quests.Add(questTemp);
 	}
+
+	UpdateQuestMarker();
+}
+
+// Called when the game starts
+void UAQ_QuestComponent::BeginPlay()
+{
+	RerunScript();
 
 	if (questMarkerClass)
 	{

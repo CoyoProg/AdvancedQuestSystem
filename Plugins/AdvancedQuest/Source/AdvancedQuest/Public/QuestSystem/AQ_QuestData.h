@@ -81,6 +81,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	int goldReward;
 
+	bool isImplemented = false;
 	/** Inventory Reward */
 	// To Do
 };

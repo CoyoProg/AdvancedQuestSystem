@@ -94,6 +94,18 @@ void UAQ_PlayerChannels::BeginPlay()
 		questChannel->SetWidgetClass(bookQuestWidget, GetOwner());
 		questChannel->AddWidgetToViewport();
 	}
+
+	/* We Create all the quest Asynchrounously,
+	   Only the first time that the game is Played */
+	if (IsNewGame)
+	{
+		AsyncTask(ENamedThreads::GameThread, [this]()
+			{
+				questChannel->CreateAllQuests();
+			});
+
+		IsNewGame = false;
+	}
 }
 
 void UAQ_PlayerChannels::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)

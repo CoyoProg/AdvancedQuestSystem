@@ -20,13 +20,20 @@ public:
 	UAQ_QuestChannel() : bookQuest(nullptr), Owner(nullptr) {}
 	~UAQ_QuestChannel() { bookQuest = nullptr; Owner = nullptr; }
 
+	virtual void AddObserver_Implementation(UObject* observerP) override;
+	virtual void RemoveObserver_Implementation(UObject* observerP) override;
+	void NotifyObservers();
+
 	UAQ_BookQuest* GetWidget() { return bookQuest; }
 	void SetWidgetClass(TSubclassOf<UUserWidget> widgetClass, AActor* owner) { bookQuestWidgetClass = widgetClass; Owner = owner; }
 	void AddWidgetToViewport();
 
+	void CreateAllQuests();
+
 	TSubclassOf<UUserWidget> bookQuestWidgetClass;
 private:
 	UAQ_BookQuest* bookQuest;
+	TArray<UAQ_Quest*> questArchive;
 
 	AActor* Owner;
 };
