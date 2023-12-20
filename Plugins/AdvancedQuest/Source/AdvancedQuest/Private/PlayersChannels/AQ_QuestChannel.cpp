@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-#include <Kismet/GameplayStatics.h>
-
 #include "PlayersChannels/AQ_QuestChannel.h"
 #include "QuestSystem/AQ_BookQuest.h"
 #include "QuestSystem/AQ_QuestComponent.h"
 
+
+#include <Kismet/GameplayStatics.h>
 #include "Components/WidgetComponent.h"
 
 void UAQ_QuestChannel::AddObserver_Implementation(UObject* observerP)
@@ -19,12 +19,16 @@ void UAQ_QuestChannel::AddObserver_Implementation(UObject* observerP)
 
 void UAQ_QuestChannel::RemoveObserver_Implementation(UObject* observerP)
 {
-	/* Add a new eventType EventRequiermentType
-       Remove Observers in:
+	/* Remove Observers in:
 							ObserversLevelRequierment
 							ObserversQuestRequierment
 							Remove the Observer from the right List
 	*/
+}
+
+void UAQ_QuestChannel::NotifyObservers()
+{
+	/* Notify All the observers per EventRequiermentType*/
 }
 
 void UAQ_QuestChannel::AddWidgetToViewport()
@@ -57,10 +61,10 @@ void UAQ_QuestChannel::CreateAllQuests()
 		// Iterate through all components attached to the actor
 		for (UActorComponent* ActorComponent : actors->GetComponents())
 		{
-			// Check if the component is of the desired class or a subclass
-			if (UAQ_QuestComponent* SubclassComponent = Cast<UAQ_QuestComponent>(ActorComponent))
+			// Check if the component is a AQ_QuestComponent
+			if (UAQ_QuestComponent* questComponent = Cast<UAQ_QuestComponent>(ActorComponent))
 			{
-				SubclassComponent->CreateQuests(this);
+				questComponent->CreateQuests(this);
 			}
 		}
 	}

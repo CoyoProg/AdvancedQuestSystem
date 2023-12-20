@@ -7,7 +7,7 @@ UAQ_InventoryChannel::UAQ_InventoryChannel()
 {
 }
 
-void UAQ_InventoryChannel::OnInteractionEvent(UObject* entity)
+void UAQ_InventoryChannel::OnNotifyEvent_Implementation(UObject* entity)
 {
-	NotifySubjects_Implementation(entity, EAQ_NotifyEventType::Collect);
+	NotifyObservers_Implementation(entity, EAQ_NotifyEventType::Collect);
 }

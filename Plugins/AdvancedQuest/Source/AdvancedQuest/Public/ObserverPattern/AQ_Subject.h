@@ -31,6 +31,9 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
 	void RemoveObserver(UObject* observer);
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Subject")
-	void NotifySubjects(UObject* entity, EAQ_NotifyEventType eventType);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
+	void NotifyObservers(UObject* entity, EAQ_NotifyEventType eventType);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
+	void OnNotifyEvent(UObject* entity);
 };

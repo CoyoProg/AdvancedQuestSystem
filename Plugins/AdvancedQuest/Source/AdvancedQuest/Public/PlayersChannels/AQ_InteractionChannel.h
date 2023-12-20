@@ -18,6 +18,5 @@ public:
 	UAQ_InteractionChannel();
 	~UAQ_InteractionChannel();
 
-	UFUNCTION(BlueprintCallable, Category = "Events")
-	void OnInteractionEvent(UObject* entity);
+	virtual void OnNotifyEvent_Implementation(UObject* entity) override;
 };

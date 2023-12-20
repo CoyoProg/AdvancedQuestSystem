@@ -17,6 +17,5 @@ class ADVANCEDQUEST_API UAQ_InventoryChannel : public UAQ_Channels
 public:
 	UAQ_InventoryChannel();
 
-	UFUNCTION(BlueprintCallable, Category = "Events")
-	void OnInteractionEvent(UObject* entity);
+	virtual void OnNotifyEvent_Implementation(UObject* entity) override;
 };
