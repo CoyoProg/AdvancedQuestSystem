@@ -14,7 +14,8 @@ UAQ_Quest::UAQ_Quest():
 	questData(nullptr),
 	PlayerChannels(nullptr),
 	BookQuest(nullptr),
-	QuestGiverComponent(nullptr)
+	QuestGiver(nullptr),
+	QuestReceiver(nullptr)
 {
 	questData = CreateDefaultSubobject<UAQ_QuestData>(TEXT("Quest Data"));
 }
@@ -24,12 +25,23 @@ UAQ_Quest::~UAQ_Quest()
 	questData = nullptr;
 	PlayerChannels = nullptr;
 	BookQuest = nullptr;
-	QuestGiverComponent = nullptr;
+	QuestGiver = nullptr;
+	QuestReceiver = nullptr;
 }
 
 void UAQ_Quest::SetQuestData(UAQ_QuestData* questDataP)
 {
 	questData = DuplicateObject<UAQ_QuestData>(questDataP, this);
+}
+
+void UAQ_Quest::SetQuestReceiver(UAQ_QuestComponent* questReceiver)
+{
+	QuestReceiver = questReceiver;
+}
+
+void UAQ_Quest::SetQuestGiver(UAQ_QuestComponent* questGiver)
+{
+	QuestGiver = questGiver;
 }
 
 void UAQ_Quest::EnableQuest(UAQ_PlayerChannels* playerChannels, UAQ_QuestComponent* questGiver)
@@ -47,7 +59,7 @@ void UAQ_Quest::EnableQuest(UAQ_PlayerChannels* playerChannels, UAQ_QuestCompone
 	if (BookQuest)
 		BookQuest->AddQuest(this);
 
-	QuestGiverComponent = questGiver;
+	QuestGiver = questGiver;
 }
 
 void UAQ_Quest::DisableQuest()
@@ -61,7 +73,11 @@ void UAQ_Quest::DisableQuest()
 		BookQuest->RemoveQuest(this);
 
 	/* Remove the Quest from the Quest Giver when the quest is done */
-	QuestGiverComponent->RemoveQuestFromArray(this);
+	if(QuestGiver != QuestReceiver)
+		QuestReceiver->RemoveQuestFromArray(this);
+
+	QuestGiver->RemoveQuestFromArray(this);
+
 
 	/* Reset display properties */
 	isDisplayJournal = false;
@@ -96,7 +112,7 @@ void UAQ_Quest::ResetQuest()
 	PlayerChannels = nullptr;
 	BookQuest = nullptr;
 
-	QuestGiverComponent->UpdateQuestMarker();
+	QuestGiver->UpdateQuestMarker();
 }
 
 void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP)
@@ -129,7 +145,7 @@ void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eve
 	{
 		questState = EAQ_QuestState::Valid;
 
-		/* Remove the Observers & Update the Quest Giver */
+		/* Remove the Observers & Update the Quest Receiver */
 		UpdateQuestComponent();
 		RemoveMyObservers();
 	}
@@ -143,7 +159,7 @@ void UAQ_Quest::UpdateQuestComponent()
 {
 	/* Set the Quest Marker to the Question Mark Sprite
 	   to show that the quest is valid */
-	QuestGiverComponent->SetQuestMarker(true, true);
+	QuestReceiver->SetQuestMarker(true, true);
 }
 
 void UAQ_Quest::EndPlay()

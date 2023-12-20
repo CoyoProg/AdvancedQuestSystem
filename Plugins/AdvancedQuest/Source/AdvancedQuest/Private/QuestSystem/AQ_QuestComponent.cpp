@@ -50,16 +50,22 @@ void UAQ_QuestComponent::UpdateQuestMarker()
 
 	for (auto quest : quests)
 	{
-		if (quest->questState == EAQ_QuestState::Valid)
+		if (quest->GetQuestReceiver() == this)
 		{
-			SetQuestMarker(true, true);
-			return;
+			if (quest->questState == EAQ_QuestState::Valid)
+			{
+				SetQuestMarker(true, true);
+				return;
+			}
 		}
 
-		if(quest->questState == EAQ_QuestState::Pending)
+		if (quest->GetQuestGiver() == this)
 		{
-			SetQuestMarker(true, false);
-			isAnyQuestPending = true;
+			if (quest->questState == EAQ_QuestState::Pending)
+			{
+				SetQuestMarker(true, false);
+				isAnyQuestPending = true;
+			}
 		}
 	}
 
@@ -76,7 +82,7 @@ void UAQ_QuestComponent::RerunScript()
 
 void UAQ_QuestComponent::Interact(UAQ_PlayerChannels* PlayerChannel)
 {
-	if (!CheckForDisplayableQuest())
+	if (!QuestMarkerWidget->IsVisible())
 		return;
 
 	UAQ_BookQuest* bookQuest = PlayerChannel->questChannel->GetWidget();
@@ -111,18 +117,37 @@ void UAQ_QuestComponent::BeginPlay()
 {
 	RerunScript();
 
-	if (questsData.IsEmpty())
-		RemoveComponent();
+	//if (questsData.IsEmpty())
+	//	RemoveComponent();
 
-	for (auto questData : questsData)
+	/*for (auto questData : questsData)
 	{
 		UAQ_Quest* questTemp = NewObject<UAQ_Quest>(this, UAQ_Quest::StaticClass());
 		questTemp->SetQuestData(questData);
 		quests.Add(questTemp);
+	}*/
+
+	for (auto questDataReceiver : quests_DataReceiver)
+	{
+		UAQ_Quest* questTemp = NewObject<UAQ_Quest>(this, UAQ_Quest::StaticClass());
+		questTemp->SetQuestData(questDataReceiver.Key);
+
+		UAQ_QuestComponent* questReceiver = questDataReceiver.Value->GetComponentByClass<UAQ_QuestComponent>();
+		questTemp->SetQuestReceiver(questReceiver);
+		questTemp->SetQuestGiver(this);
+
+		quests.Add(questTemp);
+
+		if(questReceiver != this)
+			questReceiver->quests.Add(questTemp);
 	}
 
 	if (questMarkerClass)
+	{
 		CreateQuestMarkerWidget();
+		UpdateQuestMarker();
+	}
+
 
 	Super::BeginPlay();
 }

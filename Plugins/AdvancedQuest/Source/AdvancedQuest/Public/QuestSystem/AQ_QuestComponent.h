@@ -25,6 +25,9 @@ public:
 	TArray<UAQ_QuestData*> questsData;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Component")
+	TMap<UAQ_QuestData*, AActor*> quests_DataReceiver;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Component")
 	TSubclassOf<UUserWidget> questMarkerClass;
 
 	/* Put a two sided material for the widget to be two sided */
@@ -49,10 +52,10 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
-private:
-	UWidgetComponent* QuestMarkerWidget;
 	TArray<UAQ_Quest*> quests;
 
+private:
+	UWidgetComponent* QuestMarkerWidget;
 
 	void CreateQuestMarkerWidget();
 	bool CheckForDisplayableQuest();

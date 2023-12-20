@@ -55,6 +55,8 @@ public:
 
 	/* Quest Functions */
 	void SetQuestData(UAQ_QuestData* questData);
+	void SetQuestReceiver(UAQ_QuestComponent* questReceiver);
+	void SetQuestGiver(UAQ_QuestComponent* questGiver);
 
 	UFUNCTION(BlueprintCallable)
 	void EnableQuest(UAQ_PlayerChannels* playerChannels, UAQ_QuestComponent* questGiver);
@@ -70,11 +72,14 @@ public:
 	void UpdateQuestComponent();
 	void EndPlay();
 
+	UAQ_QuestComponent* GetQuestReceiver() const { return QuestReceiver; }
+	UAQ_QuestComponent* GetQuestGiver() const { return QuestGiver; }
 private:
 	/** Quest owner */
 	UAQ_PlayerChannels* PlayerChannels;
 	UAQ_BookQuest* BookQuest;
-	UAQ_QuestComponent* QuestGiverComponent;
+	UAQ_QuestComponent* QuestGiver;
+	UAQ_QuestComponent* QuestReceiver;
 
 	int objectivesCompleted = 0;
 
