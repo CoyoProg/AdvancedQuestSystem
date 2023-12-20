@@ -44,7 +44,7 @@ void UAQ_Quest::SetQuestGiver(UAQ_QuestComponent* questGiver)
 	QuestGiver = questGiver;
 }
 
-void UAQ_Quest::EnableQuest(UAQ_PlayerChannels* playerChannels, UAQ_QuestComponent* questGiver)
+void UAQ_Quest::EnableQuest(UAQ_PlayerChannels* playerChannels)
 {
 	questState = EAQ_QuestState::Active;
 
@@ -58,8 +58,6 @@ void UAQ_Quest::EnableQuest(UAQ_PlayerChannels* playerChannels, UAQ_QuestCompone
 	/* Add the Quest to the UI (if any) */
 	if (BookQuest)
 		BookQuest->AddQuest(this);
-
-	QuestGiver = questGiver;
 }
 
 void UAQ_Quest::DisableQuest()

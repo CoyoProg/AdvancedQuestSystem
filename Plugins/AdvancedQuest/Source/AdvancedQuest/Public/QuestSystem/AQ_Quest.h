@@ -59,7 +59,7 @@ public:
 	void SetQuestGiver(UAQ_QuestComponent* questGiver);
 
 	UFUNCTION(BlueprintCallable)
-	void EnableQuest(UAQ_PlayerChannels* playerChannels, UAQ_QuestComponent* questGiver);
+	void EnableQuest(UAQ_PlayerChannels* playerChannels);
 
 	UFUNCTION(BlueprintCallable)
 	void DisableQuest();

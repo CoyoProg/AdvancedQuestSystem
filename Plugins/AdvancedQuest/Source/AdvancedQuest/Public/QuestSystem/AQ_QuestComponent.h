@@ -22,9 +22,6 @@ public:
 
 	/* Quest properties */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Component")
-	TArray<UAQ_QuestData*> questsData;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Component")
 	TMap<UAQ_QuestData*, AActor*> quests_DataReceiver;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Component")
@@ -58,7 +55,6 @@ private:
 	UWidgetComponent* QuestMarkerWidget;
 
 	void CreateQuestMarkerWidget();
-	bool CheckForDisplayableQuest();
 
 	void DisableQuest(UAQ_PlayerChannels* PlayerChannel);
 	void RemoveComponent();

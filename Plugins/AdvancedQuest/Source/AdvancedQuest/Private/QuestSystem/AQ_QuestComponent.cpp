@@ -101,31 +101,10 @@ void UAQ_QuestComponent::RemoveQuestFromArray(UAQ_Quest* questToRemove)
 	quests.Remove(questToRemove);
 }
 
-bool UAQ_QuestComponent::CheckForDisplayableQuest()
-{
-	for (auto quest : quests)
-	{
-		if (quest->questState == EAQ_QuestState::Pending || quest->questState == EAQ_QuestState::Valid)
-			return true;
-	}
-
-	return false;
-}
-
 // Called when the game starts
 void UAQ_QuestComponent::BeginPlay()
 {
 	RerunScript();
-
-	//if (questsData.IsEmpty())
-	//	RemoveComponent();
-
-	/*for (auto questData : questsData)
-	{
-		UAQ_Quest* questTemp = NewObject<UAQ_Quest>(this, UAQ_Quest::StaticClass());
-		questTemp->SetQuestData(questData);
-		quests.Add(questTemp);
-	}*/
 
 	for (auto questDataReceiver : quests_DataReceiver)
 	{
@@ -147,7 +126,6 @@ void UAQ_QuestComponent::BeginPlay()
 		CreateQuestMarkerWidget();
 		UpdateQuestMarker();
 	}
-
 
 	Super::BeginPlay();
 }
