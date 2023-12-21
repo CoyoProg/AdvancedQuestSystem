@@ -25,6 +25,5 @@ public:
 	virtual void NotifyObservers_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP) override;
 
 private:
-	FCriticalSection ObserversMutex;
 	TArray<UObject*> Observers;
 };

@@ -11,7 +11,7 @@
 class UAQ_BookQuest;
 class UAQ_QuestData;
 class UAQ_PlayerChannel;
-
+class UAQ_QuestChannel;
 /**
  *
  */
@@ -68,9 +68,12 @@ public:
 	void ResetQuest();
 
 	void OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP);
+	void OnNotifyRequierment_Implementation(EAQ_RequiermentEventType eventType, FAQ_RequiermentData& requiermentData);
 
 	void UpdateQuestComponent();
 	void EndPlay();
+
+	UAQ_QuestChannel* questChannel;
 
 	UAQ_QuestComponent* GetQuestReceiver() const { return QuestReceiver; }
 	UAQ_QuestComponent* GetQuestGiver() const { return QuestGiver; }

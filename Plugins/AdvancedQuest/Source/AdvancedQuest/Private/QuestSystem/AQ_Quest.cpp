@@ -9,6 +9,7 @@
 #include "QuestSystem/AQ_QuestComponent.h"
 #include "QuestSystem/AQ_UniqueIDComponent.h"
 #include "External/AQ_FilesManager.h"
+#include "Enums/AQ_RequiermentEventType.h"
 
 UAQ_Quest::UAQ_Quest():
 	questData(nullptr),
@@ -65,6 +66,12 @@ void UAQ_Quest::DisableQuest()
 	/* When a QuestState is Archive, we need to keep track of
 	   it in the QuestChannel associated with the PlayerChannel */
 	questState = EAQ_QuestState::Archive;
+
+	FAQ_RequiermentData questRequierments;
+	questRequierments.questID = questData->questID;
+
+	PlayerChannels->questChannel->NotifyObservers(EAQ_RequiermentEventType::Quest, questRequierments);
+
 
 	/* Remove the Quest from the UI (if any) */
 	if(BookQuest)
@@ -153,6 +160,19 @@ void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eve
 		BookQuest->UpdateQuestBook(this);
 }
 
+void UAQ_Quest::OnNotifyRequierment_Implementation(EAQ_RequiermentEventType eventType, FAQ_RequiermentData& requiermentData)
+{
+	if (requiermentData.questID == questData->questRequierments.questID)
+	{
+		FString DebugMessage = TEXT("Remove observer Requierment");
+		float TimeToDisplay = 5.0f;
+		FColor TextColor = FColor::Green;
+		GEngine->AddOnScreenDebugMessage(-1, TimeToDisplay, TextColor, DebugMessage);
+
+		questChannel->RemoveObserverRequierment(this, EAQ_RequiermentEventType::Quest);
+	}
+}
+
 void UAQ_Quest::UpdateQuestComponent()
 {
 	/* Set the Quest Marker to the Question Mark Sprite
@@ -167,6 +187,9 @@ void UAQ_Quest::EndPlay()
 	{
 		TriggerEndPlayOnce = true;
 		RemoveMyObservers();
+
+		questChannel->RemoveObserverRequierment(this, EAQ_RequiermentEventType::Quest);
+		questChannel->RemoveObserverRequierment(this, EAQ_RequiermentEventType::Level);
 	}
 }
 

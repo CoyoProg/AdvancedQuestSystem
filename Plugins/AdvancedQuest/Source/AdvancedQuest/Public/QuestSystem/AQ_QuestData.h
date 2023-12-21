@@ -60,17 +60,20 @@ public:
 		xpReward(0),
 		goldReward(0) {}
 
-
+	/* Quest properties */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	FString questTitle;
 
-	/** Quest specificities */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	FString questDescription;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	int questID;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
+	FAQ_RequiermentData questRequierments;
+
+	/* Objectives */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	TArray<FAQ_Objectives> objectives;
 

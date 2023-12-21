@@ -6,6 +6,7 @@
 #include "UObject/Interface.h"
 
 #include "Enums/AQ_NotifyEventType.h"
+#include "Enums/AQ_RequiermentEventType.h"
 
 #include "AQ_Observer.generated.h"
 
@@ -27,4 +28,7 @@ class ADVANCEDQUEST_API IAQ_Observer
 public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
 	void OnNotify(UObject* entity, EAQ_NotifyEventType eventType);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
+	void OnNotifyRequierment(EAQ_RequiermentEventType eventType, FAQ_RequiermentData& requiermentData);
 };

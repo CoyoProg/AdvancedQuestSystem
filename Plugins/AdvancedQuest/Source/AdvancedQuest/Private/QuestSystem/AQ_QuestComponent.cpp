@@ -1,15 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "QuestSystem/AQ_QuestComponent.h"
-#include "PlayersChannels/AQ_QuestChannel.h"
-#include "QuestSystem/AQ_BookQuest.h"
 #include "QuestSystem/AQ_QuestData.h"
+#include "PlayersChannels/AQ_QuestChannel.h"
+#include "PlayersChannels/AQ_PlayerChannels.h"
+#include "QuestSystem/AQ_BookQuest.h"
 #include "QuestSystem/AQ_Quest.h"
 #include "QuestSystem/AQ_QuestMarkerWidget.h"
-#include "Components/WidgetComponent.h"
 
-#include "PlayersChannels/AQ_PlayerChannels.h"
+#include "Components/WidgetComponent.h"
 
 // Sets default values for this component's properties
 UAQ_QuestComponent::UAQ_QuestComponent() :
@@ -101,23 +99,29 @@ void UAQ_QuestComponent::RemoveQuestFromArray(UAQ_Quest* questToRemove)
 
 void UAQ_QuestComponent::CreateQuests(UAQ_QuestChannel* questChannel)
 {
-	for (auto questDataReceiver : quests_DataReceiver)
+	for (auto questData : quests_DataReceiver)
 	{
-		if (questDataReceiver.Key->isImplemented)
+		if (questData.Key->isImplemented)
 			continue;
 
-		UAQ_Quest* questTemp = NewObject<UAQ_Quest>(this, UAQ_Quest::StaticClass());
-		questTemp->SetQuestData(questDataReceiver.Key);
+		UAQ_Quest* newQuest = NewObject<UAQ_Quest>(this, UAQ_Quest::StaticClass());
+		newQuest->SetQuestData(questData.Key);
 
-		UAQ_QuestComponent* questReceiver = questDataReceiver.Value->GetComponentByClass<UAQ_QuestComponent>();
-		questTemp->SetQuestReceiver(questReceiver);
-		questTemp->SetQuestGiver(this);
-		questChannel->AddObserver_Implementation(questTemp);
+		UAQ_QuestComponent* questReceiver = questData.Value->GetComponentByClass<UAQ_QuestComponent>();
+		newQuest->SetQuestReceiver(questReceiver);
+		newQuest->SetQuestGiver(this);
+		newQuest->questChannel = questChannel;
 
-		quests.Add(questTemp);
+		if(questData.Key->questRequierments.playerLevel != 0)
+			questChannel->AddObserverRequierment(newQuest, EAQ_RequiermentEventType::Level);
+
+		if(questData.Key->questRequierments.questID != 0)
+			questChannel->AddObserverRequierment(newQuest, EAQ_RequiermentEventType::Quest);
+
+		quests.Add(newQuest);
 
 		if (questReceiver != this)
-			questReceiver->quests.Add(questTemp);
+			questReceiver->quests.Add(newQuest);
 	}
 
 	UpdateQuestMarker();

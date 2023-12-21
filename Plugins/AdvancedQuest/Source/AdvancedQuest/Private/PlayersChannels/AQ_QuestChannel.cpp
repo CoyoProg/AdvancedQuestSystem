@@ -1,34 +1,94 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "PlayersChannels/AQ_QuestChannel.h"
+
 #include "QuestSystem/AQ_BookQuest.h"
 #include "QuestSystem/AQ_QuestComponent.h"
 
+#include "ObserverPattern/AQ_Observer.h"
 
 #include <Kismet/GameplayStatics.h>
 #include "Components/WidgetComponent.h"
 
-void UAQ_QuestChannel::AddObserver_Implementation(UObject* observerP)
+void UAQ_QuestChannel::AddObserverRequierment(UObject* observerP, EAQ_RequiermentEventType requiermentType)
 {
-	/* Add a new eventType EventRequiermentType
-	   Add Observers in: 
-							ObserversLevelRequierment
-							ObserversQuestRequierment
-							Add one Observer list per Requierment Type 
-	*/
+	switch (requiermentType)
+	{
+	case EAQ_RequiermentEventType::Level:
+	{
+		if (observerP->GetClass()->ImplementsInterface(UAQ_Observer::StaticClass()))
+		{
+			ObserversLevelReq.AddUnique(observerP);
+		}
+
+		break;
+	}
+	case EAQ_RequiermentEventType::Quest:
+	{
+		if (observerP->GetClass()->ImplementsInterface(UAQ_Observer::StaticClass()))
+		{
+			ObserversQuestReq.AddUnique(observerP);
+		}
+
+		break;
+	}
+	}
 }
 
-void UAQ_QuestChannel::RemoveObserver_Implementation(UObject* observerP)
+void UAQ_QuestChannel::RemoveObserverRequierment(UObject* observerP, EAQ_RequiermentEventType requiermentType)
 {
-	/* Remove Observers in:
-							ObserversLevelRequierment
-							ObserversQuestRequierment
-							Remove the Observer from the right List
-	*/
+	switch (requiermentType)
+	{
+	case EAQ_RequiermentEventType::Level:
+	{
+		if (observerP->GetClass()->ImplementsInterface(UAQ_Observer::StaticClass()))
+		{
+			if (ObserversLevelReq.Contains(observerP))
+				ObserversLevelReq.Remove(observerP);
+		}
+
+		break;
+	}
+	case EAQ_RequiermentEventType::Quest:
+	{
+		if (observerP->GetClass()->ImplementsInterface(UAQ_Observer::StaticClass()))
+		{
+			if (ObserversQuestReq.Contains(observerP))
+				ObserversQuestReq.Remove(observerP);
+		}
+		break;
+	}
+	}
 }
 
-void UAQ_QuestChannel::NotifyObservers()
+void UAQ_QuestChannel::NotifyObservers(EAQ_RequiermentEventType requiermentType, FAQ_RequiermentData& questRequierments)
 {
-	/* Notify All the observers per EventRequiermentType*/
+	switch (requiermentType)
+	{
+	case EAQ_RequiermentEventType::Level:
+	{
+		if (ObserversLevelReq.Num() == 0)
+			return;
+
+		for (int Index = 0; Index < ObserversLevelReq.Num(); ++Index)
+		{
+			IAQ_Observer::Execute_OnNotifyRequierment(ObserversLevelReq[Index], requiermentType, questRequierments);
+		}
+
+		break;
+	}
+	case EAQ_RequiermentEventType::Quest:
+	{
+		if (ObserversQuestReq.Num() == 0)
+			return;
+
+		for (int Index = 0; Index < ObserversQuestReq.Num(); ++Index)
+		{
+			IAQ_Observer::Execute_OnNotifyRequierment(ObserversQuestReq[Index], requiermentType, questRequierments);
+		}
+
+		break;
+	}
+	}
 }
 
 void UAQ_QuestChannel::AddWidgetToViewport()
@@ -68,4 +128,9 @@ void UAQ_QuestChannel::CreateAllQuests()
 			}
 		}
 	}
+}
+
+void UAQ_QuestChannel::AddQuestToArchive(UAQ_Quest* questArchive)
+{
+	QuestArchive.AddUnique(questArchive);
 }

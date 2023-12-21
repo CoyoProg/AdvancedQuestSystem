@@ -103,7 +103,7 @@ void UAQ_PlayerChannels::BeginPlay()
 			{
 				questChannel->CreateAllQuests();
 			});
-
+	
 		IsNewGame = false;
 	}
 }
