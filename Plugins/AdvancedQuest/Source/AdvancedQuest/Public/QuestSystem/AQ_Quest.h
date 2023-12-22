@@ -5,13 +5,11 @@
 #include "Misc/Guid.h"
 
 #include "ObserverPattern/AQ_Observer.h"
+#include "QuestSystem/AQ_QuestData.h"
 
 #include "AQ_Quest.generated.h"
 
-class UAQ_BookQuest;
-class UAQ_QuestData;
-class UAQ_PlayerChannel;
-class UAQ_QuestChannel;
+
 /**
  *
  */
@@ -24,6 +22,8 @@ enum class EAQ_QuestState : uint8
 	Archive				UMETA(DisplayName = "Archive")
 };
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FQuestStateChangedDelegate, UAQ_Quest*, QuestUpdate, EAQ_QuestState, QuestState);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FObjectivesUpdatedDelegate, UAQ_Quest*, QuestUpdate);
 
 /**
  * 
@@ -55,11 +55,11 @@ public:
 
 	/* Quest Functions */
 	void SetQuestData(UAQ_QuestData* questData);
-	void SetQuestReceiver(UAQ_QuestComponent* questReceiver);
-	void SetQuestGiver(UAQ_QuestComponent* questGiver);
+	void SetQuestReceiver(AActor* questReceiver);
+	void SetQuestGiver(AActor* questGiver);
 
 	UFUNCTION(BlueprintCallable)
-	void EnableQuest(UAQ_PlayerChannels* playerChannels);
+	void EnableQuest();
 
 	UFUNCTION(BlueprintCallable)
 	void DisableQuest();
@@ -70,27 +70,20 @@ public:
 	void OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP);
 	void OnNotifyRequierment_Implementation(EAQ_RequiermentEventType eventType, FAQ_RequiermentData& requiermentData);
 
-	void UpdateQuestComponent();
-	void EndPlay();
+	AActor* GetQuestReceiver() const { return QuestReceiver; }
+	AActor* GetQuestGiver() const { return QuestGiver; }
 
-	UAQ_QuestChannel* questChannel;
-
-	UAQ_QuestComponent* GetQuestReceiver() const { return QuestReceiver; }
-	UAQ_QuestComponent* GetQuestGiver() const { return QuestGiver; }
+	FQuestStateChangedDelegate QuestStateChangedDelegate;
+	FObjectivesUpdatedDelegate ObjectivesUpdatedDelegate;
 private:
 	/** Quest owner */
-	UAQ_PlayerChannels* PlayerChannels;
-	UAQ_BookQuest* BookQuest;
-	UAQ_QuestComponent* QuestGiver;
-	UAQ_QuestComponent* QuestReceiver;
+	AActor* QuestGiver;
+	AActor* QuestReceiver;
 
 	int objectivesCompleted = 0;
 
 	bool IsSameObject(int objectiveIndexP,UObject* entityP);
 	bool IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTypeP);
-
-	void AddMyObservers();
-	void RemoveMyObservers();
 
 	bool TriggerEndPlayOnce = false;
 };

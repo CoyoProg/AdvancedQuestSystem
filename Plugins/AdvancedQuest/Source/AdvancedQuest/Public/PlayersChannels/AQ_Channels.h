@@ -24,6 +24,7 @@ public:
 	virtual void RemoveObserver_Implementation(UObject* observerP) override;
 	virtual void NotifyObservers_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP) override;
 
+	void ClearObservers() { Observers.Empty(); }
 private:
 	TArray<UObject*> Observers;
 };

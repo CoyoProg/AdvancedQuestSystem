@@ -3,11 +3,6 @@
 
 #include "PlayersChannels/AQ_PlayerChannels.h"
 
-#include "PlayersChannels/AQ_InteractionChannel.h"
-#include "PlayersChannels/AQ_InventoryChannel.h"
-#include "PlayersChannels/AQ_QuestChannel.h"
-#include "QuestSystem/AQ_BookQuest.h"
-
 UAQ_PlayerChannels::UAQ_PlayerChannels() :
 	interactionChannel(nullptr),
 	inventoryChannel(nullptr),
@@ -85,6 +80,53 @@ void UAQ_PlayerChannels::RemoveObserver(UObject* entity, EAQ_ObjectivesType even
 	}
 }
 
+void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestState QuestState)
+{
+	switch (QuestState)
+	{
+	case EAQ_QuestState::Active:
+	{
+		for (auto const& questObjectives : QuestUpdate->questData->objectives)
+		{
+			EAQ_ObjectivesType eventType = questObjectives.objectiveType;
+			AddObserver(QuestUpdate, eventType);
+		}
+
+		break;
+	}
+	case EAQ_QuestState::Valid:
+	{
+		for (auto const& questObjectives : QuestUpdate->questData->objectives)
+		{
+			EAQ_ObjectivesType eventType = questObjectives.objectiveType;
+			RemoveObserver(QuestUpdate, eventType);
+		}
+
+		break;
+	}
+	case EAQ_QuestState::Pending:
+	{
+		for (auto const& questObjectives : QuestUpdate->questData->objectives)
+		{
+			EAQ_ObjectivesType eventType = questObjectives.objectiveType;
+			RemoveObserver(QuestUpdate, eventType);
+		}
+
+		break;
+	}
+	case EAQ_QuestState::Archive:
+		break;
+	}
+}
+
+void UAQ_PlayerChannels::OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay)
+{
+	UAQ_BookQuest* bookQuest = questChannel->GetWidget();
+
+	if (bookQuest)
+		bookQuest->DisplayQuestGiverSummary(questsToDisplay);
+}
+
 void UAQ_PlayerChannels::BeginPlay()
 {
 	Super::BeginPlay();
@@ -101,9 +143,9 @@ void UAQ_PlayerChannels::BeginPlay()
 	{
 		AsyncTask(ENamedThreads::GameThread, [this]()
 			{
-				questChannel->CreateAllQuests();
+				questChannel->CreateAllQuests(this);
 			});
-	
+
 		IsNewGame = false;
 	}
 }
@@ -121,8 +163,17 @@ void UAQ_PlayerChannels::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 		{
 			if (OwnerPlayerController->WasInputKeyJustReleased(EKeys::J))
 			{
-				questChannel->GetWidget()->OpenJournal();
+				UAQ_BookQuest* bookQuest = questChannel->GetWidget();
+
+				if (bookQuest)
+					bookQuest->OpenJournal();
 			}
 		}
 	}
+}
+
+void UAQ_PlayerChannels::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	interactionChannel->ClearObservers();
+	inventoryChannel->ClearObservers();
 }

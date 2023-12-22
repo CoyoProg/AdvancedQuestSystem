@@ -4,12 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+
+#include "QuestSystem/AQ_Quest.h"
 #include "AQ_QuestComponent.generated.h"
 
-class UAQ_Quest;
 class UAQ_QuestData;
-class UAQ_PlayerChannels;
 class UWidgetComponent;
+class IAQ_PlayerChannelsFacade;
 
 UCLASS(Blueprintable, BlueprintType)
 class ADVANCEDQUEST_API UAQ_QuestComponent : public UActorComponent
@@ -41,21 +42,22 @@ public:
 	void RerunScript();
 
 	UFUNCTION(BlueprintCallable)
-	void Interact(UAQ_PlayerChannels* PlayerChannel);
+	void Interact(const TScriptInterface<IAQ_PlayerChannelsFacade>& PlayerChannel);
 
+	UFUNCTION()
+	void OnQuestStateChanged(UAQ_Quest* questUpdate, EAQ_QuestState QuestState);
 	void RemoveQuestFromArray(UAQ_Quest* questToRemove);
-	void CreateQuests(UAQ_QuestChannel* questChannel);
+
+	TArray<UAQ_Quest*> CreateQuests();
 protected:
 	virtual void BeginPlay() override;
-	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	TArray<UAQ_Quest*> quests;
 
 private:
 	UWidgetComponent* QuestMarkerWidget;
+	AActor* Owner;
 
 	void CreateQuestMarkerWidget();
-
-	void DisableQuest(UAQ_PlayerChannels* PlayerChannel);
 	void RemoveComponent();
 };

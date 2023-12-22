@@ -7,7 +7,6 @@
 #include "AQ_BookQuest.generated.h"
 
 class UAQ_Quest;
-class UAQ_QuestComponent;
 	
 /**
  *
@@ -37,7 +36,7 @@ public:
 	void UpdateQuestBook(UAQ_Quest* quest);
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-	void DisplayQuestGiverSummary(const TArray<UAQ_Quest*>& questsToDisplay, UAQ_QuestComponent* questGiverOwner, UAQ_PlayerChannels* PlayerChannel);
+	void DisplayQuestGiverSummary(const TArray<UAQ_Quest*>& questsToDisplay);
 
 	UFUNCTION(BlueprintCallable)
 	void OpenJournal();

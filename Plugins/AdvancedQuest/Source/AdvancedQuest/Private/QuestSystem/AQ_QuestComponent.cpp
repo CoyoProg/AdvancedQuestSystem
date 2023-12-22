@@ -1,21 +1,19 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "QuestSystem/AQ_QuestComponent.h"
-#include "QuestSystem/AQ_QuestData.h"
-#include "PlayersChannels/AQ_QuestChannel.h"
-#include "PlayersChannels/AQ_PlayerChannels.h"
-#include "QuestSystem/AQ_BookQuest.h"
-#include "QuestSystem/AQ_Quest.h"
-#include "QuestSystem/AQ_QuestMarkerWidget.h"
 
+#include "QuestSystem/AQ_QuestMarkerWidget.h"
+#include "PlayersChannels/AQ_PlayerChannelsFacade.h"
 #include "Components/WidgetComponent.h"
 
 // Sets default values for this component's properties
 UAQ_QuestComponent::UAQ_QuestComponent() :
 	questMarkerClass(nullptr),
+	material(nullptr),
 	QuestMarkerWidget(nullptr),
-	material(nullptr)
+	Owner(nullptr)
 {
 	PrimaryComponentTick.bCanEverTick = true;
+	Owner = GetOwner();
 }
 
 UAQ_QuestComponent::~UAQ_QuestComponent()
@@ -23,6 +21,7 @@ UAQ_QuestComponent::~UAQ_QuestComponent()
 	questMarkerClass = nullptr;
 	QuestMarkerWidget = nullptr;
 	material = nullptr;
+	Owner = nullptr;
 }
 
 void UAQ_QuestComponent::SetQuestMarker(bool isMarkerVisible, bool isQuestValid)
@@ -48,7 +47,7 @@ void UAQ_QuestComponent::UpdateQuestMarker()
 
 	for (auto quest : quests)
 	{
-		if (quest->GetQuestReceiver() == this)
+		if (quest->GetQuestReceiver() == Owner)
 		{
 			if (quest->questState == EAQ_QuestState::Valid)
 			{
@@ -57,7 +56,7 @@ void UAQ_QuestComponent::UpdateQuestMarker()
 			}
 		}
 
-		if (quest->GetQuestGiver() == this)
+		if (quest->GetQuestGiver() == Owner)
 		{
 			if (quest->questState == EAQ_QuestState::Pending)
 			{
@@ -78,18 +77,12 @@ void UAQ_QuestComponent::RerunScript()
 	Actor->RerunConstructionScripts();
 }
 
-void UAQ_QuestComponent::Interact(UAQ_PlayerChannels* PlayerChannel)
+void UAQ_QuestComponent::Interact(const TScriptInterface<IAQ_PlayerChannelsFacade>& PlayerChannel)
 {
 	if (!QuestMarkerWidget->IsVisible())
 		return;
 
-	UAQ_BookQuest* bookQuest = PlayerChannel->questChannel->GetWidget();
-
-	if (bookQuest)
-	{
-		bookQuest->DisplayQuestGiverSummary(quests, this, PlayerChannel);
-		return;
-	}
+	PlayerChannel->OnInteractQuestGiver(quests);
 }
 
 void UAQ_QuestComponent::RemoveQuestFromArray(UAQ_Quest* questToRemove)
@@ -97,7 +90,25 @@ void UAQ_QuestComponent::RemoveQuestFromArray(UAQ_Quest* questToRemove)
 	quests.Remove(questToRemove);
 }
 
-void UAQ_QuestComponent::CreateQuests(UAQ_QuestChannel* questChannel)
+void UAQ_QuestComponent::OnQuestStateChanged(UAQ_Quest* questUpdate, EAQ_QuestState QuestState)
+{
+	switch (QuestState)
+	{
+	case EAQ_QuestState::Active:
+		break;
+	case EAQ_QuestState::Valid:
+		break;
+	case EAQ_QuestState::Pending:
+		break;
+	case EAQ_QuestState::Archive:
+		RemoveQuestFromArray(questUpdate);
+		break;
+	}
+
+	UpdateQuestMarker();
+}
+
+TArray<UAQ_Quest*> UAQ_QuestComponent::CreateQuests()
 {
 	for (auto questData : quests_DataReceiver)
 	{
@@ -108,16 +119,13 @@ void UAQ_QuestComponent::CreateQuests(UAQ_QuestChannel* questChannel)
 		newQuest->SetQuestData(questData.Key);
 
 		UAQ_QuestComponent* questReceiver = questData.Value->GetComponentByClass<UAQ_QuestComponent>();
-		newQuest->SetQuestReceiver(questReceiver);
-		newQuest->SetQuestGiver(this);
-		newQuest->questChannel = questChannel;
+		newQuest->SetQuestReceiver(questReceiver->GetOwner());
+		newQuest->SetQuestGiver(Owner);
 
-		if(questData.Key->questRequierments.playerLevel != 0)
-			questChannel->AddObserverRequierment(newQuest, EAQ_RequiermentEventType::Level);
+		if(questReceiver != this)
+			newQuest->QuestStateChangedDelegate.AddDynamic(questReceiver, &UAQ_QuestComponent::OnQuestStateChanged);
 
-		if(questData.Key->questRequierments.questID != 0)
-			questChannel->AddObserverRequierment(newQuest, EAQ_RequiermentEventType::Quest);
-
+		newQuest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChanged);
 		quests.Add(newQuest);
 
 		if (questReceiver != this)
@@ -125,6 +133,7 @@ void UAQ_QuestComponent::CreateQuests(UAQ_QuestChannel* questChannel)
 	}
 
 	UpdateQuestMarker();
+	return quests;
 }
 
 // Called when the game starts
@@ -146,14 +155,6 @@ void UAQ_QuestComponent::RemoveComponent()
 	UnregisterComponent();
 	GetOwner()->RemoveOwnedComponent(this);
 	DestroyComponent();
-}
-
-void UAQ_QuestComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
-{
-	for (auto quest : quests)
-	{
-		quest->EndPlay();
-	}
 }
 
 void UAQ_QuestComponent::CreateQuestMarkerWidget()
@@ -182,16 +183,4 @@ void UAQ_QuestComponent::CreateQuestMarkerWidget()
 			QuestMarkerWidget->SetRelativeLocation(FVector(0, 0, extent.Z / 1.5f));
 		}
 	}
-}
-
-void UAQ_QuestComponent::DisableQuest(UAQ_PlayerChannels* PlayerChannel)
-{
-	// Check if the WidgetComponent exists
-	if (QuestMarkerWidget)
-	{
-		QuestMarkerWidget->UnregisterComponent();
-		QuestMarkerWidget = nullptr;
-	}
-
-	RemoveComponent();
 }

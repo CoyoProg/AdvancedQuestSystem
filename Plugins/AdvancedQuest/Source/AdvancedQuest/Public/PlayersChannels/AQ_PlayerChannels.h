@@ -4,20 +4,20 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 
+#include "AQ_PlayerChannelsFacade.h"
+#include "PlayersChannels/AQ_InteractionChannel.h"
+#include "PlayersChannels/AQ_InventoryChannel.h"
+#include "PlayersChannels/AQ_QuestChannel.h"
+
 #include "Enums/AQ_ObjectivesType.h"
 
 #include "AQ_PlayerChannels.generated.h"
-
-class UAQ_InteractionChannel;
-class UAQ_InventoryChannel;
-class UAQ_QuestChannel;
-class UAQ_BookQuest;
 
 /**
  *
  */
 UCLASS(ClassGroup = (AdvancedQuest), meta = (BlueprintSpawnableComponent))
-class ADVANCEDQUEST_API UAQ_PlayerChannels : public UActorComponent
+class ADVANCEDQUEST_API UAQ_PlayerChannels : public UActorComponent, public IAQ_PlayerChannelsFacade
 {
 	GENERATED_BODY()
 	
@@ -49,10 +49,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Events")
 	void RemoveObserver(UObject* entity, EAQ_ObjectivesType eventType);
 
+	virtual void OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestState QuestState) override;
+	virtual void OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay) override;
 protected:
 	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction);
-
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 private:
 	bool IsNewGame = true;
 };

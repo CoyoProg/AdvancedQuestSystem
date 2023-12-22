@@ -4,13 +4,15 @@
 #include "CoreMinimal.h"
 
 #include "PlayersChannels/AQ_Channels.h"
+#include "QuestSystem/AQ_BookQuest.h"
+#include "QuestSystem/AQ_QuestComponent.h"
 #include "Enums/AQ_RequiermentEventType.h"
 
 #include "AQ_QuestChannel.generated.h"
 
-class UAQ_BookQuest;
 class UWidgetComponent;
-class UAQ_Quest;
+class IAQ_PlayerChannelsFacade;
+
 /**
  * 
  */
@@ -31,10 +33,17 @@ public:
 	void SetWidgetClass(TSubclassOf<UUserWidget> widgetClass, AActor* owner) { bookQuestWidgetClass = widgetClass; Owner = owner; }
 	void AddWidgetToViewport();
 
-	void CreateAllQuests();
+	void CreateAllQuests(IAQ_PlayerChannelsFacade* playerChannelListener);
+	void GetAllQuestComponents(TArray<UAQ_QuestComponent*>& foundQuestComponentsP);
 	void AddQuestToArchive(UAQ_Quest* questArchive);
 
 	TSubclassOf<UUserWidget> bookQuestWidgetClass;
+
+	UFUNCTION()
+	void OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestState QuestState);
+
+	UFUNCTION()
+	void OnQuestUpdate(UAQ_Quest* QuestUpdate);
 private:
 	/* References */
 	UAQ_BookQuest* bookQuest;

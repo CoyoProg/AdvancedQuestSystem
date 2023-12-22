@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
+
 #include "Enums/AQ_ObjectivesType.h"
+#include "Enums/AQ_RequiermentEventType.h"
 
 #include "AQ_QuestData.generated.h"
 

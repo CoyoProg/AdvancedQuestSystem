@@ -1,13 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "PlayersChannels/AQ_QuestChannel.h"
-
-#include "QuestSystem/AQ_BookQuest.h"
-#include "QuestSystem/AQ_QuestComponent.h"
+#include <PlayersChannels/AQ_PlayerChannelsFacade.h>
 
 #include "ObserverPattern/AQ_Observer.h"
 
 #include <Kismet/GameplayStatics.h>
 #include "Components/WidgetComponent.h"
+
 
 void UAQ_QuestChannel::AddObserverRequierment(UObject* observerP, EAQ_RequiermentEventType requiermentType)
 {
@@ -111,20 +110,35 @@ void UAQ_QuestChannel::AddWidgetToViewport()
 	bookQuest->AddToViewport();
 }
 
-void UAQ_QuestChannel::CreateAllQuests()
+void UAQ_QuestChannel::CreateAllQuests(IAQ_PlayerChannelsFacade* playerChannelListener)
+{
+	TArray<UAQ_QuestComponent*> FoundQuestComponents;
+	GetAllQuestComponents(FoundQuestComponents);
+
+	for (auto questCompoent : FoundQuestComponents)
+	{
+		TArray<UAQ_Quest*> newQuests = questCompoent->CreateQuests();
+
+		for (auto quest : newQuests)
+		{
+			quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestChannel::OnQuestStateChanged);
+			quest->QuestStateChangedDelegate.AddDynamic(playerChannelListener, &IAQ_PlayerChannelsFacade::OnQuestStateChanged);
+		}
+	}
+}
+
+void UAQ_QuestChannel::GetAllQuestComponents(TArray<UAQ_QuestComponent*>& foundQuestComponentsP)
 {
 	TArray<AActor*> FoundActors;
 	UGameplayStatics::GetAllActorsOfClass(Owner->GetWorld(), AActor::StaticClass(), FoundActors);
 
 	for (auto actors : FoundActors)
 	{
-		// Iterate through all components attached to the actor
 		for (UActorComponent* ActorComponent : actors->GetComponents())
 		{
-			// Check if the component is a AQ_QuestComponent
 			if (UAQ_QuestComponent* questComponent = Cast<UAQ_QuestComponent>(ActorComponent))
 			{
-				questComponent->CreateQuests(this);
+				foundQuestComponentsP.Add(questComponent);
 			}
 		}
 	}
@@ -133,4 +147,51 @@ void UAQ_QuestChannel::CreateAllQuests()
 void UAQ_QuestChannel::AddQuestToArchive(UAQ_Quest* questArchive)
 {
 	QuestArchive.AddUnique(questArchive);
+}
+
+void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestState QuestState)
+{
+	switch (QuestState)
+	{
+	case EAQ_QuestState::Active:
+	{
+		if(bookQuest)
+			bookQuest->AddQuest(QuestUpdate);
+
+		QuestUpdate->ObjectivesUpdatedDelegate.AddDynamic(this, &UAQ_QuestChannel::OnQuestUpdate);
+		break;
+	}
+	case EAQ_QuestState::Valid:
+	{
+		QuestUpdate->ObjectivesUpdatedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestUpdate);
+		break;
+	}
+	case EAQ_QuestState::Pending:
+	{
+		if (bookQuest)
+			bookQuest->RemoveQuest(QuestUpdate);
+
+		QuestUpdate->ObjectivesUpdatedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestUpdate);
+		break;
+	}
+	case EAQ_QuestState::Archive:
+	{
+		if (bookQuest)
+			bookQuest->RemoveQuest(QuestUpdate);
+
+		break;
+	}
+	}
+}
+
+void UAQ_QuestChannel::OnQuestUpdate(UAQ_Quest* QuestUpdate)
+{
+	if (bookQuest)
+		bookQuest->UpdateQuestBook(QuestUpdate);
+
+	FString DebugMessage = TEXT("On Quest Update");
+	float TimeToDisplay = 5.0f;
+	FColor TextColor = FColor::Green;
+	GEngine->AddOnScreenDebugMessage(-1, TimeToDisplay, TextColor, DebugMessage);
+
 }
