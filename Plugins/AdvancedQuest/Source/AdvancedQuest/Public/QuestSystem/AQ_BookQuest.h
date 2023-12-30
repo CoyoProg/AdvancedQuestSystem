@@ -7,7 +7,7 @@
 #include "AQ_BookQuest.generated.h"
 
 class UAQ_Quest;
-	
+class IAQ_PlayerChannelsFacade;
 /**
  *
  */
@@ -25,6 +25,9 @@ public:
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Book Quest Widget")
 	TArray<UAQ_Quest*> Quests;
+
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Book Quest Widget")
+	TScriptInterface<IAQ_PlayerChannelsFacade> owner;
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void AddQuest(UAQ_Quest* quest);
@@ -46,4 +49,5 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void CloseAll();
+
 };

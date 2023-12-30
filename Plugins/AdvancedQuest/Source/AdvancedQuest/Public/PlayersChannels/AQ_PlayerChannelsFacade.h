@@ -25,5 +25,8 @@ public:
 	virtual void OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestState QuestState);
 
 	virtual void OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnQuestEnable(UAQ_Quest* quest);
 };
 

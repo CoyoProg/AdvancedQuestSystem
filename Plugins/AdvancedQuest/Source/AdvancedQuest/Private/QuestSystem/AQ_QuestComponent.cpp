@@ -58,7 +58,7 @@ void UAQ_QuestComponent::UpdateQuestMarker()
 
 		if (quest->GetQuestGiver() == Owner)
 		{
-			if (quest->questState == EAQ_QuestState::Pending)
+			if (quest->questState == EAQ_QuestState::Pending && quest->isRequiermentMet)
 			{
 				SetQuestMarker(true, false);
 				isAnyQuestPending = true;
@@ -96,10 +96,50 @@ void UAQ_QuestComponent::OnQuestStateChanged(UAQ_Quest* questUpdate, EAQ_QuestSt
 	{
 	case EAQ_QuestState::Active:
 		break;
+
+		/* Pass the quest from the Giver to the Receiver */
 	case EAQ_QuestState::Valid:
+	{
+		/* Check if this component is the quest Receiver */
+		AActor* questReceiver = questUpdate->GetQuestReceiver();
+		if (questReceiver != Owner)
+		{
+			/* If not we remove the quest and the Event Listener from this Component */
+			questUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_QuestComponent::OnQuestStateChanged);
+			RemoveQuestFromArray(questUpdate);
+
+			/* And add the quest to the quest Receiver*/
+			UAQ_QuestComponent* questComponent = questReceiver->GetComponentByClass<UAQ_QuestComponent>();
+			questUpdate->QuestStateChangedDelegate.AddDynamic(questComponent, &UAQ_QuestComponent::OnQuestStateChanged);
+			questComponent->quests.Add(questUpdate);
+			questComponent->UpdateQuestMarker();
+		}
+
 		break;
+	}
+
+		/* Pass the quest from the Receiver to the Giver */
 	case EAQ_QuestState::Pending:
+	{
+		/* Check if this component is the quest Giver */
+		AActor* questGiver = questUpdate->GetQuestGiver();
+		if (questGiver != Owner)
+		{
+			/* If not we remove the quest and the Event Listener from this Component */
+			questUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_QuestComponent::OnQuestStateChanged);
+			RemoveQuestFromArray(questUpdate);
+
+			/* And add back the quest to the original quest Giver*/
+			UAQ_QuestComponent* questComponent = questGiver->GetComponentByClass<UAQ_QuestComponent>();
+			questUpdate->QuestStateChangedDelegate.AddDynamic(questComponent, &UAQ_QuestComponent::OnQuestStateChanged);
+			questComponent->quests.Add(questUpdate);
+			questComponent->UpdateQuestMarker();
+		}
 		break;
+
+		// Note: Pending is only called when a quest is reset to its initial State.
+	}
+
 	case EAQ_QuestState::Archive:
 		RemoveQuestFromArray(questUpdate);
 		break;
@@ -122,14 +162,10 @@ TArray<UAQ_Quest*> UAQ_QuestComponent::CreateQuests()
 		newQuest->SetQuestReceiver(questReceiver->GetOwner());
 		newQuest->SetQuestGiver(Owner);
 
-		if(questReceiver != this)
-			newQuest->QuestStateChangedDelegate.AddDynamic(questReceiver, &UAQ_QuestComponent::OnQuestStateChanged);
-
 		newQuest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChanged);
-		quests.Add(newQuest);
+		newQuest->QuestRequiermentMetDelegate.AddDynamic(this, &UAQ_QuestComponent::UpdateQuestMarker);
 
-		if (questReceiver != this)
-			questReceiver->quests.Add(newQuest);
+		quests.Add(newQuest);
 	}
 
 	UpdateQuestMarker();

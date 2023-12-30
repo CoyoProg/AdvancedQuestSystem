@@ -25,6 +25,10 @@ UAQ_Quest::~UAQ_Quest()
 void UAQ_Quest::SetQuestData(UAQ_QuestData* questDataP)
 {
 	questData = DuplicateObject<UAQ_QuestData>(questDataP, this);
+
+	FAQ_RequiermentData requierments = questData->questRequirements;
+	if (requierments.playerLevel != 0 || requierments.questID != 0)
+		isRequiermentMet = false;
 }
 
 void UAQ_Quest::SetQuestReceiver(AActor* questReceiver)
@@ -49,10 +53,6 @@ void UAQ_Quest::DisableQuest()
 	questState = EAQ_QuestState::Archive;
 	if (QuestStateChangedDelegate.IsBound())
 		QuestStateChangedDelegate.Broadcast(this, questState);
-
-
-	//FAQ_RequiermentData questRequierments;
-	//questRequierments.questID = questData->questID;
 
 	/* Reset display properties */
 	isDisplayJournal = false;
@@ -116,16 +116,37 @@ void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eve
 	}
 }
 
-void UAQ_Quest::OnNotifyRequierment_Implementation(EAQ_RequiermentEventType eventType, FAQ_RequiermentData& requiermentData)
+void UAQ_Quest::OnQuestRequiermentChange(int questID)
 {
-	if (requiermentData.questID == questData->questRequierments.questID)
+	if (questData->questRequirements.questID == questID)
+		questData->requirementsProgression.questID = questID;
+
+	CheckIfRequiermentsMet();
+}
+
+void UAQ_Quest::OnLevelRequiermentChange(int playerLevel)
+{
+	if (questData->questRequirements.playerLevel == playerLevel)
+		questData->requirementsProgression.playerLevel = playerLevel;
+
+	CheckIfRequiermentsMet();
+}
+
+void UAQ_Quest::CheckIfRequiermentsMet()
+{
+	FAQ_RequiermentData requierments = questData->questRequirements;
+	FAQ_RequiermentData requiermentsProgression = questData->requirementsProgression;
+
+	if (requierments.playerLevel == requiermentsProgression.playerLevel
+		&& requierments.questID == requiermentsProgression.questID)
 	{
-		FString DebugMessage = TEXT("Remove observer Requierment");
-		float TimeToDisplay = 5.0f;
-		FColor TextColor = FColor::Green;
-		GEngine->AddOnScreenDebugMessage(-1, TimeToDisplay, TextColor, DebugMessage);
+		isRequiermentMet = true;
+
+		if (QuestRequiermentMetDelegate.IsBound())
+			QuestRequiermentMetDelegate.Broadcast();
 	}
 }
+
 
 bool UAQ_Quest::IsSameObject(int objectiveIndexP, UObject* entityP)
 {

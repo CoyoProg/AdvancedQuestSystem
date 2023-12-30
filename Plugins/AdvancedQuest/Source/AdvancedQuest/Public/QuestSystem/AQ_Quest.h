@@ -24,6 +24,7 @@ enum class EAQ_QuestState : uint8
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FQuestStateChangedDelegate, UAQ_Quest*, QuestUpdate, EAQ_QuestState, QuestState);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FObjectivesUpdatedDelegate, UAQ_Quest*, QuestUpdate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FQuestRequiermentMetDelegate);
 
 /**
  * 
@@ -53,6 +54,10 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
 	int indexQuickDisplay = 0;
 
+	/* Requierments */
+	UPROPERTY(BlueprintReadOnly, Category = "Quest Display")
+	bool isRequiermentMet = true;
+
 	/* Quest Functions */
 	void SetQuestData(UAQ_QuestData* questData);
 	void SetQuestReceiver(AActor* questReceiver);
@@ -67,23 +72,30 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ResetQuest();
 
+	/* Event Listeners */
 	void OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP);
-	void OnNotifyRequierment_Implementation(EAQ_RequiermentEventType eventType, FAQ_RequiermentData& requiermentData);
+	UFUNCTION()
+	void OnQuestRequiermentChange(int questID);
+	UFUNCTION()
+	void OnLevelRequiermentChange(int playerLevel);
 
 	AActor* GetQuestReceiver() const { return QuestReceiver; }
 	AActor* GetQuestGiver() const { return QuestGiver; }
 
 	FQuestStateChangedDelegate QuestStateChangedDelegate;
 	FObjectivesUpdatedDelegate ObjectivesUpdatedDelegate;
+	FQuestRequiermentMetDelegate QuestRequiermentMetDelegate;
+
 private:
 	/** Quest owner */
 	AActor* QuestGiver;
 	AActor* QuestReceiver;
 
+	/* Objectives */
 	int objectivesCompleted = 0;
-
 	bool IsSameObject(int objectiveIndexP,UObject* entityP);
 	bool IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTypeP);
 
-	bool TriggerEndPlayOnce = false;
+	/* Requuierments */
+	void CheckIfRequiermentsMet();
 };

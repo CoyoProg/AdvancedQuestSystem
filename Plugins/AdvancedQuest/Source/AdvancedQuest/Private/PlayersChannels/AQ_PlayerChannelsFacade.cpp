@@ -15,4 +15,3 @@ void IAQ_PlayerChannelsFacade::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_Q
 void IAQ_PlayerChannelsFacade::OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay)
 {
 }
-

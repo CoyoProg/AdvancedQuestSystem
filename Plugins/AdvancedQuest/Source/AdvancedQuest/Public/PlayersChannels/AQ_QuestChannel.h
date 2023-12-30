@@ -13,6 +13,9 @@
 class UWidgetComponent;
 class IAQ_PlayerChannelsFacade;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FQuestRequiermentChangedDelegate, int, QuestID);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FLevelRequiermentChangedDelegate, int, PlayerLevel);
+
 /**
  * 
  */
@@ -25,32 +28,31 @@ public:
 	UAQ_QuestChannel() : bookQuest(nullptr), Owner(nullptr) {}
 	~UAQ_QuestChannel() { bookQuest = nullptr; Owner = nullptr; }
 
-	void AddObserverRequierment(UObject* observerP, EAQ_RequiermentEventType requiermentType);
-	void RemoveObserverRequierment(UObject* observerP, EAQ_RequiermentEventType requiermentType);
-	void NotifyObservers(EAQ_RequiermentEventType requiermentType, FAQ_RequiermentData& questRequierments);
-
+	/* Book quest Widget */
 	UAQ_BookQuest* GetWidget() { return bookQuest; }
 	void SetWidgetClass(TSubclassOf<UUserWidget> widgetClass, AActor* owner) { bookQuestWidgetClass = widgetClass; Owner = owner; }
 	void AddWidgetToViewport();
-
-	void CreateAllQuests(IAQ_PlayerChannelsFacade* playerChannelListener);
-	void GetAllQuestComponents(TArray<UAQ_QuestComponent*>& foundQuestComponentsP);
-	void AddQuestToArchive(UAQ_Quest* questArchive);
-
 	TSubclassOf<UUserWidget> bookQuestWidgetClass;
 
+	/* Quests */
+	void CreateAllQuests(IAQ_PlayerChannelsFacade* playerChannelListener);
+	void GetAllQuestComponents(TArray<UAQ_QuestComponent*>& foundQuestComponentsP);
+	void AddQuestToArchive(int questID);
+
+	void OnPlayerLevelChange(int newLevel);
+
+	/* Delegates */
 	UFUNCTION()
 	void OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestState QuestState);
 
 	UFUNCTION()
 	void OnQuestUpdate(UAQ_Quest* QuestUpdate);
+
+	FQuestRequiermentChangedDelegate QuestRequiermentChangedDelegate;
+	FLevelRequiermentChangedDelegate LevelRequiermentChangedDelegate;
 private:
 	/* References */
 	UAQ_BookQuest* bookQuest;
-	TArray<UAQ_Quest*> QuestArchive;
+	TArray<int> QuestIDArchive;
 	AActor* Owner;
-
-	/* Observers */
-	TArray<UObject*> ObserversLevelReq;
-	TArray<UObject*> ObserversQuestReq;
 };

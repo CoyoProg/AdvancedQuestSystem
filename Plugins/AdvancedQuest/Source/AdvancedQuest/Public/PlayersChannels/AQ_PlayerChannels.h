@@ -49,8 +49,15 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Events")
 	void RemoveObserver(UObject* entity, EAQ_ObjectivesType eventType);
 
+	/* Event listener */
 	virtual void OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestState QuestState) override;
 	virtual void OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay) override;
+
+	UFUNCTION(BlueprintCallable, Category = "Events")
+	void OnPlayerLevelUp(int PlayerLevel);
+
+	void OnQuestEnable_Implementation(UAQ_Quest* quest);
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction);

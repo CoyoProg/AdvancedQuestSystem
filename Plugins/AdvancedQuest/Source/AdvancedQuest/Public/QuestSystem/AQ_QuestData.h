@@ -73,7 +73,9 @@ public:
 	int questID;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	FAQ_RequiermentData questRequierments;
+	FAQ_RequiermentData questRequirements;
+
+	FAQ_RequiermentData requirementsProgression;
 
 	/* Objectives */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")

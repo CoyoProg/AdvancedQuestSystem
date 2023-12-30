@@ -17,27 +17,23 @@ void UAQ_Channels::AddObserver_Implementation(UObject* observerP)
 
 void UAQ_Channels::RemoveObserver_Implementation(UObject* observerP)
 {
-	int Range = Observers.Num() - 1;
-
 	if (observerP->GetClass()->ImplementsInterface(UAQ_Observer::StaticClass()))
 	{
-		for (int Index = Range; Index > -1; Index--)
-		{
-			if (Observers[Index] == observerP)
-			{
-				Observers.Remove(observerP);
-				return;
-			}
-		}
+		if (Observers.Contains(observerP))
+			Observers.Remove(observerP);
 	}
 }
 
 void UAQ_Channels::NotifyObservers_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP)
 {
-	if (Observers.Num() == 0)
+	/* We use a reverse loop here in case that 
+	   the Observer needs to be removed from the list
+	   and not affect the executeNotify order */
+	int Range = Observers.Num();
+	if (Range == 0)
 		return;
 
-	for (int Index = 0; Index < Observers.Num(); ++Index)
+	for (int Index = Range - 1; Index > -1; --Index)
 	{
 		IAQ_Observer::Execute_OnNotify(Observers[Index], entity, eventTypeP);
 	}

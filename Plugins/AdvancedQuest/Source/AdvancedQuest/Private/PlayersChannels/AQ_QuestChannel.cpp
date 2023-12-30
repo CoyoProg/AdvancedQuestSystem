@@ -7,89 +7,6 @@
 #include <Kismet/GameplayStatics.h>
 #include "Components/WidgetComponent.h"
 
-
-void UAQ_QuestChannel::AddObserverRequierment(UObject* observerP, EAQ_RequiermentEventType requiermentType)
-{
-	switch (requiermentType)
-	{
-	case EAQ_RequiermentEventType::Level:
-	{
-		if (observerP->GetClass()->ImplementsInterface(UAQ_Observer::StaticClass()))
-		{
-			ObserversLevelReq.AddUnique(observerP);
-		}
-
-		break;
-	}
-	case EAQ_RequiermentEventType::Quest:
-	{
-		if (observerP->GetClass()->ImplementsInterface(UAQ_Observer::StaticClass()))
-		{
-			ObserversQuestReq.AddUnique(observerP);
-		}
-
-		break;
-	}
-	}
-}
-
-void UAQ_QuestChannel::RemoveObserverRequierment(UObject* observerP, EAQ_RequiermentEventType requiermentType)
-{
-	switch (requiermentType)
-	{
-	case EAQ_RequiermentEventType::Level:
-	{
-		if (observerP->GetClass()->ImplementsInterface(UAQ_Observer::StaticClass()))
-		{
-			if (ObserversLevelReq.Contains(observerP))
-				ObserversLevelReq.Remove(observerP);
-		}
-
-		break;
-	}
-	case EAQ_RequiermentEventType::Quest:
-	{
-		if (observerP->GetClass()->ImplementsInterface(UAQ_Observer::StaticClass()))
-		{
-			if (ObserversQuestReq.Contains(observerP))
-				ObserversQuestReq.Remove(observerP);
-		}
-		break;
-	}
-	}
-}
-
-void UAQ_QuestChannel::NotifyObservers(EAQ_RequiermentEventType requiermentType, FAQ_RequiermentData& questRequierments)
-{
-	switch (requiermentType)
-	{
-	case EAQ_RequiermentEventType::Level:
-	{
-		if (ObserversLevelReq.Num() == 0)
-			return;
-
-		for (int Index = 0; Index < ObserversLevelReq.Num(); ++Index)
-		{
-			IAQ_Observer::Execute_OnNotifyRequierment(ObserversLevelReq[Index], requiermentType, questRequierments);
-		}
-
-		break;
-	}
-	case EAQ_RequiermentEventType::Quest:
-	{
-		if (ObserversQuestReq.Num() == 0)
-			return;
-
-		for (int Index = 0; Index < ObserversQuestReq.Num(); ++Index)
-		{
-			IAQ_Observer::Execute_OnNotifyRequierment(ObserversQuestReq[Index], requiermentType, questRequierments);
-		}
-
-		break;
-	}
-	}
-}
-
 void UAQ_QuestChannel::AddWidgetToViewport()
 {
 	if (!bookQuestWidgetClass)
@@ -103,26 +20,32 @@ void UAQ_QuestChannel::AddWidgetToViewport()
 
 	PlayerController = Cast<APlayerController>(Pawn->GetController());
 	
+	/* Create the BookQuest widget and add it to the viewport */
 	bookQuest = CreateWidget<UAQ_BookQuest>(PlayerController, bookQuestWidgetClass);
 	if (!bookQuest)
 		return;
-
 	bookQuest->AddToViewport();
 }
 
 void UAQ_QuestChannel::CreateAllQuests(IAQ_PlayerChannelsFacade* playerChannelListener)
 {
+	/* Check for all the Quest Component in the world */
 	TArray<UAQ_QuestComponent*> FoundQuestComponents;
 	GetAllQuestComponents(FoundQuestComponents);
 
 	for (auto questCompoent : FoundQuestComponents)
 	{
+		/* Create all the quests */
 		TArray<UAQ_Quest*> newQuests = questCompoent->CreateQuests();
 
 		for (auto quest : newQuests)
 		{
-			quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestChannel::OnQuestStateChanged);
-			quest->QuestStateChangedDelegate.AddDynamic(playerChannelListener, &IAQ_PlayerChannelsFacade::OnQuestStateChanged);
+			/* Subscribe the Quest to the OnRequiermentsUpdate delegate*/
+			if (quest->questData->questRequirements.playerLevel != 0)
+				LevelRequiermentChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnLevelRequiermentChange);
+			
+			if (quest->questData->questRequirements.questID != 0)
+				QuestRequiermentChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnQuestRequiermentChange);
 		}
 	}
 }
@@ -144,26 +67,17 @@ void UAQ_QuestChannel::GetAllQuestComponents(TArray<UAQ_QuestComponent*>& foundQ
 	}
 }
 
-void UAQ_QuestChannel::AddQuestToArchive(UAQ_Quest* questArchive)
-{
-	QuestArchive.AddUnique(questArchive);
-}
-
 void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestState QuestState)
 {
 	switch (QuestState)
 	{
 	case EAQ_QuestState::Active:
-	{
-		if(bookQuest)
-			bookQuest->AddQuest(QuestUpdate);
-
-		QuestUpdate->ObjectivesUpdatedDelegate.AddDynamic(this, &UAQ_QuestChannel::OnQuestUpdate);
 		break;
-	}
 	case EAQ_QuestState::Valid:
 	{
+		/* Remove from the ObjectivesUpdate delegate*/
 		QuestUpdate->ObjectivesUpdatedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestUpdate);
+		
 		break;
 	}
 	case EAQ_QuestState::Pending:
@@ -171,27 +85,51 @@ void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestStat
 		if (bookQuest)
 			bookQuest->RemoveQuest(QuestUpdate);
 
+		/* Remove the Quest Channel to the Quest Update delegate*/
 		QuestUpdate->ObjectivesUpdatedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestUpdate);
+		QuestUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestStateChanged);
+
+		/* Remove the Quest from the Requirements delegates */
+		if(QuestUpdate->questData->questRequirements.playerLevel !=0)
+			QuestRequiermentChangedDelegate.RemoveDynamic(QuestUpdate, &UAQ_Quest::OnQuestRequiermentChange);
+		if (QuestUpdate->questData->questRequirements.playerLevel != 0)
+			LevelRequiermentChangedDelegate.RemoveDynamic(QuestUpdate, &UAQ_Quest::OnLevelRequiermentChange);
+
 		break;
 	}
 	case EAQ_QuestState::Archive:
 	{
+		/* Remove the quest from the book quest */
 		if (bookQuest)
 			bookQuest->RemoveQuest(QuestUpdate);
 
+		/* Remove from the QuestStateChanged delegate*/
+		QuestUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestStateChanged);
+		
+		/* Archive the quest */
+		int questID = QuestUpdate->questData->questID;
+		AddQuestToArchive(questID);
 		break;
 	}
 	}
+}
+
+void UAQ_QuestChannel::AddQuestToArchive(int questID)
+{
+	QuestIDArchive.AddUnique(questID);
+
+	if (QuestRequiermentChangedDelegate.IsBound())
+		QuestRequiermentChangedDelegate.Broadcast(questID);
+}
+
+void UAQ_QuestChannel::OnPlayerLevelChange(int newLevel)
+{
+	if (LevelRequiermentChangedDelegate.IsBound())
+		LevelRequiermentChangedDelegate.Broadcast(newLevel);
 }
 
 void UAQ_QuestChannel::OnQuestUpdate(UAQ_Quest* QuestUpdate)
 {
 	if (bookQuest)
 		bookQuest->UpdateQuestBook(QuestUpdate);
-
-	FString DebugMessage = TEXT("On Quest Update");
-	float TimeToDisplay = 5.0f;
-	FColor TextColor = FColor::Green;
-	GEngine->AddOnScreenDebugMessage(-1, TimeToDisplay, TextColor, DebugMessage);
-
 }

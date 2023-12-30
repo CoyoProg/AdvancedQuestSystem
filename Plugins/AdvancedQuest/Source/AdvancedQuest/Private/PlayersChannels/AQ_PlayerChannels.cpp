@@ -85,15 +85,7 @@ void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestSt
 	switch (QuestState)
 	{
 	case EAQ_QuestState::Active:
-	{
-		for (auto const& questObjectives : QuestUpdate->questData->objectives)
-		{
-			EAQ_ObjectivesType eventType = questObjectives.objectiveType;
-			AddObserver(QuestUpdate, eventType);
-		}
-
 		break;
-	}
 	case EAQ_QuestState::Valid:
 	{
 		for (auto const& questObjectives : QuestUpdate->questData->objectives)
@@ -112,10 +104,15 @@ void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestSt
 			RemoveObserver(QuestUpdate, eventType);
 		}
 
+		QuestUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
+
 		break;
 	}
 	case EAQ_QuestState::Archive:
+	{
+		QuestUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
 		break;
+	}
 	}
 }
 
@@ -125,6 +122,31 @@ void UAQ_PlayerChannels::OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay
 
 	if (bookQuest)
 		bookQuest->DisplayQuestGiverSummary(questsToDisplay);
+}
+
+void UAQ_PlayerChannels::OnPlayerLevelUp(int PlayerLevel)
+{
+	questChannel->OnPlayerLevelChange(PlayerLevel);
+}
+
+void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
+{
+	/* Subscribe the player Channel to the OnStateChanged delegate */
+	quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
+	for (auto const& questObjectives : quest->questData->objectives)
+	{
+		EAQ_ObjectivesType eventType = questObjectives.objectiveType;
+		AddObserver(quest, eventType);
+	}
+
+	/* Subscribe the quest Channel to the ObjectivesUpdate & OnStateChanged delegate*/
+	quest->QuestStateChangedDelegate.AddDynamic(questChannel, &UAQ_QuestChannel::OnQuestStateChanged);
+	quest->ObjectivesUpdatedDelegate.AddDynamic(questChannel, &UAQ_QuestChannel::OnQuestUpdate);
+
+	/* Add the quest to the book quest*/
+	UAQ_BookQuest* bookQuest = questChannel->GetWidget();
+	if (bookQuest)
+		bookQuest->AddQuest(quest);
 }
 
 void UAQ_PlayerChannels::BeginPlay()
@@ -148,6 +170,10 @@ void UAQ_PlayerChannels::BeginPlay()
 
 		IsNewGame = false;
 	}
+
+	UAQ_BookQuest* bookQuest = questChannel->GetWidget();
+	if(bookQuest)
+		bookQuest->owner = this;
 }
 
 void UAQ_PlayerChannels::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
