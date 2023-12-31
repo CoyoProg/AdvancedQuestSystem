@@ -8,8 +8,7 @@ USTRUCT(Blueprintable, BlueprintType)
 struct FAQ_RequiermentData
 {
 	GENERATED_BODY()
-	FAQ_RequiermentData() : 
-		questID(0),
+	FAQ_RequiermentData() :
 		playerLevel(0)
 	{}
 
@@ -17,7 +16,7 @@ struct FAQ_RequiermentData
 	int playerLevel;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Requierment")
-	int questID;
+	TArray<int> questID;
 };
 
 

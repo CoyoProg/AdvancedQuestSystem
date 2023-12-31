@@ -27,7 +27,7 @@ void UAQ_Quest::SetQuestData(UAQ_QuestData* questDataP)
 	questData = DuplicateObject<UAQ_QuestData>(questDataP, this);
 
 	FAQ_RequiermentData requierments = questData->questRequirements;
-	if (requierments.playerLevel != 0 || requierments.questID != 0)
+	if (requierments.playerLevel != 0 || requierments.questID.Num() > 0)
 		isRequiermentMet = false;
 }
 
@@ -118,8 +118,11 @@ void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eve
 
 void UAQ_Quest::OnQuestRequiermentChange(int questID)
 {
-	if (questData->questRequirements.questID == questID)
-		questData->requirementsProgression.questID = questID;
+	for (auto requirementID : questData->questRequirements.questID)
+	{
+		if (requirementID == questID)
+			questData->requirementsProgression.questID.Add(questID);
+	}
 
 	CheckIfRequiermentsMet();
 }
@@ -137,14 +140,19 @@ void UAQ_Quest::CheckIfRequiermentsMet()
 	FAQ_RequiermentData requierments = questData->questRequirements;
 	FAQ_RequiermentData requiermentsProgression = questData->requirementsProgression;
 
-	if (requierments.playerLevel == requiermentsProgression.playerLevel
-		&& requierments.questID == requiermentsProgression.questID)
-	{
-		isRequiermentMet = true;
+	if (requierments.playerLevel != requiermentsProgression.playerLevel)
+		return;
 
-		if (QuestRequiermentMetDelegate.IsBound())
-			QuestRequiermentMetDelegate.Broadcast();
+	for(auto requirementID : questData->questRequirements.questID)
+	{
+		if(!questData->requirementsProgression.questID.Contains(requirementID))
+			return;
 	}
+
+	isRequiermentMet = true;
+
+	if (QuestRequiermentMetDelegate.IsBound())
+		QuestRequiermentMetDelegate.Broadcast();
 }
 
 

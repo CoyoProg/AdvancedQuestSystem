@@ -44,7 +44,7 @@ void UAQ_QuestChannel::CreateAllQuests(IAQ_PlayerChannelsFacade* playerChannelLi
 			if (quest->questData->questRequirements.playerLevel != 0)
 				LevelRequiermentChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnLevelRequiermentChange);
 			
-			if (quest->questData->questRequirements.questID != 0)
+			if (quest->questData->questRequirements.questID.Num() > 0)
 				QuestRequiermentChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnQuestRequiermentChange);
 		}
 	}

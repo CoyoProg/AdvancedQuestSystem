@@ -70,6 +70,9 @@ public:
 	FString questDescription;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
+	FString questSummary;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	int questID;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
