@@ -42,13 +42,18 @@ public:
 	void RerunScript();
 
 	UFUNCTION(BlueprintCallable)
-	void Interact(const TScriptInterface<IAQ_PlayerChannelsFacade>& PlayerChannel);
+	void Interact(UAQ_PlayerChannels* PlayerChannel);
 
 	UFUNCTION()
 	void OnQuestStateChanged(UAQ_Quest* questUpdate, EAQ_QuestState QuestState);
+
+	UFUNCTION()
+	void OnQuestRequirementMet(UAQ_Quest* quest);
+
 	void RemoveQuestFromArray(UAQ_Quest* questToRemove);
 
-	TArray<UAQ_Quest*> CreateQuests();
+	void CreateQuests();
+
 protected:
 	virtual void BeginPlay() override;
 

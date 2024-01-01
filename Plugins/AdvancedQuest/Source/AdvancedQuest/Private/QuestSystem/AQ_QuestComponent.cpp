@@ -2,7 +2,7 @@
 #include "QuestSystem/AQ_QuestComponent.h"
 
 #include "QuestSystem/AQ_QuestMarkerWidget.h"
-#include "PlayersChannels/AQ_PlayerChannelsFacade.h"
+#include "PlayersChannels/AQ_PlayerChannels.h"
 #include "Components/WidgetComponent.h"
 
 // Sets default values for this component's properties
@@ -58,7 +58,7 @@ void UAQ_QuestComponent::UpdateQuestMarker()
 
 		if (quest->GetQuestGiver() == Owner)
 		{
-			if (quest->questState == EAQ_QuestState::Pending && quest->isRequiermentMet)
+			if (quest->questState == EAQ_QuestState::Pending && quest->isRequirementMet)
 			{
 				SetQuestMarker(true, false);
 				isAnyQuestPending = true;
@@ -77,7 +77,7 @@ void UAQ_QuestComponent::RerunScript()
 	Actor->RerunConstructionScripts();
 }
 
-void UAQ_QuestComponent::Interact(const TScriptInterface<IAQ_PlayerChannelsFacade>& PlayerChannel)
+void UAQ_QuestComponent::Interact(UAQ_PlayerChannels* PlayerChannel)
 {
 	if (!QuestMarkerWidget->IsVisible())
 		return;
@@ -148,13 +148,17 @@ void UAQ_QuestComponent::OnQuestStateChanged(UAQ_Quest* questUpdate, EAQ_QuestSt
 	UpdateQuestMarker();
 }
 
-TArray<UAQ_Quest*> UAQ_QuestComponent::CreateQuests()
+void UAQ_QuestComponent::OnQuestRequirementMet(UAQ_Quest* quest)
+{
+	UpdateQuestMarker();
+
+	quest->QuestRequirementMetDelegate.RemoveDynamic(this, &UAQ_QuestComponent::OnQuestRequirementMet);
+}
+
+void UAQ_QuestComponent::CreateQuests()
 {
 	for (auto questData : quests_DataReceiver)
 	{
-		if (questData.Key->isImplemented)
-			continue;
-
 		UAQ_Quest* newQuest = NewObject<UAQ_Quest>(this, UAQ_Quest::StaticClass());
 		newQuest->SetQuestData(questData.Key);
 
@@ -163,13 +167,21 @@ TArray<UAQ_Quest*> UAQ_QuestComponent::CreateQuests()
 		newQuest->SetQuestGiver(Owner);
 
 		newQuest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChanged);
-		newQuest->QuestRequiermentMetDelegate.AddDynamic(this, &UAQ_QuestComponent::UpdateQuestMarker);
+		if(!newQuest->isRequirementMet)
+			newQuest->QuestRequirementMetDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestRequirementMet);
 
 		quests.Add(newQuest);
+
+		UAQ_PlayerChannels* playerChannels = GetWorld()->
+			GetFirstPlayerController()->
+			GetPawn()->
+			GetComponentByClass<UAQ_PlayerChannels>();
+		
+		if(playerChannels)
+			playerChannels->OnQuestCreated(newQuest);
 	}
 
 	UpdateQuestMarker();
-	return quests;
 }
 
 // Called when the game starts
@@ -182,6 +194,8 @@ void UAQ_QuestComponent::BeginPlay()
 		CreateQuestMarkerWidget();
 		UpdateQuestMarker();
 	}
+
+	CreateQuests();
 
 	Super::BeginPlay();
 }

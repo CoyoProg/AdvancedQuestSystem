@@ -24,7 +24,7 @@ enum class EAQ_QuestState : uint8
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FQuestStateChangedDelegate, UAQ_Quest*, QuestUpdate, EAQ_QuestState, QuestState);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FObjectivesUpdatedDelegate, UAQ_Quest*, QuestUpdate);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FQuestRequiermentMetDelegate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FQuestRequirementMetDelegate, UAQ_Quest*, QuestUpdate);
 
 /**
  * 
@@ -56,7 +56,7 @@ public:
 
 	/* Requierments */
 	UPROPERTY(BlueprintReadOnly, Category = "Quest Display")
-	bool isRequiermentMet = true;
+	bool isRequirementMet = true;
 
 	/* Quest Functions */
 	void SetQuestData(UAQ_QuestData* questData);
@@ -84,7 +84,7 @@ public:
 
 	FQuestStateChangedDelegate QuestStateChangedDelegate;
 	FObjectivesUpdatedDelegate ObjectivesUpdatedDelegate;
-	FQuestRequiermentMetDelegate QuestRequiermentMetDelegate;
+	FQuestRequirementMetDelegate QuestRequirementMetDelegate;
 
 private:
 	/** Quest owner */

@@ -79,7 +79,7 @@ public:
 	FAQ_RequiermentData questRequirements;
 
 	FAQ_RequiermentData requirementsProgression;
-
+	
 	/* Objectives */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	TArray<FAQ_Objectives> objectives;
@@ -91,7 +91,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	int goldReward;
 
-	bool isImplemented = false;
-	/** Inventory Reward */
-	// To Do
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
+	TArray<UObject*> itemsReward;
 };

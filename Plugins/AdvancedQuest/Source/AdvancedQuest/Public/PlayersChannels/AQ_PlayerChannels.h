@@ -5,18 +5,19 @@
 #include "Components/ActorComponent.h"
 
 #include "AQ_PlayerChannelsFacade.h"
-#include "PlayersChannels/AQ_InteractionChannel.h"
-#include "PlayersChannels/AQ_InventoryChannel.h"
-#include "PlayersChannels/AQ_QuestChannel.h"
-
 #include "Enums/AQ_ObjectivesType.h"
 
 #include "AQ_PlayerChannels.generated.h"
 
+class UAQ_InteractionChannel;
+class UAQ_InventoryChannel;
+class UAQ_QuestChannel;
+
+
 /**
  *
  */
-UCLASS(ClassGroup = (AdvancedQuest), meta = (BlueprintSpawnableComponent))
+UCLASS(Blueprintable, BlueprintType)
 class ADVANCEDQUEST_API UAQ_PlayerChannels : public UActorComponent, public IAQ_PlayerChannelsFacade
 {
 	GENERATED_BODY()
@@ -56,7 +57,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Events")
 	void OnPlayerLevelUp(int PlayerLevel);
 
+	void OnQuestCreated(UAQ_Quest* quest);
 	void OnQuestEnable_Implementation(UAQ_Quest* quest);
+
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Events")
+	void OnQuestEnded(UAQ_Quest* quest);
 
 protected:
 	virtual void BeginPlay() override;

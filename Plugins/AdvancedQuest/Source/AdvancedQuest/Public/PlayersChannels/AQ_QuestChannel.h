@@ -13,8 +13,8 @@
 class UWidgetComponent;
 class IAQ_PlayerChannelsFacade;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FQuestRequiermentChangedDelegate, int, QuestID);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FLevelRequiermentChangedDelegate, int, PlayerLevel);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FQuestRequirementChangedDelegate, int, QuestID);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FLevelRequirementChangedDelegate, int, PlayerLevel);
 
 /**
  * 
@@ -35,8 +35,6 @@ public:
 	TSubclassOf<UUserWidget> bookQuestWidgetClass;
 
 	/* Quests */
-	void CreateAllQuests(IAQ_PlayerChannelsFacade* playerChannelListener);
-	void GetAllQuestComponents(TArray<UAQ_QuestComponent*>& foundQuestComponentsP);
 	void AddQuestToArchive(int questID);
 
 	void OnPlayerLevelChange(int newLevel);
@@ -48,8 +46,11 @@ public:
 	UFUNCTION()
 	void OnQuestUpdate(UAQ_Quest* QuestUpdate);
 
-	FQuestRequiermentChangedDelegate QuestRequiermentChangedDelegate;
-	FLevelRequiermentChangedDelegate LevelRequiermentChangedDelegate;
+	UFUNCTION()
+	void OnQuestRequirementMet(UAQ_Quest* quest);
+
+	FQuestRequirementChangedDelegate QuestRequirementChangedDelegate;
+	FLevelRequirementChangedDelegate LevelRequirementChangedDelegate;
 private:
 	/* References */
 	UAQ_BookQuest* bookQuest;

@@ -28,7 +28,7 @@ void UAQ_Quest::SetQuestData(UAQ_QuestData* questDataP)
 
 	FAQ_RequiermentData requierments = questData->questRequirements;
 	if (requierments.playerLevel != 0 || requierments.questID.Num() > 0)
-		isRequiermentMet = false;
+		isRequirementMet = false;
 }
 
 void UAQ_Quest::SetQuestReceiver(AActor* questReceiver)
@@ -51,6 +51,7 @@ void UAQ_Quest::EnableQuest()
 void UAQ_Quest::DisableQuest()
 {
 	questState = EAQ_QuestState::Archive;
+
 	if (QuestStateChangedDelegate.IsBound())
 		QuestStateChangedDelegate.Broadcast(this, questState);
 
@@ -149,10 +150,10 @@ void UAQ_Quest::CheckIfRequiermentsMet()
 			return;
 	}
 
-	isRequiermentMet = true;
+	isRequirementMet = true;
 
-	if (QuestRequiermentMetDelegate.IsBound())
-		QuestRequiermentMetDelegate.Broadcast();
+	if (QuestRequirementMetDelegate.IsBound())
+		QuestRequirementMetDelegate.Broadcast(this);
 }
 
 
@@ -164,7 +165,7 @@ bool UAQ_Quest::IsSameObject(int objectiveIndexP, UObject* entityP)
 
 	/* Check if the entity Class is the same as the ObjectiveTarget Class */
 	UClass* ObjectiveTargetClass = questData->objectives[objectiveIndexP].objectiveTarget;
-	if (entityP->GetClass() != ObjectiveTargetClass)
+	if (!entityP->GetClass()->IsChildOf(ObjectiveTargetClass))
 		return false;
 
 	/* Check if the Objective is a Unique Objective */

@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "PlayersChannels/AQ_PlayerChannels.h"
+#include "PlayersChannels/AQ_InteractionChannel.h"
+#include "PlayersChannels/AQ_InventoryChannel.h"
+#include "PlayersChannels/AQ_QuestChannel.h"
 
 UAQ_PlayerChannels::UAQ_PlayerChannels() :
 	interactionChannel(nullptr),
@@ -111,6 +112,13 @@ void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestSt
 	case EAQ_QuestState::Archive:
 	{
 		QuestUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
+
+		/* Get all the rewards and pass them to the player */
+		OnQuestEnded(QuestUpdate);
+		//QuestUpdate->questData->xpReward;
+		//QuestUpdate->questData->goldReward;
+		//QuestUpdate->questData->itemsReward;
+
 		break;
 	}
 	}
@@ -119,9 +127,8 @@ void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestSt
 void UAQ_PlayerChannels::OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay)
 {
 	UAQ_BookQuest* bookQuest = questChannel->GetWidget();
-
 	if (bookQuest)
-		bookQuest->DisplayQuestGiverSummary(questsToDisplay);
+		questChannel->GetWidget()->DisplayQuestGiverSummary(questsToDisplay);
 }
 
 void UAQ_PlayerChannels::OnPlayerLevelUp(int PlayerLevel)
@@ -129,10 +136,54 @@ void UAQ_PlayerChannels::OnPlayerLevelUp(int PlayerLevel)
 	questChannel->OnPlayerLevelChange(PlayerLevel);
 }
 
+void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
+{
+	switch (quest->questState)
+	{
+	case EAQ_QuestState::Active:
+	{
+		OnQuestEnable(quest);
+		break;
+	}
+
+	case EAQ_QuestState::Pending:
+	{
+		if (quest->isRequirementMet)
+			break;
+
+		if (quest->questData->questRequirements.playerLevel != 0)
+			questChannel->LevelRequirementChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnLevelRequiermentChange);
+
+		if (quest->questData->questRequirements.questID.Num() > 0)
+			questChannel->QuestRequirementChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnQuestRequiermentChange);
+
+		quest->QuestRequirementMetDelegate.AddDynamic(questChannel, &UAQ_QuestChannel::OnQuestRequirementMet);
+		break;
+	}
+
+	case EAQ_QuestState::Valid:
+	{
+		quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
+		quest->QuestStateChangedDelegate.AddDynamic(questChannel, &UAQ_QuestChannel::OnQuestStateChanged);
+		
+		/* Add the quest to the book quest*/
+		UAQ_BookQuest* bookQuest = questChannel->GetWidget();
+		if (bookQuest)
+			bookQuest->AddQuest(quest);
+
+		break;
+	}
+
+	case EAQ_QuestState::Archive:
+		break;
+	}
+}
+
 void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 {
 	/* Subscribe the player Channel to the OnStateChanged delegate */
 	quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
+
 	for (auto const& questObjectives : quest->questData->objectives)
 	{
 		EAQ_ObjectivesType eventType = questObjectives.objectiveType;
@@ -159,21 +210,10 @@ void UAQ_PlayerChannels::BeginPlay()
 		questChannel->AddWidgetToViewport();
 	}
 
-	/* We Create all the quest Asynchrounously,
-	   Only the first time that the game is Played */
-	if (IsNewGame)
-	{
-		AsyncTask(ENamedThreads::GameThread, [this]()
-			{
-				questChannel->CreateAllQuests(this);
-			});
-
-		IsNewGame = false;
-	}
-
 	UAQ_BookQuest* bookQuest = questChannel->GetWidget();
 	if(bookQuest)
 		bookQuest->owner = this;
+
 }
 
 void UAQ_PlayerChannels::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
