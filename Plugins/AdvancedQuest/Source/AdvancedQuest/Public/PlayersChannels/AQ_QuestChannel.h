@@ -28,8 +28,6 @@ public:
 	UAQ_QuestChannel() : bookQuest(nullptr), Owner(nullptr) {}
 	~UAQ_QuestChannel() { bookQuest = nullptr; Owner = nullptr; }
 
-	/* Book quest Widget */
-	UAQ_BookQuest* GetWidget() { return bookQuest; }
 	void SetWidgetClass(TSubclassOf<UUserWidget> widgetClass, AActor* owner) { bookQuestWidgetClass = widgetClass; Owner = owner; }
 	void AddWidgetToViewport();
 	TSubclassOf<UUserWidget> bookQuestWidgetClass;
@@ -49,11 +47,13 @@ public:
 	UFUNCTION()
 	void OnQuestRequirementMet(UAQ_Quest* quest);
 
+	/* References */
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly)
+	UAQ_BookQuest* bookQuest;
+
 	FQuestRequirementChangedDelegate QuestRequirementChangedDelegate;
 	FLevelRequirementChangedDelegate LevelRequirementChangedDelegate;
 private:
-	/* References */
-	UAQ_BookQuest* bookQuest;
 	TArray<int> QuestIDArchive;
 	AActor* Owner;
 };

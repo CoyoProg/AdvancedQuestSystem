@@ -126,9 +126,9 @@ void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestSt
 
 void UAQ_PlayerChannels::OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay)
 {
-	UAQ_BookQuest* bookQuest = questChannel->GetWidget();
+	UAQ_BookQuest* bookQuest = questChannel->bookQuest;
 	if (bookQuest)
-		questChannel->GetWidget()->DisplayQuestGiverSummary(questsToDisplay);
+		bookQuest->DisplayQuestGiverSummary(questsToDisplay);
 }
 
 void UAQ_PlayerChannels::OnPlayerLevelUp(int PlayerLevel)
@@ -167,7 +167,7 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 		quest->QuestStateChangedDelegate.AddDynamic(questChannel, &UAQ_QuestChannel::OnQuestStateChanged);
 		
 		/* Add the quest to the book quest*/
-		UAQ_BookQuest* bookQuest = questChannel->GetWidget();
+		UAQ_BookQuest* bookQuest = questChannel->bookQuest;
 		if (bookQuest)
 			bookQuest->AddQuest(quest);
 
@@ -195,7 +195,7 @@ void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 	quest->ObjectivesUpdatedDelegate.AddDynamic(questChannel, &UAQ_QuestChannel::OnQuestUpdate);
 
 	/* Add the quest to the book quest*/
-	UAQ_BookQuest* bookQuest = questChannel->GetWidget();
+	UAQ_BookQuest* bookQuest = questChannel->bookQuest;
 	if (bookQuest)
 		bookQuest->AddQuest(quest);
 }
@@ -210,32 +210,10 @@ void UAQ_PlayerChannels::BeginPlay()
 		questChannel->AddWidgetToViewport();
 	}
 
-	UAQ_BookQuest* bookQuest = questChannel->GetWidget();
+	UAQ_BookQuest* bookQuest = questChannel->bookQuest;
 	if(bookQuest)
 		bookQuest->owner = this;
 
-}
-
-void UAQ_PlayerChannels::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	AActor* OwnerActor = GetOwner();
-	if (OwnerActor)
-	{
-		APlayerController* OwnerPlayerController = Cast<APlayerController>(OwnerActor->GetInstigatorController());
-
-		if (OwnerPlayerController)
-		{
-			if (OwnerPlayerController->WasInputKeyJustReleased(EKeys::J))
-			{
-				UAQ_BookQuest* bookQuest = questChannel->GetWidget();
-
-				if (bookQuest)
-					bookQuest->OpenJournal();
-			}
-		}
-	}
 }
 
 void UAQ_PlayerChannels::EndPlay(const EEndPlayReason::Type EndPlayReason)
