@@ -9,17 +9,22 @@
 
 void UAQ_QuestChannel::AddWidgetToViewport()
 {
+	if (Owner->HasAuthority())
+		return;
+
 	if (!bookQuestWidgetClass)
 		return;
 
-	APlayerController* PlayerController = nullptr;
+	APlayerController* PlayerController = Cast<APlayerController>(Owner);
 
-	APawn* Pawn = Cast<APawn>(Owner);
-	if (!Pawn)
-		return;
-
-	PlayerController = Cast<APlayerController>(Pawn->GetController());
+	//APawn* Pawn = Cast<APawn>(Owner);
+	//if (!Pawn)
+	//	return;
+	//
+	//PlayerController = Cast<APlayerController>(Pawn->GetController());
 	
+	if (!PlayerController)
+		return;
 	/* Create the BookQuest widget and add it to the viewport */
 	bookQuest = CreateWidget<UAQ_BookQuest>(PlayerController, bookQuestWidgetClass);
 	if (!bookQuest)

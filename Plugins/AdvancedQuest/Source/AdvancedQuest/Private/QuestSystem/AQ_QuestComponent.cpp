@@ -159,6 +159,7 @@ void UAQ_QuestComponent::CreateQuests()
 {
 	for (auto questData : quests_DataReceiver)
 	{
+		/* Get the quest in the Quest Center with the ID */
 		UAQ_Quest* newQuest = NewObject<UAQ_Quest>(this, UAQ_Quest::StaticClass());
 		newQuest->SetQuestData(questData.Key);
 
