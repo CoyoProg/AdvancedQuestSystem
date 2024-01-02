@@ -60,8 +60,6 @@ public:
 
 	/* Quest Functions */
 	void SetQuestData(UAQ_QuestData* questData);
-	void SetQuestReceiver(AActor* questReceiver);
-	void SetQuestGiver(AActor* questGiver);
 
 	UFUNCTION(BlueprintCallable)
 	void EnableQuest();
@@ -79,18 +77,11 @@ public:
 	UFUNCTION()
 	void OnLevelRequiermentChange(int playerLevel);
 
-	AActor* GetQuestReceiver() const { return QuestReceiver; }
-	AActor* GetQuestGiver() const { return QuestGiver; }
-
 	FQuestStateChangedDelegate QuestStateChangedDelegate;
 	FObjectivesUpdatedDelegate ObjectivesUpdatedDelegate;
 	FQuestRequirementMetDelegate QuestRequirementMetDelegate;
 
 private:
-	/** Quest owner */
-	AActor* QuestGiver;
-	AActor* QuestReceiver;
-
 	/* Objectives */
 	int objectivesCompleted = 0;
 	bool IsSameObject(int objectiveIndexP,UObject* entityP);

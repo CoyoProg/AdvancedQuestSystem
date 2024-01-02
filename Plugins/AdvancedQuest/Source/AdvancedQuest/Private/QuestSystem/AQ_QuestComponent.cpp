@@ -3,6 +3,8 @@
 
 #include "QuestSystem/AQ_QuestMarkerWidget.h"
 #include "PlayersChannels/AQ_PlayerChannels.h"
+#include <QuestSystem/AQ_QuestManager.h>
+
 #include "Components/WidgetComponent.h"
 
 // Sets default values for this component's properties
@@ -40,14 +42,23 @@ void UAQ_QuestComponent::SetQuestMarker(bool isMarkerVisible, bool isQuestValid)
 
 void UAQ_QuestComponent::UpdateQuestMarker()
 {
-	if (!questMarkerClass)
+	if (quests_Data.Num() == 0)
+	{
+		SetQuestMarker(false, false);
+		return;
+	}
+
+	if (!questMarkerClass || !QuestManager)
 		return;
 
 	bool isAnyQuestPending = false;
 
-	for (auto quest : quests)
+	for (auto questData : quests_Data)
 	{
-		if (quest->GetQuestReceiver() == Owner)
+		/* Query the quests to the Quest Manager Data Center*/
+		UAQ_Quest* quest = QuestManager->QueryQuest(questData.Key);
+
+		if (questData.Value.isQuestReceiver)
 		{
 			if (quest->questState == EAQ_QuestState::Valid)
 			{
@@ -56,7 +67,7 @@ void UAQ_QuestComponent::UpdateQuestMarker()
 			}
 		}
 
-		if (quest->GetQuestGiver() == Owner)
+		if (questData.Value.isQuestGiver)
 		{
 			if (quest->questState == EAQ_QuestState::Pending && quest->isRequirementMet)
 			{
@@ -82,104 +93,70 @@ void UAQ_QuestComponent::Interact(UAQ_PlayerChannels* PlayerChannel)
 	if (!QuestMarkerWidget->IsVisible())
 		return;
 
-	PlayerChannel->OnInteractQuestGiver(quests);
-}
+	TArray<UAQ_Quest*> quests;
+	for (auto questID : quests_Data)
+	{
+		UAQ_Quest* quest = QuestManager->QueryQuest(questID.Key);
 
-void UAQ_QuestComponent::RemoveQuestFromArray(UAQ_Quest* questToRemove)
-{
-	quests.Remove(questToRemove);
+		if(quest->questState == EAQ_QuestState::Pending &&
+			quest->isRequirementMet &&
+			questID.Value.isQuestGiver)
+			quests.Add(quest);
+
+		if (quest->questState == EAQ_QuestState::Valid &&
+			questID.Value.isQuestReceiver)
+			quests.Add(quest);
+	}
+
+	if(PlayerChannel)
+		PlayerChannel->OnInteractQuestGiver(quests);
 }
 
 void UAQ_QuestComponent::OnQuestStateChanged(UAQ_Quest* questUpdate, EAQ_QuestState QuestState)
 {
-	switch (QuestState)
-	{
-	case EAQ_QuestState::Active:
-		break;
-
-		/* Pass the quest from the Giver to the Receiver */
-	case EAQ_QuestState::Valid:
-	{
-		/* Check if this component is the quest Receiver */
-		AActor* questReceiver = questUpdate->GetQuestReceiver();
-		if (questReceiver != Owner)
-		{
-			/* If not we remove the quest and the Event Listener from this Component */
-			questUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_QuestComponent::OnQuestStateChanged);
-			RemoveQuestFromArray(questUpdate);
-
-			/* And add the quest to the quest Receiver*/
-			UAQ_QuestComponent* questComponent = questReceiver->GetComponentByClass<UAQ_QuestComponent>();
-			questUpdate->QuestStateChangedDelegate.AddDynamic(questComponent, &UAQ_QuestComponent::OnQuestStateChanged);
-			questComponent->quests.Add(questUpdate);
-			questComponent->UpdateQuestMarker();
-		}
-
-		break;
-	}
-
-		/* Pass the quest from the Receiver to the Giver */
-	case EAQ_QuestState::Pending:
-	{
-		/* Check if this component is the quest Giver */
-		AActor* questGiver = questUpdate->GetQuestGiver();
-		if (questGiver != Owner)
-		{
-			/* If not we remove the quest and the Event Listener from this Component */
-			questUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_QuestComponent::OnQuestStateChanged);
-			RemoveQuestFromArray(questUpdate);
-
-			/* And add back the quest to the original quest Giver*/
-			UAQ_QuestComponent* questComponent = questGiver->GetComponentByClass<UAQ_QuestComponent>();
-			questUpdate->QuestStateChangedDelegate.AddDynamic(questComponent, &UAQ_QuestComponent::OnQuestStateChanged);
-			questComponent->quests.Add(questUpdate);
-			questComponent->UpdateQuestMarker();
-		}
-		break;
-
-		// Note: Pending is only called when a quest is reset to its initial State.
-	}
-
-	case EAQ_QuestState::Archive:
-		RemoveQuestFromArray(questUpdate);
-		break;
-	}
-
 	UpdateQuestMarker();
+
+	if(questUpdate->questState == EAQ_QuestState::Archive)
+		questUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_QuestComponent::OnQuestStateChanged);
 }
 
 void UAQ_QuestComponent::OnQuestRequirementMet(UAQ_Quest* quest)
 {
 	UpdateQuestMarker();
 
+	/* Unsubscribe to the Requirement Met delegate */
 	quest->QuestRequirementMetDelegate.RemoveDynamic(this, &UAQ_QuestComponent::OnQuestRequirementMet);
+	
+	/* Subscribe to the Quest State Changed delegate*/
+	quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChanged);
+
 }
 
 void UAQ_QuestComponent::CreateQuests()
 {
-	for (auto questData : quests_DataReceiver)
+	if (!QuestManager)
+		return;
+
+	for (auto questData : quests_Data)
 	{
-		/* Get the quest in the Quest Center with the ID */
-		UAQ_Quest* newQuest = NewObject<UAQ_Quest>(this, UAQ_Quest::StaticClass());
-		newQuest->SetQuestData(questData.Key);
+		/* Query the quests to the Quest Manager Data Center*/
+		UAQ_Quest* newQuest = QuestManager->QueryQuest(questData.Key);
 
-		UAQ_QuestComponent* questReceiver = questData.Value->GetComponentByClass<UAQ_QuestComponent>();
-		newQuest->SetQuestReceiver(questReceiver->GetOwner());
-		newQuest->SetQuestGiver(Owner);
-
-		newQuest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChanged);
+		/* Subscribe to the Quest Requirement Met Delegate if needed */
 		if(!newQuest->isRequirementMet)
 			newQuest->QuestRequirementMetDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestRequirementMet);
+		else
+		{
+			/* Subscribe to the Quest State Changed Delegate if the Quest isn't archived */
+			if(newQuest->questState != EAQ_QuestState::Archive)
+				newQuest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChanged);
+		}
 
-		quests.Add(newQuest);
-
-		UAQ_PlayerChannels* playerChannels = GetWorld()->
-			GetFirstPlayerController()->
-			GetPawn()->
-			GetComponentByClass<UAQ_PlayerChannels>();
-		
-		if(playerChannels)
-			playerChannels->OnQuestCreated(newQuest);
+		if (questData.Value.isQuestReceiver)
+		{
+			if (PlayerChannels)
+				PlayerChannels->OnQuestCreated(newQuest);
+		}
 	}
 
 	UpdateQuestMarker();
@@ -190,22 +167,20 @@ void UAQ_QuestComponent::BeginPlay()
 {
 	RerunScript();
 
+	QuestManager = GetWorld()->
+		GetFirstPlayerController()->
+		GetComponentByClass<UAQ_QuestManager>();
+
+	PlayerChannels = GetWorld()->
+		GetFirstPlayerController()->
+		GetComponentByClass<UAQ_PlayerChannels>();
+
 	if (questMarkerClass)
-	{
 		CreateQuestMarkerWidget();
-		UpdateQuestMarker();
-	}
 
 	CreateQuests();
 
 	Super::BeginPlay();
-}
-
-void UAQ_QuestComponent::RemoveComponent()
-{
-	UnregisterComponent();
-	GetOwner()->RemoveOwnedComponent(this);
-	DestroyComponent();
 }
 
 void UAQ_QuestComponent::CreateQuestMarkerWidget()

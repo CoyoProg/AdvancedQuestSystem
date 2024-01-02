@@ -127,6 +127,7 @@ void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestSt
 void UAQ_PlayerChannels::OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay)
 {
 	UAQ_BookQuest* bookQuest = questChannel->bookQuest;
+
 	if (bookQuest)
 		bookQuest->DisplayQuestGiverSummary(questsToDisplay);
 }
@@ -153,7 +154,7 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 
 		if (quest->questData->questRequirements.playerLevel != 0)
 			questChannel->LevelRequirementChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnLevelRequiermentChange);
-
+		
 		if (quest->questData->questRequirements.questID.Num() > 0)
 			questChannel->QuestRequirementChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnQuestRequiermentChange);
 
@@ -184,6 +185,7 @@ void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 	/* Subscribe the player Channel to the OnStateChanged delegate */
 	quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
 
+	/* Add the quest as Observer to the different channels */
 	for (auto const& questObjectives : quest->questData->objectives)
 	{
 		EAQ_ObjectivesType eventType = questObjectives.objectiveType;
@@ -213,7 +215,6 @@ void UAQ_PlayerChannels::BeginPlay()
 	UAQ_BookQuest* bookQuest = questChannel->bookQuest;
 	if(bookQuest)
 		bookQuest->owner = this;
-
 }
 
 void UAQ_PlayerChannels::EndPlay(const EEndPlayReason::Type EndPlayReason)

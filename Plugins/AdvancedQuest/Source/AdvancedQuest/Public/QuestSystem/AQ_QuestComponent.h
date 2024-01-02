@@ -10,7 +10,21 @@
 
 class UAQ_QuestData;
 class UWidgetComponent;
-class IAQ_PlayerChannelsFacade;
+class UAQ_QuestManager;
+class UAQ_PlayerChannels;
+
+USTRUCT(Blueprintable, BlueprintType)
+struct FAQ_IsGiverOrReceiver
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Component")
+	bool isQuestReceiver = true;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Component")
+	bool isQuestGiver = true;
+};
+
 
 UCLASS(Blueprintable, BlueprintType)
 class ADVANCEDQUEST_API UAQ_QuestComponent : public UActorComponent
@@ -23,7 +37,7 @@ public:
 
 	/* Quest properties */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Component")
-	TMap<UAQ_QuestData*, AActor*> quests_DataReceiver;
+	TMap<int, FAQ_IsGiverOrReceiver> quests_Data;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Component")
 	TSubclassOf<UUserWidget> questMarkerClass;
@@ -50,19 +64,17 @@ public:
 	UFUNCTION()
 	void OnQuestRequirementMet(UAQ_Quest* quest);
 
-	void RemoveQuestFromArray(UAQ_Quest* questToRemove);
-
 	void CreateQuests();
 
 protected:
 	virtual void BeginPlay() override;
-
-	TArray<UAQ_Quest*> quests;
 
 private:
 	UWidgetComponent* QuestMarkerWidget;
 	AActor* Owner;
 
 	void CreateQuestMarkerWidget();
-	void RemoveComponent();
+
+	UAQ_QuestManager* QuestManager;
+	UAQ_PlayerChannels* PlayerChannels;
 };

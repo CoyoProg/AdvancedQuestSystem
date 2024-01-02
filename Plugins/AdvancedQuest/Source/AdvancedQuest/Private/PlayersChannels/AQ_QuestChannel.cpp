@@ -34,6 +34,8 @@ void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestStat
 		/* Remove from the ObjectivesUpdate delegate*/
 		QuestUpdate->ObjectivesUpdatedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestUpdate);
 		
+		if (bookQuest)
+			bookQuest->UpdateQuestBook(QuestUpdate);
 		break;
 	}
 	case EAQ_QuestState::Pending:

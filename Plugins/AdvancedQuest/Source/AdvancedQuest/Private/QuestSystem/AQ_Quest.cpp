@@ -8,9 +8,7 @@
 #include "External/AQ_FilesManager.h"
 
 UAQ_Quest::UAQ_Quest():
-	questData(nullptr),
-	QuestGiver(nullptr),
-	QuestReceiver(nullptr)
+	questData(nullptr)
 {
 	questData = CreateDefaultSubobject<UAQ_QuestData>(TEXT("Quest Data"));
 }
@@ -18,8 +16,6 @@ UAQ_Quest::UAQ_Quest():
 UAQ_Quest::~UAQ_Quest()
 {
 	questData = nullptr;
-	QuestGiver = nullptr;
-	QuestReceiver = nullptr;
 }
 
 void UAQ_Quest::SetQuestData(UAQ_QuestData* questDataP)
@@ -29,16 +25,6 @@ void UAQ_Quest::SetQuestData(UAQ_QuestData* questDataP)
 	FAQ_RequiermentData requierments = questData->questRequirements;
 	if (requierments.playerLevel != 0 || requierments.questID.Num() > 0)
 		isRequirementMet = false;
-}
-
-void UAQ_Quest::SetQuestReceiver(AActor* questReceiver)
-{
-	QuestReceiver = questReceiver;
-}
-
-void UAQ_Quest::SetQuestGiver(AActor* questGiver)
-{
-	QuestGiver = questGiver;
 }
 
 void UAQ_Quest::EnableQuest()
