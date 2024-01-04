@@ -38,11 +38,14 @@ public:
 	UAQ_Quest();
 	~UAQ_Quest();
 
-	UPROPERTY(BlueprintReadOnly, Category = "Quest")
+	UPROPERTY(BlueprintReadWrite, Category = "Quest")
 	EAQ_QuestState questState = EAQ_QuestState::Pending;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	UAQ_QuestData* questData;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Quest")
+	int objectivesCompleted = 0;
 
 	/* Display Properties */
 	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
@@ -55,7 +58,7 @@ public:
 	int indexQuickDisplay = 0;
 
 	/* Requierments */
-	UPROPERTY(BlueprintReadOnly, Category = "Quest Display")
+	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
 	bool isRequirementMet = true;
 
 	/* Quest Functions */
@@ -83,7 +86,6 @@ public:
 
 private:
 	/* Objectives */
-	int objectivesCompleted = 0;
 	bool IsSameObject(int objectiveIndexP,UObject* entityP);
 	bool IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTypeP);
 

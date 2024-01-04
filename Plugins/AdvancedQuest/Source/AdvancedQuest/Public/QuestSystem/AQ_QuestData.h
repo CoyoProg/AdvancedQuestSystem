@@ -43,8 +43,11 @@ struct FAQ_Objectives
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	int amountNeeded;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Quest")
+	UPROPERTY(BlueprintReadWrite, Category = "Quest")
 	int CurrentAmount;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Quest")
+	bool isObjectiveComplete = false;
 };
 
 /**
@@ -78,6 +81,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	FAQ_RequiermentData questRequirements;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	FAQ_RequiermentData requirementsProgression;
 	
 	/* Objectives */

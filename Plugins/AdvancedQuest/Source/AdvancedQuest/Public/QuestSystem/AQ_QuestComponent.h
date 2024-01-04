@@ -64,7 +64,7 @@ public:
 	UFUNCTION()
 	void OnQuestRequirementMet(UAQ_Quest* quest);
 
-	void CreateQuests();
+	void SubscribeToQuestDelegates();
 
 protected:
 	virtual void BeginPlay() override;
@@ -76,5 +76,4 @@ private:
 	void CreateQuestMarkerWidget();
 
 	UAQ_QuestManager* QuestManager;
-	UAQ_PlayerChannels* PlayerChannels;
 };

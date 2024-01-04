@@ -132,7 +132,7 @@ void UAQ_QuestComponent::OnQuestRequirementMet(UAQ_Quest* quest)
 
 }
 
-void UAQ_QuestComponent::CreateQuests()
+void UAQ_QuestComponent::SubscribeToQuestDelegates()
 {
 	if (!QuestManager)
 		return;
@@ -151,12 +151,6 @@ void UAQ_QuestComponent::CreateQuests()
 			if(newQuest->questState != EAQ_QuestState::Archive)
 				newQuest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChanged);
 		}
-
-		if (questData.Value.isQuestReceiver)
-		{
-			if (PlayerChannels)
-				PlayerChannels->OnQuestCreated(newQuest);
-		}
 	}
 
 	UpdateQuestMarker();
@@ -171,14 +165,10 @@ void UAQ_QuestComponent::BeginPlay()
 		GetFirstPlayerController()->
 		GetComponentByClass<UAQ_QuestManager>();
 
-	PlayerChannels = GetWorld()->
-		GetFirstPlayerController()->
-		GetComponentByClass<UAQ_PlayerChannels>();
-
 	if (questMarkerClass)
 		CreateQuestMarkerWidget();
 
-	CreateQuests();
+	SubscribeToQuestDelegates();
 
 	Super::BeginPlay();
 }

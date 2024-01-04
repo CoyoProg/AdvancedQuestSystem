@@ -143,7 +143,8 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 	{
 	case EAQ_QuestState::Active:
 	{
-		OnQuestEnable(quest);
+		OnQuestEnable_Implementation(quest);
+		questChannel->bookQuest->OnLoadQuests(quest);
 		break;
 	}
 
@@ -166,12 +167,8 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 	{
 		quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
 		quest->QuestStateChangedDelegate.AddDynamic(questChannel, &UAQ_QuestChannel::OnQuestStateChanged);
-		
-		/* Add the quest to the book quest*/
-		UAQ_BookQuest* bookQuest = questChannel->bookQuest;
-		if (bookQuest)
-			bookQuest->AddQuest(quest);
 
+		questChannel->bookQuest->OnLoadQuests(quest);
 		break;
 	}
 
@@ -195,11 +192,6 @@ void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 	/* Subscribe the quest Channel to the ObjectivesUpdate & OnStateChanged delegate*/
 	quest->QuestStateChangedDelegate.AddDynamic(questChannel, &UAQ_QuestChannel::OnQuestStateChanged);
 	quest->ObjectivesUpdatedDelegate.AddDynamic(questChannel, &UAQ_QuestChannel::OnQuestUpdate);
-
-	/* Add the quest to the book quest*/
-	UAQ_BookQuest* bookQuest = questChannel->bookQuest;
-	if (bookQuest)
-		bookQuest->AddQuest(quest);
 }
 
 void UAQ_PlayerChannels::BeginPlay()

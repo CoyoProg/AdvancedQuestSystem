@@ -3,6 +3,7 @@
 #include <AssetRegistry/AssetRegistryModule.h>
 
 #include <QuestSystem/AQ_Quest.h>
+#include <PlayersChannels/AQ_PlayerChannels.h>
 
 #include <Kismet/KismetSystemLibrary.h>
 
@@ -20,6 +21,16 @@ UAQ_QuestManager::UAQ_QuestManager()
 void UAQ_QuestManager::BeginPlay()
 {
 	Super::BeginPlay();
+
+	UAQ_PlayerChannels* playerChannels = GetOwner()->GetComponentByClass<UAQ_PlayerChannels>();
+
+	TArray<UAQ_Quest*> temporaryQuests;
+	QuestDataCenter.GenerateValueArray(temporaryQuests);
+
+	for (auto quests : temporaryQuests)
+	{
+		playerChannels->OnQuestCreated(quests);
+	}
 }
 
 void UAQ_QuestManager::InitializeComponent()
@@ -29,7 +40,6 @@ void UAQ_QuestManager::InitializeComponent()
 
 	FTopLevelAssetPath assetPath = UKismetSystemLibrary::MakeTopLevelAssetPath("/Script/AdvancedQuest", "AQ_QuestData");
 	AssetRegistry.GetAssetsByClass(assetPath, QuestDataAssets, true);
-
 
 	for (auto assets : QuestDataAssets)
 	{
@@ -44,6 +54,8 @@ void UAQ_QuestManager::InitializeComponent()
 		int questID = questData->questID;
 		QuestDataCenter.Add(questID, newQuest);
 	}
+
+	LoadQuestData();
 }
 
 

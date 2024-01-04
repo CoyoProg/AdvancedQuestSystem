@@ -8,7 +8,7 @@
 
 class UAQ_Quest;
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(Blueprintable, BlueprintType)
 class ADVANCEDQUEST_API UAQ_QuestManager : public UActorComponent
 {
 	GENERATED_BODY()
@@ -23,6 +23,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	UAQ_Quest* QueryQuest(int QuestID) { return QuestDataCenter[QuestID]; }
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void LoadQuestData();
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
