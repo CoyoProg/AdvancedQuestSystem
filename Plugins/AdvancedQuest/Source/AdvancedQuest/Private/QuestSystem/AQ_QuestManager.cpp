@@ -7,40 +7,23 @@
 
 #include <Kismet/KismetSystemLibrary.h>
 
-// Sets default values for this component's properties
 UAQ_QuestManager::UAQ_QuestManager()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 	bWantsInitializeComponent = true;
 }
 
-
-// Called when the game starts
-void UAQ_QuestManager::BeginPlay()
-{
-	Super::BeginPlay();
-
-	UAQ_PlayerChannels* playerChannels = GetOwner()->GetComponentByClass<UAQ_PlayerChannels>();
-
-	TArray<UAQ_Quest*> temporaryQuests;
-	QuestDataCenter.GenerateValueArray(temporaryQuests);
-
-	for (auto quests : temporaryQuests)
-	{
-		playerChannels->OnQuestCreated(quests);
-	}
-}
-
 void UAQ_QuestManager::InitializeComponent()
 {
+	/* Get the Asset RegistryModule */
 	FAssetRegistryModule& AssetRegistryModule = FModuleManager::LoadModuleChecked<FAssetRegistryModule>("AssetRegistry");
 	IAssetRegistry& AssetRegistry = AssetRegistryModule.Get();
 
+	/* Get all the Quest Data within the PLUGIN FOLDER */
 	FTopLevelAssetPath assetPath = UKismetSystemLibrary::MakeTopLevelAssetPath("/Script/AdvancedQuest", "AQ_QuestData");
 	AssetRegistry.GetAssetsByClass(assetPath, QuestDataAssets, true);
 
+	/* Create a quest for each Quest Data found */
 	for (auto assets : QuestDataAssets)
 	{
 		UAQ_QuestData* questData = Cast<UAQ_QuestData>(assets.GetAsset());
@@ -52,14 +35,35 @@ void UAQ_QuestManager::InitializeComponent()
 		newQuest->SetQuestData(questData);
 
 		int questID = questData->questID;
+
+		/* Add the quest in QuestDataCenter with it's ID as key to retrieve it easily*/
 		QuestDataCenter.Add(questID, newQuest);
 	}
 
-	LoadQuestData();
+	/* Load the save to update all the Objectives & current state for each quests */
+	LoadQuestData(); // This function is implemented in blueprint
 }
 
+void UAQ_QuestManager::BeginPlay()
+{
+	Super::BeginPlay();
 
-// Called every frame
+	/* Get the Player Channels component */
+	UAQ_PlayerChannels* playerChannels = GetOwner()->GetComponentByClass<UAQ_PlayerChannels>();
+
+	/* Generate an array with all the quests in the QuestDataCenter */
+	TArray<UAQ_Quest*> temporaryQuests;
+	QuestDataCenter.GenerateValueArray(temporaryQuests);
+
+	/* Call On Quest Created for each quests */
+	for (auto quests : temporaryQuests)
+	{
+		/* According to the state of each quests, the Player Channels will update 
+		the Quest channel and its book quest, and Functions will be bind to delegates */
+		playerChannels->OnQuestCreated(quests);
+	}
+}
+
 void UAQ_QuestManager::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);

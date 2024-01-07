@@ -11,7 +11,7 @@
 class UAQ_QuestData;
 class UWidgetComponent;
 class UAQ_QuestManager;
-class UAQ_PlayerChannels;
+class IAQ_PlayerChannelsFacade;
 
 USTRUCT(Blueprintable, BlueprintType)
 struct FAQ_IsGiverOrReceiver
@@ -53,10 +53,10 @@ public:
 	void UpdateQuestMarker();
 
 	UFUNCTION(BlueprintCallable)
-	void RerunScript();
+	void RerunScript(); // Usefull only to see all the quest Marker when using the Tool
 
 	UFUNCTION(BlueprintCallable)
-	void Interact(UAQ_PlayerChannels* PlayerChannel);
+	void Interact(const TScriptInterface<IAQ_PlayerChannelsFacade>& PlayerChannel);
 
 	UFUNCTION()
 	void OnQuestStateChanged(UAQ_Quest* questUpdate, EAQ_QuestState QuestState);
@@ -64,7 +64,7 @@ public:
 	UFUNCTION()
 	void OnQuestRequirementMet(UAQ_Quest* quest);
 
-	void SubscribeToQuestDelegates();
+	void BindFunctionsToQuestDelegates();
 
 protected:
 	virtual void BeginPlay() override;

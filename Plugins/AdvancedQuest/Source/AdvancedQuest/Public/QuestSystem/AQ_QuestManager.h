@@ -28,9 +28,9 @@ public:
 	void LoadQuestData();
 
 protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
+	// Called before BeginPlay
 	virtual void InitializeComponent() override;
+	virtual void BeginPlay() override;
 
 private:
 	TArray<FAssetData> QuestDataAssets;

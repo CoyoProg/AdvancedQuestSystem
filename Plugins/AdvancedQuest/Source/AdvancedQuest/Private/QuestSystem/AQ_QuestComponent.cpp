@@ -2,12 +2,12 @@
 #include "QuestSystem/AQ_QuestComponent.h"
 
 #include "QuestSystem/AQ_QuestMarkerWidget.h"
-#include "PlayersChannels/AQ_PlayerChannels.h"
+#include "PlayersChannels/AQ_PlayerChannelsFacade.h"
 #include <QuestSystem/AQ_QuestManager.h>
 
 #include "Components/WidgetComponent.h"
 
-// Sets default values for this component's properties
+
 UAQ_QuestComponent::UAQ_QuestComponent() :
 	questMarkerClass(nullptr),
 	material(nullptr),
@@ -36,28 +36,29 @@ void UAQ_QuestComponent::SetQuestMarker(bool isMarkerVisible, bool isQuestValid)
 	if (widget)
 	{
 		QuestMarkerWidget->SetVisibility(isMarkerVisible);
-		widget->SetImageQuest(isQuestValid);
+		widget->SetImageQuest(isQuestValid); 
 	}
 }
 
 void UAQ_QuestComponent::UpdateQuestMarker()
 {
+	if (!questMarkerClass || !QuestManager)
+		return;
+
+	/* If there is no quest we hide the quest Marker and return */
 	if (quests_Data.Num() == 0)
 	{
 		SetQuestMarker(false, false);
 		return;
 	}
 
-	if (!questMarkerClass || !QuestManager)
-		return;
-
 	bool isAnyQuestPending = false;
-
 	for (auto questData : quests_Data)
 	{
-		/* Query the quests to the Quest Manager Data Center*/
+		/* Query to the QuestManager the quest of the corresponding ID */
 		UAQ_Quest* quest = QuestManager->QueryQuest(questData.Key);
 
+		/* Check if any quest is valid, and if this is the QuestReceiver */
 		if (questData.Value.isQuestReceiver)
 		{
 			if (quest->questState == EAQ_QuestState::Valid)
@@ -67,6 +68,7 @@ void UAQ_QuestComponent::UpdateQuestMarker()
 			}
 		}
 
+		/* If none, check if any quest is pending and if this is the QuestGiver */
 		if (questData.Value.isQuestGiver)
 		{
 			if (quest->questState == EAQ_QuestState::Pending && quest->isRequirementMet)
@@ -77,6 +79,7 @@ void UAQ_QuestComponent::UpdateQuestMarker()
 		}
 	}
 
+	/* Update the Quest Marker accordingly */
 	if(!isAnyQuestPending)
 		SetQuestMarker(false, false);
 }
@@ -88,11 +91,14 @@ void UAQ_QuestComponent::RerunScript()
 	Actor->RerunConstructionScripts();
 }
 
-void UAQ_QuestComponent::Interact(UAQ_PlayerChannels* PlayerChannel)
+void UAQ_QuestComponent::Interact(const TScriptInterface<IAQ_PlayerChannelsFacade>& PlayerChannel)
 {
 	if (!QuestMarkerWidget->IsVisible())
 		return;
 
+	/* When Interacting with the player, Show only the quest that are:
+	- Pending & Requirement is Met & this is the Quest Giver
+	- Valid && this is the quest Receiver */
 	TArray<UAQ_Quest*> quests;
 	for (auto questID : quests_Data)
 	{
@@ -116,6 +122,7 @@ void UAQ_QuestComponent::OnQuestStateChanged(UAQ_Quest* questUpdate, EAQ_QuestSt
 {
 	UpdateQuestMarker();
 
+	/* If the Quest is now archive, we unbind to the delegates */
 	if(questUpdate->questState == EAQ_QuestState::Archive)
 		questUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_QuestComponent::OnQuestStateChanged);
 }
@@ -124,15 +131,15 @@ void UAQ_QuestComponent::OnQuestRequirementMet(UAQ_Quest* quest)
 {
 	UpdateQuestMarker();
 
-	/* Unsubscribe to the Requirement Met delegate */
+	/* Unbind to the Requirement Met delegate */
 	quest->QuestRequirementMetDelegate.RemoveDynamic(this, &UAQ_QuestComponent::OnQuestRequirementMet);
 	
-	/* Subscribe to the Quest State Changed delegate*/
+	/* Bind to the Quest State Changed delegate*/
 	quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChanged);
 
 }
 
-void UAQ_QuestComponent::SubscribeToQuestDelegates()
+void UAQ_QuestComponent::BindFunctionsToQuestDelegates()
 {
 	if (!QuestManager)
 		return;
@@ -156,7 +163,6 @@ void UAQ_QuestComponent::SubscribeToQuestDelegates()
 	UpdateQuestMarker();
 }
 
-// Called when the game starts
 void UAQ_QuestComponent::BeginPlay()
 {
 	RerunScript();
@@ -168,7 +174,7 @@ void UAQ_QuestComponent::BeginPlay()
 	if (questMarkerClass)
 		CreateQuestMarkerWidget();
 
-	SubscribeToQuestDelegates();
+	BindFunctionsToQuestDelegates();
 
 	Super::BeginPlay();
 }
