@@ -14,9 +14,5 @@ class ADVANCEDQUEST_API UAQ_InteractionChannel : public UAQ_Channels
 {
 	GENERATED_BODY()
 	
-public:
-	UAQ_InteractionChannel();
-	~UAQ_InteractionChannel();
-
 	virtual void OnNotifyEvent_Implementation(UObject* entity) override;
 };

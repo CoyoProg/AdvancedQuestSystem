@@ -25,16 +25,15 @@ class ADVANCEDQUEST_API UAQ_QuestChannel : public UAQ_Channels
 	GENERATED_BODY()
 
 public:
-	UAQ_QuestChannel() : bookQuest(nullptr), Owner(nullptr) {}
-	~UAQ_QuestChannel() { bookQuest = nullptr; Owner = nullptr; }
-
+	/* Widget */
+	TSubclassOf<UUserWidget> bookQuestWidgetClass;
 	void SetWidgetClass(TSubclassOf<UUserWidget> widgetClass, AActor* owner) { bookQuestWidgetClass = widgetClass; Owner = owner; }
 	void AddWidgetToViewport();
-	TSubclassOf<UUserWidget> bookQuestWidgetClass;
 
 	/* Quests */
 	void AddQuestToArchive(int questID);
 
+	/* Events */
 	void OnPlayerLevelChange(int newLevel);
 
 	/* Delegates */
@@ -49,11 +48,11 @@ public:
 
 	/* References */
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly)
-	UAQ_BookQuest* bookQuest;
+	UAQ_BookQuest* bookQuest = nullptr;
 
 	FQuestRequirementChangedDelegate QuestRequirementChangedDelegate;
 	FLevelRequirementChangedDelegate LevelRequirementChangedDelegate;
 private:
 	TArray<int> QuestIDArchive;
-	AActor* Owner;
+	AActor* Owner = nullptr;
 };

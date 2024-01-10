@@ -57,7 +57,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
 	int indexQuickDisplay = 0;
 
-	/* Requierments */
+	/* Requirements */
 	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
 	bool isRequirementMet = true;
 
@@ -76,9 +76,9 @@ public:
 	/* Event Listeners */
 	void OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP);
 	UFUNCTION()
-	void OnQuestRequiermentChange(int questID);
+	void OnQuestRequirementChange(int questID);
 	UFUNCTION()
-	void OnLevelRequiermentChange(int playerLevel);
+	void OnLevelRequirementChange(int playerLevel);
 
 	FQuestStateChangedDelegate QuestStateChangedDelegate;
 	FObjectivesUpdatedDelegate ObjectivesUpdatedDelegate;

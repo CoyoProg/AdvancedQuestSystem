@@ -103,7 +103,7 @@ void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eve
 	}
 }
 
-void UAQ_Quest::OnQuestRequiermentChange(int questID)
+void UAQ_Quest::OnQuestRequirementChange(int questID)
 {
 	for (auto requirementID : questData->questRequirements.questID)
 	{
@@ -114,7 +114,7 @@ void UAQ_Quest::OnQuestRequiermentChange(int questID)
 	CheckIfRequiermentsMet();
 }
 
-void UAQ_Quest::OnLevelRequiermentChange(int playerLevel)
+void UAQ_Quest::OnLevelRequirementChange(int playerLevel)
 {
 	if (questData->questRequirements.playerLevel == playerLevel)
 		questData->requirementsProgression.playerLevel = playerLevel;
@@ -192,6 +192,17 @@ bool UAQ_Quest::IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTy
 		break;
 	case EAQ_NotifyEventType::Kill:
 		if (questData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Kill)
+			return true;
+		break;
+
+	case EAQ_NotifyEventType::Heal:
+		break;
+
+	case EAQ_NotifyEventType::Damage:
+		break;
+
+	case EAQ_NotifyEventType::Travel:
+		if (questData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Location)
 			return true;
 		break;
 	}

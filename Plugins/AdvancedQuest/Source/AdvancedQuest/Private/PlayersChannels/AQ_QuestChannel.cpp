@@ -15,7 +15,7 @@ void UAQ_QuestChannel::AddWidgetToViewport()
 	APlayerController* PlayerController = Cast<APlayerController>(Owner);
 	if (!PlayerController)
 		return;
-
+	
 	/* Create the BookQuest widget and add it to the viewport */
 	bookQuest = CreateWidget<UAQ_BookQuest>(PlayerController, bookQuestWidgetClass);
 	if (!bookQuest)
@@ -89,7 +89,7 @@ void UAQ_QuestChannel::OnQuestRequirementMet(UAQ_Quest* quest)
 {
 	/* Remove the Quest from the Requirements delegates */
 	if (quest->questData->questRequirements.questID.Num() > 0)
-		QuestRequirementChangedDelegate.RemoveDynamic(quest, &UAQ_Quest::OnQuestRequiermentChange);
+		QuestRequirementChangedDelegate.RemoveDynamic(quest, &UAQ_Quest::OnQuestRequirementChange);
 	if (quest->questData->questRequirements.playerLevel != 0)
-		LevelRequirementChangedDelegate.RemoveDynamic(quest, &UAQ_Quest::OnLevelRequiermentChange);
+		LevelRequirementChangedDelegate.RemoveDynamic(quest, &UAQ_Quest::OnLevelRequirementChange);
 }

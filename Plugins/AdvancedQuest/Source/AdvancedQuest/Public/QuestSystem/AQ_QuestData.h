@@ -14,37 +14,30 @@ USTRUCT(Blueprintable, BlueprintType)
 struct FAQ_Objectives
 {
 	GENERATED_BODY()
-	FAQ_Objectives() : objectiveType(EAQ_ObjectivesType::Interact),
-		objectiveTarget(nullptr),
-		objectiveSummary(TEXT("")),
-		isUnique(false),
-		uniqueObjectID(0),
-		amountNeeded(1),
-		CurrentAmount(0) {}
 
 	/** Objectives specificities */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	EAQ_ObjectivesType objectiveType;
+	EAQ_ObjectivesType objectiveType = EAQ_ObjectivesType::Interact;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	UClass* objectiveTarget;
+	UClass* objectiveTarget = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Quest")
-	FString objectiveSummary;
+	FString objectiveSummary = FString();
 
 	/** If the goal is a unique target*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	bool isUnique;
+	bool isUnique = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	int uniqueObjectID;
+	int uniqueObjectID = 0;
 
 	/** Amount needed to complete the objective */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	int amountNeeded;
+	int amountNeeded = 1;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Quest")
-	int CurrentAmount;
+	int CurrentAmount = 0;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Quest")
 	bool isObjectiveComplete = false;
@@ -59,24 +52,20 @@ class ADVANCEDQUEST_API UAQ_QuestData : public UPrimaryDataAsset
 	GENERATED_BODY()
 	
 public:
-	UAQ_QuestData() : questTitle(TEXT("")),
-		questDescription(TEXT("")),
-		questID(0),
-		xpReward(0),
-		goldReward(0) {}
+	UAQ_QuestData() {};
 
 	/* Quest properties */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	FString questTitle;
+	FString questTitle = FString();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	FString questDescription;
+	FString questDescription = FString();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	FString questSummary;
+	FString questSummary = FString();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	int questID;
+	int questID = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	FAQ_RequiermentData questRequirements;
@@ -90,10 +79,10 @@ public:
 
 	/** Rewards */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	int xpReward;
+	int xpReward = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	int goldReward;
+	int goldReward = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	TArray<UObject*> itemsReward;

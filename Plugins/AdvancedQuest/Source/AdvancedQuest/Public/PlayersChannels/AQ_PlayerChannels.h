@@ -11,13 +11,15 @@
 
 class UAQ_InteractionChannel;
 class UAQ_InventoryChannel;
+class UAQ_EnvironmentChannel;
+class UAQ_CombatChannel;
 class UAQ_QuestChannel;
 
 
 /**
  *
  */
-UCLASS(Blueprintable, BlueprintType)
+UCLASS(Blueprintable, meta = (ABSTRACT))
 class ADVANCEDQUEST_API UAQ_PlayerChannels : public UActorComponent, public IAQ_PlayerChannelsFacade
 {
 	GENERATED_BODY()
@@ -27,19 +29,27 @@ public:
 	~UAQ_PlayerChannels();
 
 	/** Interaction Channel */
-	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "Channels")
-	UAQ_InteractionChannel* interactionChannel;
+	UPROPERTY(BlueprintReadOnly, Category = "Channels")
+	UAQ_InteractionChannel* interactionChannel = nullptr;
 
 	/** Inventory Channel */
-	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "Channels")
-	UAQ_InventoryChannel* inventoryChannel;
+	UPROPERTY(BlueprintReadOnly, Category = "Channels")
+	UAQ_InventoryChannel* inventoryChannel = nullptr;
+
+	/** Environment Channel */
+	UPROPERTY(BlueprintReadOnly, Category = "Channels")
+	UAQ_EnvironmentChannel* environmentChannel = nullptr;
+
+	/** Combat Channel */
+	UPROPERTY(BlueprintReadOnly, Category = "Channels")
+	UAQ_CombatChannel* combatChannel = nullptr;
 
 	/** Quest Channel */
-	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "Channels")
-	UAQ_QuestChannel* questChannel;
+	UPROPERTY(BlueprintReadOnly, Category = "Channels")
+	UAQ_QuestChannel* questChannel = nullptr;
 
 	/* Book Quest Template */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Channels")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widget")
 	TSubclassOf<UUserWidget> bookQuestWidget;
 
 	/** Add Observer to the corresponding channel */
@@ -54,13 +64,13 @@ public:
 	virtual void OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestState QuestState) override;
 	virtual void OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay) override;
 
-	UFUNCTION(BlueprintCallable, Category = "Events")
+	UFUNCTION(BlueprintCallable, Category = "Events|Player")
 	void OnPlayerLevelUp(int PlayerLevel);
 
 	void OnQuestCreated(UAQ_Quest* quest);
 	void OnQuestEnable_Implementation(UAQ_Quest* quest);
 
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Events")
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Events|Quests")
 	void OnQuestEnded(UAQ_Quest* quest);
 
 protected:

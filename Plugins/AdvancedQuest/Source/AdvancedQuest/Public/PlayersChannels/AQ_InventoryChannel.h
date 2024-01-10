@@ -14,8 +14,5 @@ class ADVANCEDQUEST_API UAQ_InventoryChannel : public UAQ_Channels
 {
 	GENERATED_BODY()
 	
-public:
-	UAQ_InventoryChannel();
-
 	virtual void OnNotifyEvent_Implementation(UObject* entity) override;
 };

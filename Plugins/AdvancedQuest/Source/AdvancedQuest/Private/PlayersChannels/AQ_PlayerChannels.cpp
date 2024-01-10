@@ -2,27 +2,26 @@
 #include "PlayersChannels/AQ_PlayerChannels.h"
 #include "PlayersChannels/AQ_InteractionChannel.h"
 #include "PlayersChannels/AQ_InventoryChannel.h"
+#include "PlayersChannels/AQ_EnvironmentChannel.h"
+#include "PlayersChannels/AQ_CombatChannel.h"
 #include "PlayersChannels/AQ_QuestChannel.h"
 
-UAQ_PlayerChannels::UAQ_PlayerChannels() :
-	interactionChannel(nullptr),
-	inventoryChannel(nullptr),
-	questChannel(nullptr)
+UAQ_PlayerChannels::UAQ_PlayerChannels()
 {
 	/** Create all channels */
 	interactionChannel = CreateDefaultSubobject<UAQ_InteractionChannel>(TEXT("Interaction Channel"));
 	inventoryChannel = CreateDefaultSubobject<UAQ_InventoryChannel>(TEXT("Inventory Channel"));
-	questChannel = CreateDefaultSubobject<UAQ_QuestChannel>(TEXT("Quest Channel"));
+	environmentChannel = CreateDefaultSubobject<UAQ_EnvironmentChannel>(TEXT("Environment Channel"));
+	combatChannel = CreateDefaultSubobject<UAQ_CombatChannel>(TEXT("Combat Channel"));
 
+	questChannel = CreateDefaultSubobject<UAQ_QuestChannel>(TEXT("Quest Channel"));
+	
 	PrimaryComponentTick.bCanEverTick = true;
 	PrimaryComponentTick.bStartWithTickEnabled = true;
 }
 
 UAQ_PlayerChannels::~UAQ_PlayerChannels()
 {
-	interactionChannel = nullptr;
-	inventoryChannel = nullptr;
-	questChannel = nullptr;
 }
 
 void UAQ_PlayerChannels::AddObserver(UObject* entity, EAQ_ObjectivesType eventType)
@@ -36,6 +35,11 @@ void UAQ_PlayerChannels::AddObserver(UObject* entity, EAQ_ObjectivesType eventTy
 
 		/** Add Observer to Combat Channel */
 	case EAQ_ObjectivesType::Kill:
+		combatChannel->AddObserver_Implementation(entity);
+		break;
+
+	case EAQ_ObjectivesType::Protect:
+		combatChannel->AddObserver_Implementation(entity);
 		break;
 
 		/** Add Observer to Inventory Channel */
@@ -43,12 +47,9 @@ void UAQ_PlayerChannels::AddObserver(UObject* entity, EAQ_ObjectivesType eventTy
 		inventoryChannel->AddObserver_Implementation(entity);
 		break;
 
-		/** Add Observer to Combat Channel */
-	case EAQ_ObjectivesType::Protect:
-		break;
-
 		/** Add Observer to Player Channel */
 	case EAQ_ObjectivesType::Location:
+		environmentChannel->AddObserver_Implementation(entity);
 		break;
 	}
 }
@@ -64,6 +65,11 @@ void UAQ_PlayerChannels::RemoveObserver(UObject* entity, EAQ_ObjectivesType even
 
 		/** Remove Observer from Combat Channel */
 	case EAQ_ObjectivesType::Kill:
+		combatChannel->RemoveObserver_Implementation(entity);
+		break;
+
+	case EAQ_ObjectivesType::Protect:
+		combatChannel->RemoveObserver_Implementation(entity);
 		break;
 
 		/** Remove Observer from Inventory Channel */
@@ -71,12 +77,9 @@ void UAQ_PlayerChannels::RemoveObserver(UObject* entity, EAQ_ObjectivesType even
 		inventoryChannel->RemoveObserver_Implementation(entity);
 		break;
 
-		/** Remove Observer from Combat Channel */
-	case EAQ_ObjectivesType::Protect:
-		break;
-
 		/** Remove Observer from Player Channel */
 	case EAQ_ObjectivesType::Location:
+		environmentChannel->RemoveObserver_Implementation(entity);
 		break;
 	}
 }
@@ -154,10 +157,10 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 			break;
 
 		if (quest->questData->questRequirements.playerLevel != 0)
-			questChannel->LevelRequirementChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnLevelRequiermentChange);
+			questChannel->LevelRequirementChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnLevelRequirementChange);
 		
 		if (quest->questData->questRequirements.questID.Num() > 0)
-			questChannel->QuestRequirementChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnQuestRequiermentChange);
+			questChannel->QuestRequirementChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnQuestRequirementChange);
 
 		quest->QuestRequirementMetDelegate.AddDynamic(questChannel, &UAQ_QuestChannel::OnQuestRequirementMet);
 		break;
@@ -198,6 +201,12 @@ void UAQ_PlayerChannels::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if (!questChannel)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("NO QUEST CHANNEL"));
+		return;
+	}
+
 	if (bookQuestWidget)
 	{
 		questChannel->SetWidgetClass(bookQuestWidget, GetOwner());
@@ -211,6 +220,9 @@ void UAQ_PlayerChannels::BeginPlay()
 
 void UAQ_PlayerChannels::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+	if (!interactionChannel)
+		return;
+
 	interactionChannel->ClearObservers();
 	inventoryChannel->ClearObservers();
 }

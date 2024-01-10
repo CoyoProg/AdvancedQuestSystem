@@ -13,7 +13,7 @@ class UWidgetComponent;
 class UAQ_QuestManager;
 class IAQ_PlayerChannelsFacade;
 
-USTRUCT(Blueprintable, BlueprintType)
+USTRUCT(Blueprintable, meta = (ABSTRACT))
 struct FAQ_IsGiverOrReceiver
 {
 	GENERATED_BODY()

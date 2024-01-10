@@ -8,7 +8,7 @@
 
 class UAQ_Quest;
 
-UCLASS(Blueprintable, BlueprintType)
+UCLASS(Blueprintable, meta = (ABSTRACT))
 class ADVANCEDQUEST_API UAQ_QuestManager : public UActorComponent
 {
 	GENERATED_BODY()
