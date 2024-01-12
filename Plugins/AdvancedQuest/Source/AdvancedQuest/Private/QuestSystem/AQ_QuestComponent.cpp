@@ -4,15 +4,12 @@
 #include "QuestSystem/AQ_QuestMarkerWidget.h"
 #include "PlayersChannels/AQ_PlayerChannelsFacade.h"
 #include <QuestSystem/AQ_QuestManager.h>
+#include "QuestSystem/AQ_Quest.h"
 
 #include "Components/WidgetComponent.h"
 
 
-UAQ_QuestComponent::UAQ_QuestComponent() :
-	questMarkerClass(nullptr),
-	material(nullptr),
-	QuestMarkerWidget(nullptr),
-	Owner(nullptr)
+UAQ_QuestComponent::UAQ_QuestComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 	Owner = GetOwner();
@@ -20,15 +17,11 @@ UAQ_QuestComponent::UAQ_QuestComponent() :
 
 UAQ_QuestComponent::~UAQ_QuestComponent()
 {
-	questMarkerClass = nullptr;
-	QuestMarkerWidget = nullptr;
-	material = nullptr;
-	Owner = nullptr;
 }
 
 void UAQ_QuestComponent::SetQuestMarker(bool isMarkerVisible, bool isQuestValid)
 {
-	if (!questMarkerClass)
+	if (!QuestMarkerClass)
 		return;
 
 	UAQ_QuestMarkerWidget* widget = Cast<UAQ_QuestMarkerWidget>(QuestMarkerWidget->GetWidget());
@@ -42,24 +35,24 @@ void UAQ_QuestComponent::SetQuestMarker(bool isMarkerVisible, bool isQuestValid)
 
 void UAQ_QuestComponent::UpdateQuestMarker()
 {
-	if (!questMarkerClass || !QuestManager)
+	if (!QuestMarkerClass || !QuestManager)
 		return;
 
 	/* If there is no quest we hide the quest Marker and return */
-	if (quests_Data.Num() == 0)
+	if (QuestsList.Num() == 0)
 	{
 		SetQuestMarker(false, false);
 		return;
 	}
 
 	bool isAnyQuestPending = false;
-	for (auto questData : quests_Data)
+	for (auto questData : QuestsList)
 	{
 		/* Query to the QuestManager the quest of the corresponding ID */
 		UAQ_Quest* quest = QuestManager->QueryQuest(questData.Key);
 
 		/* Check if any quest is valid, and if this is the QuestReceiver */
-		if (questData.Value.isQuestReceiver)
+		if (questData.Value.bIsQuestReceiver)
 		{
 			if (quest->questState == EAQ_QuestState::Valid)
 			{
@@ -69,7 +62,7 @@ void UAQ_QuestComponent::UpdateQuestMarker()
 		}
 
 		/* If none, check if any quest is pending and if this is the QuestGiver */
-		if (questData.Value.isQuestGiver)
+		if (questData.Value.bIsQuestGiver)
 		{
 			if (quest->questState == EAQ_QuestState::Pending && quest->isRequirementMet)
 			{
@@ -93,24 +86,24 @@ void UAQ_QuestComponent::RerunScript()
 
 void UAQ_QuestComponent::Interact(const TScriptInterface<IAQ_PlayerChannelsFacade>& PlayerChannel)
 {
-	if (!QuestMarkerWidget->IsVisible())
+	if (QuestMarkerWidget && !QuestMarkerWidget->IsVisible())
 		return;
 
 	/* When Interacting with the player, Show only the quest that are:
 	- Pending & Requirement is Met & this is the Quest Giver
 	- Valid && this is the quest Receiver */
 	TArray<UAQ_Quest*> quests;
-	for (auto questID : quests_Data)
+	for (auto questID : QuestsList)
 	{
 		UAQ_Quest* quest = QuestManager->QueryQuest(questID.Key);
 
 		if(quest->questState == EAQ_QuestState::Pending &&
 			quest->isRequirementMet &&
-			questID.Value.isQuestGiver)
+			questID.Value.bIsQuestGiver)
 			quests.Add(quest);
 
 		if (quest->questState == EAQ_QuestState::Valid &&
-			questID.Value.isQuestReceiver)
+			questID.Value.bIsQuestReceiver)
 			quests.Add(quest);
 	}
 
@@ -144,7 +137,7 @@ void UAQ_QuestComponent::BindFunctionsToQuestDelegates()
 	if (!QuestManager)
 		return;
 
-	for (auto questData : quests_Data)
+	for (auto questData : QuestsList)
 	{
 		/* Query the quests to the Quest Manager Data Center*/
 		UAQ_Quest* newQuest = QuestManager->QueryQuest(questData.Key);
@@ -171,7 +164,7 @@ void UAQ_QuestComponent::BeginPlay()
 		GetFirstPlayerController()->
 		GetComponentByClass<UAQ_QuestManager>();
 
-	if (questMarkerClass)
+	if (QuestMarkerClass)
 		CreateQuestMarkerWidget();
 
 	BindFunctionsToQuestDelegates();
@@ -193,8 +186,8 @@ void UAQ_QuestComponent::CreateQuestMarkerWidget()
 		if (QuestMarkerWidget)
 		{
 			QuestMarkerWidget->AttachToComponent(GetOwner()->GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
-			QuestMarkerWidget->SetWidgetClass(questMarkerClass);
-			QuestMarkerWidget->SetMaterial(0, material);
+			QuestMarkerWidget->SetWidgetClass(QuestMarkerClass);
+			QuestMarkerWidget->SetMaterial(0, QuestMarkerMaterial);
 			QuestMarkerWidget->SetWidgetSpace(EWidgetSpace::World);
 
 			QuestMarkerWidget->RegisterComponent();

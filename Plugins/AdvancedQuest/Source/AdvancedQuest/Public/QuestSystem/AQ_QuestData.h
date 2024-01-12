@@ -25,12 +25,14 @@ struct FAQ_Objectives
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Quest")
 	FString objectiveSummary = FString();
 
+
 	/** If the goal is a unique target*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	bool isUnique = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	int uniqueObjectID = 0;
+
 
 	/** Amount needed to complete the objective */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
@@ -52,8 +54,6 @@ class ADVANCEDQUEST_API UAQ_QuestData : public UPrimaryDataAsset
 	GENERATED_BODY()
 	
 public:
-	UAQ_QuestData() {};
-
 	/* Quest properties */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	FString questTitle = FString();
@@ -73,9 +73,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	FAQ_RequiermentData requirementsProgression;
 	
+
 	/* Objectives */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	TArray<FAQ_Objectives> objectives;
+
 
 	/** Rewards */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")

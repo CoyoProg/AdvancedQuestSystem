@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -16,7 +14,7 @@ public:
 	UAQ_UniqueIDComponent();
 
 	UFUNCTION(BlueprintCallable, Category = "Unique ID Component")
-	void SetUniqueID(int uniqueID) { UniqueID = uniqueID; }
+	void SetUniqueID(int InUniqueID) { UniqueID = InUniqueID; }
 
 	UFUNCTION(BlueprintCallable, Category = "Unique ID Component")
 	const int GetUniqueID() const { return UniqueID; }
@@ -24,6 +22,7 @@ public:
 	UFUNCTION(CallInEditor)
 	void GenerateUniqueID();
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Unique ID Component")
-	int UniqueID;
+private:
+	UPROPERTY(VisibleAnywhere, Category = "Unique ID Component")
+	int UniqueID = 0;
 };

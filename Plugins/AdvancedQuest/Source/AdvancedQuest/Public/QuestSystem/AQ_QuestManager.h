@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -13,25 +11,27 @@ class ADVANCEDQUEST_API UAQ_QuestManager : public UActorComponent
 {
 	GENERATED_BODY()
 
+	/* Constructor & Begin Play*/
 public:	
 	UAQ_QuestManager();
 
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-	UPROPERTY(BlueprintReadWrite)
-	TMap<int, UAQ_Quest*> QuestDataCenter;
-
-	UFUNCTION(BlueprintCallable)
-	UAQ_Quest* QueryQuest(int QuestID) { return QuestDataCenter[QuestID]; }
-
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-	void LoadQuestData();
-
 protected:
-	// Called before BeginPlay
 	virtual void InitializeComponent() override;
 	virtual void BeginPlay() override;
 
-private:
-	TArray<FAssetData> QuestDataAssets;
+
+	/* Quests */
+public:
+	UFUNCTION(BlueprintCallable)
+	UAQ_Quest* QueryQuest(int QuestID);
+
+protected:
+	UPROPERTY(BlueprintReadOnly)
+	TMap<int, UAQ_Quest*> QuestDataCenter;
+
+
+	/* Load & Save */
+public:
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void LoadQuestData();
 };

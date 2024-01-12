@@ -1,4 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 #include "QuestSystem/AQ_QuestManager.h"
 #include <AssetRegistry/AssetRegistryModule.h>
 
@@ -21,6 +20,7 @@ void UAQ_QuestManager::InitializeComponent()
 
 	/* Get all the Quest Data within the PLUGIN FOLDER */
 	FTopLevelAssetPath assetPath = UKismetSystemLibrary::MakeTopLevelAssetPath("/Script/AdvancedQuest", "AQ_QuestData");
+	TArray<FAssetData> QuestDataAssets;
 	AssetRegistry.GetAssetsByClass(assetPath, QuestDataAssets, true);
 
 	/* Create a quest for each Quest Data found */
@@ -64,8 +64,8 @@ void UAQ_QuestManager::BeginPlay()
 	}
 }
 
-void UAQ_QuestManager::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+UAQ_Quest* UAQ_QuestManager::QueryQuest(int QuestID)
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	/* Query the Quest corresponding with the ID */
+	return QuestDataCenter[QuestID];
 }
-
