@@ -20,10 +20,40 @@ UAQ_PlayerChannels::UAQ_PlayerChannels()
 	
 	PrimaryComponentTick.bCanEverTick = true;
 	PrimaryComponentTick.bStartWithTickEnabled = true;
+	bWantsInitializeComponent = true;
 }
 
 UAQ_PlayerChannels::~UAQ_PlayerChannels()
 {
+}
+
+void UAQ_PlayerChannels::InitializeComponent()
+{
+	//InitBookQuestWidget();
+}
+
+void UAQ_PlayerChannels::InitBookQuestWidget()
+{
+	if (!QuestChannel)
+		return;
+
+	/* Add the Quest Book Widget to the viewport */
+	if (BookQuestWidget)
+	{
+		QuestChannel->SetWidgetClass(BookQuestWidget, GetOwner());
+		QuestChannel->AddWidgetToViewport();
+	}
+
+	UAQ_BookQuest* BookQuest = QuestChannel->BookQuest;
+	if (BookQuest)
+		BookQuest->Owner = this;
+}
+
+void UAQ_PlayerChannels::BeginPlay()
+{
+	Super::BeginPlay();
+
+	InitBookQuestWidget();
 }
 
 void UAQ_PlayerChannels::AddObserver(UObject* entity, EAQ_ObjectivesType eventType)
@@ -106,7 +136,7 @@ void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestSt
 	case EAQ_QuestState::Pending:
 	{
 		/* Remove all the Quest's Observers when the Quest is Pending */
-		/* This State is only called when a Quest is Abandonned */
+		/* This State is only called when a Quest is Abandoned */
 		for (auto const& questObjectives : QuestUpdate->QuestData->objectives)
 		{
 			EAQ_ObjectivesType eventType = questObjectives.objectiveType;
@@ -153,9 +183,10 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 	{
 		/* Add the Quest to the Book Quest */
 		OnQuestEnable_Implementation(quest);
-		QuestChannel->BookQuest->OnLoadQuests(quest);
-		break;
+		if(QuestChannel->BookQuest)
+			QuestChannel->BookQuest->OnLoadQuests(quest);
 	}
+	break;
 
 	case EAQ_QuestState::Pending:
 	{
@@ -170,8 +201,8 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 			QuestChannel->QuestRequirementChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnQuestRequirementChange);
 
 		quest->QuestRequirementMetDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestRequirementMet);
-		break;
 	}
+	break;
 
 	case EAQ_QuestState::Valid:
 	{
@@ -180,10 +211,13 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 		quest->QuestStateChangedDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestStateChanged);
 
 		QuestChannel->BookQuest->OnLoadQuests(quest);
-		break;
 	}
+	break;
 
 	case EAQ_QuestState::Archive:
+		break;
+
+	default:
 		break;
 	}
 }
@@ -203,25 +237,6 @@ void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 	/* Subscribe the quest Channel to the ObjectivesUpdate & OnStateChanged delegate*/
 	quest->QuestStateChangedDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestStateChanged);
 	quest->ObjectivesUpdatedDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestUpdate);
-}
-
-void UAQ_PlayerChannels::BeginPlay()
-{
-	Super::BeginPlay();
-
-	if (!QuestChannel)
-		return;
-
-	/* Add the Quest Book Widget to the viewport */
-	if (BookQuestWidget)
-	{
-		QuestChannel->SetWidgetClass(BookQuestWidget, GetOwner());
-		QuestChannel->AddWidgetToViewport();
-	}
-
-	UAQ_BookQuest* BookQuest = QuestChannel->BookQuest;
-	if(BookQuest)
-		BookQuest->Owner = this;
 }
 
 void UAQ_PlayerChannels::EndPlay(const EEndPlayReason::Type EndPlayReason)

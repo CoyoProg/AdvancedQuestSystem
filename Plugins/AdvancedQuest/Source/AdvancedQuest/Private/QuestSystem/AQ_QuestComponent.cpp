@@ -19,6 +19,27 @@ UAQ_QuestComponent::~UAQ_QuestComponent()
 {
 }
 
+void UAQ_QuestComponent::BeginPlay()
+{
+	RerunScript();
+
+	QuestManager = GetWorld()->
+		GetFirstPlayerController()->
+		GetComponentByClass<UAQ_QuestManager>();
+
+	if (QuestMarkerClass)
+		CreateQuestMarkerWidget();
+
+	GetWorld()->OnWorldBeginPlay.AddUObject(this, &UAQ_QuestComponent::LateBeginPlay);
+
+	Super::BeginPlay();
+}
+
+void UAQ_QuestComponent::LateBeginPlay()
+{
+	BindFunctionsToQuestDelegates();
+}
+
 void UAQ_QuestComponent::SetQuestMarker(bool isMarkerVisible, bool isQuestValid)
 {
 	if (!QuestMarkerClass)
@@ -53,6 +74,9 @@ void UAQ_QuestComponent::UpdateQuestMarker()
 
 		/* Query to the QuestManager the quest of the corresponding ID */
 		UAQ_Quest* quest = QuestManager->QueryQuest(QuestData.Key);
+
+		if (quest == nullptr)
+			continue;
 
 		/* Check if any quest is valid, and if this is the QuestReceiver */
 		if (QuestData.Value.bIsQuestReceiver)
@@ -135,7 +159,6 @@ void UAQ_QuestComponent::OnQuestRequirementMet(UAQ_Quest* quest)
 	
 	/* Bind to the Quest State Changed delegate*/
 	quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChanged);
-
 }
 
 void UAQ_QuestComponent::BindFunctionsToQuestDelegates()
@@ -151,6 +174,9 @@ void UAQ_QuestComponent::BindFunctionsToQuestDelegates()
 		/* Query the quests to the Quest Manager Data Center*/
 		UAQ_Quest* newQuest = QuestManager->QueryQuest(QuestData.Key);
 
+		if (newQuest == nullptr)
+			continue;
+
 		/* Subscribe to the Quest Requirement Met Delegate if needed */
 		if(!newQuest->bIsRequirementMet)
 			newQuest->QuestRequirementMetDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestRequirementMet);
@@ -163,22 +189,6 @@ void UAQ_QuestComponent::BindFunctionsToQuestDelegates()
 	}
 
 	UpdateQuestMarker();
-}
-
-void UAQ_QuestComponent::BeginPlay()
-{
-	RerunScript();
-
-	QuestManager = GetWorld()->
-		GetFirstPlayerController()->
-		GetComponentByClass<UAQ_QuestManager>();
-
-	if (QuestMarkerClass)
-		CreateQuestMarkerWidget();
-
-	BindFunctionsToQuestDelegates();
-
-	Super::BeginPlay();
 }
 
 void UAQ_QuestComponent::CreateQuestMarkerWidget()

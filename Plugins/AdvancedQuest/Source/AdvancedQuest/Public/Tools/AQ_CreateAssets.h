@@ -26,4 +26,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Advanced Quest System")
 	static void ShowFormattedDialog(const FString& InFileName);
+
+	UFUNCTION(BlueprintCallable, Category = "Create Assets")
+	static void UpdateActor(AActor* Actor);
+	
+	UFUNCTION(BlueprintCallable, Category = "Create Assets")
+	static void SavePackage(UObject* Object);
 };

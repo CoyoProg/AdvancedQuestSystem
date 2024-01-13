@@ -18,7 +18,7 @@ public:
 protected:
 	virtual void InitializeComponent() override;
 	virtual void BeginPlay() override;
-
+	void LateBeginPlay();
 
 	/* Quests */
 public:

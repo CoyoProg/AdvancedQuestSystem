@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "Tools/AQ_CreateAssets.h"
 #include "External/AQ_FilesManager.h"
-
-#include "FileHelpers.h"
+#include <FileHelpers.h>
+#include <QuestSystem/AQ_QuestComponent.h>
 
 #define LOCTEXT_NAMESPACE "FAdvancedQuestModule"
 
@@ -36,9 +36,8 @@ UActorComponent* UAQ_CreateAssets::AddComponent(TSubclassOf<class UActorComponen
 	Actor->AddInstanceComponent(Result);
 	Result->OnComponentCreated();
 	Result->RegisterComponent();
-	Actor->RerunConstructionScripts();
-
-	FEditorFileUtils::SaveMapDataPackages(Actor->GetWorld(), false);
+	
+	UpdateActor(Actor);
 	return Result;
 }
 
@@ -46,7 +45,8 @@ void UAQ_CreateAssets::RemoveComponent(UActorComponent* ActorComponent, AActor* 
 {
 	Actor->RemoveInstanceComponent(ActorComponent);
 	ActorComponent->DestroyComponent();
-	Actor->RerunConstructionScripts();
+
+	UpdateActor(Actor);
 }
 
 void UAQ_CreateAssets::ShowFormattedDialog(const FString& InFileName)
@@ -59,4 +59,43 @@ void UAQ_CreateAssets::ShowFormattedDialog(const FString& InFileName)
 	);
 
 	FMessageDialog::Open(EAppMsgType::Ok, DialogText);
+}
+
+void UAQ_CreateAssets::UpdateActor(AActor* Actor)
+{
+	Actor->RerunConstructionScripts();
+	FEditorFileUtils::SaveCurrentLevel();
+
+	SavePackage(Actor);
+
+	// Save all components' packages
+	TArray<UActorComponent*> ActorComponents;
+	Actor->GetComponents(ActorComponents);
+
+	SavePackage(ActorComponents[0]); // just to trigger the save
+}
+
+void UAQ_CreateAssets::SavePackage(UObject* Object)
+{
+	if (!Object)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Invalid object pointer"));
+		return;
+	}
+
+	// Get the package associated with the object
+	UPackage* Package = Object->GetPackage();
+
+	if (!Package)
+	{
+		Package = Object->GetExternalPackage();
+		if(!Package)
+			return;
+	}
+
+	// Modify the package to mark it as dirty
+	Package->Modify();
+
+	// Save the package
+	bool bSaved = UPackage::SavePackage(Package, Object, EObjectFlags::RF_Public | EObjectFlags::RF_Standalone, *Package->GetName(), GError, nullptr, true, true, SAVE_NoError);
 }

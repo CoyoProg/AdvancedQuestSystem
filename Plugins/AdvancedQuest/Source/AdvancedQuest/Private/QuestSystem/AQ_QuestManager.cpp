@@ -48,6 +48,11 @@ void UAQ_QuestManager::BeginPlay()
 {
 	Super::BeginPlay();
 
+	GetWorld()->OnWorldBeginPlay.AddUObject(this, &UAQ_QuestManager::LateBeginPlay);
+}
+
+void UAQ_QuestManager::LateBeginPlay()
+{
 	/* Get the Player Channels component */
 	UAQ_PlayerChannels* playerChannels = GetOwner()->GetComponentByClass<UAQ_PlayerChannels>();
 
@@ -58,7 +63,7 @@ void UAQ_QuestManager::BeginPlay()
 	/* Call On Quest Created for each quests */
 	for (auto quests : temporaryQuests)
 	{
-		/* According to the state of each quests, the Player Channels will update 
+		/* According to the state of each quests, the Player Channels will update
 		the Quest channel and its book quest, and Functions will be bind to delegates */
 		playerChannels->OnQuestCreated(quests);
 	}
@@ -67,5 +72,9 @@ void UAQ_QuestManager::BeginPlay()
 UAQ_Quest* UAQ_QuestManager::QueryQuest(int QuestID)
 {
 	/* Find the Quest corresponding to the ID */
-	return QuestDataCenter[QuestID];
+	if (QuestDataCenter.Find(QuestID))
+		return QuestDataCenter[QuestID];
+
+	UE_LOG(LogTemp, Warning, TEXT("THERE IS NO QUEST WITH %i ID"), QuestID);
+	return nullptr;
 }

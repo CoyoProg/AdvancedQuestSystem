@@ -45,6 +45,7 @@ public:
 	/* Book Quest Template */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widget")
 	TSubclassOf<UUserWidget> BookQuestWidget = nullptr;
+	void InitBookQuestWidget();
 
 
 	/* Observers Pattern */
@@ -70,7 +71,9 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Events|Quests")
 	void OnQuestEnded(UAQ_Quest* quest);
 
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+	virtual void InitializeComponent() override;
 };
