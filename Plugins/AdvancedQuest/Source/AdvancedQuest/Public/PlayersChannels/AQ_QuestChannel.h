@@ -1,17 +1,16 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 #include "CoreMinimal.h"
 
 #include "PlayersChannels/AQ_Channels.h"
-#include "QuestSystem/AQ_BookQuest.h"
-#include "QuestSystem/AQ_QuestComponent.h"
 #include "Enums/AQ_RequiermentEventType.h"
 
 #include "AQ_QuestChannel.generated.h"
 
-class UWidgetComponent;
+class UAQ_Quest;
+class UAQ_BookQuest;
+class UAQ_QuestComponent;
 class IAQ_PlayerChannelsFacade;
+class UWidgetComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FQuestRequirementChangedDelegate, int, QuestID);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FLevelRequirementChangedDelegate, int, PlayerLevel);
@@ -26,12 +25,13 @@ class ADVANCEDQUEST_API UAQ_QuestChannel : public UAQ_Channels
 
 public:
 	/* Widget */
-	TSubclassOf<UUserWidget> bookQuestWidgetClass;
-	void SetWidgetClass(TSubclassOf<UUserWidget> widgetClass, AActor* owner) { bookQuestWidgetClass = widgetClass; Owner = owner; }
+	TSubclassOf<UUserWidget> BookQuestWidgetClass;
+	void SetWidgetClass(TSubclassOf<UUserWidget> widgetClass, AActor* owner) { BookQuestWidgetClass = widgetClass; OwnerWidget = owner; }
 	void AddWidgetToViewport();
 
-	/* Quests */
-	void AddQuestToArchive(int questID);
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly)
+	UAQ_BookQuest* BookQuest = nullptr;
+
 
 	/* Events */
 	void OnPlayerLevelChange(int newLevel);
@@ -46,13 +46,11 @@ public:
 	UFUNCTION()
 	void OnQuestRequirementMet(UAQ_Quest* quest);
 
-	/* References */
-	UPROPERTY(EditInstanceOnly, BlueprintReadOnly)
-	UAQ_BookQuest* bookQuest = nullptr;
-
 	FQuestRequirementChangedDelegate QuestRequirementChangedDelegate;
 	FLevelRequirementChangedDelegate LevelRequirementChangedDelegate;
+
+
+	/* References */
 private:
-	TArray<int> QuestIDArchive;
-	AActor* Owner = nullptr;
+	AActor* OwnerWidget = nullptr;
 };

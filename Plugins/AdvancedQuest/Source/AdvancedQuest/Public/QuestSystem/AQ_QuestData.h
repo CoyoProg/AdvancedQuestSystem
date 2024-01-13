@@ -65,7 +65,7 @@ public:
 	FString questSummary = FString();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	int questID = 0;
+	int QuestID = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	FAQ_RequiermentData questRequirements;

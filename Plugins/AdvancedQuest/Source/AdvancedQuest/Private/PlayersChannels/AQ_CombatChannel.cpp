@@ -1,6 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "PlayersChannels/AQ_CombatChannel.h"
 
 void UAQ_CombatChannel::OnCombatEventNotify(EAQ_CombatEventType eventType, UObject* entity)

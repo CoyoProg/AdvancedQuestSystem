@@ -1,26 +1,30 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 #include "PlayersChannels/AQ_QuestChannel.h"
-#include <PlayersChannels/AQ_PlayerChannelsFacade.h>
 
+#include <PlayersChannels/AQ_PlayerChannelsFacade.h>
 #include "ObserverPattern/AQ_Observer.h"
+#include "QuestSystem/AQ_BookQuest.h"
+#include "QuestSystem/AQ_QuestComponent.h"
+#include "QuestSystem/AQ_Quest.h"
 
 #include <Kismet/GameplayStatics.h>
 #include "Components/WidgetComponent.h"
 
 void UAQ_QuestChannel::AddWidgetToViewport()
 {
-	if (!bookQuestWidgetClass)
+	/* Check if there is a BookQuest Widget class */
+	if (!BookQuestWidgetClass)
 		return;
 
-	APlayerController* PlayerController = Cast<APlayerController>(Owner);
+	APlayerController* PlayerController = Cast<APlayerController>(OwnerWidget);
 	if (!PlayerController)
 		return;
 	
 	/* Create the BookQuest widget and add it to the viewport */
-	bookQuest = CreateWidget<UAQ_BookQuest>(PlayerController, bookQuestWidgetClass);
-	if (!bookQuest)
+	BookQuest = CreateWidget<UAQ_BookQuest>(PlayerController, BookQuestWidgetClass);
+	if (!BookQuest)
 		return;
-	bookQuest->AddToViewport();
+
+	BookQuest->AddToViewport();
 }
 
 void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestState QuestState)
@@ -31,17 +35,19 @@ void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestStat
 		break;
 	case EAQ_QuestState::Valid:
 	{
-		/* Remove from the ObjectivesUpdate delegate*/
+		/* Remove the Quest channel from the Objectives Update delegate*/
 		QuestUpdate->ObjectivesUpdatedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestUpdate);
 		
-		if (bookQuest)
-			bookQuest->UpdateQuestBook(QuestUpdate);
+		/* Update the Book Quest */
+		if (BookQuest)
+			BookQuest->UpdateQuestBook(QuestUpdate);
 		break;
 	}
 	case EAQ_QuestState::Pending:
 	{
-		if (bookQuest)
-			bookQuest->RemoveQuest(QuestUpdate);
+		/* Remove the Quest from the Book Quest */
+		if (BookQuest)
+			BookQuest->RemoveQuest(QuestUpdate);
 
 		/* Remove the Quest Channel to the Quest Update delegate*/
 		QuestUpdate->ObjectivesUpdatedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestUpdate);
@@ -51,26 +57,20 @@ void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestStat
 	case EAQ_QuestState::Archive:
 	{
 		/* Remove the quest from the book quest */
-		if (bookQuest)
-			bookQuest->RemoveQuest(QuestUpdate);
+		if (BookQuest)
+			BookQuest->RemoveQuest(QuestUpdate);
 
-		/* Remove from the QuestStateChanged delegate*/
+		/* Remove the Quest Channel from the Quest State Changed delegate*/
 		QuestUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestStateChanged);
 		
-		/* Archive the quest */
-		int questID = QuestUpdate->questData->questID;
-		AddQuestToArchive(questID);
+		int QuestID = QuestUpdate->QuestData->QuestID;
+
+		if (QuestRequirementChangedDelegate.IsBound())
+			QuestRequirementChangedDelegate.Broadcast(QuestID);
+
 		break;
 	}
 	}
-}
-
-void UAQ_QuestChannel::AddQuestToArchive(int questID)
-{
-	QuestIDArchive.AddUnique(questID);
-
-	if (QuestRequirementChangedDelegate.IsBound())
-		QuestRequirementChangedDelegate.Broadcast(questID);
 }
 
 void UAQ_QuestChannel::OnPlayerLevelChange(int newLevel)
@@ -81,15 +81,15 @@ void UAQ_QuestChannel::OnPlayerLevelChange(int newLevel)
 
 void UAQ_QuestChannel::OnQuestUpdate(UAQ_Quest* QuestUpdate)
 {
-	if (bookQuest)
-		bookQuest->UpdateQuestBook(QuestUpdate);
+	if (BookQuest)
+		BookQuest->UpdateQuestBook(QuestUpdate);
 }
 
 void UAQ_QuestChannel::OnQuestRequirementMet(UAQ_Quest* quest)
 {
 	/* Remove the Quest from the Requirements delegates */
-	if (quest->questData->questRequirements.questID.Num() > 0)
+	if (quest->QuestData->questRequirements.QuestID.Num() > 0)
 		QuestRequirementChangedDelegate.RemoveDynamic(quest, &UAQ_Quest::OnQuestRequirementChange);
-	if (quest->questData->questRequirements.playerLevel != 0)
+	if (quest->QuestData->questRequirements.PlayerLevel != 0)
 		LevelRequirementChangedDelegate.RemoveDynamic(quest, &UAQ_Quest::OnLevelRequirementChange);
 }

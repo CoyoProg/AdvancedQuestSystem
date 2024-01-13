@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
@@ -15,7 +13,6 @@ class UAQ_EnvironmentChannel;
 class UAQ_CombatChannel;
 class UAQ_QuestChannel;
 
-
 /**
  *
  */
@@ -28,30 +25,29 @@ public:
 	UAQ_PlayerChannels();
 	~UAQ_PlayerChannels();
 
-	/** Interaction Channel */
+	/** Player Channels */
 	UPROPERTY(BlueprintReadOnly, Category = "Channels")
-	UAQ_InteractionChannel* interactionChannel = nullptr;
+	UAQ_InteractionChannel* InteractionChannel = nullptr;
 
-	/** Inventory Channel */
 	UPROPERTY(BlueprintReadOnly, Category = "Channels")
-	UAQ_InventoryChannel* inventoryChannel = nullptr;
+	UAQ_InventoryChannel* InventoryChannel = nullptr;
 
-	/** Environment Channel */
 	UPROPERTY(BlueprintReadOnly, Category = "Channels")
-	UAQ_EnvironmentChannel* environmentChannel = nullptr;
+	UAQ_EnvironmentChannel* EnvironmentChannel = nullptr;
 
-	/** Combat Channel */
 	UPROPERTY(BlueprintReadOnly, Category = "Channels")
-	UAQ_CombatChannel* combatChannel = nullptr;
+	UAQ_CombatChannel* CombatChannel = nullptr;
 
-	/** Quest Channel */
 	UPROPERTY(BlueprintReadOnly, Category = "Channels")
-	UAQ_QuestChannel* questChannel = nullptr;
+	UAQ_QuestChannel* QuestChannel = nullptr;
+
 
 	/* Book Quest Template */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widget")
-	TSubclassOf<UUserWidget> bookQuestWidget;
+	TSubclassOf<UUserWidget> BookQuestWidget = nullptr;
 
+
+	/* Observers Pattern */
 	/** Add Observer to the corresponding channel */
 	UFUNCTION(BlueprintCallable, Category = "Events")
 	void AddObserver(UObject* entity, EAQ_ObjectivesType eventType);
@@ -60,7 +56,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Events")
 	void RemoveObserver(UObject* entity, EAQ_ObjectivesType eventType);
 
-	/* Event listener */
+
+	/* Delegates */
 	virtual void OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestState QuestState) override;
 	virtual void OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay) override;
 

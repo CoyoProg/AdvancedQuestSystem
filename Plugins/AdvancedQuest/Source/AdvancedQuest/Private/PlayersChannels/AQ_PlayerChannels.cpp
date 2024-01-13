@@ -1,20 +1,22 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "PlayersChannels/AQ_PlayerChannels.h"
+
 #include "PlayersChannels/AQ_InteractionChannel.h"
 #include "PlayersChannels/AQ_InventoryChannel.h"
 #include "PlayersChannels/AQ_EnvironmentChannel.h"
 #include "PlayersChannels/AQ_CombatChannel.h"
 #include "PlayersChannels/AQ_QuestChannel.h"
+#include "QuestSystem/AQ_BookQuest.h"
+#include "QuestSystem/AQ_Quest.h"
 
 UAQ_PlayerChannels::UAQ_PlayerChannels()
 {
 	/** Create all channels */
-	interactionChannel = CreateDefaultSubobject<UAQ_InteractionChannel>(TEXT("Interaction Channel"));
-	inventoryChannel = CreateDefaultSubobject<UAQ_InventoryChannel>(TEXT("Inventory Channel"));
-	environmentChannel = CreateDefaultSubobject<UAQ_EnvironmentChannel>(TEXT("Environment Channel"));
-	combatChannel = CreateDefaultSubobject<UAQ_CombatChannel>(TEXT("Combat Channel"));
-
-	questChannel = CreateDefaultSubobject<UAQ_QuestChannel>(TEXT("Quest Channel"));
+	InteractionChannel = CreateDefaultSubobject<UAQ_InteractionChannel>(TEXT("Interaction Channel"));
+	InventoryChannel = CreateDefaultSubobject<UAQ_InventoryChannel>(TEXT("Inventory Channel"));
+	EnvironmentChannel = CreateDefaultSubobject<UAQ_EnvironmentChannel>(TEXT("Environment Channel"));
+	CombatChannel = CreateDefaultSubobject<UAQ_CombatChannel>(TEXT("Combat Channel"));
+	QuestChannel = CreateDefaultSubobject<UAQ_QuestChannel>(TEXT("Quest Channel"));
 	
 	PrimaryComponentTick.bCanEverTick = true;
 	PrimaryComponentTick.bStartWithTickEnabled = true;
@@ -30,26 +32,26 @@ void UAQ_PlayerChannels::AddObserver(UObject* entity, EAQ_ObjectivesType eventTy
 	{
 		/** Add Observer to Interaction Channel */
 	case EAQ_ObjectivesType::Interact:
-		interactionChannel->AddObserver_Implementation(entity);
+		InteractionChannel->AddObserver_Implementation(entity);
 		break;
 
 		/** Add Observer to Combat Channel */
 	case EAQ_ObjectivesType::Kill:
-		combatChannel->AddObserver_Implementation(entity);
+		CombatChannel->AddObserver_Implementation(entity);
 		break;
 
 	case EAQ_ObjectivesType::Protect:
-		combatChannel->AddObserver_Implementation(entity);
+		CombatChannel->AddObserver_Implementation(entity);
 		break;
 
 		/** Add Observer to Inventory Channel */
 	case EAQ_ObjectivesType::Collect:
-		inventoryChannel->AddObserver_Implementation(entity);
+		InventoryChannel->AddObserver_Implementation(entity);
 		break;
 
 		/** Add Observer to Player Channel */
 	case EAQ_ObjectivesType::Location:
-		environmentChannel->AddObserver_Implementation(entity);
+		EnvironmentChannel->AddObserver_Implementation(entity);
 		break;
 	}
 }
@@ -60,26 +62,26 @@ void UAQ_PlayerChannels::RemoveObserver(UObject* entity, EAQ_ObjectivesType even
 	{
 		/** Remove Observer from Interaction Channel */
 	case EAQ_ObjectivesType::Interact:
-		interactionChannel->RemoveObserver_Implementation(entity);
+		InteractionChannel->RemoveObserver_Implementation(entity);
 		break;
 
 		/** Remove Observer from Combat Channel */
 	case EAQ_ObjectivesType::Kill:
-		combatChannel->RemoveObserver_Implementation(entity);
+		CombatChannel->RemoveObserver_Implementation(entity);
 		break;
 
 	case EAQ_ObjectivesType::Protect:
-		combatChannel->RemoveObserver_Implementation(entity);
+		CombatChannel->RemoveObserver_Implementation(entity);
 		break;
 
 		/** Remove Observer from Inventory Channel */
 	case EAQ_ObjectivesType::Collect:
-		inventoryChannel->RemoveObserver_Implementation(entity);
+		InventoryChannel->RemoveObserver_Implementation(entity);
 		break;
 
 		/** Remove Observer from Player Channel */
 	case EAQ_ObjectivesType::Location:
-		environmentChannel->RemoveObserver_Implementation(entity);
+		EnvironmentChannel->RemoveObserver_Implementation(entity);
 		break;
 	}
 }
@@ -92,7 +94,8 @@ void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestSt
 		break;
 	case EAQ_QuestState::Valid:
 	{
-		for (auto const& questObjectives : QuestUpdate->questData->objectives)
+		/* Remove all the Quest's Observers when the Quest is Done */
+		for (auto const& questObjectives : QuestUpdate->QuestData->objectives)
 		{
 			EAQ_ObjectivesType eventType = questObjectives.objectiveType;
 			RemoveObserver(QuestUpdate, eventType);
@@ -102,26 +105,25 @@ void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestSt
 	}
 	case EAQ_QuestState::Pending:
 	{
-		for (auto const& questObjectives : QuestUpdate->questData->objectives)
+		/* Remove all the Quest's Observers when the Quest is Pending */
+		/* This State is only called when a Quest is Abandonned */
+		for (auto const& questObjectives : QuestUpdate->QuestData->objectives)
 		{
 			EAQ_ObjectivesType eventType = questObjectives.objectiveType;
 			RemoveObserver(QuestUpdate, eventType);
 		}
 
+		/* Remove the Player Channels from the Quest State Changed delegate */
 		QuestUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
-
 		break;
 	}
 	case EAQ_QuestState::Archive:
 	{
+		/* Remove the Player Channels from the Quest State Changed delegate */
 		QuestUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
 
 		/* Get all the rewards and pass them to the player */
-		OnQuestEnded(QuestUpdate);
-		//QuestUpdate->questData->xpReward;
-		//QuestUpdate->questData->goldReward;
-		//QuestUpdate->questData->itemsReward;
-
+		OnQuestEnded(QuestUpdate); // Implemented in Blueprints
 		break;
 	}
 	}
@@ -129,49 +131,55 @@ void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestSt
 
 void UAQ_PlayerChannels::OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay)
 {
-	UAQ_BookQuest* bookQuest = questChannel->bookQuest;
+	/* Get the Book Quest and Display the Quests */
+	UAQ_BookQuest* BookQuest = QuestChannel->BookQuest;
 
-	if (bookQuest)
-		bookQuest->DisplayQuestGiverSummary(questsToDisplay);
+	if (BookQuest)
+		BookQuest->DisplayQuestGiverSummary(questsToDisplay);
 }
 
 void UAQ_PlayerChannels::OnPlayerLevelUp(int PlayerLevel)
 {
-	questChannel->OnPlayerLevelChange(PlayerLevel);
+	QuestChannel->OnPlayerLevelChange(PlayerLevel);
 }
 
 void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 {
-	switch (quest->questState)
+	/* This function is called by the Quest Manager at the Load of each game 
+		It will load prior save and update all the quest & Observers accordingly */
+	switch (quest->QuestState)
 	{
 	case EAQ_QuestState::Active:
 	{
+		/* Add the Quest to the Book Quest */
 		OnQuestEnable_Implementation(quest);
-		questChannel->bookQuest->OnLoadQuests(quest);
+		QuestChannel->BookQuest->OnLoadQuests(quest);
 		break;
 	}
 
 	case EAQ_QuestState::Pending:
 	{
-		if (quest->isRequirementMet)
+		/* Check the requirements & bind delegates */
+		if (quest->bIsRequirementMet)
 			break;
 
-		if (quest->questData->questRequirements.playerLevel != 0)
-			questChannel->LevelRequirementChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnLevelRequirementChange);
+		if (quest->QuestData->questRequirements.PlayerLevel != 0)
+			QuestChannel->LevelRequirementChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnLevelRequirementChange);
 		
-		if (quest->questData->questRequirements.questID.Num() > 0)
-			questChannel->QuestRequirementChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnQuestRequirementChange);
+		if (quest->QuestData->questRequirements.QuestID.Num() > 0)
+			QuestChannel->QuestRequirementChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnQuestRequirementChange);
 
-		quest->QuestRequirementMetDelegate.AddDynamic(questChannel, &UAQ_QuestChannel::OnQuestRequirementMet);
+		quest->QuestRequirementMetDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestRequirementMet);
 		break;
 	}
 
 	case EAQ_QuestState::Valid:
 	{
+		/* Bind delegates & add the Quest to the Book Quest*/
 		quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
-		quest->QuestStateChangedDelegate.AddDynamic(questChannel, &UAQ_QuestChannel::OnQuestStateChanged);
+		quest->QuestStateChangedDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestStateChanged);
 
-		questChannel->bookQuest->OnLoadQuests(quest);
+		QuestChannel->BookQuest->OnLoadQuests(quest);
 		break;
 	}
 
@@ -186,43 +194,44 @@ void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 	quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
 
 	/* Add the quest as Observer to the different channels */
-	for (auto const& questObjectives : quest->questData->objectives)
+	for (auto const& questObjectives : quest->QuestData->objectives)
 	{
 		EAQ_ObjectivesType eventType = questObjectives.objectiveType;
 		AddObserver(quest, eventType);
 	}
 
 	/* Subscribe the quest Channel to the ObjectivesUpdate & OnStateChanged delegate*/
-	quest->QuestStateChangedDelegate.AddDynamic(questChannel, &UAQ_QuestChannel::OnQuestStateChanged);
-	quest->ObjectivesUpdatedDelegate.AddDynamic(questChannel, &UAQ_QuestChannel::OnQuestUpdate);
+	quest->QuestStateChangedDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestStateChanged);
+	quest->ObjectivesUpdatedDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestUpdate);
 }
 
 void UAQ_PlayerChannels::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (!questChannel)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("NO QUEST CHANNEL"));
+	if (!QuestChannel)
 		return;
-	}
 
-	if (bookQuestWidget)
+	/* Add the Quest Book Widget to the viewport */
+	if (BookQuestWidget)
 	{
-		questChannel->SetWidgetClass(bookQuestWidget, GetOwner());
-		questChannel->AddWidgetToViewport();
+		QuestChannel->SetWidgetClass(BookQuestWidget, GetOwner());
+		QuestChannel->AddWidgetToViewport();
 	}
 
-	UAQ_BookQuest* bookQuest = questChannel->bookQuest;
-	if(bookQuest)
-		bookQuest->owner = this;
+	UAQ_BookQuest* BookQuest = QuestChannel->BookQuest;
+	if(BookQuest)
+		BookQuest->Owner = this;
 }
 
 void UAQ_PlayerChannels::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-	if (!interactionChannel)
-		return;
+	/* Because some value are persistent between play in editor, 
+	We need to clear all the Observers at the end of a play */
 
-	interactionChannel->ClearObservers();
-	inventoryChannel->ClearObservers();
+	InteractionChannel->ClearObservers();
+	InventoryChannel->ClearObservers();
+	CombatChannel->ClearObservers();
+	EnvironmentChannel->ClearObservers();
+	QuestChannel->ClearObservers();
 }

@@ -1,5 +1,5 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 #pragma once
+
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "Misc/Guid.h"
@@ -38,31 +38,15 @@ public:
 	UAQ_Quest();
 	~UAQ_Quest();
 
+	/* Quest Data */
 	UPROPERTY(BlueprintReadWrite, Category = "Quest")
-	EAQ_QuestState questState = EAQ_QuestState::Pending;
+	EAQ_QuestState QuestState = EAQ_QuestState::Pending;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	UAQ_QuestData* questData;
+	UAQ_QuestData* QuestData = nullptr;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Quest")
-	int objectivesCompleted = 0;
-
-	/* Display Properties */
-	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
-	bool isDisplayJournal = false;
-
-	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
-	bool isDisplayQuickJournal = false;
-
-	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
-	int indexQuickDisplay = 0;
-
-	/* Requirements */
-	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
-	bool isRequirementMet = true;
-
-	/* Quest Functions */
-	void SetQuestData(UAQ_QuestData* questData);
+	int ObjectivesCompleted = 0;
 
 	UFUNCTION(BlueprintCallable)
 	void EnableQuest();
@@ -73,13 +57,33 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ResetQuest();
 
+	void SetQuestData(UAQ_QuestData* QuestData);
+
+
+	/* Display Properties */
+	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
+	bool bIsDisplayJournal = false;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
+	bool bIsDisplayQuickJournal = false;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
+	int IndexQuickDisplay = 0;
+
+
+	/* Requirements */
+	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
+	bool bIsRequirementMet = true;
+
+
 	/* Event Listeners */
 	void OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP);
 	UFUNCTION()
-	void OnQuestRequirementChange(int questID);
+	void OnQuestRequirementChange(int QuestID);
 	UFUNCTION()
-	void OnLevelRequirementChange(int playerLevel);
+	void OnLevelRequirementChange(int PlayerLevel);
 
+	/* Delegates */
 	FQuestStateChangedDelegate QuestStateChangedDelegate;
 	FObjectivesUpdatedDelegate ObjectivesUpdatedDelegate;
 	FQuestRequirementMetDelegate QuestRequirementMetDelegate;
@@ -89,6 +93,6 @@ private:
 	bool IsSameObject(int objectiveIndexP,UObject* entityP);
 	bool IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTypeP);
 
-	/* Requuierments */
+	/* Requirements */
 	void CheckIfRequiermentsMet();
 };

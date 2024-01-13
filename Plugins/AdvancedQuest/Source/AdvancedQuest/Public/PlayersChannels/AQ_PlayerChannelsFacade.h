@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "AQ_PlayerChannelsFacade.generated.h"
@@ -22,9 +20,9 @@ class ADVANCEDQUEST_API IAQ_PlayerChannelsFacade
 
 public:
 	UFUNCTION()
-	virtual void OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestState QuestState);
+	virtual void OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestState QuestState) {}
 
-	virtual void OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay);
+	virtual void OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay) {}
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnQuestEnable(UAQ_Quest* quest);

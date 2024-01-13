@@ -1,16 +1,12 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "PlayersChannels/AQ_Channels.h"
 #include "AQ_CombatChannel.generated.h"
 
-
 UENUM(BlueprintType)
 enum class EAQ_CombatEventType : uint8
 {
-    // Combat 
     Kill       UMETA(DisplayName = "Kill"),
     Heal       UMETA(DisplayName = "Heal"),
     Damage     UMETA(DisplayName = "Damage"),

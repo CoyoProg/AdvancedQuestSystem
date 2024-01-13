@@ -1,4 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 #include "PlayersChannels/AQ_Channels.h"
 #include "ObserverPattern/AQ_Observer.h"
 

@@ -1,4 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 #pragma once
 #include "AQ_RequiermentEventType.generated.h"
 
@@ -9,14 +8,14 @@ struct FAQ_RequiermentData
 {
 	GENERATED_BODY()
 	FAQ_RequiermentData() :
-		playerLevel(0)
+		PlayerLevel(0)
 	{}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Requierment")
-	int playerLevel;
+	int PlayerLevel;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Requierment")
-	TArray<int> questID;
+	TArray<int> QuestID;
 };
 
 

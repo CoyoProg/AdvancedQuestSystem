@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -8,6 +6,7 @@
 
 class UAQ_Quest;
 class IAQ_PlayerChannelsFacade;
+
 /**
  *
  */
@@ -17,33 +16,19 @@ class ADVANCEDQUEST_API UAQ_BookQuest : public UUserWidget
 	GENERATED_BODY()
 	
 public:
+	/* Widgets */
 	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "Book Quest Widget")
-	UUserWidget* JournalWidget;
+	UUserWidget* JournalWidget = nullptr;
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "Book Quest Widget")
-	UUserWidget* QuestGiverWidget;
-
-	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Book Quest Widget")
-	TArray<UAQ_Quest*> Quests;
-
-	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Book Quest Widget")
-	TScriptInterface<IAQ_PlayerChannelsFacade> owner;
-
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-	void AddQuest(UAQ_Quest* quest);
-
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-	void RemoveQuest(UAQ_Quest* quest);
+	UUserWidget* QuestGiverWidget = nullptr;
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void UpdateQuestBook(UAQ_Quest* quest);
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-	void OnLoadQuests(UAQ_Quest* quest);
-
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void DisplayQuestGiverSummary(const TArray<UAQ_Quest*>& questsToDisplay);
-
+	
 	UFUNCTION(BlueprintCallable)
 	void OpenJournal();
 
@@ -53,4 +38,24 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void CloseAll();
 
+
+	/* Quests */
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Book Quest Widget")
+	TArray<UAQ_Quest*> Quests;
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void AddQuest(UAQ_Quest* quest);
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void RemoveQuest(UAQ_Quest* quest);
+
+
+	/* References */
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Book Quest Widget")
+	TScriptInterface<IAQ_PlayerChannelsFacade> Owner = nullptr;
+
+
+	/* Load Save */
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void OnLoadQuests(UAQ_Quest* quest);
 };

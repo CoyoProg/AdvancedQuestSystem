@@ -1,6 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "PlayersChannels/AQ_InventoryChannel.h"
 
 void UAQ_InventoryChannel::OnNotifyEvent_Implementation(UObject* entity)

@@ -26,18 +26,18 @@ void UAQ_QuestManager::InitializeComponent()
 	/* Create a quest for each Quest Data found */
 	for (auto assets : QuestDataAssets)
 	{
-		UAQ_QuestData* questData = Cast<UAQ_QuestData>(assets.GetAsset());
+		UAQ_QuestData* QuestData = Cast<UAQ_QuestData>(assets.GetAsset());
 
-		if (!questData)
+		if (!QuestData)
 			return;
 
 		UAQ_Quest* newQuest = NewObject<UAQ_Quest>(this, UAQ_Quest::StaticClass());
-		newQuest->SetQuestData(questData);
+		newQuest->SetQuestData(QuestData);
 
-		int questID = questData->questID;
+		int QuestID = QuestData->QuestID;
 
 		/* Add the quest in QuestDataCenter with it's ID as key to retrieve it easily*/
-		QuestDataCenter.Add(questID, newQuest);
+		QuestDataCenter.Add(QuestID, newQuest);
 	}
 
 	/* Load the save to update all the Objectives & current state for each quests */
@@ -66,6 +66,6 @@ void UAQ_QuestManager::BeginPlay()
 
 UAQ_Quest* UAQ_QuestManager::QueryQuest(int QuestID)
 {
-	/* Query the Quest corresponding with the ID */
+	/* Find the Quest corresponding to the ID */
 	return QuestDataCenter[QuestID];
 }
