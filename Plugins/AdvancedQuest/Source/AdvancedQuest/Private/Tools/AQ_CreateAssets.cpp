@@ -2,6 +2,8 @@
 #include "Tools/AQ_CreateAssets.h"
 #include "External/AQ_FilesManager.h"
 
+#include "FileHelpers.h"
+
 #define LOCTEXT_NAMESPACE "FAdvancedQuestModule"
 
 int UAQ_CreateAssets::AssignUniqueID(const FString& valueName)
@@ -34,9 +36,9 @@ UActorComponent* UAQ_CreateAssets::AddComponent(TSubclassOf<class UActorComponen
 	Actor->AddInstanceComponent(Result);
 	Result->OnComponentCreated();
 	Result->RegisterComponent();
-
 	Actor->RerunConstructionScripts();
 
+	FEditorFileUtils::SaveMapDataPackages(Actor->GetWorld(), false);
 	return Result;
 }
 
