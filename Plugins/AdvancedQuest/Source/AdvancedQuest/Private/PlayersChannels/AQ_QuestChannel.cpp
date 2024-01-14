@@ -15,7 +15,7 @@ void UAQ_QuestChannel::AddWidgetToViewport()
 	if (!BookQuestWidgetClass)
 		return;
 
-	APlayerController* PlayerController = Cast<APlayerController>(OwnerWidget);
+	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
 	if (!PlayerController)
 		return;
 	

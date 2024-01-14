@@ -9,6 +9,9 @@
 #include "QuestSystem/AQ_BookQuest.h"
 #include "QuestSystem/AQ_Quest.h"
 
+#include "EnhancedInputComponent.h"
+#include "EnhancedInputSubsystems.h"
+
 UAQ_PlayerChannels::UAQ_PlayerChannels()
 {
 	/** Create all channels */
@@ -17,19 +20,21 @@ UAQ_PlayerChannels::UAQ_PlayerChannels()
 	EnvironmentChannel = CreateDefaultSubobject<UAQ_EnvironmentChannel>(TEXT("Environment Channel"));
 	CombatChannel = CreateDefaultSubobject<UAQ_CombatChannel>(TEXT("Combat Channel"));
 	QuestChannel = CreateDefaultSubobject<UAQ_QuestChannel>(TEXT("Quest Channel"));
-	
+
 	PrimaryComponentTick.bCanEverTick = true;
 	PrimaryComponentTick.bStartWithTickEnabled = true;
-	bWantsInitializeComponent = true;
 }
 
 UAQ_PlayerChannels::~UAQ_PlayerChannels()
 {
 }
 
-void UAQ_PlayerChannels::InitializeComponent()
+void UAQ_PlayerChannels::BeginPlay()
 {
-	//InitBookQuestWidget();
+	Super::BeginPlay();
+
+	InitBookQuestWidget();
+	SetPlayerInputComponent();
 }
 
 void UAQ_PlayerChannels::InitBookQuestWidget()
@@ -49,11 +54,16 @@ void UAQ_PlayerChannels::InitBookQuestWidget()
 		BookQuest->Owner = this;
 }
 
-void UAQ_PlayerChannels::BeginPlay()
+void UAQ_PlayerChannels::SetPlayerInputComponent()
 {
-	Super::BeginPlay();
+	UInputComponent* PlayerInputComponent = GetWorld()->GetFirstPlayerController()->InputComponent;
 
-	InitBookQuestWidget();
+	// Set up action bindings
+	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		// Open Journal
+		EnhancedInputComponent->BindAction(OpenJournalAction, ETriggerEvent::Started, QuestChannel->BookQuest, &UAQ_BookQuest::OpenJournal);
+	}
 }
 
 void UAQ_PlayerChannels::AddObserver(UObject* entity, EAQ_ObjectivesType eventType)
@@ -243,6 +253,9 @@ void UAQ_PlayerChannels::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	/* Because some value are persistent between play in editor, 
 	We need to clear all the Observers at the end of a play */
+
+	if (!InteractionChannel)
+		return;
 
 	InteractionChannel->ClearObservers();
 	InventoryChannel->ClearObservers();

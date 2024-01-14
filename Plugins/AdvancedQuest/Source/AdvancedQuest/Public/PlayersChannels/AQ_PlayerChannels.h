@@ -26,19 +26,19 @@ public:
 	~UAQ_PlayerChannels();
 
 	/** Player Channels */
-	UPROPERTY(BlueprintReadOnly, Category = "Channels")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Channels")
 	UAQ_InteractionChannel* InteractionChannel = nullptr;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Channels")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Channels")
 	UAQ_InventoryChannel* InventoryChannel = nullptr;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Channels")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Channels")
 	UAQ_EnvironmentChannel* EnvironmentChannel = nullptr;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Channels")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Channels")
 	UAQ_CombatChannel* CombatChannel = nullptr;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Channels")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Channels")
 	UAQ_QuestChannel* QuestChannel = nullptr;
 
 
@@ -72,8 +72,14 @@ public:
 	void OnQuestEnded(UAQ_Quest* quest);
 
 
+	/* Controllers */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	class UInputAction* OpenJournalAction;
+
+	void SetPlayerInputComponent();
+
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
-	virtual void InitializeComponent() override;
 };

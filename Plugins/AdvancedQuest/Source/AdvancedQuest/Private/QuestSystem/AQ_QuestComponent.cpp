@@ -24,7 +24,7 @@ void UAQ_QuestComponent::BeginPlay()
 	RerunScript();
 
 	QuestManager = GetWorld()->
-		GetFirstPlayerController()->
+		GetFirstPlayerController()->GetPawn()->
 		GetComponentByClass<UAQ_QuestManager>();
 
 	if (QuestMarkerClass)

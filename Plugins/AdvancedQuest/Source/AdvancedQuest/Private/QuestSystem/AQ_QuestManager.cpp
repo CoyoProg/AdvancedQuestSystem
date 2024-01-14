@@ -4,6 +4,8 @@
 #include <QuestSystem/AQ_Quest.h>
 #include <PlayersChannels/AQ_PlayerChannels.h>
 
+#include "EnhancedInputComponent.h"
+#include "EnhancedInputSubsystems.h"
 #include <Kismet/KismetSystemLibrary.h>
 
 UAQ_QuestManager::UAQ_QuestManager()
@@ -49,6 +51,7 @@ void UAQ_QuestManager::BeginPlay()
 	Super::BeginPlay();
 
 	GetWorld()->OnWorldBeginPlay.AddUObject(this, &UAQ_QuestManager::LateBeginPlay);
+	SetPlayerInputComponent();
 }
 
 void UAQ_QuestManager::LateBeginPlay()
@@ -77,4 +80,16 @@ UAQ_Quest* UAQ_QuestManager::QueryQuest(int QuestID)
 
 	UE_LOG(LogTemp, Warning, TEXT("THERE IS NO QUEST WITH %i ID"), QuestID);
 	return nullptr;
+}
+
+void UAQ_QuestManager::SetPlayerInputComponent()
+{
+	UInputComponent* PlayerInputComponent = GetWorld()->GetFirstPlayerController()->InputComponent;
+
+	// Set up action bindings
+	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		// Save Quests
+		EnhancedInputComponent->BindAction(SaveQuestsAction, ETriggerEvent::Started, this, &UAQ_QuestManager::SaveQuestData);
+	}
 }

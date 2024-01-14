@@ -4,14 +4,10 @@
 #include "GameFramework/PlayerController.h"
 #include "AQ_PlayerController.generated.h"
 
-class UInputMappingContext;
-class UInputAction;
-struct FInputActionValue;
-
 /**
 	IMPORTANT: This class is not meant to be used in your projects, this is just
 	an example to showcase how to use the plugin.
-	Everything in here will be less well-thaught-out and Optimized.
+	Everything in here will be less well-thought-out and Optimized.
 	It's just a very quick implementation of a very basic Player.
  */
 UCLASS(Blueprintable)
