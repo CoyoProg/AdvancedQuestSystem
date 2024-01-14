@@ -7,6 +7,8 @@
 class UAQ_Quest;
 class IAQ_PlayerChannelsFacade;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnQuestEnableDelegate, UAQ_Quest*, InQuest);
+
 /**
  *
  */
@@ -45,17 +47,25 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void AddQuest(UAQ_Quest* quest);
-
+	
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void RemoveQuest(UAQ_Quest* quest);
 
 
 	/* References */
-	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Book Quest Widget")
-	TScriptInterface<IAQ_PlayerChannelsFacade> Owner = nullptr;
+	UPROPERTY(BlueprintReadOnly)
+	APlayerController* PlayerController = nullptr;
 
 
 	/* Load Save */
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void OnLoadQuests(UAQ_Quest* quest);
+
+
+	/* Delegates */
+	UPROPERTY(BlueprintAssignable)
+	FOnQuestEnableDelegate OnQuestEnableDelegate;
+
+	UFUNCTION(BlueprintCallable)
+	void OnQuestEnableBroadcast(UAQ_Quest* quest);
 };

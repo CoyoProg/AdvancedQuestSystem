@@ -45,13 +45,16 @@ void UAQ_PlayerChannels::InitBookQuestWidget()
 	/* Add the Quest Book Widget to the viewport */
 	if (BookQuestWidget)
 	{
-		QuestChannel->SetWidgetClass(BookQuestWidget, GetOwner());
+		QuestChannel->SetWidgetClass(BookQuestWidget);
 		QuestChannel->AddWidgetToViewport();
 	}
 
 	UAQ_BookQuest* BookQuest = QuestChannel->BookQuest;
 	if (BookQuest)
-		BookQuest->Owner = this;
+	{
+		BookQuest->PlayerController = GetWorld()->GetFirstPlayerController();
+		BookQuest->OnQuestEnableDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestEnable_Implementation);
+	}
 }
 
 void UAQ_PlayerChannels::SetPlayerInputComponent()
@@ -253,9 +256,6 @@ void UAQ_PlayerChannels::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	/* Because some value are persistent between play in editor, 
 	We need to clear all the Observers at the end of a play */
-
-	if (!InteractionChannel)
-		return;
 
 	InteractionChannel->ClearObservers();
 	InventoryChannel->ClearObservers();

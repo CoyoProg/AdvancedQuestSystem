@@ -66,6 +66,8 @@ public:
 	void OnPlayerLevelUp(int PlayerLevel);
 
 	void OnQuestCreated(UAQ_Quest* quest);
+
+	UFUNCTION()
 	void OnQuestEnable_Implementation(UAQ_Quest* quest);
 
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Events|Quests")

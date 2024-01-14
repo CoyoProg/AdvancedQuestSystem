@@ -6,30 +6,55 @@
 void UAQ_BookQuest::OpenJournal()
 {
 	/* Open/Close the Journal */
-	if (!JournalWidget->IsVisible())
-		JournalWidget->SetVisibility(ESlateVisibility::Visible); 
-	else
-		JournalWidget->SetVisibility(ESlateVisibility::Hidden);
+	bool bIsJournalVisible = JournalWidget->IsVisible();
+	UE_LOG(LogTemp, Warning, TEXT("isVisible ?  % d"), bIsJournalVisible);
 
-	/* Close the other widget */
-	QuestGiverWidget->SetVisibility(ESlateVisibility::Hidden);
+	CloseAll();
+
+	if (!bIsJournalVisible)
+	{
+		if (PlayerController)
+		{
+			PlayerController->SetShowMouseCursor(true);
+			PlayerController->SetInputMode(FInputModeUIOnly{});
+		}
+
+		SetKeyboardFocus();
+		JournalWidget->SetVisibility(ESlateVisibility::Visible);
+		return;
+	}
+
+	if (PlayerController)
+	{
+		PlayerController->SetShowMouseCursor(false);
+		PlayerController->SetInputMode(FInputModeGameOnly{});
+	}
 }
 
 void UAQ_BookQuest::OpenQuestGiverSummary()
 {
+	CloseAll();
+
 	/* Open the Quest Giver Summary */
 	QuestGiverWidget->SetVisibility(ESlateVisibility::Visible);
+	PlayerController->SetInputMode(FInputModeUIOnly{});
 
-	/* Close the other widget */
-	JournalWidget->SetVisibility(ESlateVisibility::Hidden);
+	if (PlayerController)
+	{
+		PlayerController->SetShowMouseCursor(true);
+		PlayerController->SetIgnoreMoveInput(true);
+	}
 }
 
 void UAQ_BookQuest::CloseAll()
 {
 	/* Close all the widgets */
-	if (JournalWidget->IsVisible())
-		JournalWidget->SetVisibility(ESlateVisibility::Hidden);
+	JournalWidget->SetVisibility(ESlateVisibility::Collapsed);
+	QuestGiverWidget->SetVisibility(ESlateVisibility::Collapsed);
+}
 
-	if (QuestGiverWidget->IsVisible())
-		QuestGiverWidget->SetVisibility(ESlateVisibility::Hidden);
+void UAQ_BookQuest::OnQuestEnableBroadcast(UAQ_Quest* quest)
+{
+	if (OnQuestEnableDelegate.IsBound())
+		OnQuestEnableDelegate.Broadcast(quest);
 }

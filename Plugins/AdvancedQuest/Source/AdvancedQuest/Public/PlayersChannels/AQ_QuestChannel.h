@@ -26,7 +26,7 @@ class ADVANCEDQUEST_API UAQ_QuestChannel : public UAQ_Channels
 public:
 	/* Widget */
 	TSubclassOf<UUserWidget> BookQuestWidgetClass;
-	void SetWidgetClass(TSubclassOf<UUserWidget> widgetClass, AActor* owner) { BookQuestWidgetClass = widgetClass; OwnerWidget = owner; }
+	void SetWidgetClass(TSubclassOf<UUserWidget> widgetClass) { BookQuestWidgetClass = widgetClass;}
 	void AddWidgetToViewport();
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly)
@@ -48,9 +48,4 @@ public:
 
 	FQuestRequirementChangedDelegate QuestRequirementChangedDelegate;
 	FLevelRequirementChangedDelegate LevelRequirementChangedDelegate;
-
-
-	/* References */
-private:
-	AActor* OwnerWidget = nullptr;
 };
