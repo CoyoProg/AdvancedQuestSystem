@@ -19,6 +19,8 @@ int UAQ_CreateAssets::AssignUniqueID(const FString& valueName)
 
 UActorComponent* UAQ_CreateAssets::AddComponent(TSubclassOf<class UActorComponent> ComponentClass, AActor* Actor, USceneComponent* ParentComponent, FName Name)
 {
+	Actor->RerunConstructionScripts();
+
 	UActorComponent* Result = nullptr;
 	if (!ComponentClass.Get())
 		return nullptr;
@@ -65,12 +67,6 @@ void UAQ_CreateAssets::UpdateActor(AActor* Actor)
 	FEditorFileUtils::SaveCurrentLevel();
 
 	SavePackage(Actor);
-
-	// Save all components' packages
-	//TArray<UActorComponent*> ActorComponents;
-	//Actor->GetComponents(ActorComponents);
-	//
-	//SavePackage(ActorComponents[0]); // just to trigger the save
 }
 
 void UAQ_CreateAssets::SavePackage(UObject* Object)
@@ -94,7 +90,4 @@ void UAQ_CreateAssets::SavePackage(UObject* Object)
 	// Modify the package to mark it as dirty
 	Package->Modify();
 	Package->MarkPackageDirty();
-
-	// Save the package
-	//bool bSaved = UPackage::SavePackage(Package, Object, EObjectFlags::RF_Public | EObjectFlags::RF_Standalone, *Package->GetName(), GError, nullptr, true, true, SAVE_NoError);
 }

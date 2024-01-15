@@ -1,6 +1,11 @@
 #include "PlayersChannels/AQ_InteractionChannel.h"
 
-void UAQ_InteractionChannel::OnNotifyEvent_Implementation(UObject* entity)
+void UAQ_InteractionChannel::OnInteractionEventNotify(EAQ_InteractionEventType eventType, UObject* entity)
 {
-	NotifyObservers_Implementation(entity, EAQ_NotifyEventType::Interact);
+	switch (eventType)
+	{
+	case EAQ_InteractionEventType::Interact:
+		NotifyObservers_Implementation(entity, EAQ_NotifyEventType::Interact);
+		break;
+	}
 }

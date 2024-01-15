@@ -8,6 +8,9 @@
 
 #include "Components/WidgetComponent.h"
 
+#if WITH_EDITOR
+#include "Editor.h"
+#endif
 
 UAQ_QuestComponent::UAQ_QuestComponent()
 {
@@ -23,12 +26,17 @@ void UAQ_QuestComponent::BeginPlay()
 {
 	RerunScript();
 
+	if (QuestMarkerClass)
+		CreateQuestMarkerWidget();
+
+	if (GetWorld()->WorldType == EWorldType::PIE && GEditor->IsSimulateInEditorInProgress())
+	{
+		return;
+	}
+
 	QuestManager = GetWorld()->
 		GetFirstPlayerController()->GetPawn()->
 		GetComponentByClass<UAQ_QuestManager>();
-
-	if (QuestMarkerClass)
-		CreateQuestMarkerWidget();
 
 	GetWorld()->OnWorldBeginPlay.AddUObject(this, &UAQ_QuestComponent::LateBeginPlay);
 
@@ -36,12 +44,17 @@ void UAQ_QuestComponent::BeginPlay()
 }
 
 void UAQ_QuestComponent::LateBeginPlay()
-{
+{	
 	BindFunctionsToQuestDelegates();
 }
 
 void UAQ_QuestComponent::SetQuestMarker(bool isMarkerVisible, bool isQuestValid)
 {
+	if (isMarkerVisible)
+		bIsComponentSilent = false;
+	else
+		bIsComponentSilent = true;
+
 	if (!QuestMarkerClass)
 		return;
 
@@ -223,6 +236,9 @@ void UAQ_QuestComponent::BindFunctionsToQuestDelegates()
 
 void UAQ_QuestComponent::CreateQuestMarkerWidget()
 {
+	FVector origin, extent;
+	GetOwner()->GetActorBounds(false, origin, extent);
+
 	// Check if the owner already has a UWidgetComponent
 	QuestMarkerWidget = Cast<UWidgetComponent>(GetOwner()->GetComponentByClass(UWidgetComponent::StaticClass()));
 
@@ -238,13 +254,13 @@ void UAQ_QuestComponent::CreateQuestMarkerWidget()
 			QuestMarkerWidget->SetWidgetClass(QuestMarkerClass);
 			QuestMarkerWidget->SetMaterial(0, QuestMarkerMaterial);
 			QuestMarkerWidget->SetWidgetSpace(EWidgetSpace::World);
-
 			QuestMarkerWidget->RegisterComponent();
 
-			FVector origin, extent;
-			GetOwner()->GetActorBounds(false, origin, extent);
+			float pixelToCm = QuestMarkerWidget->GetDrawSize().Y / 8.f; // Adjust this value if you have another Quest Marker
+			float zCoord = extent.Z * 2 + pixelToCm;
+			QuestMarkerWidget->SetRelativeLocation(FVector(0, 0, zCoord));
 
-			QuestMarkerWidget->SetRelativeLocation(FVector(0, 0, extent.Z / 1.5f));
+			SetQuestMarker(false, false);
 		}
 	}
 }

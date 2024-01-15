@@ -56,12 +56,15 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Interact(const TScriptInterface<IAQ_PlayerChannelsFacade>& PlayerChannel);
 
+	UPROPERTY(BlueprintReadOnly, Category = "Quest Component")
+	bool bIsComponentSilent = true;
+
 
 	/* Widgets */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Component")
 	TSubclassOf<UUserWidget> QuestMarkerClass = nullptr;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Quest Component")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Component")
 	UMaterialInterface* QuestMarkerMaterial = nullptr; // Put a two sided material for the widget to be two sided
 
 	UFUNCTION(BlueprintCallable)

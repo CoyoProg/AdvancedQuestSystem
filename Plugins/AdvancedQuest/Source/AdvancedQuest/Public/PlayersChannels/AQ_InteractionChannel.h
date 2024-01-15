@@ -4,6 +4,13 @@
 #include "PlayersChannels/AQ_Channels.h"
 #include "AQ_InteractionChannel.generated.h"
 
+UENUM(BlueprintType)
+enum class EAQ_InteractionEventType : uint8
+{
+    Interact       UMETA(DisplayName = "Interact"),
+};
+
+
 /**
  * 
  */
@@ -12,5 +19,6 @@ class ADVANCEDQUEST_API UAQ_InteractionChannel : public UAQ_Channels
 {
 	GENERATED_BODY()
 	
-	virtual void OnNotifyEvent_Implementation(UObject* entity) override;
+    UFUNCTION(BlueprintCallable, Category = "Events|Combat")
+	void OnInteractionEventNotify(EAQ_InteractionEventType eventType, UObject* entity);
 };

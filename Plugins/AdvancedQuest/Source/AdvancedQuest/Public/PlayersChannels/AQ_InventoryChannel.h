@@ -4,6 +4,12 @@
 #include "PlayersChannels/AQ_Channels.h"
 #include "AQ_InventoryChannel.generated.h"
 
+UENUM(BlueprintType)
+enum class EAQ_InventoryEventType : uint8
+{
+    Collect       UMETA(DisplayName = "Collect"),
+};
+
 /**
  * 
  */
@@ -12,5 +18,6 @@ class ADVANCEDQUEST_API UAQ_InventoryChannel : public UAQ_Channels
 {
 	GENERATED_BODY()
 	
-	virtual void OnNotifyEvent_Implementation(UObject* entity) override;
+    UFUNCTION(BlueprintCallable, Category = "Events|Inventory")
+	void OnInventoryEventNotify(EAQ_InventoryEventType eventType, UObject* entity);
 };
