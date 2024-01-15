@@ -7,7 +7,6 @@ void UAQ_BookQuest::OpenJournal()
 {
 	/* Open/Close the Journal */
 	bool bIsJournalVisible = JournalWidget->IsVisible();
-	UE_LOG(LogTemp, Warning, TEXT("isVisible ?  % d"), bIsJournalVisible);
 
 	CloseAll();
 
