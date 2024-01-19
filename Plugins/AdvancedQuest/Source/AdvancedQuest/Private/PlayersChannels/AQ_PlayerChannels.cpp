@@ -11,6 +11,7 @@
 
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include <QuestSystem/AQ_QuestManager.h>
 
 UAQ_PlayerChannels::UAQ_PlayerChannels()
 {
@@ -35,6 +36,9 @@ void UAQ_PlayerChannels::BeginPlay()
 
 	InitBookQuestWidget();
 	SetPlayerInputComponent();
+
+
+	LoadInventory();
 }
 
 void UAQ_PlayerChannels::InitBookQuestWidget()
@@ -66,6 +70,10 @@ void UAQ_PlayerChannels::SetPlayerInputComponent()
 	{
 		// Open Journal
 		EnhancedInputComponent->BindAction(OpenJournalAction, ETriggerEvent::Started, QuestChannel->BookQuest, &UAQ_BookQuest::OpenJournal);
+		
+		// Save Quests
+		EnhancedInputComponent->BindAction(SaveQuestsAction, ETriggerEvent::Started, this, &UAQ_PlayerChannels::SaveGame);
+
 	}
 }
 
@@ -189,23 +197,6 @@ void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestSt
 	}
 }
 
-void UAQ_PlayerChannels::OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay)
-{
-	/* Get the Book Quest and Display the Quests */
-	UAQ_BookQuest* BookQuest = QuestChannel->BookQuest;
-
-	if (BookQuest)
-		BookQuest->DisplayQuestGiverSummary(questsToDisplay);
-}
-
-void UAQ_PlayerChannels::OnPlayerLevelUp()
-{
-	PlayerLevel++;
-
-	NotifyObservers(GetOwner(), EAQ_NotifyEventType::PlayerLevelUp);
-	QuestChannel->OnPlayerLevelChange(PlayerLevel);
-}
-
 void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 {
 	/* This function is called by the Quest Manager at the Load of each game 
@@ -305,19 +296,23 @@ void UAQ_PlayerChannels::OnInteractionEvent_Implementation(EAQ_InteractionEventT
 	InteractionChannel->OnInteractionEventNotify(eventType, entity);
 }
 
-void UAQ_PlayerChannels::EndPlay(const EEndPlayReason::Type EndPlayReason)
+void UAQ_PlayerChannels::OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay)
 {
-	/* Because some value are persistent between play in editor, 
-	We need to clear all the Observers at the end of a play */
+	/* Get the Book Quest and Display the Quests */
+	UAQ_BookQuest* BookQuest = QuestChannel->BookQuest;
 
-	InteractionChannel->ClearObservers();
-	InventoryChannel->ClearObservers();
-	CombatChannel->ClearObservers();
-	EnvironmentChannel->ClearObservers();
-	QuestChannel->ClearObservers();
-
-	Observers.Empty();
+	if (BookQuest)
+		BookQuest->DisplayQuestGiverSummary(questsToDisplay);
 }
+
+void UAQ_PlayerChannels::OnPlayerLevelUp()
+{
+	PlayerLevel++;
+
+	NotifyObservers(GetOwner(), EAQ_NotifyEventType::PlayerLevelUp);
+	QuestChannel->OnPlayerLevelChange(PlayerLevel);
+}
+
 
 void UAQ_PlayerChannels::NotifyObservers(UObject* entity, EAQ_NotifyEventType eventType, float amount)
 {
@@ -330,3 +325,27 @@ void UAQ_PlayerChannels::NotifyObservers(UObject* entity, EAQ_NotifyEventType ev
 		IAQ_Observer::Execute_OnNotify(Observers[Index], entity, eventType, amount);
 	}
 }
+
+void UAQ_PlayerChannels::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	/* Because some value are persistent between play in editor,
+	We need to clear all the Observers at the end of a play */
+
+	InteractionChannel->ClearObservers();
+	InventoryChannel->ClearObservers();
+	CombatChannel->ClearObservers();
+	EnvironmentChannel->ClearObservers();
+	QuestChannel->ClearObservers();
+
+	Observers.Empty();
+}
+
+void UAQ_PlayerChannels::SaveGame()
+{
+	UAQ_QuestManager* questManager = GetOwner()->GetComponentByClass<UAQ_QuestManager>();
+	if (questManager)
+		questManager->SaveQuestData();
+
+	SaveInventory();
+}
+

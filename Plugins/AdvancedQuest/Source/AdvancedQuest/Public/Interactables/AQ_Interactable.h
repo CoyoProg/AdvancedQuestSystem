@@ -14,33 +14,53 @@ public:
 	AAQ_Interactable();
 	virtual void Tick(float DeltaTime) override;
 
+	/* Components */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	class UNiagaraComponent* NiagaraComponent = nullptr;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	class UStaticMeshComponent* StaticMesh = nullptr;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	class USceneComponent* SceneRoot = nullptr;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsSleeping = false;
+
+	UFUNCTION(BlueprintCallable)
+	void EnableParticles(bool isEnable);
+
 
 	/* Delegates */
 	UFUNCTION()
 	void OnQuestStateChanged(class UAQ_Quest* quest, EAQ_QuestState questState);
 
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-	void EnableParticles(bool isEnable);
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Initial State")
+	void ResetToInitialState();
 
-	UPROPERTY(BlueprintReadWrite)
-	bool bIsSleeping = false;
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Initial State")
+	void SaveInitialState();
+
+	UPROPERTY(BlueprintReadWrite, Category = "Initial State")
+	bool bIsInitialStateSaved = false;
+
 
 
 protected:
 	virtual void BeginPlay() override;
 	void LateBeginPlay();
 
-	void SetQuestItem(int InQuestID);
-
-	/* References */
-private:
-	class UAQ_QuestManager* QuestManager;
-
 
 	/* Quest Item */
+	void SetQuestItem(int InQuestID);
+private:
 	UPROPERTY(EditAnywhere, Category = "Quest")
 	bool bIsQuestActor = false;
 
-	UPROPERTY(EditAnywhere, Category = "Quest")
+	UPROPERTY(EditAnywhere, Category = "Quest", meta = (EditCondition = "bIsQuestActor == true", EditConditionHides))
 	int QuestID = 0;
+
+
+	/* References */
+	class UAQ_QuestManager* QuestManager;
 };

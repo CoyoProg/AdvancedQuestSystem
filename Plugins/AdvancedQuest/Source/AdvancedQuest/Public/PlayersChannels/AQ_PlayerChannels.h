@@ -81,9 +81,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputAction* OpenJournalAction = nullptr;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	class UInputAction* SaveQuestsAction;
+
 	void SetPlayerInputComponent();
-
-
 
 	/* Checkers for Quests */
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Checkers|Quests")
@@ -100,6 +101,16 @@ protected:
 	/* Player Stats */
 	UPROPERTY(BlueprintReadOnly)
 	int PlayerLevel = 1;
+
+
+	/* Saving system */
+	void SaveGame();
+
+	// Those functions should be in the Inventory Component
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void SaveInventory(); 
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void LoadInventory();
 
 
 	/* Observers of Player Channels */

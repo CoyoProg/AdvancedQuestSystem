@@ -11,7 +11,7 @@ AAQ_Collectable::AAQ_Collectable()
 
 void AAQ_Collectable::BeginPlay()
 {
-	if (ItemData->bIsQuestActor)
+	if (ItemData->bIsQuestItem)
 		SetQuestItem(ItemData->QuestID);
 
 	Super::BeginPlay();

@@ -24,7 +24,7 @@ public:
 	bool bIsStackable = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	bool bIsQuestActor = false;
+	bool bIsQuestItem = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (EditCondition = "bIsQuestItem == true", EditConditionHides))
 	int QuestID = 0;

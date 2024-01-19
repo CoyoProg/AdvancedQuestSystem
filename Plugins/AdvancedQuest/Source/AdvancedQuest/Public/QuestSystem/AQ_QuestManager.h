@@ -38,10 +38,4 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void SaveQuestData();
-
-	/* Controllers */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	class UInputAction* SaveQuestsAction;
-
-	void SetPlayerInputComponent();
 };
