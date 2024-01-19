@@ -7,7 +7,8 @@
 UENUM(BlueprintType)
 enum class EAQ_InventoryEventType : uint8
 {
-    Collect       UMETA(DisplayName = "Collect"),
+    Collect					UMETA(DisplayName = "Collect"),
+	RemoveFromInventory		UMETA(DisplayName = "Remove From Inventory"),
 };
 
 /**
@@ -18,6 +19,7 @@ class ADVANCEDQUEST_API UAQ_InventoryChannel : public UAQ_Channels
 {
 	GENERATED_BODY()
 	
+public:
     UFUNCTION(BlueprintCallable, Category = "Events|Inventory")
-	void OnInventoryEventNotify(EAQ_InventoryEventType eventType, UObject* entity);
+	void OnInventoryEventNotify(EAQ_InventoryEventType eventType, UObject* entity, float amount = 1);
 };

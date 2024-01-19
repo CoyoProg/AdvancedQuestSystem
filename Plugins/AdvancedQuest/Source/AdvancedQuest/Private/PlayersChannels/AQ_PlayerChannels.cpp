@@ -92,7 +92,7 @@ void UAQ_PlayerChannels::AddObserver(UObject* entity, EAQ_ObjectivesType eventTy
 		InventoryChannel->AddObserver_Implementation(entity);
 		break;
 
-		/** Add Observer to Player Channel */
+		/** Add Observer to Environment Channel */
 	case EAQ_ObjectivesType::Location:
 		EnvironmentChannel->AddObserver_Implementation(entity);
 		break;
@@ -135,17 +135,10 @@ void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestSt
 	{
 	case EAQ_QuestState::Active:
 		break;
-	case EAQ_QuestState::Valid:
-	{
-		/* Remove all the Quest's Observers when the Quest is Done */
-		for (auto const& questObjectives : QuestUpdate->QuestData->objectives)
-		{
-			EAQ_ObjectivesType eventType = questObjectives.objectiveType;
-			RemoveObserver(QuestUpdate, eventType);
-		}
 
+	case EAQ_QuestState::Valid:
 		break;
-	}
+
 	case EAQ_QuestState::Pending:
 	{
 		/* Remove all the Quest's Observers when the Quest is Pending */
@@ -154,14 +147,37 @@ void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestSt
 		{
 			EAQ_ObjectivesType eventType = questObjectives.objectiveType;
 			RemoveObserver(QuestUpdate, eventType);
+
+			if (eventType == EAQ_ObjectivesType::PlayerLevelUp)
+			{
+				if (Observers.Contains(QuestUpdate))
+					Observers.Remove(QuestUpdate);
+			}
 		}
 
 		/* Remove the Player Channels from the Quest State Changed delegate */
 		QuestUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
 		break;
 	}
+
 	case EAQ_QuestState::Archive:
 	{
+		/* Remove all the Quest's Observers when the Quest is Done */
+		for (auto const& questObjectives : QuestUpdate->QuestData->objectives)
+		{
+			if (questObjectives.objectiveType == EAQ_ObjectivesType::Collect)
+				continue;
+
+			EAQ_ObjectivesType eventType = questObjectives.objectiveType;
+			RemoveObserver(QuestUpdate, eventType);
+
+			if (eventType == EAQ_ObjectivesType::PlayerLevelUp)
+			{
+				if (Observers.Contains(QuestUpdate))
+					Observers.Remove(QuestUpdate);
+			}
+		}
+
 		/* Remove the Player Channels from the Quest State Changed delegate */
 		QuestUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
 
@@ -169,6 +185,7 @@ void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestSt
 		OnQuestEnded(QuestUpdate); // Implemented in Blueprints
 		break;
 	}
+
 	}
 }
 
@@ -181,8 +198,11 @@ void UAQ_PlayerChannels::OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay
 		BookQuest->DisplayQuestGiverSummary(questsToDisplay);
 }
 
-void UAQ_PlayerChannels::OnPlayerLevelUp(int PlayerLevel)
+void UAQ_PlayerChannels::OnPlayerLevelUp()
 {
+	PlayerLevel++;
+
+	NotifyObservers(GetOwner(), EAQ_NotifyEventType::PlayerLevelUp);
 	QuestChannel->OnPlayerLevelChange(PlayerLevel);
 }
 
@@ -194,7 +214,6 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 	{
 	case EAQ_QuestState::Active:
 	{
-		/* Add the Quest to the Book Quest */
 		OnQuestEnable_Implementation(quest);
 		if(QuestChannel->BookQuest)
 			QuestChannel->BookQuest->OnLoadQuests(quest);
@@ -240,16 +259,50 @@ void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 	/* Subscribe the player Channel to the OnStateChanged delegate */
 	quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
 
-	/* Add the quest as Observer to the different channels */
-	for (auto const& questObjectives : quest->QuestData->objectives)
-	{
-		EAQ_ObjectivesType eventType = questObjectives.objectiveType;
-		AddObserver(quest, eventType);
-	}
-
 	/* Subscribe the quest Channel to the ObjectivesUpdate & OnStateChanged delegate*/
 	quest->QuestStateChangedDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestStateChanged);
 	quest->ObjectivesUpdatedDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestUpdate);
+
+	/* Add the quest as Observer to the different channels */
+	for (auto& questObjectives : quest->QuestData->objectives)
+	{
+		EAQ_ObjectivesType eventType = questObjectives.objectiveType;
+		AddObserver(quest, eventType);
+
+		int currentAmount = 0;
+		if (eventType == EAQ_ObjectivesType::PlayerLevelUp)
+		{
+			/* Update the Objective target of this type of quest */
+			questObjectives.objectTarget = GetOwner()->GetClass();
+			Observers.AddUnique(quest);
+
+			/* Check the Player stats (Can be anything from Player's Level,
+			to Achievements, Professions Level...) and Update the Objective current
+			amount and trigger the Objective Update Event */
+			currentAmount = CheckForPlayerStats(questObjectives);
+		}
+
+		if (eventType == EAQ_ObjectivesType::Collect)
+		{
+			/* If a Quest item is already in the inventory, we update the Objective
+			current amount and trigger the Objective Update event */
+			currentAmount = CheckInventoryForItem(questObjectives);
+		}
+
+		if (currentAmount > 0)
+		{
+			questObjectives.CurrentAmount = currentAmount;
+			if (currentAmount >= questObjectives.amountNeeded)
+				quest->ObjectivesCompleted++;
+
+			quest->UpdateQuestState();
+		}
+	}
+}
+
+void UAQ_PlayerChannels::OnInteractionEvent_Implementation(EAQ_InteractionEventType eventType, UObject* entity)
+{
+	InteractionChannel->OnInteractionEventNotify(eventType, entity);
 }
 
 void UAQ_PlayerChannels::EndPlay(const EEndPlayReason::Type EndPlayReason)
@@ -262,4 +315,18 @@ void UAQ_PlayerChannels::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	CombatChannel->ClearObservers();
 	EnvironmentChannel->ClearObservers();
 	QuestChannel->ClearObservers();
+
+	Observers.Empty();
+}
+
+void UAQ_PlayerChannels::NotifyObservers(UObject* entity, EAQ_NotifyEventType eventType, float amount)
+{
+	int Range = Observers.Num();
+	if (Range == 0)
+		return;
+
+	for (int Index = Range - 1; Index > -1; --Index)
+	{
+		IAQ_Observer::Execute_OnNotify(Observers[Index], entity, eventType, amount);
+	}
 }

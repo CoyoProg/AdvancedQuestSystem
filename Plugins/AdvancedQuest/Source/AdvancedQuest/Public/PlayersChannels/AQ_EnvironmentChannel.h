@@ -12,5 +12,6 @@ class ADVANCEDQUEST_API UAQ_EnvironmentChannel : public UAQ_Channels
 {
 	GENERATED_BODY()
 	
+public:
 	virtual void OnNotifyEvent_Implementation(UObject* entity) override;
 };

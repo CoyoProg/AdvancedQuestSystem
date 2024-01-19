@@ -58,7 +58,7 @@ public:
 	void ResetQuest();
 
 	void SetQuestData(UAQ_QuestData* QuestData);
-
+	void UpdateQuestState();
 
 	/* Display Properties */
 	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
@@ -77,7 +77,9 @@ public:
 
 
 	/* Event Listeners */
-	void OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP);
+	void OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP, float amount = 1);
+	void UpdateCurrentObjective(int i, float amount = 1);
+
 	UFUNCTION()
 	void OnQuestRequirementChange(int QuestID);
 	UFUNCTION()
@@ -88,9 +90,11 @@ public:
 	FObjectivesUpdatedDelegate ObjectivesUpdatedDelegate;
 	FQuestRequirementMetDelegate QuestRequirementMetDelegate;
 
+
 private:
 	/* Objectives */
 	bool IsSameObject(int objectiveIndexP,UObject* entityP);
+	bool IsSameItem(int objectiveIndexP, UObject* entityP);
 	bool IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTypeP);
 
 	/* Requirements */

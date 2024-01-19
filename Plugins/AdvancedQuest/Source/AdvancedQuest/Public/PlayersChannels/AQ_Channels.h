@@ -20,7 +20,7 @@ public:
 
 	virtual void AddObserver_Implementation(UObject* observerP) override;
 	virtual void RemoveObserver_Implementation(UObject* observerP) override;
-	virtual void NotifyObservers_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP) override;
+	virtual void NotifyObservers_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP, float amount = 1) override;
 
 	void ClearObservers() { Observers.Empty(); }
 private:

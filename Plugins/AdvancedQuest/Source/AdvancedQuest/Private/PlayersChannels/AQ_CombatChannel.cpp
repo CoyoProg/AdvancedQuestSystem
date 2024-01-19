@@ -1,6 +1,6 @@
 #include "PlayersChannels/AQ_CombatChannel.h"
 
-void UAQ_CombatChannel::OnCombatEventNotify(EAQ_CombatEventType eventType, UObject* entity)
+void UAQ_CombatChannel::OnCombatEventNotify(EAQ_CombatEventType eventType, UObject* entity, float amount)
 {
 	switch (eventType)
 	{
@@ -9,11 +9,11 @@ void UAQ_CombatChannel::OnCombatEventNotify(EAQ_CombatEventType eventType, UObje
 		break;
 
 	case EAQ_CombatEventType::Heal:
-		NotifyObservers_Implementation(entity, EAQ_NotifyEventType::Heal);
+		NotifyObservers_Implementation(entity, EAQ_NotifyEventType::Heal, amount);
 		break;
 
 	case EAQ_CombatEventType::Damage:
-		NotifyObservers_Implementation(entity, EAQ_NotifyEventType::Damage);
+		NotifyObservers_Implementation(entity, EAQ_NotifyEventType::Damage, amount);
 		break;
 	}
 }

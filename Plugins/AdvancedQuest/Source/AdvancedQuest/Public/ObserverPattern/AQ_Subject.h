@@ -28,7 +28,7 @@ public:
 	void RemoveObserver(UObject* observer);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
-	void NotifyObservers(UObject* entity, EAQ_NotifyEventType eventType);
+	void NotifyObservers(UObject* entity, EAQ_NotifyEventType eventType, float amount = 1);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
 	void OnNotifyEvent(UObject* entity);

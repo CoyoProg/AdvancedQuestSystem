@@ -32,12 +32,14 @@ void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestStat
 	switch (QuestState)
 	{
 	case EAQ_QuestState::Active:
-		break;
-	case EAQ_QuestState::Valid:
 	{
-		/* Remove the Quest channel from the Objectives Update delegate*/
-		QuestUpdate->ObjectivesUpdatedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestUpdate);
-		
+		/* Update the Book Quest */
+		if (BookQuest)
+			BookQuest->UpdateQuestBook(QuestUpdate);
+		break;
+	}
+	case EAQ_QuestState::Valid:
+	{		
 		/* Update the Book Quest */
 		if (BookQuest)
 			BookQuest->UpdateQuestBook(QuestUpdate);
@@ -59,6 +61,9 @@ void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestStat
 		/* Remove the quest from the book quest */
 		if (BookQuest)
 			BookQuest->RemoveQuest(QuestUpdate);
+
+		/* Remove the Quest channel from the Objectives Update delegate*/
+		QuestUpdate->ObjectivesUpdatedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestUpdate);
 
 		/* Remove the Quest Channel from the Quest State Changed delegate*/
 		QuestUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestStateChanged);

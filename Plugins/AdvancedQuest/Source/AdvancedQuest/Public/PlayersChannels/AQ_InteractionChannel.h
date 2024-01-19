@@ -19,6 +19,7 @@ class ADVANCEDQUEST_API UAQ_InteractionChannel : public UAQ_Channels
 {
 	GENERATED_BODY()
 	
+public:
     UFUNCTION(BlueprintCallable, Category = "Events|Combat")
 	void OnInteractionEventNotify(EAQ_InteractionEventType eventType, UObject* entity);
 };

@@ -1,5 +1,6 @@
 #include "QuestSystem/AQ_UniqueIDComponent.h"
 #include "Tools/AQ_CreateAssets.h"
+#include "Interactables/AQ_Collectable.h"
 
 UAQ_UniqueIDComponent::UAQ_UniqueIDComponent()
 {

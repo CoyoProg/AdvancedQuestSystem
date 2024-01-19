@@ -14,7 +14,9 @@ enum class EAQ_ObjectivesType : uint8
 	Protect			UMETA(DisplayName = "Protect"),
 	WavesOfEnemies	UMETA(DisplayName = "Waves Of Enemies"),
 
-	Location		UMETA(DisplayName = "Location")
+	Location		UMETA(DisplayName = "Location"),
+
+	PlayerLevelUp   UMETA(DisplayName = "Player Level Up"),
 };
 
 UENUM(BlueprintType)

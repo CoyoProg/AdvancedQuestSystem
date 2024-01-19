@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -19,18 +17,21 @@ struct FAQ_Objectives
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	EAQ_ObjectivesType objectiveType = EAQ_ObjectivesType::Interact;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	UClass* objectiveTarget = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest", meta = (EditCondition = "objectiveType != EAQ_ObjectivesType::Collect", EditConditionHides))
+	UClass* objectTarget = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest", meta = (EditCondition = "objectiveType == EAQ_ObjectivesType::Collect", EditConditionHides))
+	class UAQ_ItemData* itemTarget = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Quest")
 	FString objectiveSummary = FString();
 
 
 	/** If the goal is a unique target*/
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest", meta = (EditCondition = "objectiveType != EAQ_ObjectivesType::Collect", EditConditionHides))
 	bool isUnique = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest", meta = (EditCondition = "objectiveType != EAQ_ObjectivesType::Collect", EditConditionHides))
 	int uniqueObjectID = 0;
 
 
@@ -87,5 +88,5 @@ public:
 	int goldReward = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
-	TArray<UObject*> itemsReward;
+	TArray<class UAQ_ItemData*> itemsReward; // Need to be replaced with your Own ItemData
 };

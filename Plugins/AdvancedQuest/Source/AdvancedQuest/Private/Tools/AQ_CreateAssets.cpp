@@ -19,6 +19,9 @@ int UAQ_CreateAssets::AssignUniqueID(const FString& valueName)
 
 UActorComponent* UAQ_CreateAssets::AddComponent(TSubclassOf<class UActorComponent> ComponentClass, AActor* Actor, USceneComponent* ParentComponent, FName Name)
 {
+	if (!Actor)
+		return nullptr;
+
 	Actor->RerunConstructionScripts();
 
 	UActorComponent* Result = nullptr;

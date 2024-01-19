@@ -23,7 +23,7 @@ class ADVANCEDQUEST_API IAQ_Observer
 
 public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
-	void OnNotify(UObject* entity, EAQ_NotifyEventType eventType);
+	void OnNotify(UObject* entity, EAQ_NotifyEventType eventType, float amount = 1);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
 	void OnNotifyRequierment(EAQ_RequiermentEventType eventType, FAQ_RequiermentData& requiermentData);

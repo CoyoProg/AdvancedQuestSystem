@@ -23,7 +23,7 @@ void UAQ_Channels::RemoveObserver_Implementation(UObject* observerP)
 	}
 }
 
-void UAQ_Channels::NotifyObservers_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP)
+void UAQ_Channels::NotifyObservers_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP, float amount)
 {
 	/* We use a reverse loop here in case that 
 	   the Observer needs to be removed from the list
@@ -34,6 +34,6 @@ void UAQ_Channels::NotifyObservers_Implementation(UObject* entity, EAQ_NotifyEve
 
 	for (int Index = Range - 1; Index > -1; --Index)
 	{
-		IAQ_Observer::Execute_OnNotify(Observers[Index], entity, eventTypeP);
+		IAQ_Observer::Execute_OnNotify(Observers[Index], entity, eventTypeP, amount);
 	}
 }

@@ -3,6 +3,7 @@
 #include "AQ_PlayerChannelsFacade.generated.h"
 
 class UAQ_Quest;
+class UAQ_ItemData;
 enum class EAQ_QuestState : uint8;
 
 /**
@@ -24,7 +25,20 @@ public:
 
 	virtual void OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay) {}
 
+
+	/* Events */
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnQuestEnable(UAQ_Quest* quest);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnInteractionEvent(EAQ_InteractionEventType eventType, UObject* entity);
+
+
+
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void AddItemToInvetory(UAQ_ItemData* item, int amount);
+
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void RemoveItemFromInvetory(UAQ_ItemData* item, int amount);
 };
 

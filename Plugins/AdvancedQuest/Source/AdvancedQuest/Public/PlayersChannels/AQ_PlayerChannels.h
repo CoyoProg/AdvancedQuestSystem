@@ -50,11 +50,11 @@ public:
 
 	/* Observers Pattern */
 	/** Add Observer to the corresponding channel */
-	UFUNCTION(BlueprintCallable, Category = "Events")
+	UFUNCTION(BlueprintCallable, Category = "Events|Observers")
 	void AddObserver(UObject* entity, EAQ_ObjectivesType eventType);
 
 	/** Remove Observer to the corresponding channel */
-	UFUNCTION(BlueprintCallable, Category = "Events")
+	UFUNCTION(BlueprintCallable, Category = "Events|Observers")
 	void RemoveObserver(UObject* entity, EAQ_ObjectivesType eventType);
 
 
@@ -63,12 +63,15 @@ public:
 	virtual void OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay) override;
 
 	UFUNCTION(BlueprintCallable, Category = "Events|Player")
-	void OnPlayerLevelUp(int PlayerLevel);
+	void OnPlayerLevelUp();
 
 	void OnQuestCreated(UAQ_Quest* quest);
 
 	UFUNCTION()
 	void OnQuestEnable_Implementation(UAQ_Quest* quest);
+
+	UFUNCTION()
+	void OnInteractionEvent_Implementation(EAQ_InteractionEventType eventType, UObject* entity);
 
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Events|Quests")
 	void OnQuestEnded(UAQ_Quest* quest);
@@ -76,12 +79,31 @@ public:
 
 	/* Controllers */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	class UInputAction* OpenJournalAction;
+	class UInputAction* OpenJournalAction = nullptr;
 
 	void SetPlayerInputComponent();
+
+
+
+	/* Checkers for Quests */
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Checkers|Quests")
+	int CheckInventoryForItem(FAQ_Objectives currentObjective);	// This is implemented in blueprint 
+	
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Checkers|Quests")
+	int CheckForPlayerStats(FAQ_Objectives currentObjective);		// This is implemented in blueprint 
 
 
 protected:
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+	/* Player Stats */
+	UPROPERTY(BlueprintReadOnly)
+	int PlayerLevel = 1;
+
+
+	/* Observers of Player Channels */
+private:
+	void NotifyObservers(UObject* entity, enum class EAQ_NotifyEventType eventType, float amount = 1);
+	TArray<UObject*> Observers;
 };
