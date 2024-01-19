@@ -6,12 +6,14 @@
 #include "PlayersChannels/AQ_EnvironmentChannel.h"
 #include "PlayersChannels/AQ_CombatChannel.h"
 #include "PlayersChannels/AQ_QuestChannel.h"
+#include <QuestSystem/AQ_QuestManager.h>
 #include "QuestSystem/AQ_BookQuest.h"
 #include "QuestSystem/AQ_Quest.h"
+#include "DataAssets/AQ_ItemData.h"
 
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
-#include <QuestSystem/AQ_QuestManager.h>
+
 
 UAQ_PlayerChannels::UAQ_PlayerChannels()
 {
@@ -173,8 +175,9 @@ void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestSt
 		/* Remove all the Quest's Observers when the Quest is Done */
 		for (auto const& questObjectives : QuestUpdate->QuestData->objectives)
 		{
-			if (questObjectives.objectiveType == EAQ_ObjectivesType::Collect)
-				continue;
+			if (questObjectives.objectiveType == EAQ_ObjectivesType::Collect
+				&& questObjectives.itemTarget->bIsQuestItem)
+				Execute_RemoveItemFromInvetory(this, questObjectives.itemTarget, 1, true);
 
 			EAQ_ObjectivesType eventType = questObjectives.objectiveType;
 			RemoveObserver(QuestUpdate, eventType);

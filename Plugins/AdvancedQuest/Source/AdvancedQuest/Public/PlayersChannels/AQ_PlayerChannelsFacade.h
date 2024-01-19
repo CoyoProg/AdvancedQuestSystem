@@ -39,6 +39,6 @@ public:
 	void AddItemToInvetory(UAQ_ItemData* item, int amount);
 
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-	void RemoveItemFromInvetory(UAQ_ItemData* item, int amount);
+	void RemoveItemFromInvetory(UAQ_ItemData* item, int amount, bool bRemoveCompletely = false);
 };
 
