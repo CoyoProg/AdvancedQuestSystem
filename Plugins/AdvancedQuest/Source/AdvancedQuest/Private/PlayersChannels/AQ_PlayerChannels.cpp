@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "PlayersChannels/AQ_PlayerChannels.h"
 
-#include "PlayersChannels/AQ_InteractionChannel.h"
 #include "PlayersChannels/AQ_InventoryChannel.h"
 #include "PlayersChannels/AQ_EnvironmentChannel.h"
 #include "PlayersChannels/AQ_CombatChannel.h"
@@ -18,7 +17,6 @@
 UAQ_PlayerChannels::UAQ_PlayerChannels()
 {
 	/** Create all channels */
-	InteractionChannel = CreateDefaultSubobject<UAQ_InteractionChannel>(TEXT("Interaction Channel"));
 	InventoryChannel = CreateDefaultSubobject<UAQ_InventoryChannel>(TEXT("Inventory Channel"));
 	EnvironmentChannel = CreateDefaultSubobject<UAQ_EnvironmentChannel>(TEXT("Environment Channel"));
 	CombatChannel = CreateDefaultSubobject<UAQ_CombatChannel>(TEXT("Combat Channel"));
@@ -84,10 +82,6 @@ void UAQ_PlayerChannels::AddObserver(UObject* entity, EAQ_ObjectivesType eventTy
 	switch (eventType)
 	{
 		/** Add Observer to Interaction Channel */
-	case EAQ_ObjectivesType::Interact:
-		InteractionChannel->AddObserver_Implementation(entity);
-		break;
-
 		/** Add Observer to Combat Channel */
 	case EAQ_ObjectivesType::Kill:
 		CombatChannel->AddObserver_Implementation(entity);
@@ -106,6 +100,10 @@ void UAQ_PlayerChannels::AddObserver(UObject* entity, EAQ_ObjectivesType eventTy
 	case EAQ_ObjectivesType::Location:
 		EnvironmentChannel->AddObserver_Implementation(entity);
 		break;
+
+	case EAQ_ObjectivesType::Interact:
+		EnvironmentChannel->AddObserver_Implementation(entity);
+		break;
 	}
 }
 
@@ -113,11 +111,6 @@ void UAQ_PlayerChannels::RemoveObserver(UObject* entity, EAQ_ObjectivesType even
 {
 	switch (eventType)
 	{
-		/** Remove Observer from Interaction Channel */
-	case EAQ_ObjectivesType::Interact:
-		InteractionChannel->RemoveObserver_Implementation(entity);
-		break;
-
 		/** Remove Observer from Combat Channel */
 	case EAQ_ObjectivesType::Kill:
 		CombatChannel->RemoveObserver_Implementation(entity);
@@ -132,8 +125,12 @@ void UAQ_PlayerChannels::RemoveObserver(UObject* entity, EAQ_ObjectivesType even
 		InventoryChannel->RemoveObserver_Implementation(entity);
 		break;
 
-		/** Remove Observer from Player Channel */
+		/** Remove Observer from Environment Channel */
 	case EAQ_ObjectivesType::Location:
+		EnvironmentChannel->RemoveObserver_Implementation(entity);
+		break;
+
+	case EAQ_ObjectivesType::Interact:
 		EnvironmentChannel->RemoveObserver_Implementation(entity);
 		break;
 	}
@@ -294,9 +291,9 @@ void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 	}
 }
 
-void UAQ_PlayerChannels::OnInteractionEvent_Implementation(EAQ_InteractionEventType eventType, UObject* entity)
+void UAQ_PlayerChannels::OnEnvironmentEventNotify_Implementation(EAQ_EnvironmentEventType eventType, UObject* entity)
 {
-	InteractionChannel->OnInteractionEventNotify(eventType, entity);
+	EnvironmentChannel->OnEnvironmentEventNotify(eventType, entity);
 }
 
 void UAQ_PlayerChannels::OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay)
@@ -333,8 +330,6 @@ void UAQ_PlayerChannels::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	/* Because some value are persistent between play in editor,
 	We need to clear all the Observers at the end of a play */
-
-	InteractionChannel->ClearObservers();
 	InventoryChannel->ClearObservers();
 	CombatChannel->ClearObservers();
 	EnvironmentChannel->ClearObservers();

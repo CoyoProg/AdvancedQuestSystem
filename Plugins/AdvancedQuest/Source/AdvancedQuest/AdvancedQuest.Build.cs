@@ -46,8 +46,8 @@ public class AdvancedQuest : ModuleRules
 				"UMG",
                 "UMGEditor",
                 "Blutility",
-				"EnhancedInput",
-                "Niagara",
+                "EnhancedInput",
+				"Niagara",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

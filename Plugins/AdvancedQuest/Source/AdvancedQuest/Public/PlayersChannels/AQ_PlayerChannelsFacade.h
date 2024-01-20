@@ -31,7 +31,7 @@ public:
 	void OnQuestEnable(UAQ_Quest* quest);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnInteractionEvent(EAQ_InteractionEventType eventType, UObject* entity);
+	void OnEnvironmentEventNotify(EAQ_EnvironmentEventType eventType, UObject* entity);
 
 
 

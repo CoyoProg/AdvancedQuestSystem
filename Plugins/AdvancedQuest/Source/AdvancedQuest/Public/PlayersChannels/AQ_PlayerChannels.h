@@ -7,7 +7,6 @@
 
 #include "AQ_PlayerChannels.generated.h"
 
-class UAQ_InteractionChannel;
 class UAQ_InventoryChannel;
 class UAQ_EnvironmentChannel;
 class UAQ_CombatChannel;
@@ -26,9 +25,6 @@ public:
 	~UAQ_PlayerChannels();
 
 	/** Player Channels */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Channels")
-	UAQ_InteractionChannel* InteractionChannel = nullptr;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Channels")
 	UAQ_InventoryChannel* InventoryChannel = nullptr;
 
@@ -71,7 +67,7 @@ public:
 	void OnQuestEnable_Implementation(UAQ_Quest* quest);
 
 	UFUNCTION()
-	void OnInteractionEvent_Implementation(EAQ_InteractionEventType eventType, UObject* entity);
+	void OnEnvironmentEventNotify_Implementation(EAQ_EnvironmentEventType eventType, UObject* entity);
 
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Events|Quests")
 	void OnQuestEnded(UAQ_Quest* quest);
