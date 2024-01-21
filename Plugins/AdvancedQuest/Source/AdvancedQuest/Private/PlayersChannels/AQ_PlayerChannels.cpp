@@ -164,16 +164,10 @@ void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestSt
 {
 	switch (QuestState)
 	{
-	case EAQ_QuestState::Active:
-		break;
-
-	case EAQ_QuestState::Valid:
-		break;
-
 	case EAQ_QuestState::Pending:
+	case EAQ_QuestState::Failed:
 	{
-		/* Remove all the Quest's Observers when the Quest is Pending */
-		/* This State is only called when a Quest is Abandoned */
+		/* Remove all the Quest's Observers when the Quest is Pending or Failed */
 		for (auto const& questObjectives : QuestUpdate->QuestData->objectives)
 		{
 			EAQ_ObjectivesType eventType = questObjectives.objectiveType;
@@ -222,6 +216,8 @@ void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestSt
 		break;
 	}
 
+	default:
+		break;
 	}
 }
 
@@ -236,8 +232,8 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 		OnQuestEnable_Implementation(quest);
 		if(QuestChannel->BookQuest)
 			QuestChannel->BookQuest->OnLoadQuests(quest);
+		break;
 	}
-	break;
 
 	case EAQ_QuestState::Pending:
 	{
@@ -252,8 +248,8 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 			QuestChannel->QuestRequirementChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnQuestRequirementChange);
 
 		quest->QuestRequirementMetDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestRequirementMet);
+		break;
 	}
-	break;
 
 	case EAQ_QuestState::Valid:
 	{
@@ -262,11 +258,8 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 		quest->QuestStateChangedDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestStateChanged);
 
 		QuestChannel->BookQuest->OnLoadQuests(quest);
-	}
-	break;
-
-	case EAQ_QuestState::Archive:
 		break;
+	}
 
 	default:
 		break;

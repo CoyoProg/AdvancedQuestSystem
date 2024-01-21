@@ -19,7 +19,9 @@ enum class EAQ_QuestState : uint8
 	Active				UMETA(DisplayName = "Active"),
 	Pending				UMETA(DisplayName = "Pending"),
 	Valid				UMETA(DisplayName = "Valid"),
-	Archive				UMETA(DisplayName = "Archive")
+	Archive				UMETA(DisplayName = "Archive"),
+
+	Failed				UMETA(DisplayName = "Failed"),
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FQuestStateChangedDelegate, UAQ_Quest*, QuestUpdate, EAQ_QuestState, QuestState);
@@ -56,6 +58,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void ResetQuest();
+
+	UFUNCTION(BlueprintCallable)
+	void QuestFailed();
 
 	void SetQuestData(UAQ_QuestData* QuestData);
 	void UpdateQuestState();

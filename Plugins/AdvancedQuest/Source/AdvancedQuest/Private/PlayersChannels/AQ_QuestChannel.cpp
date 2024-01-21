@@ -32,19 +32,15 @@ void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestStat
 	switch (QuestState)
 	{
 	case EAQ_QuestState::Active:
+	case EAQ_QuestState::Valid:
+	case EAQ_QuestState::Failed:
 	{
 		/* Update the Book Quest */
 		if (BookQuest)
 			BookQuest->UpdateQuestBook(QuestUpdate);
 		break;
 	}
-	case EAQ_QuestState::Valid:
-	{		
-		/* Update the Book Quest */
-		if (BookQuest)
-			BookQuest->UpdateQuestBook(QuestUpdate);
-		break;
-	}
+
 	case EAQ_QuestState::Pending:
 	{
 		/* Remove the Quest from the Book Quest */

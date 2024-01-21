@@ -78,6 +78,14 @@ void UAQ_Quest::ResetQuest()
 	IndexQuickDisplay = 0;
 }
 
+void UAQ_Quest::QuestFailed()
+{
+	QuestState = EAQ_QuestState::Failed;
+
+	if (QuestStateChangedDelegate.IsBound())
+		QuestStateChangedDelegate.Broadcast(this, QuestState);
+}
+
 void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP, float amount)
 {
 	bool bIsEventRemovedFromInventory = false;
