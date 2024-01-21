@@ -17,10 +17,10 @@ struct FAQ_Objectives
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
 	EAQ_ObjectivesType objectiveType = EAQ_ObjectivesType::Interact;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest", meta = (EditCondition = "objectiveType != EAQ_ObjectivesType::Collect", EditConditionHides))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest", meta = (EditCondition = "objectiveType != EAQ_ObjectivesType::Collect && objectiveType != EAQ_ObjectivesType::Deliver", EditConditionHides))
 	UClass* objectTarget = nullptr;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest", meta = (EditCondition = "objectiveType == EAQ_ObjectivesType::Collect", EditConditionHides))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest", meta = (EditCondition = "objectiveType == EAQ_ObjectivesType::Collect || objectiveType == EAQ_ObjectivesType::Deliver", EditConditionHides))
 	class UAQ_ItemData* itemTarget = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Quest")
@@ -28,10 +28,10 @@ struct FAQ_Objectives
 
 
 	/** If the goal is a unique target*/
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest", meta = (EditCondition = "objectiveType != EAQ_ObjectivesType::Collect", EditConditionHides))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest", meta = (EditCondition = "objectiveType != EAQ_ObjectivesType::Collect && objectiveType != EAQ_ObjectivesType::Deliver", EditConditionHides))
 	bool isUnique = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest", meta = (EditCondition = "objectiveType != EAQ_ObjectivesType::Collect", EditConditionHides))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest", meta = (EditCondition = "objectiveType != EAQ_ObjectivesType::Collect && objectiveType != EAQ_ObjectivesType::Deliver", EditConditionHides))
 	int uniqueObjectID = 0;
 
 

@@ -24,23 +24,23 @@ UAQ_QuestComponent::~UAQ_QuestComponent()
 
 void UAQ_QuestComponent::BeginPlay()
 {
-	RerunScript();
-
-	if (QuestMarkerClass)
-		CreateQuestMarkerWidget();
+	Super::BeginPlay();
 
 	if (GetWorld()->WorldType == EWorldType::PIE && GEditor->IsSimulateInEditorInProgress())
 	{
 		return;
 	}
 
+	RerunScript();
+
+	if (QuestMarkerClass)
+		CreateQuestMarkerWidget();
+
 	QuestManager = GetWorld()->
 		GetFirstPlayerController()->GetPawn()->
 		GetComponentByClass<UAQ_QuestManager>();
 
 	GetWorld()->OnWorldBeginPlay.AddUObject(this, &UAQ_QuestComponent::LateBeginPlay);
-
-	Super::BeginPlay();
 }
 
 void UAQ_QuestComponent::LateBeginPlay()

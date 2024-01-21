@@ -18,11 +18,11 @@
 		{
 			"Name": "AdvancedQuest",
 			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"AdditionalDependencies": [
-				"EnhancedInput",
-				"Niagara"
-			]
+			"LoadingPhase": "Default"
 		}
+	],
+	"AdditionalDependencies": [
+		"EnhancedInput",
+		"Niagara"
 	]
 }

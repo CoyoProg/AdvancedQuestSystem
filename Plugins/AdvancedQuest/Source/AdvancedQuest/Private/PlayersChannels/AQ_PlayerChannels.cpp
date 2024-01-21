@@ -172,9 +172,13 @@ void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestSt
 		/* Remove all the Quest's Observers when the Quest is Done */
 		for (auto const& questObjectives : QuestUpdate->QuestData->objectives)
 		{
-			if (questObjectives.objectiveType == EAQ_ObjectivesType::Collect
-				&& questObjectives.itemTarget->bIsQuestItem)
-				Execute_RemoveItemFromInvetory(this, questObjectives.itemTarget, 1, true);
+			if ((questObjectives.objectiveType == EAQ_ObjectivesType::Collect
+				|| questObjectives.objectiveType == EAQ_ObjectivesType::Deliver)
+				&& questObjectives.itemTarget)
+			{
+				if(questObjectives.itemTarget->itemType == EAQ_ItemType::Quest)
+					Execute_RemoveItemFromInvetory(this, questObjectives.itemTarget, 1, true);
+			}
 
 			EAQ_ObjectivesType eventType = questObjectives.objectiveType;
 			RemoveObserver(QuestUpdate, eventType);
@@ -268,20 +272,34 @@ void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 			Observers.AddUnique(quest);
 
 			/* Check the Player stats (Can be anything from Player's Level,
-			to Achievements, Professions Level...) and Update the Objective current
-			amount and trigger the Objective Update Event */
+			to Achievements, Professions Level...) */
 			currentAmount = CheckForPlayerStats(questObjectives);
 		}
-
-		if (eventType == EAQ_ObjectivesType::Collect)
+		else if (eventType == EAQ_ObjectivesType::Collect)
 		{
-			/* If a Quest item is already in the inventory, we update the Objective
-			current amount and trigger the Objective Update event */
+			/* Check if there is already the itemTarget in the inventory */
 			currentAmount = CheckInventoryForItem(questObjectives);
 		}
-
-		if (currentAmount > 0)
+		else if (eventType == EAQ_ObjectivesType::Deliver)
 		{
+			if (questObjectives.itemTarget)
+			{
+				/* Check if the item is already there (to not add it at every load)
+				and add the item that need to be delivered into the inventory */
+				currentAmount = CheckInventoryForItem(questObjectives);
+				if (currentAmount == 0)
+				{
+					currentAmount = questObjectives.amountNeeded;
+
+
+					Execute_AddItemToInvetory(this, questObjectives.itemTarget, currentAmount);
+				}
+			}
+		}
+
+		if (currentAmount > 0 || questObjectives.amountNeeded == 0)
+		{
+			/* Update the current amount of the quest */
 			questObjectives.CurrentAmount = currentAmount;
 			if (currentAmount >= questObjectives.amountNeeded)
 				quest->ObjectivesCompleted++;

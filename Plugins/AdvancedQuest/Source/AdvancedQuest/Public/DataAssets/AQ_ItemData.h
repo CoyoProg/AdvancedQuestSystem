@@ -4,6 +4,14 @@
 #include "Engine/DataAsset.h"
 #include "AQ_ItemData.generated.h"
 
+UENUM(BlueprintType)
+enum class EAQ_ItemType : uint8
+{
+    Default		UMETA(DisplayName = "World Item"),
+	Ressource	UMETA(DisplayName = "Ressource Item"),
+	Quest		UMETA(DisplayName = "Quest Item"),
+};
+
 /**
  * 
  */
@@ -23,9 +31,5 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	bool bIsStackable = true;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	bool bIsQuestItem = false;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (EditCondition = "bIsQuestItem == true", EditConditionHides))
-	int QuestID = 0;
+	EAQ_ItemType itemType = EAQ_ItemType::Default;
 };

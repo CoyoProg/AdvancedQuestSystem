@@ -1,8 +1,10 @@
 #include "Interactables/AQ_Collectable.h"
 
 #include <DataAssets/AQ_ItemData.h>
+#include <DataAssets/AQ_QuestItemData.h>
 #include <QuestSystem/AQ_QuestManager.h>
 #include <QuestSystem/AQ_Quest.h>
+
 
 AAQ_Collectable::AAQ_Collectable()
 {
@@ -11,8 +13,12 @@ AAQ_Collectable::AAQ_Collectable()
 
 void AAQ_Collectable::BeginPlay()
 {
-	if (ItemData->bIsQuestItem)
-		SetQuestItem(ItemData->QuestID);
+	if (ItemData->itemType == EAQ_ItemType::Quest)
+	{
+		UAQ_QuestItemData* QuestItem = Cast<UAQ_QuestItemData>(ItemData);
+		SetQuestItem(QuestItem->QuestID);
+	}
+
 
 	Super::BeginPlay();
 }
