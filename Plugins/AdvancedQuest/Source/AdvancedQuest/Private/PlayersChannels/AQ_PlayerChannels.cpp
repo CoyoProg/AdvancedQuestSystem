@@ -96,12 +96,24 @@ void UAQ_PlayerChannels::AddObserver(UObject* entity, EAQ_ObjectivesType eventTy
 		InventoryChannel->AddObserver_Implementation(entity);
 		break;
 
+	case EAQ_ObjectivesType::Deliver:
+		InventoryChannel->AddObserver_Implementation(entity);
+		break;
+
 		/** Add Observer to Environment Channel */
 	case EAQ_ObjectivesType::Location:
 		EnvironmentChannel->AddObserver_Implementation(entity);
 		break;
 
 	case EAQ_ObjectivesType::Interact:
+		EnvironmentChannel->AddObserver_Implementation(entity);
+		break;
+
+	case EAQ_ObjectivesType::MiniGame:
+		EnvironmentChannel->AddObserver_Implementation(entity);
+		break;
+
+	case EAQ_ObjectivesType::Puzzle:
 		EnvironmentChannel->AddObserver_Implementation(entity);
 		break;
 	}
@@ -125,12 +137,24 @@ void UAQ_PlayerChannels::RemoveObserver(UObject* entity, EAQ_ObjectivesType even
 		InventoryChannel->RemoveObserver_Implementation(entity);
 		break;
 
+	case EAQ_ObjectivesType::Deliver:
+		InventoryChannel->RemoveObserver_Implementation(entity);
+		break;
+
 		/** Remove Observer from Environment Channel */
 	case EAQ_ObjectivesType::Location:
 		EnvironmentChannel->RemoveObserver_Implementation(entity);
 		break;
 
 	case EAQ_ObjectivesType::Interact:
+		EnvironmentChannel->RemoveObserver_Implementation(entity);
+		break;
+
+	case EAQ_ObjectivesType::MiniGame:
+		EnvironmentChannel->RemoveObserver_Implementation(entity);
+		break;
+
+	case EAQ_ObjectivesType::Puzzle:
 		EnvironmentChannel->RemoveObserver_Implementation(entity);
 		break;
 	}
@@ -364,4 +388,3 @@ void UAQ_PlayerChannels::SaveGame()
 
 	SaveInventory();
 }
-

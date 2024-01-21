@@ -18,10 +18,10 @@ enum class EAQ_NotifyEventType : uint8
     Deliver                 UMETA(DisplayName = "Deliver to"),
 
     // Environment
-    Interact                UMETA(DisplayName = "Interact with"),
-    Travel                  UMETA(DisplayName = "Travel to"),
-    Puzzle                  UMETA(DisplayName = "Puzzle Solve"),
-    MiniGame                UMETA(DisplayName = "Mini-Game Complete"),
+    Interact                UMETA(DisplayName = "Interact"),
+    Travel                  UMETA(DisplayName = "Travel"),
+    Puzzle                  UMETA(DisplayName = "Puzzle"),
+    MiniGame                UMETA(DisplayName = "Mini-Game"),
 
 
     // Player Related

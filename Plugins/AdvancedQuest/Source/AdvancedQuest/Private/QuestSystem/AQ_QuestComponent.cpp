@@ -31,8 +31,6 @@ void UAQ_QuestComponent::BeginPlay()
 		return;
 	}
 
-	RerunScript();
-
 	if (QuestMarkerClass)
 		CreateQuestMarkerWidget();
 
@@ -151,13 +149,14 @@ void UAQ_QuestComponent::Interact(const TScriptInterface<IAQ_PlayerChannelsFacad
 		PlayerChannel->OnInteractQuestGiver(quests);
 }
 
-void UAQ_QuestComponent::OnQuestStateChanged(UAQ_Quest* questUpdate, EAQ_QuestState QuestState)
+void UAQ_QuestComponent::OnQuestStateChangedWrapper(UAQ_Quest* questUpdate, EAQ_QuestState QuestState)
 {
 	UpdateQuestMarker();
+	OnQuestStateChanged.Broadcast(QuestState); // Trigger the blueprint event
 
 	/* If the Quest is now archive, we unbind to the delegates */
 	if(questUpdate->QuestState == EAQ_QuestState::Archive)
-		questUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_QuestComponent::OnQuestStateChanged);
+		questUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_QuestComponent::OnQuestStateChangedWrapper);
 }
 
 void UAQ_QuestComponent::OnQuestRequirementMet(UAQ_Quest* quest)
@@ -168,7 +167,7 @@ void UAQ_QuestComponent::OnQuestRequirementMet(UAQ_Quest* quest)
 	quest->QuestRequirementMetDelegate.RemoveDynamic(this, &UAQ_QuestComponent::OnQuestRequirementMet);
 	
 	/* Bind to the Quest State Changed delegate*/
-	quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChanged);
+	quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChangedWrapper);
 }
 
 void UAQ_QuestComponent::BindFunctionsToQuestDelegates()
@@ -206,7 +205,7 @@ void UAQ_QuestComponent::BindFunctionsToQuestDelegates()
 				if (QuestData.Value.bIsQuestReceiver)
 					bIsAnyQuestValid = true;
 
-				newQuest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChanged);
+				newQuest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChangedWrapper);
 				break;
 			}
 
@@ -215,13 +214,13 @@ void UAQ_QuestComponent::BindFunctionsToQuestDelegates()
 				if (QuestData.Value.bIsQuestGiver)
 					bIsAnyQuestPending = true;
 
-				newQuest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChanged);
+				newQuest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChangedWrapper);
 				break;
 			}
 				
 			case EAQ_QuestState::Active:
 			{
-				newQuest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChanged);
+				newQuest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChangedWrapper);
 				break;
 			}
 			}
@@ -259,8 +258,10 @@ void UAQ_QuestComponent::CreateQuestMarkerWidget()
 			float pixelToCm = QuestMarkerWidget->GetDrawSize().Y / 8.f; // Adjust this value if you have another Quest Marker
 			float zCoord = extent.Z * 2 + pixelToCm;
 			QuestMarkerWidget->SetRelativeLocation(FVector(0, 0, zCoord));
-
-			SetQuestMarker(false, false);
 		}
 	}
+	else
+		QuestMarkerWidget->SetWidgetClass(QuestMarkerClass);
+
+	SetQuestMarker(false, false);
 }

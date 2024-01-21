@@ -30,6 +30,6 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
 	void NotifyObservers(UObject* entity, EAQ_NotifyEventType eventType, float amount = 1);
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
-	void OnNotifyEvent(UObject* entity);
+	//UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
+	//void OnNotifyEvent(UObject* entity);
 };

@@ -24,6 +24,7 @@ struct FAQ_IsGiverOrReceiver
 	bool bIsQuestGiver = true;
 };
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnStateChangedBueprintDelegate, EAQ_QuestState, QuestState);
 
 UCLASS(Blueprintable, meta = (ABSTRACT))
 class ADVANCEDQUEST_API UAQ_QuestComponent : public UActorComponent
@@ -44,7 +45,7 @@ public:
 	TMap<int, FAQ_IsGiverOrReceiver> QuestsList;
 
 	UFUNCTION()
-	void OnQuestStateChanged(UAQ_Quest* questUpdate, EAQ_QuestState QuestState);
+	void OnQuestStateChangedWrapper(UAQ_Quest* questUpdate, EAQ_QuestState QuestState);
 
 	UFUNCTION()
 	void OnQuestRequirementMet(UAQ_Quest* quest);
@@ -73,6 +74,20 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void UpdateQuestMarker();
 
+
+	/* References */
+protected:
+	AActor* Owner = nullptr;
+
+	UPROPERTY(BlueprintReadOnly)
+	UAQ_QuestManager* QuestManager = nullptr;
+
+
+	// Use this delegate to be able to update actors in blueprint
+	// when OnQuestStateChanged is triggered
+	UPROPERTY(BlueprintAssignable)
+	FOnStateChangedBueprintDelegate OnQuestStateChanged;
+
 private:
 	UWidgetComponent* QuestMarkerWidget = nullptr;
 	void CreateQuestMarkerWidget();
@@ -81,10 +96,4 @@ private:
 	/* DEBUG */
 	UFUNCTION(BlueprintCallable)
 	void RerunScript(); // Usefull only to see all the quest Marker when using the Tool
-
-
-	/* References */
-private:
-	AActor* Owner = nullptr ;
-	UAQ_QuestManager* QuestManager = nullptr;
 };

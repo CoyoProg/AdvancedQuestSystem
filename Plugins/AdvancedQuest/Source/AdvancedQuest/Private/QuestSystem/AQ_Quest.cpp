@@ -260,11 +260,28 @@ bool UAQ_Quest::IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTy
 	/* Check if the eventType notified is the same as the ObjectiveType*/
 	switch (eventTypeP)
 	{
+		// ENVIRONMENT
 	case EAQ_NotifyEventType::Interact:
 		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Interact)
 			return true;
 		break;
 
+	case EAQ_NotifyEventType::MiniGame:
+		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::MiniGame)
+			return true;
+		break;
+
+	case EAQ_NotifyEventType::Puzzle:
+		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Puzzle)
+			return true;
+		break;
+
+	case EAQ_NotifyEventType::Travel:
+		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Location)
+			return true;
+		break;
+
+		// INVENTORY
 	case EAQ_NotifyEventType::Collect:
 		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Collect)
 			return true;
@@ -275,22 +292,20 @@ bool UAQ_Quest::IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTy
 			return true;
 		break;
 
-	case EAQ_NotifyEventType::Kill:
-		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Kill)
-			return true;
-		break;
-
+		// COMBAT
 	case EAQ_NotifyEventType::Heal:
 		break;
 
 	case EAQ_NotifyEventType::Damage:
 		break;
 
-	case EAQ_NotifyEventType::Travel:
-		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Location)
+	case EAQ_NotifyEventType::Kill:
+		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Kill)
 			return true;
 		break;
 
+
+		// PLAYER STATS
 	case EAQ_NotifyEventType::PlayerLevelUp:
 		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::PlayerLevelUp)
 			return true;

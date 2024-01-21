@@ -21,8 +21,14 @@
 			"LoadingPhase": "Default"
 		}
 	],
-	"AdditionalDependencies": [
-		"EnhancedInput",
-		"Niagara"
+	"Plugins": [
+		{
+			"Name": "EnhancedInput",
+			"Enabled": true
+		},
+		{
+			"Name": "Niagara",
+			"Enabled": true
+		}
 	]
 }

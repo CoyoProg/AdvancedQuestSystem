@@ -7,8 +7,10 @@
 UENUM(BlueprintType)
 enum class EAQ_EnvironmentEventType : uint8
 {
-    Interact		UMETA(DisplayName = "Interact"),
-	Travel			UMETA(DisplayName = "Travel"),
+	Interact                UMETA(DisplayName = "Interact"),
+	Travel                  UMETA(DisplayName = "Travel"),
+	Puzzle                  UMETA(DisplayName = "Puzzle"),
+	MiniGame                UMETA(DisplayName = "Mini-Game"),
 };
 
 /**
