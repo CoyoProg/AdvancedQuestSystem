@@ -1,4 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 #include "QuestSystem/AQ_QuestComponent.h"
 
 #include "QuestSystem/AQ_QuestMarkerWidget.h"
@@ -27,9 +26,7 @@ void UAQ_QuestComponent::BeginPlay()
 	Super::BeginPlay();
 
 	if (GetWorld()->WorldType == EWorldType::PIE && GEditor->IsSimulateInEditorInProgress())
-	{
 		return;
-	}
 
 	if (QuestMarkerClass)
 		CreateQuestMarkerWidget();
@@ -195,11 +192,6 @@ void UAQ_QuestComponent::BindFunctionsToQuestDelegates()
 			/* Update the Quest Marker */
 			switch (newQuest->QuestState)
 			{
-			case EAQ_QuestState::Archive:
-			{
-				break;
-			}
-
 			case EAQ_QuestState::Valid:
 			{
 				if (QuestData.Value.bIsQuestReceiver)
@@ -223,6 +215,9 @@ void UAQ_QuestComponent::BindFunctionsToQuestDelegates()
 				newQuest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChangedWrapper);
 				break;
 			}
+
+			default:
+				break;
 			}
 
 			if(bIsAnyQuestValid)

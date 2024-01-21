@@ -8,6 +8,10 @@ void UAQ_CombatChannel::OnCombatEventNotify(EAQ_CombatEventType eventType, UObje
 		NotifyObservers_Implementation(entity, EAQ_NotifyEventType::Kill);
 		break;
 
+	case EAQ_CombatEventType::Protect:
+		NotifyObservers_Implementation(entity, EAQ_NotifyEventType::Protect);
+		break;
+
 	case EAQ_CombatEventType::Heal:
 		NotifyObservers_Implementation(entity, EAQ_NotifyEventType::Heal, amount);
 		break;

@@ -10,6 +10,7 @@ enum class EAQ_CombatEventType : uint8
     Kill       UMETA(DisplayName = "Kill"),
     Heal       UMETA(DisplayName = "Heal"),
     Damage     UMETA(DisplayName = "Damage"),
+    Protect    UMETA(DisplayName = "Protect"),
 };
 
 /**

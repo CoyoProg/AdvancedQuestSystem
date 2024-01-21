@@ -78,6 +78,20 @@ void UAQ_Quest::ResetQuest()
 	IndexQuickDisplay = 0;
 }
 
+void UAQ_Quest::ResetObjectives()
+{
+	for (auto& Objectives : QuestData->objectives)
+	{
+		Objectives.CurrentAmount = 0;
+		Objectives.isObjectiveComplete = false;
+	}
+
+	ObjectivesCompleted = 0;
+
+	if (ObjectivesUpdatedDelegate.IsBound())
+		ObjectivesUpdatedDelegate.Broadcast(this);
+}
+
 void UAQ_Quest::QuestFailed()
 {
 	QuestState = EAQ_QuestState::Failed;
@@ -309,6 +323,11 @@ bool UAQ_Quest::IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTy
 
 	case EAQ_NotifyEventType::Kill:
 		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Kill)
+			return true;
+		break;
+
+	case EAQ_NotifyEventType::Protect:
+		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Protect)
 			return true;
 		break;
 

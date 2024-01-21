@@ -10,7 +10,8 @@ enum class EAQ_NotifyEventType : uint8
     // Combat 
 	Kill                    UMETA(DisplayName = "Kill"),
 	Heal                    UMETA(DisplayName = "Heal"),
-    Damage                  UMETA(DisplayName = "Damag"),
+    Damage                  UMETA(DisplayName = "Damage"),
+    Protect                 UMETA(DisplayName = "Protect"),
 
     // Inventory
     Collect                 UMETA(DisplayName = "Collect"),

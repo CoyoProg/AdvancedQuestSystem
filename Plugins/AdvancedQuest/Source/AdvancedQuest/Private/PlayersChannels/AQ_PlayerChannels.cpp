@@ -282,7 +282,9 @@ void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 		AddObserver(quest, eventType);
 
 		int currentAmount = 0;
-		if (eventType == EAQ_ObjectivesType::PlayerLevelUp)
+		switch (eventType)
+		{
+		case EAQ_ObjectivesType::PlayerLevelUp:
 		{
 			/* Update the Objective target of this type of quest */
 			questObjectives.objectTarget = GetOwner()->GetClass();
@@ -291,27 +293,34 @@ void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 			/* Check the Player stats (Can be anything from Player's Level,
 			to Achievements, Professions Level...) */
 			currentAmount = CheckForPlayerStats(questObjectives);
+
+			break;
 		}
-		else if (eventType == EAQ_ObjectivesType::Collect)
+
+		case  EAQ_ObjectivesType::Collect:
 		{
 			/* Check if there is already the itemTarget in the inventory */
 			currentAmount = CheckInventoryForItem(questObjectives);
+			break;
 		}
-		else if (eventType == EAQ_ObjectivesType::Deliver)
-		{
-			if (questObjectives.itemTarget)
+
+		case EAQ_ObjectivesType::Deliver:
+		{ 
+			if (!questObjectives.itemTarget)
+				break;
+
+			/* Check if the item is already there (to not add it at every load)
+			and add the item that need to be delivered into the inventory */
+			currentAmount = CheckInventoryForItem(questObjectives);
+			if (currentAmount == 0)
 			{
-				/* Check if the item is already there (to not add it at every load)
-				and add the item that need to be delivered into the inventory */
-				currentAmount = CheckInventoryForItem(questObjectives);
-				if (currentAmount == 0)
-				{
-					currentAmount = questObjectives.amountNeeded;
+				currentAmount = questObjectives.amountNeeded;
 
 
-					Execute_AddItemToInvetory(this, questObjectives.itemTarget, currentAmount);
-				}
+				Execute_AddItemToInvetory(this, questObjectives.itemTarget, currentAmount);
 			}
+			break;
+		}
 		}
 
 		if (currentAmount > 0 || questObjectives.amountNeeded == 0)

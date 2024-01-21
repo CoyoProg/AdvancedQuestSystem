@@ -60,6 +60,9 @@ public:
 	void ResetQuest();
 
 	UFUNCTION(BlueprintCallable)
+	void ResetObjectives();
+
+	UFUNCTION(BlueprintCallable)
 	void QuestFailed();
 
 	void SetQuestData(UAQ_QuestData* QuestData);
