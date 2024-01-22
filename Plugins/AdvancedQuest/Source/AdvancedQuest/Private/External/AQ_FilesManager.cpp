@@ -3,6 +3,8 @@
 
 #include "External/AQ_FilesManager.h"
 #include "Interfaces/IPluginManager.h"
+#include "Misc/Paths.h"
+#include "Misc/FileHelper.h"
 
 AQ_FilesManager::AQ_FilesManager()
 {

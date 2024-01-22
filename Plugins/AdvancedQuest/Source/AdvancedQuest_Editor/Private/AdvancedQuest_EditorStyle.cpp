@@ -1,7 +1,7 @@
 // Copyright 2024, Coyo Prog, All rights reserved.
 
-#include "AdvancedQuestStyle.h"
-#include "AdvancedQuest.h"
+#include "AdvancedQuest_EditorStyle.h"
+#include "AdvancedQuest_Editor.h"
 #include "Framework/Application/SlateApplication.h"
 #include "Styling/SlateStyleRegistry.h"
 #include "Slate/SlateGameResources.h"
@@ -10,9 +10,9 @@
 
 #define RootToContentDir Style->RootToContentDir
 
-TSharedPtr<FSlateStyleSet> FAdvancedQuestStyle::StyleInstance = nullptr;
+TSharedPtr<FSlateStyleSet> FAdvancedQuest_EditorStyle::StyleInstance = nullptr;
 
-void FAdvancedQuestStyle::Initialize()
+void FAdvancedQuest_EditorStyle::Initialize()
 {
 	if (!StyleInstance.IsValid())
 	{
@@ -21,16 +21,16 @@ void FAdvancedQuestStyle::Initialize()
 	}
 }
 
-void FAdvancedQuestStyle::Shutdown()
+void FAdvancedQuest_EditorStyle::Shutdown()
 {
 	FSlateStyleRegistry::UnRegisterSlateStyle(*StyleInstance);
 	ensure(StyleInstance.IsUnique());
 	StyleInstance.Reset();
 }
 
-FName FAdvancedQuestStyle::GetStyleSetName()
+FName FAdvancedQuest_EditorStyle::GetStyleSetName()
 {
-	static FName StyleSetName(TEXT("AdvancedQuestStyle"));
+	static FName StyleSetName(TEXT("AdvancedQuest_EditorStyle"));
 	return StyleSetName;
 }
 
@@ -38,9 +38,9 @@ FName FAdvancedQuestStyle::GetStyleSetName()
 const FVector2D Icon16x16(16.0f, 16.0f);
 const FVector2D Icon20x20(20.0f, 20.0f);
 
-TSharedRef< FSlateStyleSet > FAdvancedQuestStyle::Create()
+TSharedRef< FSlateStyleSet > FAdvancedQuest_EditorStyle::Create()
 {
-	TSharedRef< FSlateStyleSet > Style = MakeShareable(new FSlateStyleSet("AdvancedQuestStyle"));
+	TSharedRef< FSlateStyleSet > Style = MakeShareable(new FSlateStyleSet("AdvancedQuest_EditorStyle"));
 
 	FString ContentRoot = IPluginManager::Get().FindPlugin("AdvancedQuest")->GetBaseDir() / TEXT("Resources");
 	Style->SetContentRoot(ContentRoot);
@@ -49,12 +49,12 @@ TSharedRef< FSlateStyleSet > FAdvancedQuestStyle::Create()
 	const FName IconName("Temporary"); // Set your icon name
 	const FString IconPath = ContentRoot / IconName.ToString() + TEXT(".png");
 
-	Style->Set("AdvancedQuest.PluginAction", new FSlateImageBrush(IconPath, IconSize));
+	Style->Set("AdvancedQuest_Editor.PluginAction", new FSlateImageBrush(IconPath, IconSize));
 
 	return Style;
 }
 
-void FAdvancedQuestStyle::ReloadTextures()
+void FAdvancedQuest_EditorStyle::ReloadTextures()
 {
 	if (FSlateApplication::IsInitialized())
 	{
@@ -62,7 +62,7 @@ void FAdvancedQuestStyle::ReloadTextures()
 	}
 }
 
-const ISlateStyle& FAdvancedQuestStyle::Get()
+const ISlateStyle& FAdvancedQuest_EditorStyle::Get()
 {
 	return *StyleInstance;
 }

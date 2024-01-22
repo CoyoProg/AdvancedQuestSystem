@@ -2,7 +2,11 @@
 
 #include "Tools/AQ_CreateAssets.h"
 #include "External/AQ_FilesManager.h"
+
+#if WITH_EDITOR
 #include <FileHelpers.h>
+#endif
+
 #include <QuestSystem/AQ_QuestComponent.h>
 
 #define LOCTEXT_NAMESPACE "FAdvancedQuestModule"
@@ -23,7 +27,9 @@ UActorComponent* UAQ_CreateAssets::AddComponent(TSubclassOf<class UActorComponen
 	if (!Actor)
 		return nullptr;
 
+#if WITH_EDITOR
 	Actor->RerunConstructionScripts();
+#endif
 
 	UActorComponent* Result = nullptr;
 	if (!ComponentClass.Get())
@@ -69,9 +75,8 @@ void UAQ_CreateAssets::ShowFormattedDialog(const FString& InFileName)
 
 void UAQ_CreateAssets::UpdateActor(AActor* Actor)
 {
-	Actor->RerunConstructionScripts();
-
 #if WITH_EDITOR
+	Actor->RerunConstructionScripts();
 	FEditorFileUtils::SaveCurrentLevel();
 #endif
 

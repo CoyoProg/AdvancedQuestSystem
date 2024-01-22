@@ -7,29 +7,27 @@ public class AdvancedQuest : ModuleRules
 	public AdvancedQuest(ReadOnlyTargetRules Target) : base(Target)
 	{
         PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-        PrecompileForTargets = PrecompileTargetsType.Any;
 
-        bPrecompile = true;
+        //PrecompileForTargets = PrecompileTargetsType.Any;
+        //bPrecompile = true;
 
         PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
 				"Core",
+                //"AdvancedQuest_Editor",
             }
 			);
 
-        if (Target.bBuildEditor)
+        if (Target.Type == TargetType.Editor)
         {
-            PublicDependencyModuleNames.AddRange(new string[] { "UnrealEd", "UMGEditor", "Blutility", });
+            PublicDependencyModuleNames.AddRange(new string[]{"UnrealEd"});
         }
 
         PrivateDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"Projects",
 				"InputCore",
-				"EditorFramework",
-				"ToolMenus",
 				"CoreUObject",
 				"Engine",
                 "Slate",
@@ -37,7 +35,6 @@ public class AdvancedQuest : ModuleRules
 				"UMG",
                 "EnhancedInput",
 				"Niagara",
-
             }
 			);
 	}

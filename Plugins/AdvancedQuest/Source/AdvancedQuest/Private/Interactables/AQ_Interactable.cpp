@@ -4,6 +4,7 @@
 
 #include <QuestSystem/AQ_QuestManager.h>
 #include <QuestSystem/AQ_Quest.h>
+#include "Components/StaticMeshComponent.h"
 
 #include "NiagaraComponent.h"
 

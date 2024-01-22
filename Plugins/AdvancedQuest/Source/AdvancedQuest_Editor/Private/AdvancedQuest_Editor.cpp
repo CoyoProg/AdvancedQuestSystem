@@ -1,8 +1,8 @@
 // Copyright 2024, Coyo Prog, All rights reserved.
 
-#include "AdvancedQuest.h"
-#include "AdvancedQuestStyle.h"
-#include "AdvancedQuestCommands.h"
+#include "AdvancedQuest_Editor.h"
+#include "AdvancedQuest_EditorStyle.h"
+#include "AdvancedQuest_EditorCommands.h"
 #include "Misc/MessageDialog.h"
 #include "ToolMenus.h"
 
@@ -13,36 +13,35 @@
 #include "EditorUtilityWidgetBlueprint.h"
 #include "EditorUtilitySubsystem.h"
 
-static const FName AdvancedQuestTabName("AdvancedQuest");
+static const FName AdvancedQuest_EditorTabName("AdvancedQuest_Editor");
 
-#define LOCTEXT_NAMESPACE "FAdvancedQuestModule"
+#define LOCTEXT_NAMESPACE "FAdvancedQuest_EditorModule"
 
-void FAdvancedQuestModule::StartupModule()
+void FAdvancedQuest_EditorModule::StartupModule()
 {
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
-	
-	FAdvancedQuestStyle::Initialize();
-	FAdvancedQuestStyle::ReloadTextures();
+	FAdvancedQuest_EditorStyle::Initialize();
+	FAdvancedQuest_EditorStyle::ReloadTextures();
 
-	FAdvancedQuestCommands::Register();
+	FAdvancedQuest_EditorCommands::Register();
 	
 	PluginCommands = MakeShareable(new FUICommandList);
 
 	PluginCommands->MapAction
 	(
-		FAdvancedQuestCommands::Get().PluginAction,
-		FExecuteAction::CreateRaw(this, &FAdvancedQuestModule::PluginButtonClicked),
+		FAdvancedQuest_EditorCommands::Get().PluginAction,
+		FExecuteAction::CreateRaw(this, &FAdvancedQuest_EditorModule::PluginButtonClicked),
 		FCanExecuteAction()
 	);
 
-	UToolMenus::RegisterStartupCallback(FSimpleMulticastDelegate::FDelegate::CreateRaw(this, &FAdvancedQuestModule::RegisterMenus));
+	UToolMenus::RegisterStartupCallback(FSimpleMulticastDelegate::FDelegate::CreateRaw(this, &FAdvancedQuest_EditorModule::RegisterMenus));
 
 	// Bind the OnBeginPIE & OnEndPIE delegates
-	FEditorDelegates::BeginPIE.AddRaw(this, &FAdvancedQuestModule::OnBeginPIEHandler);
-	FEditorDelegates::EndPIE.AddRaw(this, &FAdvancedQuestModule::OnEndPIEHandler);
+	FEditorDelegates::BeginPIE.AddRaw(this, &FAdvancedQuest_EditorModule::OnBeginPIEHandler);
+	FEditorDelegates::EndPIE.AddRaw(this, &FAdvancedQuest_EditorModule::OnEndPIEHandler);
 }
 
-void FAdvancedQuestModule::ShutdownModule()
+void FAdvancedQuest_EditorModule::ShutdownModule()
 {
 	// This function may be called during shutdown to clean up your module.  For modules that support dynamic reloading,
 	// we call this function before unloading the module.
@@ -51,15 +50,15 @@ void FAdvancedQuestModule::ShutdownModule()
 
 	UToolMenus::UnregisterOwner(this);
 
-	FAdvancedQuestStyle::Shutdown();
+	FAdvancedQuest_EditorStyle::Shutdown();
 
-	FAdvancedQuestCommands::Unregister();
+	FAdvancedQuest_EditorCommands::Unregister();
 
 	FEditorDelegates::BeginPIE.RemoveAll(this);
 	FEditorDelegates::EndPIE.RemoveAll(this);
 }
 
-void FAdvancedQuestModule::PluginButtonClicked()
+void FAdvancedQuest_EditorModule::PluginButtonClicked()
 {
 	if (isPIE)
 		return;
@@ -87,14 +86,14 @@ void FAdvancedQuestModule::PluginButtonClicked()
 
 }
 
-bool FAdvancedQuestModule::ClosePlugin()
+bool FAdvancedQuest_EditorModule::ClosePlugin()
 {
 	UEditorUtilitySubsystem* EditorUtilitySubsystem = GEditor->GetEditorSubsystem<UEditorUtilitySubsystem>();
 
 	return EditorUtilitySubsystem->CloseTabByID(widgetID);
 }
 
-void FAdvancedQuestModule::RegisterMenus()
+void FAdvancedQuest_EditorModule::RegisterMenus()
 {
 	// Owner will be used for cleanup in call to UToolMenus::UnregisterOwner
 	FToolMenuOwnerScoped OwnerScoped(this);
@@ -103,7 +102,7 @@ void FAdvancedQuestModule::RegisterMenus()
 		UToolMenu* Menu = UToolMenus::Get()->ExtendMenu("LevelEditor.MainMenu.Window");
 		{
 			FToolMenuSection& Section = Menu->FindOrAddSection("WindowLayout");
-			Section.AddMenuEntryWithCommandList(FAdvancedQuestCommands::Get().PluginAction, PluginCommands);
+			Section.AddMenuEntryWithCommandList(FAdvancedQuest_EditorCommands::Get().PluginAction, PluginCommands);
 		}
 	}
 
@@ -112,7 +111,7 @@ void FAdvancedQuestModule::RegisterMenus()
 		{
 			FToolMenuSection& Section = ToolbarMenu->FindOrAddSection("PluginTools");
 			{
-				FToolMenuEntry& Entry = Section.AddEntry(FToolMenuEntry::InitToolBarButton(FAdvancedQuestCommands::Get().PluginAction));
+				FToolMenuEntry& Entry = Section.AddEntry(FToolMenuEntry::InitToolBarButton(FAdvancedQuest_EditorCommands::Get().PluginAction));
 				Entry.SetCommandList(PluginCommands);
 			}
 		}
@@ -121,4 +120,4 @@ void FAdvancedQuestModule::RegisterMenus()
 
 #undef LOCTEXT_NAMESPACE
 	
-IMPLEMENT_MODULE(FAdvancedQuestModule, AdvancedQuest)
+IMPLEMENT_MODULE(FAdvancedQuest_EditorModule, AdvancedQuest_Editor)

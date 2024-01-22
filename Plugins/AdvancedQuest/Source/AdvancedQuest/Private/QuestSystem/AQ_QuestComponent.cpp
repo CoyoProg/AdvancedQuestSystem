@@ -7,6 +7,7 @@
 #include <QuestSystem/AQ_QuestManager.h>
 #include "QuestSystem/AQ_Quest.h"
 
+#include "GameFramework/Actor.h"
 #include "Components/WidgetComponent.h"
 
 #if WITH_EDITOR
@@ -27,9 +28,11 @@ void UAQ_QuestComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
+#if WITH_EDITOR
 	/* Return if the play mode is Simulate */
 	if (GetWorld()->WorldType == EWorldType::PIE && GEditor->IsSimulateInEditorInProgress())
 		return;
+#endif
 
 	if (QuestMarkerClass)
 		CreateQuestMarkerWidget();
@@ -117,9 +120,10 @@ void UAQ_QuestComponent::UpdateQuestMarker()
 
 void UAQ_QuestComponent::RerunScript()
 {
+#if WITH_EDITOR
 	AActor* Actor = GetOwner();
-
 	Actor->RerunConstructionScripts();
+#endif
 }
 
 void UAQ_QuestComponent::Interact(const TScriptInterface<IAQ_PlayerChannelsFacade>& PlayerChannel)

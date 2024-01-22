@@ -13,8 +13,10 @@ void UAQ_QuestListenerComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
+#if WITH_EDITOR
 	if (GetWorld()->WorldType == EWorldType::PIE && GEditor->IsSimulateInEditorInProgress())
 		return;
+#endif
 
 	QuestManager = GetWorld()->
 		GetFirstPlayerController()->GetPawn()->
