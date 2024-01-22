@@ -1,4 +1,5 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright 2024, Coyo Prog, All rights reserved.
+
 #include "Character/AQ_PlayerController.h"
 #include "GameFramework/Character.h"
 #include "Character/AQ_Player.h"

@@ -1,3 +1,5 @@
+// Copyright 2024, Coyo Prog, All rights reserved.
+
 #pragma once
 
 #include "CoreMinimal.h"
@@ -13,7 +15,6 @@ class ADVANCEDQUEST_API UAQ_QuestListenerComponent : public UActorComponent
 
 public:	
 	UAQ_QuestListenerComponent();
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 protected:
 	virtual void BeginPlay() override;

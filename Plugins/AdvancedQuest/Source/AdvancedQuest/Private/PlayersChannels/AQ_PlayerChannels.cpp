@@ -1,4 +1,5 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright 2024, Coyo Prog, All rights reserved.
+
 #include "PlayersChannels/AQ_PlayerChannels.h"
 
 #include "PlayersChannels/AQ_InventoryChannel.h"
@@ -338,6 +339,11 @@ void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 void UAQ_PlayerChannels::OnEnvironmentEventNotify_Implementation(EAQ_EnvironmentEventType eventType, UObject* entity)
 {
 	EnvironmentChannel->OnEnvironmentEventNotify(eventType, entity);
+}
+
+void UAQ_PlayerChannels::OnCombatEventNotify_Implementation(EAQ_CombatEventType eventType, UObject* entity, float amount)
+{
+	CombatChannel->OnCombatEventNotify(eventType, entity, amount);
 }
 
 void UAQ_PlayerChannels::OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay)

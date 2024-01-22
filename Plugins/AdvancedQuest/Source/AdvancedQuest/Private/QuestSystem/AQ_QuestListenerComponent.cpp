@@ -1,10 +1,12 @@
+// Copyright 2024, Coyo Prog, All rights reserved.
+
 #include "QuestSystem/AQ_QuestListenerComponent.h"
 #include <QuestSystem/AQ_QuestManager.h>
 #include "QuestSystem/AQ_Quest.h"
 
 UAQ_QuestListenerComponent::UAQ_QuestListenerComponent()
 {
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
 }
 
 void UAQ_QuestListenerComponent::BeginPlay()
@@ -23,6 +25,7 @@ void UAQ_QuestListenerComponent::OnQuestStateChangedWrapper(UAQ_Quest* questUpda
 {
 	OnQuestStateChanged.Broadcast(questUpdate, QuestState);
 
+	/* Unbind if the quest isn't active anymore */
 	switch (questUpdate->QuestState)
 	{
 	case EAQ_QuestState::Pending:
@@ -41,6 +44,7 @@ void UAQ_QuestListenerComponent::OnQuestStateChangedWrapper(UAQ_Quest* questUpda
 
 void UAQ_QuestListenerComponent::BindFunctionsToQuestDelegates(UAQ_Quest* quest)
 {
+	/* Only bind to the delegate when the quest is active */
 	if (!QuestManager 
 		|| quest == nullptr 
 		|| !quest->bIsRequirementMet)
@@ -48,9 +52,3 @@ void UAQ_QuestListenerComponent::BindFunctionsToQuestDelegates(UAQ_Quest* quest)
 
 	quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestListenerComponent::OnQuestStateChangedWrapper);
 }
-
-void UAQ_QuestListenerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-}
-

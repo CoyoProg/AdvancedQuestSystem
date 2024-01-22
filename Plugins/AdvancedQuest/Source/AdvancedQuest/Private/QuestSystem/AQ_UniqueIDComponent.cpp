@@ -1,3 +1,5 @@
+// Copyright 2024, Coyo Prog, All rights reserved.
+
 #include "QuestSystem/AQ_UniqueIDComponent.h"
 #include "Tools/AQ_CreateAssets.h"
 #include "Interactables/AQ_Collectable.h"

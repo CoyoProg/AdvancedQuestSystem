@@ -1,3 +1,5 @@
+// Copyright 2024, Coyo Prog, All rights reserved.
+
 #pragma once
 
 #include "CoreMinimal.h"
@@ -106,5 +108,5 @@ private:
 	bool IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTypeP);
 
 	/* Requirements */
-	void CheckIfRequiermentsMet();
+	void CheckIfRequirementsMet();
 };

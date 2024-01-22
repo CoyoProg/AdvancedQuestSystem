@@ -1,3 +1,5 @@
+// Copyright 2024, Coyo Prog, All rights reserved.
+
 #include "QuestSystem/AQ_QuestComponent.h"
 
 #include "QuestSystem/AQ_QuestMarkerWidget.h"
@@ -25,12 +27,14 @@ void UAQ_QuestComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
+	/* Return if the play mode is Simulate */
 	if (GetWorld()->WorldType == EWorldType::PIE && GEditor->IsSimulateInEditorInProgress())
 		return;
 
 	if (QuestMarkerClass)
 		CreateQuestMarkerWidget();
 
+	/* Get the quest manager */
 	QuestManager = GetWorld()->
 		GetFirstPlayerController()->GetPawn()->
 		GetComponentByClass<UAQ_QuestManager>();
@@ -45,6 +49,7 @@ void UAQ_QuestComponent::LateBeginPlay()
 
 void UAQ_QuestComponent::SetQuestMarker(bool isMarkerVisible, bool isQuestValid)
 {
+	/* If no quest to show, set the component to be silent */
 	if (isMarkerVisible)
 		bIsComponentSilent = false;
 	else
@@ -55,6 +60,7 @@ void UAQ_QuestComponent::SetQuestMarker(bool isMarkerVisible, bool isQuestValid)
 
 	UAQ_QuestMarkerWidget* widget = Cast<UAQ_QuestMarkerWidget>(QuestMarkerWidget->GetWidget());
 
+	/* Update the quest marker */
 	if (widget)
 	{
 		QuestMarkerWidget->SetVisibility(isMarkerVisible);

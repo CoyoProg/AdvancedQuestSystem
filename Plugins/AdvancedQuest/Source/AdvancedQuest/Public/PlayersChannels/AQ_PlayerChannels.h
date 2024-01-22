@@ -1,3 +1,5 @@
+// Copyright 2024, Coyo Prog, All rights reserved.
+
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
@@ -23,20 +25,6 @@ class ADVANCEDQUEST_API UAQ_PlayerChannels : public UActorComponent, public IAQ_
 public:
 	UAQ_PlayerChannels();
 	~UAQ_PlayerChannels();
-
-	/** Player Channels */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Channels")
-	UAQ_InventoryChannel* InventoryChannel = nullptr;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Channels")
-	UAQ_EnvironmentChannel* EnvironmentChannel = nullptr;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Channels")
-	UAQ_CombatChannel* CombatChannel = nullptr;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Channels")
-	UAQ_QuestChannel* QuestChannel = nullptr;
-
 
 	/* Book Quest Template */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widget")
@@ -68,6 +56,9 @@ public:
 
 	UFUNCTION()
 	void OnEnvironmentEventNotify_Implementation(EAQ_EnvironmentEventType eventType, UObject* entity);
+	UFUNCTION()
+	void OnCombatEventNotify_Implementation(EAQ_CombatEventType eventType, UObject* entity, float amount = 1);
+
 
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Events|Quests")
 	void OnQuestEnded(UAQ_Quest* quest);
@@ -94,6 +85,21 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
+
+	/** Player Channels */
+	UPROPERTY(BlueprintReadOnly)
+	UAQ_InventoryChannel* InventoryChannel = nullptr;
+
+	UPROPERTY(BlueprintReadOnly)
+	UAQ_EnvironmentChannel* EnvironmentChannel = nullptr;
+
+	UPROPERTY(BlueprintReadOnly)
+	UAQ_CombatChannel* CombatChannel = nullptr;
+
+	UPROPERTY(BlueprintReadOnly)
+	UAQ_QuestChannel* QuestChannel = nullptr;
+
+
 	/* Player Stats */
 	UPROPERTY(BlueprintReadOnly)
 	int PlayerLevel = 1;
@@ -101,6 +107,7 @@ protected:
 
 	/* Saving system */
 	void SaveGame();
+
 
 	// Those functions should be in the Inventory Component
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)

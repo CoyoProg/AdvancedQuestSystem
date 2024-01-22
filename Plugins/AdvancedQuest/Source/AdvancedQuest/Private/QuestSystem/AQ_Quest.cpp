@@ -1,3 +1,5 @@
+// Copyright 2024, Coyo Prog, All rights reserved.
+
 #include "QuestSystem/AQ_Quest.h"
 
 #include <DataAssets/AQ_ItemData.h>
@@ -80,6 +82,7 @@ void UAQ_Quest::ResetQuest()
 
 void UAQ_Quest::ResetObjectives()
 {
+	/* Reset all objectives to zero */
 	for (auto& Objectives : QuestData->objectives)
 	{
 		Objectives.CurrentAmount = 0;
@@ -159,6 +162,7 @@ void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eve
 		return;
 	}
 
+	/* Update the state if the objective was valid but isn't anymore */
 	if (ObjectivesCompleted < objectivesCount && QuestState == EAQ_QuestState::Valid)
 	{
 		QuestState = EAQ_QuestState::Active;
@@ -189,6 +193,8 @@ void UAQ_Quest::UpdateCurrentObjective(int CurrentIndex, float amount)
 		QuestData->objectives[CurrentIndex].isObjectiveComplete = false;
 	}
 	
+	/* Update the objective only if currentAmount is less than the amount needed 
+	   We don't want to have a bigger number showing in the quest Log */
 	if (currentAmount <= amountNeeded)
 	{
 		if (ObjectivesUpdatedDelegate.IsBound())
@@ -204,7 +210,7 @@ void UAQ_Quest::OnQuestRequirementChange(int QuestID)
 			QuestData->requirementsProgression.QuestID.Add(QuestID);
 	}
 
-	CheckIfRequiermentsMet();
+	CheckIfRequirementsMet();
 }
 
 void UAQ_Quest::OnLevelRequirementChange(int PlayerLevel)
@@ -212,11 +218,12 @@ void UAQ_Quest::OnLevelRequirementChange(int PlayerLevel)
 	if (QuestData->questRequirements.PlayerLevel == PlayerLevel)
 		QuestData->requirementsProgression.PlayerLevel = PlayerLevel;
 
-	CheckIfRequiermentsMet();
+	CheckIfRequirementsMet();
 }
 
-void UAQ_Quest::CheckIfRequiermentsMet()
+void UAQ_Quest::CheckIfRequirementsMet()
 {
+	/* Check if all the requirements are met */
 	FAQ_RequiermentData requierments = QuestData->questRequirements;
 	FAQ_RequiermentData requiermentsProgression = QuestData->requirementsProgression;
 

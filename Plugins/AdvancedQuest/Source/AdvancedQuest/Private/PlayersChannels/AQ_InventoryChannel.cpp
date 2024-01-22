@@ -1,3 +1,5 @@
+// Copyright 2024, Coyo Prog, All rights reserved.
+
 #include "PlayersChannels/AQ_InventoryChannel.h"
 
 void UAQ_InventoryChannel::OnInventoryEventNotify(EAQ_InventoryEventType eventType, UObject* entity, float amount)

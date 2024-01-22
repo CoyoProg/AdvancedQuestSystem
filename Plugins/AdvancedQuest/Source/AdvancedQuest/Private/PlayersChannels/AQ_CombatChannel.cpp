@@ -1,3 +1,5 @@
+// Copyright 2024, Coyo Prog, All rights reserved.
+
 #include "PlayersChannels/AQ_CombatChannel.h"
 
 void UAQ_CombatChannel::OnCombatEventNotify(EAQ_CombatEventType eventType, UObject* entity, float amount)
@@ -5,11 +7,11 @@ void UAQ_CombatChannel::OnCombatEventNotify(EAQ_CombatEventType eventType, UObje
 	switch (eventType)
 	{
 	case EAQ_CombatEventType::Kill:
-		NotifyObservers_Implementation(entity, EAQ_NotifyEventType::Kill);
+		NotifyObservers_Implementation(entity, EAQ_NotifyEventType::Kill, amount);
 		break;
 
 	case EAQ_CombatEventType::Protect:
-		NotifyObservers_Implementation(entity, EAQ_NotifyEventType::Protect);
+		NotifyObservers_Implementation(entity, EAQ_NotifyEventType::Protect, amount);
 		break;
 
 	case EAQ_CombatEventType::Heal:

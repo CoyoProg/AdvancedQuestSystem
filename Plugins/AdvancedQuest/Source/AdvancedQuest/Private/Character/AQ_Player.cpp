@@ -1,3 +1,5 @@
+// Copyright 2024, Coyo Prog, All rights reserved.
+
 #include "Character/AQ_Player.h"
 
 #include <PlayersChannels/AQ_PlayerChannels.h>

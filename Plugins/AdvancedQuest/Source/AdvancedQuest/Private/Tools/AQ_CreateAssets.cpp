@@ -1,4 +1,5 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright 2024, Coyo Prog, All rights reserved.
+
 #include "Tools/AQ_CreateAssets.h"
 #include "External/AQ_FilesManager.h"
 #include <FileHelpers.h>

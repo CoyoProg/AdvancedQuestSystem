@@ -1,3 +1,5 @@
+// Copyright 2024, Coyo Prog, All rights reserved.
+
 #pragma once
 #include "AQ_NotifyEventType.generated.h"
 

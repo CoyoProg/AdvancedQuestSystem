@@ -1,3 +1,5 @@
+// Copyright 2024, Coyo Prog, All rights reserved.
+
 #include "PlayersChannels/AQ_Channels.h"
 #include "ObserverPattern/AQ_Observer.h"
 

@@ -1,3 +1,5 @@
+// Copyright 2024, Coyo Prog, All rights reserved.
+
 #pragma once
 
 #include "AQ_PlayerChannelsFacade.generated.h"
@@ -5,6 +7,8 @@
 class UAQ_Quest;
 class UAQ_ItemData;
 enum class EAQ_QuestState : uint8;
+enum class EAQ_EnvironmentEventType : uint8;
+enum class EAQ_CombatEventType : uint8;
 
 /**
  * 
@@ -33,6 +37,8 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnEnvironmentEventNotify(EAQ_EnvironmentEventType eventType, UObject* entity);
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnCombatEventNotify(EAQ_CombatEventType eventType, UObject* entity, float amount = 1);
 
 
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
