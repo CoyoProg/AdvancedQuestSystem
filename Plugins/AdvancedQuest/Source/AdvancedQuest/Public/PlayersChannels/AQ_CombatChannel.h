@@ -24,6 +24,6 @@ class ADVANCEDQUEST_API UAQ_CombatChannel : public UAQ_Channels
 	GENERATED_BODY()
 	
 public:
-    UFUNCTION(BlueprintCallable, Category = "Events|Combat")
+    UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
 	void OnCombatEventNotify(EAQ_CombatEventType eventType, UObject* entity, float amount = 1);
 };

@@ -57,7 +57,7 @@ public:
 
 
 	/* Interact */
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Advanced Quest | Events")
 	void Interact();
 
 protected:

@@ -17,19 +17,19 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	/* Components */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Interactable")
 	class UNiagaraComponent* NiagaraComponent = nullptr;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Interactable")
 	class UStaticMeshComponent* StaticMesh = nullptr;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Interactable")
 	class USceneComponent* SceneRoot = nullptr;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Category = "Advanced Quest | Interactable")
 	bool bIsSleeping = false;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Interactable")
 	void EnableParticles(bool isEnable);
 
 
@@ -37,13 +37,13 @@ public:
 	UFUNCTION()
 	void OnQuestStateChanged(class UAQ_Quest* quest, EAQ_QuestState questState);
 
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Initial State")
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Advanced Quest | Interactable | Reset")
 	void ResetToInitialState();
 
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Initial State")
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Advanced Quest | Interactable| Reset")
 	void SaveInitialState();
 
-	UPROPERTY(BlueprintReadWrite, Category = "Initial State")
+	UPROPERTY(BlueprintReadWrite, Category = "Advanced Quest | Interactable | Reset")
 	bool bIsInitialStateSaved = false;
 
 

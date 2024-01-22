@@ -24,7 +24,7 @@ class ADVANCEDQUEST_API UAQ_EnvironmentChannel : public UAQ_Channels
 	GENERATED_BODY()
 	
 public:
-	UFUNCTION(BlueprintCallable, Category = "Events|Combat")
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
 	void OnEnvironmentEventNotify(EAQ_EnvironmentEventType eventType, UObject* entity);
 
 };

@@ -31,20 +31,20 @@ public:
 
 
 	/* Events */
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Advanced Quest | Events")
 	void OnQuestEnable(UAQ_Quest* quest);
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Advanced Quest | Events")
 	void OnEnvironmentEventNotify(EAQ_EnvironmentEventType eventType, UObject* entity);
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Advanced Quest | Events")
 	void OnCombatEventNotify(EAQ_CombatEventType eventType, UObject* entity, float amount = 1);
 
 
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Advanced Quest | Inventory")
 	void AddItemToInvetory(UAQ_ItemData* item, int amount);
 
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Advanced Quest | Inventory")
 	void RemoveItemFromInvetory(UAQ_ItemData* item, int amount, bool bRemoveCompletely = false);
 };
 

@@ -20,6 +20,6 @@ public:
 		itemType = EAQ_ItemType::Quest;
 	}
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Advanced Quest | Quest")
 	int QuestID = 0;
 };

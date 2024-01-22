@@ -7,12 +7,11 @@
 #include "ToolMenus.h"
 
 #include "Misc/CoreDelegates.h"
-#include "Editor/EditorEngine.h"
 
+#include "Editor/EditorEngine.h"
 #include "EditorUtilityWidget.h"
 #include "EditorUtilityWidgetBlueprint.h"
 #include "EditorUtilitySubsystem.h"
-
 
 static const FName AdvancedQuestTabName("AdvancedQuest");
 
@@ -68,7 +67,7 @@ void FAdvancedQuestModule::PluginButtonClicked()
 	if (ClosePlugin())
 		return;
 
-	const FStringAssetReference widgetAssetPath
+	const FSoftObjectPath widgetAssetPath
 	("/AdvancedQuest/Tools/QuestTool/AQ_EUW_CustomQuestTool.AQ_EUW_CustomQuestTool");
 
 	UObject* widgetAssetLoaded = widgetAssetPath.TryLoad();
@@ -85,12 +84,13 @@ void FAdvancedQuestModule::PluginButtonClicked()
 
 	UEditorUtilitySubsystem* EditorUtilitySubsystem = GEditor->GetEditorSubsystem<UEditorUtilitySubsystem>();
 	EditorUtilitySubsystem->SpawnAndRegisterTabAndGetID(widget, widgetID);
+
 }
 
 bool FAdvancedQuestModule::ClosePlugin()
 {
 	UEditorUtilitySubsystem* EditorUtilitySubsystem = GEditor->GetEditorSubsystem<UEditorUtilitySubsystem>();
-	
+
 	return EditorUtilitySubsystem->CloseTabByID(widgetID);
 }
 

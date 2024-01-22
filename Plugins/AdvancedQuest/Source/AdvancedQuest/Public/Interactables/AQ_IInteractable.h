@@ -22,6 +22,6 @@ class ADVANCEDQUEST_API IAQ_IInteractable
 	GENERATED_BODY()
 
 public:
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Advanced Quest | Events")
 	void Interact(const TScriptInterface<IAQ_PlayerChannelsFacade>& PlayerChannel);
 };

@@ -42,10 +42,10 @@ void AAQ_Interactable::BeginPlay()
 {
 	Super::BeginPlay();
 
+#if WITH_EDITOR
 	if (GetWorld()->WorldType == EWorldType::PIE && GEditor->IsSimulateInEditorInProgress())
-	{
 		return;
-	}
+#endif
 
 	if (bIsQuestActor)
 		bIsSleeping = true;

@@ -15,16 +15,16 @@ class ADVANCEDQUEST_API UAQ_UniqueIDComponent : public UActorComponent
 public:
 	UAQ_UniqueIDComponent();
 
-	UFUNCTION(BlueprintCallable, Category = "Unique ID Component")
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Component")
 	void SetUniqueID(int InUniqueID) { UniqueID = InUniqueID; }
 
-	UFUNCTION(BlueprintCallable, Category = "Unique ID Component")
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Component")
 	const int GetUniqueID() const { return UniqueID; }
 
-	UFUNCTION(CallInEditor)
+	UFUNCTION(CallInEditor, Category = "Advanced Quest | Component")
 	void GenerateUniqueID();
 
 private:
-	UPROPERTY(VisibleAnywhere, Category = "Unique ID Component")
+	UPROPERTY(VisibleAnywhere, Category = "Advanced Quest | Component")
 	int UniqueID = 0;
 };

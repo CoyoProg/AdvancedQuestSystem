@@ -20,17 +20,17 @@ protected:
 	virtual void BeginPlay() override;
 
 	/* References */
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category = "Advanced Quest | Quest")
 	class UAQ_QuestManager* QuestManager = nullptr;
 
-	UFUNCTION()
+	UFUNCTION(Category = "Advanced Quest | Events")
 	void OnQuestStateChangedWrapper(class UAQ_Quest* questUpdate, EAQ_QuestState QuestState);
 
 	// Use this delegate to be able to update actors in blueprint
 	// when OnQuestStateChanged is triggered
-	UPROPERTY(BlueprintAssignable)
+	UPROPERTY(BlueprintAssignable, Category = "Advanced Quest | Events")
 	FOnQuestStateChangedListenerDelegate OnQuestStateChanged;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
 	void BindFunctionsToQuestDelegates(class UAQ_Quest* quest);
 };

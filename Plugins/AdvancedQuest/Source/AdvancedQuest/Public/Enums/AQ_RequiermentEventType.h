@@ -13,10 +13,10 @@ struct FAQ_RequiermentData
 		PlayerLevel(0)
 	{}
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Requierment")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest | Requirement")
 	int PlayerLevel;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Requierment")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest | Requirement")
 	TArray<int> QuestID;
 };
 

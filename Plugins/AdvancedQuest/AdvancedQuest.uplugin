@@ -7,18 +7,17 @@
 	"Category": "Other",
 	"CreatedBy": "Coyo",
 	"CreatedByURL": "https://coyoprog.github.io/about.html",
-	"DocsURL": "coyoprog.github.io/plugins/advancedquest/documentation.html",
+	"DocsURL": "https://coyoprog.github.io/plugins/advancedquest/documentation.html",
 	"MarketplaceURL": "",
 	"SupportURL": "https://discord.gg/etdaQ45EqY",
 	"CanContainContent": true,
-	"IsBetaVersion": false,
-	"IsExperimentalVersion": true,
 	"Installed": false,
 	"Modules": [
 		{
 			"Name": "AdvancedQuest",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": "Win64"
 		}
 	],
 	"Plugins": [

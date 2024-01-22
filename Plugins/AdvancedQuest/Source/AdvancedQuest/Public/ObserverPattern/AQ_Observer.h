@@ -24,9 +24,9 @@ class ADVANCEDQUEST_API IAQ_Observer
 	GENERATED_BODY()
 
 public:
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Advanced Quest | Events | Observer")
 	void OnNotify(UObject* entity, EAQ_NotifyEventType eventType, float amount = 1);
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Advanced Quest | Events | Observer")
 	void OnNotifyRequierment(EAQ_RequiermentEventType eventType, FAQ_RequiermentData& requiermentData);
 };

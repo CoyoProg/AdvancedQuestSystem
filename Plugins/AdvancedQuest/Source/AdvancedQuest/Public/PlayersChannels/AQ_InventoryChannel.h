@@ -22,6 +22,6 @@ class ADVANCEDQUEST_API UAQ_InventoryChannel : public UAQ_Channels
 	GENERATED_BODY()
 	
 public:
-    UFUNCTION(BlueprintCallable, Category = "Events|Inventory")
+    UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
 	void OnInventoryEventNotify(EAQ_InventoryEventType eventType, UObject* entity, float amount = 1);
 };

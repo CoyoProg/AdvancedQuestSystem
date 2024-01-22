@@ -62,13 +62,18 @@ void UAQ_CreateAssets::ShowFormattedDialog(const FString& InFileName)
 		FText::FromString(InFileName)
 	);
 
+#if WITH_EDITOR
 	FMessageDialog::Open(EAppMsgType::Ok, DialogText);
+#endif
 }
 
 void UAQ_CreateAssets::UpdateActor(AActor* Actor)
 {
 	Actor->RerunConstructionScripts();
+
+#if WITH_EDITOR
 	FEditorFileUtils::SaveCurrentLevel();
+#endif
 
 	SavePackage(Actor);
 }

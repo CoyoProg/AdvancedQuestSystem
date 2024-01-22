@@ -24,13 +24,13 @@ class ADVANCEDQUEST_API UAQ_ItemData : public UPrimaryDataAsset
 	
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Advanced Quest | Item")
 	class UTexture2D* Sprite = nullptr;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Advanced Quest | Item")
 	FString ItemName = FString();
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Advanced Quest | Item")
 	bool bIsStackable = true;
 
 	EAQ_ItemType itemType = EAQ_ItemType::Default;

@@ -23,13 +23,13 @@ class ADVANCEDQUEST_API IAQ_Subject
 	GENERATED_BODY()
 
 public:
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Advanced Quest | Events | Subject")
 	void AddObserver(UObject* observer);
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Advanced Quest | Events | Subject")
 	void RemoveObserver(UObject* observer);
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Advanced Quest | Events | Subject")
 	void NotifyObservers(UObject* entity, EAQ_NotifyEventType eventType, float amount = 1);
 
 	//UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Observer")

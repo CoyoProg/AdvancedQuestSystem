@@ -20,7 +20,7 @@ public:
 	class UAQ_ItemData* const GetItemData() { return ItemData; }
 
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Advanced Quest | Item")
 	class UAQ_ItemData* ItemData;
 
 	virtual void BeginPlay() override;

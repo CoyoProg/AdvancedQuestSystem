@@ -21,53 +21,53 @@ class ADVANCEDQUEST_API UAQ_BookQuest : public UUserWidget
 	
 public:
 	/* Widgets */
-	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "Book Quest Widget")
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "Advanced Quest | UI")
 	UUserWidget* JournalWidget = nullptr;
 
-	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "Book Quest Widget")
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "Advanced Quest | UI")
 	UUserWidget* QuestGiverWidget = nullptr;
 
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Advanced Quest | UI")
 	void UpdateQuestBook(UAQ_Quest* quest);
 
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Advanced Quest | UI")
 	void DisplayQuestGiverSummary(const TArray<UAQ_Quest*>& questsToDisplay);
 	
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | UI")
 	void OpenJournal();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | UI")
 	void OpenQuestGiverSummary();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | UI")
 	void CloseAll();
 
 
 	/* Quests */
-	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Book Quest Widget")
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Advanced Quest | UI")
 	TArray<UAQ_Quest*> Quests;
 
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Advanced Quest | UI")
 	void AddQuest(UAQ_Quest* quest);
 	
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Advanced Quest | UI")
 	void RemoveQuest(UAQ_Quest* quest);
 
 
 	/* References */
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category = "Advanced Quest | UI")
 	APlayerController* PlayerController = nullptr;
 
 
 	/* Load Save */
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Advanced Quest | Save-Load")
 	void OnLoadQuests(UAQ_Quest* quest);
 
 
 	/* Delegates */
-	UPROPERTY(BlueprintAssignable)
+	UPROPERTY(BlueprintAssignable, Category = "Advanced Quest | Events")
 	FOnQuestEnableDelegate OnQuestEnableDelegate;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
 	void OnQuestEnableBroadcast(UAQ_Quest* quest);
 };

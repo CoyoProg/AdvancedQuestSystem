@@ -31,7 +31,7 @@ public:
 	void SetWidgetClass(TSubclassOf<UUserWidget> widgetClass) { BookQuestWidgetClass = widgetClass;}
 	void AddWidgetToViewport();
 
-	UPROPERTY(EditInstanceOnly, BlueprintReadOnly)
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Advanced Quest | UI")
 	UAQ_BookQuest* BookQuest = nullptr;
 
 

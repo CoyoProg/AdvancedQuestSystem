@@ -17,10 +17,10 @@ struct FAQ_IsGiverOrReceiver
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Component")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Component")
 	bool bIsQuestReceiver = true;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Component")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Component")
 	bool bIsQuestGiver = true;
 };
 
@@ -41,37 +41,37 @@ protected:
 
 public:
 	/* Quests */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Component")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Component")
 	TMap<int, FAQ_IsGiverOrReceiver> QuestsList;
 
-	UFUNCTION()
+	UFUNCTION(Category = "Advanced Quest | Events")
 	void OnQuestStateChangedWrapper(UAQ_Quest* questUpdate, EAQ_QuestState QuestState);
 
-	UFUNCTION()
+	UFUNCTION(Category = "Advanced Quest | Events")
 	void OnQuestRequirementMet(UAQ_Quest* quest);
 
 	void BindFunctionsToQuestDelegates();
 
 
 	/* Interaction */
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Component")
 	void Interact(const TScriptInterface<IAQ_PlayerChannelsFacade>& PlayerChannel);
 
-	UPROPERTY(BlueprintReadOnly, Category = "Quest Component")
+	UPROPERTY(BlueprintReadOnly, Category = "Advanced Quest | Component")
 	bool bIsComponentSilent = true;
 
 
 	/* Widgets */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Component")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | UI")
 	TSubclassOf<UUserWidget> QuestMarkerClass = nullptr;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest Component")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | UI")
 	UMaterialInterface* QuestMarkerMaterial = nullptr; // Put a two sided material for the widget to be two sided
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | UI")
 	void SetQuestMarker(bool isMarkerVisible, bool isQuestValid);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | UI")
 	void UpdateQuestMarker();
 
 
@@ -79,13 +79,13 @@ public:
 protected:
 	AActor* Owner = nullptr;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category = "Advanced Quest | Component")
 	UAQ_QuestManager* QuestManager = nullptr;
 
 
 	// Use this delegate to be able to update actors in blueprint
 	// when OnQuestStateChanged is triggered
-	UPROPERTY(BlueprintAssignable)
+	UPROPERTY(BlueprintAssignable, Category = "Advanced Quest | Events")
 	FOnStateChangedBueprintDelegate OnQuestStateChanged;
 
 private:
@@ -94,6 +94,6 @@ private:
 
 
 	/* DEBUG */
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Debug")
 	void RerunScript(); // Usefull only to see all the quest Marker when using the Tool
 };

@@ -25,19 +25,19 @@ protected:
 
 	/* Quests */
 public:
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Quest")
 	UAQ_Quest* QueryQuest(int QuestID);
 
 protected:
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category = "Advanced Quest | Quest")
 	TMap<int, UAQ_Quest*> QuestDataCenter;
 
 
 	/* Load & Save */
 public:
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Advanced Quest | Save-Load")
 	void LoadQuestData();
 
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Advanced Quest | Save-Load")
 	void SaveQuestData();
 };

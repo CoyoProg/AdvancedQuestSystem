@@ -43,46 +43,46 @@ public:
 	~UAQ_Quest();
 
 	/* Quest Data */
-	UPROPERTY(BlueprintReadWrite, Category = "Quest")
+	UPROPERTY(BlueprintReadWrite, Category = "Advanced Quest | Quest")
 	EAQ_QuestState QuestState = EAQ_QuestState::Pending;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Quest")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest")
 	UAQ_QuestData* QuestData = nullptr;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Quest")
+	UPROPERTY(BlueprintReadWrite, Category = "Advanced Quest | Quest")
 	int ObjectivesCompleted = 0;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
 	void EnableQuest();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
 	void DisableQuest();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
 	void ResetQuest();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
 	void ResetObjectives();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
 	void QuestFailed();
 
 	void SetQuestData(UAQ_QuestData* QuestData);
 	void UpdateQuestState();
 
 	/* Display Properties */
-	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
+	UPROPERTY(BlueprintReadWrite, Category = "Advanced Quest | UI")
 	bool bIsDisplayJournal = false;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
+	UPROPERTY(BlueprintReadWrite, Category = "Advanced Quest | UI")
 	bool bIsDisplayQuickJournal = false;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
+	UPROPERTY(BlueprintReadWrite, Category = "Advanced Quest | UI")
 	int IndexQuickDisplay = 0;
 
 
 	/* Requirements */
-	UPROPERTY(BlueprintReadWrite, Category = "Quest Display")
+	UPROPERTY(BlueprintReadWrite, Category = "Advanced Quest | Quest")
 	bool bIsRequirementMet = true;
 
 
@@ -90,9 +90,9 @@ public:
 	void OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP, float amount = 1);
 	void UpdateCurrentObjective(int i, float amount = 1);
 
-	UFUNCTION()
+	UFUNCTION(Category = "Advanced Quest | Events")
 	void OnQuestRequirementChange(int QuestID);
-	UFUNCTION()
+	UFUNCTION(Category = "Advanced Quest | Events")
 	void OnLevelRequirementChange(int PlayerLevel);
 
 	/* Delegates */

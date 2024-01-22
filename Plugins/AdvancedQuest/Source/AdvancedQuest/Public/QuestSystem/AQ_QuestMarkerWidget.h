@@ -16,6 +16,6 @@ class ADVANCEDQUEST_API UAQ_QuestMarkerWidget : public UUserWidget
 	GENERATED_BODY()
 	
 public:
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Advanced Quest | UI")
 	void SetImageQuest(bool isEnded);
 };
