@@ -34,9 +34,6 @@ void UAQ_QuestComponent::BeginPlay()
 		return;
 #endif
 
-	if (QuestMarkerClass)
-		CreateQuestMarkerWidget();
-
 	/* Get the quest manager */
 	QuestManager = GetWorld()->
 		GetFirstPlayerController()->GetPawn()->
@@ -47,6 +44,9 @@ void UAQ_QuestComponent::BeginPlay()
 
 void UAQ_QuestComponent::LateBeginPlay()
 {	
+	if (QuestMarkerClass)
+		CreateQuestMarkerWidget();
+
 	BindFunctionsToQuestDelegates();
 }
 
