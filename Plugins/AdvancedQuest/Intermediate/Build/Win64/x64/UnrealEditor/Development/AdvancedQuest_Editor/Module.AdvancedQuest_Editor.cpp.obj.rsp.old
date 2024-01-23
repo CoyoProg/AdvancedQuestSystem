@@ -1,11 +1,11 @@
-"C:\Users\cpaya\Documents\ArtFx\Unreal\DemoreelRPG\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest_Editor\Module.AdvancedQuest_Editor.cpp"
-/FI"C:\Users\cpaya\Documents\ArtFx\Unreal\DemoreelRPG\Intermediate\Build\Win64\x64\DemoreelRPGEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h"
-/FI"C:\Users\cpaya\Documents\ArtFx\Unreal\DemoreelRPG\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest_Editor\Definitions.AdvancedQuest_Editor.h"
-/Yu"C:\Users\cpaya\Documents\ArtFx\Unreal\DemoreelRPG\Intermediate\Build\Win64\x64\DemoreelRPGEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h"
-/Fp"C:\Users\cpaya\Documents\ArtFx\Unreal\DemoreelRPG\Intermediate\Build\Win64\x64\DemoreelRPGEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h.pch"
-/Fo"C:\Users\cpaya\Documents\ArtFx\Unreal\DemoreelRPG\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest_Editor\Module.AdvancedQuest_Editor.cpp.obj"
-/sourceDependencies "C:\Users\cpaya\Documents\ArtFx\Unreal\DemoreelRPG\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest_Editor\Module.AdvancedQuest_Editor.cpp.dep.json"
-@"C:\Users\cpaya\Documents\ArtFx\Unreal\DemoreelRPG\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest_Editor\AdvancedQuest_Editor.Shared.rsp"
+"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuestDemo\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest_Editor\Module.AdvancedQuest_Editor.cpp"
+/FI"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuestDemo\Intermediate\Build\Win64\x64\AdvancedQuestDemoEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h"
+/FI"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuestDemo\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest_Editor\Definitions.AdvancedQuest_Editor.h"
+/Yu"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuestDemo\Intermediate\Build\Win64\x64\AdvancedQuestDemoEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h"
+/Fp"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuestDemo\Intermediate\Build\Win64\x64\AdvancedQuestDemoEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h.pch"
+/Fo"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuestDemo\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest_Editor\Module.AdvancedQuest_Editor.cpp.obj"
+/sourceDependencies "C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuestDemo\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest_Editor\Module.AdvancedQuest_Editor.cpp.dep.json"
+@"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuestDemo\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest_Editor\AdvancedQuest_Editor.Shared.rsp"
 /Zc:inline
 /nologo
 /Oi

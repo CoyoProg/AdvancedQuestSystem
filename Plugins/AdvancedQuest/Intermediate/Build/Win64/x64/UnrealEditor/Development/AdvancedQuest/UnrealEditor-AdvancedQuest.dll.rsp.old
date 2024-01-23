@@ -35,9 +35,9 @@
 /NODEFAULTLIB:"LIBCPD"
 /FUNCTIONPADMIN:6
 /NATVIS:"..\Plugins\FX\Niagara\Intermediate\Build\Win64\x64\UnrealEditor\Development\Niagara\Niagara.natvis"
-"C:\Users\cpaya\Documents\ArtFx\Unreal\DemoreelRPG\Intermediate\Build\Win64\x64\DemoreelRPGEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h.obj"
-"C:\Users\cpaya\Documents\ArtFx\Unreal\DemoreelRPG\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest\Module.AdvancedQuest.cpp.obj"
-"C:\Users\cpaya\Documents\ArtFx\Unreal\DemoreelRPG\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest\Default.rc2.res"
+"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuestDemo\Intermediate\Build\Win64\x64\AdvancedQuestDemoEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h.obj"
+"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuestDemo\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest\Module.AdvancedQuest.cpp.obj"
+"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuestDemo\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest\Default.rc2.res"
 "..\Intermediate\Build\Win64\x64\UnrealEditor\Development\InputCore\UnrealEditor-InputCore.lib"
 "..\Intermediate\Build\Win64\x64\UnrealEditor\Development\CoreUObject\UnrealEditor-CoreUObject.lib"
 "..\Intermediate\Build\Win64\x64\UnrealEditor\Development\Engine\UnrealEditor-Engine.lib"
@@ -73,7 +73,7 @@
 "synchronization.lib"
 "dwmapi.lib"
 "imm32.lib"
-/OUT:"C:\Users\cpaya\Documents\ArtFx\Unreal\DemoreelRPG\Plugins\AdvancedQuest\Binaries\Win64\UnrealEditor-AdvancedQuest.dll"
-/IMPLIB:"C:\Users\cpaya\Documents\ArtFx\Unreal\DemoreelRPG\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest\UnrealEditor-AdvancedQuest.sup.lib"
-/PDB:"C:\Users\cpaya\Documents\ArtFx\Unreal\DemoreelRPG\Plugins\AdvancedQuest\Binaries\Win64\UnrealEditor-AdvancedQuest.pdb"
+/OUT:"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuestDemo\Plugins\AdvancedQuest\Binaries\Win64\UnrealEditor-AdvancedQuest.dll"
+/IMPLIB:"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuestDemo\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest\UnrealEditor-AdvancedQuest.sup.lib"
+/PDB:"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuestDemo\Plugins\AdvancedQuest\Binaries\Win64\UnrealEditor-AdvancedQuest.pdb"
 /ignore:4078

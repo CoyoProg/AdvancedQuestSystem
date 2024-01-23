@@ -6,7 +6,7 @@
 /NAME:"UnrealEditor-AdvancedQuest_Editor.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuestDemo\Intermediate\Build\Win64\x64\AdvancedQuestDemoEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h.obj"
-"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuestDemo\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest_Editor\Module.AdvancedQuest_Editor.cpp.obj"
-"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuestDemo\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest_Editor\Default.rc2.res"
-/OUT:"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuestDemo\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest_Editor\UnrealEditor-AdvancedQuest_Editor.lib"
+"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuest\Intermediate\Build\Win64\x64\AdvancedQuestDemoEditor\Development\UnrealEd\SharedPCH.UnrealEd.Cpp20.h.obj"
+"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuest\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest_Editor\Module.AdvancedQuest_Editor.cpp.obj"
+"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuest\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest_Editor\Default.rc2.res"
+/OUT:"C:\Users\cpaya\Documents\ArtFx\Unreal\AdvancedQuest\Plugins\AdvancedQuest\Intermediate\Build\Win64\x64\UnrealEditor\Development\AdvancedQuest_Editor\UnrealEditor-AdvancedQuest_Editor.lib"
