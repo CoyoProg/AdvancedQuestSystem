@@ -17,7 +17,7 @@ public class DemoreelRPG : ModuleRules
 			"InputCore", 
 			"EnhancedInput", 
 			
-			"UnrealEd",
+			//"UnrealEd",
 			"UMG",
             "AdvancedQuest",
         }
@@ -25,7 +25,7 @@ public class DemoreelRPG : ModuleRules
 
         PrivateDependencyModuleNames.AddRange(new string[] 
 		{ 
-			"AssetTools"
+			//"AssetTools"
 		}
 		);
     }
