@@ -1,0 +1,10 @@
+{
+	"SourceFiles": [
+		"C:\\Users\\cpaya\\Documents\\ArtFx\\Unreal\\AdvancedQuest\\Source\\AdvancedQuestDemo\\AdvancedQuestDemo.Build.cs",
+		"C:\\Users\\cpaya\\Documents\\ArtFx\\Unreal\\AdvancedQuest\\Plugins\\AdvancedQuest\\Source\\AdvancedQuest\\AdvancedQuest.Build.cs",
+		"C:\\Users\\cpaya\\Documents\\ArtFx\\Unreal\\AdvancedQuest\\Plugins\\AdvancedQuest\\Source\\AdvancedQuest_Editor\\AdvancedQuest_Editor.Build.cs",
+		"C:\\Users\\cpaya\\Documents\\ArtFx\\Unreal\\AdvancedQuest\\Source\\AdvancedQuestDemo.Target.cs",
+		"C:\\Users\\cpaya\\Documents\\ArtFx\\Unreal\\AdvancedQuest\\Source\\AdvancedQuestDemoEditor.Target.cs"
+	],
+	"EngineVersion": "5.3.2"
+}

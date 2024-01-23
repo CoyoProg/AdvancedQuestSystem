@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "AdvancedQuestDemo",
+			"Path": "..\\Source\\AdvancedQuestDemo.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "AdvancedQuestDemoEditor",
+			"Path": "..\\Source\\AdvancedQuestDemoEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

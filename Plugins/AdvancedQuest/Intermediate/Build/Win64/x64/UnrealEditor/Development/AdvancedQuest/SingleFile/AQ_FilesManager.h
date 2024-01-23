@@ -1,0 +1,1 @@
+#include "C:/Users/cpaya/Documents/ArtFx/Unreal/DemoreelRPG/Plugins/AdvancedQuest/Source/AdvancedQuest/Public/External/AQ_FilesManager.h"

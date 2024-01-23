@@ -1,0 +1,8 @@
+{
+	"BuildId": "27405482",
+	"Modules": 
+	{
+		"AdvancedQuest": "UnrealEditor-AdvancedQuest.dll",
+		"AdvancedQuest_Editor": "UnrealEditor-AdvancedQuest_Editor.dll"
+	}
+}
