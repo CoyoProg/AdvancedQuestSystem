@@ -17,13 +17,13 @@
 			"Name": "AdvancedQuest",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
-			"WhitelistPlatforms": "Win64"
+			"PlatformAllowList": "Win64"
 		},
 		{
 			"Name": "AdvancedQuest_Editor",
 			"Type": "Editor",
 			"LoadingPhase": "PostEngineInit",
-			"WhitelistPlatforms": "Win64"
+			"PlatformAllowList": "Win64"
 		}
 	],
 	"Plugins": [

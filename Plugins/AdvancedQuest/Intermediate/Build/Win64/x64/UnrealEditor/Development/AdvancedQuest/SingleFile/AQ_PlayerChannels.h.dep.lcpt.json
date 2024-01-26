@@ -1,12 +1,12 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquestdemo\\plugins\\advancedquest\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\advancedquest\\singlefile\\aq_playerchannels.h",
+        "Source": "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\plugins\\advancedquest\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\advancedquest\\singlefile\\aq_playerchannels.h",
         "ProvidedModule": "",
         "Includes": [
-            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquestdemo\\plugins\\advancedquest\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\advancedquest\\definitions.advancedquest.h",
-            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquestdemo\\intermediate\\build\\win64\\x64\\advancedquestdemoeditor\\development\\unrealed\\shareddefinitions.unrealed.cpp20.h",
-            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquestdemo\\plugins\\advancedquest\\source\\advancedquest\\public\\playerschannels\\aq_playerchannels.h",
+            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\plugins\\advancedquest\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\advancedquest\\definitions.advancedquest.h",
+            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\intermediate\\build\\win64\\x64\\advancedquestdemoeditor\\development\\unrealed\\shareddefinitions.unrealed.cpp20.h",
+            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\plugins\\advancedquest\\source\\advancedquest\\public\\playerschannels\\aq_playerchannels.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\coreminimal.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\coretypes.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\hal\\platform.h",
@@ -548,11 +548,11 @@
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\componentinstancedatacache.generated.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\actorcomponent.generated.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\net\\core\\public\\net\\core\\pushmodel\\pushmodelmacros.h",
-            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquestdemo\\plugins\\advancedquest\\source\\advancedquest\\public\\playerschannels\\aq_playerchannelsfacade.h",
-            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquestdemo\\plugins\\advancedquest\\intermediate\\build\\win64\\unrealeditor\\inc\\advancedquest\\uht\\aq_playerchannelsfacade.generated.h",
-            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquestdemo\\plugins\\advancedquest\\source\\advancedquest\\public\\enums\\aq_objectivestype.h",
-            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquestdemo\\plugins\\advancedquest\\intermediate\\build\\win64\\unrealeditor\\inc\\advancedquest\\uht\\aq_objectivestype.generated.h",
-            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquestdemo\\plugins\\advancedquest\\intermediate\\build\\win64\\unrealeditor\\inc\\advancedquest\\uht\\aq_playerchannels.generated.h"
+            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\plugins\\advancedquest\\source\\advancedquest\\public\\playerschannels\\aq_playerchannelsfacade.h",
+            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\plugins\\advancedquest\\intermediate\\build\\win64\\unrealeditor\\inc\\advancedquest\\uht\\aq_playerchannelsfacade.generated.h",
+            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\plugins\\advancedquest\\source\\advancedquest\\public\\enums\\aq_objectivestype.h",
+            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\plugins\\advancedquest\\intermediate\\build\\win64\\unrealeditor\\inc\\advancedquest\\uht\\aq_objectivestype.generated.h",
+            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\plugins\\advancedquest\\intermediate\\build\\win64\\unrealeditor\\inc\\advancedquest\\uht\\aq_playerchannels.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []
