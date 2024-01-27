@@ -82,7 +82,6 @@ void UAQ_PlayerChannels::AddObserver(UObject* entity, EAQ_ObjectivesType eventTy
 {
 	switch (eventType)
 	{
-		/** Add Observer to Interaction Channel */
 		/** Add Observer to Combat Channel */
 	case EAQ_ObjectivesType::Kill:
 		CombatChannel->AddObserver_Implementation(entity);
@@ -111,10 +110,6 @@ void UAQ_PlayerChannels::AddObserver(UObject* entity, EAQ_ObjectivesType eventTy
 		break;
 
 	case EAQ_ObjectivesType::MiniGame:
-		EnvironmentChannel->AddObserver_Implementation(entity);
-		break;
-
-	case EAQ_ObjectivesType::Puzzle:
 		EnvironmentChannel->AddObserver_Implementation(entity);
 		break;
 	}
@@ -152,10 +147,6 @@ void UAQ_PlayerChannels::RemoveObserver(UObject* entity, EAQ_ObjectivesType even
 		break;
 
 	case EAQ_ObjectivesType::MiniGame:
-		EnvironmentChannel->RemoveObserver_Implementation(entity);
-		break;
-
-	case EAQ_ObjectivesType::Puzzle:
 		EnvironmentChannel->RemoveObserver_Implementation(entity);
 		break;
 	}

@@ -300,11 +300,6 @@ bool UAQ_Quest::IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTy
 			return true;
 		break;
 
-	case EAQ_NotifyEventType::Puzzle:
-		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Puzzle)
-			return true;
-		break;
-
 	case EAQ_NotifyEventType::Travel:
 		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Location)
 			return true;

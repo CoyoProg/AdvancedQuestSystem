@@ -1,12 +1,12 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "c:\\users\\cpaya\\documents\\artfx\\unreal\\demoreelrpg\\plugins\\advancedquest\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\advancedquest\\singlefile\\aq_questdata.h",
+        "Source": "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\plugins\\advancedquest\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\advancedquest\\singlefile\\aq_questdata.h",
         "ProvidedModule": "",
         "Includes": [
-            "c:\\users\\cpaya\\documents\\artfx\\unreal\\demoreelrpg\\plugins\\advancedquest\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\advancedquest\\definitions.advancedquest.h",
-            "c:\\users\\cpaya\\documents\\artfx\\unreal\\demoreelrpg\\intermediate\\build\\win64\\x64\\demoreelrpgeditor\\development\\engine\\shareddefinitions.engine.cpp20.h",
-            "c:\\users\\cpaya\\documents\\artfx\\unreal\\demoreelrpg\\plugins\\advancedquest\\source\\advancedquest\\public\\questsystem\\aq_questdata.h",
+            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\plugins\\advancedquest\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\advancedquest\\definitions.advancedquest.h",
+            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\intermediate\\build\\win64\\x64\\advancedquestdemoeditor\\development\\unrealed\\shareddefinitions.unrealed.cpp20.h",
+            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\plugins\\advancedquest\\source\\advancedquest\\public\\questsystem\\aq_questdata.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\coreminimal.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\coretypes.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\hal\\platform.h",
@@ -530,11 +530,11 @@
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\coreuobject\\public\\uobject\\stack.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\coreuobject\\public\\uobject\\enumproperty.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\coreuobject\\public\\uobject\\fieldpathproperty.h",
-            "c:\\users\\cpaya\\documents\\artfx\\unreal\\demoreelrpg\\plugins\\advancedquest\\source\\advancedquest\\public\\enums\\aq_objectivestype.h",
-            "c:\\users\\cpaya\\documents\\artfx\\unreal\\demoreelrpg\\plugins\\advancedquest\\intermediate\\build\\win64\\unrealeditor\\inc\\advancedquest\\uht\\aq_objectivestype.generated.h",
-            "c:\\users\\cpaya\\documents\\artfx\\unreal\\demoreelrpg\\plugins\\advancedquest\\source\\advancedquest\\public\\enums\\aq_requiermenteventtype.h",
-            "c:\\users\\cpaya\\documents\\artfx\\unreal\\demoreelrpg\\plugins\\advancedquest\\intermediate\\build\\win64\\unrealeditor\\inc\\advancedquest\\uht\\aq_requiermenteventtype.generated.h",
-            "c:\\users\\cpaya\\documents\\artfx\\unreal\\demoreelrpg\\plugins\\advancedquest\\intermediate\\build\\win64\\unrealeditor\\inc\\advancedquest\\uht\\aq_questdata.generated.h"
+            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\plugins\\advancedquest\\source\\advancedquest\\public\\enums\\aq_objectivestype.h",
+            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\plugins\\advancedquest\\intermediate\\build\\win64\\unrealeditor\\inc\\advancedquest\\uht\\aq_objectivestype.generated.h",
+            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\plugins\\advancedquest\\source\\advancedquest\\public\\enums\\aq_requiermenteventtype.h",
+            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\plugins\\advancedquest\\intermediate\\build\\win64\\unrealeditor\\inc\\advancedquest\\uht\\aq_requiermenteventtype.generated.h",
+            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\plugins\\advancedquest\\intermediate\\build\\win64\\unrealeditor\\inc\\advancedquest\\uht\\aq_questdata.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

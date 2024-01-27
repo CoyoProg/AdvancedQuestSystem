@@ -29,7 +29,6 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	op(EAQ_NotifyEventType::Deliver) \
 	op(EAQ_NotifyEventType::Interact) \
 	op(EAQ_NotifyEventType::Travel) \
-	op(EAQ_NotifyEventType::Puzzle) \
 	op(EAQ_NotifyEventType::MiniGame) \
 	op(EAQ_NotifyEventType::PlayerLevelUp) 
 

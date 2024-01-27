@@ -26,7 +26,6 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	op(EAQ_ObjectivesType::Kill) \
 	op(EAQ_ObjectivesType::Protect) \
 	op(EAQ_ObjectivesType::Location) \
-	op(EAQ_ObjectivesType::Puzzle) \
 	op(EAQ_ObjectivesType::MiniGame) \
 	op(EAQ_ObjectivesType::PlayerLevelUp) 
 

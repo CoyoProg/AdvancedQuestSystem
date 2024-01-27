@@ -80,7 +80,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Observer() {}
 	};
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_Observer_OnNotify_Statics::NewProp_entity = { "entity", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_Observer_eventOnNotify_Parms, entity), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(0, nullptr) };
 	const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAQ_Observer_OnNotify_Statics::NewProp_eventType_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
-	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAQ_Observer_OnNotify_Statics::NewProp_eventType = { "eventType", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_Observer_eventOnNotify_Parms, eventType), Z_Construct_UEnum_AdvancedQuest_EAQ_NotifyEventType, METADATA_PARAMS(0, nullptr) }; // 2989188449
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAQ_Observer_OnNotify_Statics::NewProp_eventType = { "eventType", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_Observer_eventOnNotify_Parms, eventType), Z_Construct_UEnum_AdvancedQuest_EAQ_NotifyEventType, METADATA_PARAMS(0, nullptr) }; // 390537601
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UAQ_Observer_OnNotify_Statics::NewProp_amount = { "amount", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_Observer_eventOnNotify_Parms, amount), METADATA_PARAMS(0, nullptr) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_Observer_OnNotify_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_Observer_OnNotify_Statics::NewProp_entity,
@@ -165,7 +165,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Observer() {}
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_Observer_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_UAQ_Observer_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_UAQ_Observer_OnNotify, "OnNotify" }, // 1169493199
+		{ &Z_Construct_UFunction_UAQ_Observer_OnNotify, "OnNotify" }, // 3138753950
 		{ &Z_Construct_UFunction_UAQ_Observer_OnNotifyRequierment, "OnNotifyRequierment" }, // 697451588
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_Observer_Statics::FuncInfo) < 2048);
@@ -251,9 +251,9 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Observer() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_ObserverPattern_AQ_Observer_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_Observer, UAQ_Observer::StaticClass, TEXT("UAQ_Observer"), &Z_Registration_Info_UClass_UAQ_Observer, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_Observer), 3860254833U) },
+		{ Z_Construct_UClass_UAQ_Observer, UAQ_Observer::StaticClass, TEXT("UAQ_Observer"), &Z_Registration_Info_UClass_UAQ_Observer, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_Observer), 3388150803U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_ObserverPattern_AQ_Observer_h_1590508169(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_ObserverPattern_AQ_Observer_h_2274236250(TEXT("/Script/AdvancedQuest"),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_ObserverPattern_AQ_Observer_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_ObserverPattern_AQ_Observer_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

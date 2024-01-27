@@ -17,7 +17,6 @@ enum class EAQ_ObjectivesType : uint8
 	Protect			UMETA(DisplayName = "Protect"),
 
 	Location		UMETA(DisplayName = "Location"),
-	Puzzle          UMETA(DisplayName = "Puzzle"),
 	MiniGame        UMETA(DisplayName = "Mini-Game"),
 
 	PlayerLevelUp   UMETA(DisplayName = "Player Level Up"),

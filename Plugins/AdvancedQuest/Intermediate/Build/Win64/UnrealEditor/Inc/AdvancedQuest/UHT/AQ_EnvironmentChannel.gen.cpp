@@ -40,7 +40,6 @@ void EmptyLinkFunctionForGeneratedCodeAQ_EnvironmentChannel() {}
 	const UECodeGen_Private::FEnumeratorParam Z_Construct_UEnum_AdvancedQuest_EAQ_EnvironmentEventType_Statics::Enumerators[] = {
 		{ "EAQ_EnvironmentEventType::Interact", (int64)EAQ_EnvironmentEventType::Interact },
 		{ "EAQ_EnvironmentEventType::Travel", (int64)EAQ_EnvironmentEventType::Travel },
-		{ "EAQ_EnvironmentEventType::Puzzle", (int64)EAQ_EnvironmentEventType::Puzzle },
 		{ "EAQ_EnvironmentEventType::MiniGame", (int64)EAQ_EnvironmentEventType::MiniGame },
 	};
 #if WITH_METADATA
@@ -51,8 +50,6 @@ void EmptyLinkFunctionForGeneratedCodeAQ_EnvironmentChannel() {}
 		{ "MiniGame.DisplayName", "Mini-Game" },
 		{ "MiniGame.Name", "EAQ_EnvironmentEventType::MiniGame" },
 		{ "ModuleRelativePath", "Public/PlayersChannels/AQ_EnvironmentChannel.h" },
-		{ "Puzzle.DisplayName", "Puzzle" },
-		{ "Puzzle.Name", "EAQ_EnvironmentEventType::Puzzle" },
 		{ "Travel.DisplayName", "Travel" },
 		{ "Travel.Name", "EAQ_EnvironmentEventType::Travel" },
 	};
@@ -111,7 +108,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_EnvironmentChannel() {}
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
 	const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAQ_EnvironmentChannel_OnEnvironmentEventNotify_Statics::NewProp_eventType_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
-	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAQ_EnvironmentChannel_OnEnvironmentEventNotify_Statics::NewProp_eventType = { "eventType", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_EnvironmentChannel_eventOnEnvironmentEventNotify_Parms, eventType), Z_Construct_UEnum_AdvancedQuest_EAQ_EnvironmentEventType, METADATA_PARAMS(0, nullptr) }; // 224120763
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAQ_EnvironmentChannel_OnEnvironmentEventNotify_Statics::NewProp_eventType = { "eventType", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_EnvironmentChannel_eventOnEnvironmentEventNotify_Parms, eventType), Z_Construct_UEnum_AdvancedQuest_EAQ_EnvironmentEventType, METADATA_PARAMS(0, nullptr) }; // 3658687028
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_EnvironmentChannel_OnEnvironmentEventNotify_Statics::NewProp_entity = { "entity", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_EnvironmentChannel_eventOnEnvironmentEventNotify_Parms, entity), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(0, nullptr) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_EnvironmentChannel_OnEnvironmentEventNotify_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_EnvironmentChannel_OnEnvironmentEventNotify_Statics::NewProp_eventType_Underlying,
@@ -157,7 +154,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_EnvironmentChannel() {}
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_EnvironmentChannel_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_UAQ_EnvironmentChannel_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_UAQ_EnvironmentChannel_OnEnvironmentEventNotify, "OnEnvironmentEventNotify" }, // 2399993296
+		{ &Z_Construct_UFunction_UAQ_EnvironmentChannel_OnEnvironmentEventNotify, "OnEnvironmentEventNotify" }, // 3893691345
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_EnvironmentChannel_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
@@ -208,12 +205,12 @@ void EmptyLinkFunctionForGeneratedCodeAQ_EnvironmentChannel() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FEnumRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_EnvironmentChannel_h_Statics::EnumInfo[] = {
-		{ EAQ_EnvironmentEventType_StaticEnum, TEXT("EAQ_EnvironmentEventType"), &Z_Registration_Info_UEnum_EAQ_EnvironmentEventType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 224120763U) },
+		{ EAQ_EnvironmentEventType_StaticEnum, TEXT("EAQ_EnvironmentEventType"), &Z_Registration_Info_UEnum_EAQ_EnvironmentEventType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3658687028U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_EnvironmentChannel_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_EnvironmentChannel, UAQ_EnvironmentChannel::StaticClass, TEXT("UAQ_EnvironmentChannel"), &Z_Registration_Info_UClass_UAQ_EnvironmentChannel, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_EnvironmentChannel), 3504489158U) },
+		{ Z_Construct_UClass_UAQ_EnvironmentChannel, UAQ_EnvironmentChannel::StaticClass, TEXT("UAQ_EnvironmentChannel"), &Z_Registration_Info_UClass_UAQ_EnvironmentChannel, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_EnvironmentChannel), 2284092041U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_EnvironmentChannel_h_2853926860(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_EnvironmentChannel_h_3728708458(TEXT("/Script/AdvancedQuest"),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_EnvironmentChannel_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_EnvironmentChannel_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_EnvironmentChannel_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_EnvironmentChannel_h_Statics::EnumInfo));
