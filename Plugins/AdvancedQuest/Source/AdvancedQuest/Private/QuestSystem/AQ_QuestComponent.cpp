@@ -261,8 +261,7 @@ void UAQ_QuestComponent::CreateQuestMarkerWidget()
 			QuestMarkerWidget->RegisterComponent();
 			QuestMarkerWidget->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
-			float pixelToCm = QuestMarkerWidget->GetDrawSize().Y / 8.f; // Adjust this value if you have another Quest Marker
-			float zCoord = extent.Z * 2 + pixelToCm;
+			float zCoord = extent.Z * 2 + zOffset;
 			QuestMarkerWidget->SetRelativeLocation(FVector(0, 0, zCoord));
 		}
 	}

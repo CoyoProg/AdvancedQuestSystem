@@ -341,6 +341,7 @@
     <None Include="..\..\AdvancedQuestDemo.uproject"/>
     <None Include="..\..\Source\AdvancedQuestDemo.Target.cs"/>
     <None Include="..\..\Source\AdvancedQuestDemoEditor.Target.cs"/>
+    <None Include="..\..\.gitignore"/>
     <None Include="..\..\.vsconfig"/>
     <None Include="..\..\Config\DefaultEditor.ini"/>
     <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini"/>

@@ -68,6 +68,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | UI")
 	UMaterialInterface* QuestMarkerMaterial = nullptr; // Put a two sided material for the widget to be two sided
 
+	// You can adjust this value if the quest Marker looks too low or to high of the actor
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Advanced Quest | UI")
+	float zOffset = 0;
+
 	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | UI")
 	void SetQuestMarker(bool isMarkerVisible, bool isQuestValid);
 

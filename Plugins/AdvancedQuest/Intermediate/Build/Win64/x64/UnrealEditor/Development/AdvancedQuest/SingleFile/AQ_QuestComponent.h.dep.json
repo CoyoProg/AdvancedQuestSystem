@@ -1,12 +1,12 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "c:\\users\\cpaya\\documents\\artfx\\unreal\\demoreelrpg\\plugins\\advancedquest\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\advancedquest\\singlefile\\aq_questcomponent.h",
+        "Source": "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\plugins\\advancedquest\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\advancedquest\\singlefile\\aq_questcomponent.h",
         "ProvidedModule": "",
         "Includes": [
-            "c:\\users\\cpaya\\documents\\artfx\\unreal\\demoreelrpg\\plugins\\advancedquest\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\advancedquest\\definitions.advancedquest.h",
-            "c:\\users\\cpaya\\documents\\artfx\\unreal\\demoreelrpg\\intermediate\\build\\win64\\x64\\demoreelrpgeditor\\development\\engine\\shareddefinitions.engine.cpp20.h",
-            "c:\\users\\cpaya\\documents\\artfx\\unreal\\demoreelrpg\\plugins\\advancedquest\\source\\advancedquest\\public\\questsystem\\aq_questcomponent.h",
+            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\plugins\\advancedquest\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\advancedquest\\definitions.advancedquest.h",
+            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\intermediate\\build\\win64\\x64\\advancedquestdemoeditor\\development\\unrealed\\shareddefinitions.unrealed.cpp20.h",
+            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\plugins\\advancedquest\\source\\advancedquest\\public\\questsystem\\aq_questcomponent.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\coreminimal.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\coretypes.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\core\\public\\hal\\platform.h",
@@ -548,7 +548,7 @@
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\componentinstancedatacache.generated.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\actorcomponent.generated.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\net\\core\\public\\net\\core\\pushmodel\\pushmodelmacros.h",
-            "c:\\users\\cpaya\\documents\\artfx\\unreal\\demoreelrpg\\plugins\\advancedquest\\intermediate\\build\\win64\\unrealeditor\\inc\\advancedquest\\uht\\aq_questcomponent.generated.h"
+            "c:\\users\\cpaya\\documents\\artfx\\unreal\\advancedquest\\plugins\\advancedquest\\intermediate\\build\\win64\\unrealeditor\\inc\\advancedquest\\uht\\aq_questcomponent.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []
