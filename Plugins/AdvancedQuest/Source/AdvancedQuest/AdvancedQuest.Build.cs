@@ -8,14 +8,10 @@ public class AdvancedQuest : ModuleRules
 	{
         PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 
-        //PrecompileForTargets = PrecompileTargetsType.Any;
-        //bPrecompile = true;
-
         PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
 				"Core",
-                //"AdvancedQuest_Editor",
             }
 			);
 

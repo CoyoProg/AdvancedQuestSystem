@@ -16,7 +16,7 @@ AQ_FilesManager::~AQ_FilesManager()
 
 void AQ_FilesManager::SaveLastQuestID(int identificatorP, const FString& ValueName)
 {
-    FString FilePath = FPaths::ProjectPluginsDir() / TEXT("AdvancedQuest") / TEXT("UniqueID.txt");
+    FString FilePath = FPaths::ProjectPluginsDir() / TEXT("AdvancedQuest") / TEXT("Resources") / TEXT("UniqueID.txt");
 
     // Create a formatted string with the key-value pairs
     FString SaveString = ValueName + FString::Printf(TEXT(": %d"), identificatorP);
@@ -51,7 +51,7 @@ void AQ_FilesManager::SaveLastQuestID(int identificatorP, const FString& ValueNa
 
 int AQ_FilesManager::LoadLastQuestID(const FString& ValueName)
 {
-    FString FilePath = FPaths::ProjectPluginsDir() / TEXT("AdvancedQuest") / TEXT("UniqueID.txt");
+    FString FilePath = FPaths::ProjectPluginsDir() / TEXT("AdvancedQuest") / TEXT("Resources") / TEXT("UniqueID.txt");
 
     int identificator = 0;
 
