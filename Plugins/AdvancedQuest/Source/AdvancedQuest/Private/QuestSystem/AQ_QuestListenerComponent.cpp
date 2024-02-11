@@ -18,9 +18,13 @@ void UAQ_QuestListenerComponent::BeginPlay()
 		return;
 #endif
 
-	QuestManager = GetWorld()->
-		GetFirstPlayerController()->GetPawn()->
-		GetComponentByClass<UAQ_QuestManager>();
+	/* Get the local Player */
+	APawn* localPlayer = GetWorld()->GetFirstPlayerController()->GetPawn();
+	if (!localPlayer)
+		return;
+
+	/* Get the quest manager */
+	QuestManager = localPlayer->GetComponentByClass<UAQ_QuestManager>();
 }
 
 void UAQ_QuestListenerComponent::OnQuestStateChangedWrapper(UAQ_Quest* questUpdate, EAQ_QuestState QuestState)

@@ -49,18 +49,21 @@ void AAQ_Interactable::BeginPlay()
 #endif
 
 	if (bIsQuestActor)
+	{
 		bIsSleeping = true;
-	else
-		return;
-
-	GetWorld()->OnWorldBeginPlay.AddUObject(this, &AAQ_Interactable::LateBeginPlay);
+		GetWorld()->OnWorldBeginPlay.AddUObject(this, &AAQ_Interactable::LateBeginPlay);
+	}
 }
 
 void AAQ_Interactable::LateBeginPlay()
 {
-	QuestManager = GetWorld()->
-		GetFirstPlayerController()->GetPawn()->
-		GetComponentByClass<UAQ_QuestManager>();
+	/* Get the local Player */
+	APawn* localPlayer = GetWorld()->GetFirstPlayerController()->GetPawn();
+	if (!localPlayer)
+		return;
+
+	/* Get the quest manager */
+	QuestManager = localPlayer->GetComponentByClass<UAQ_QuestManager>();
 
 	if (QuestManager)
 	{

@@ -35,18 +35,20 @@ void UAQ_PlayerChannels::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if (!QuestChannel)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("CHANNELS NOT INITIALIZED PROPERLY"));
+		return;
+	}
+
 	InitBookQuestWidget();
 	SetPlayerInputComponent();
-
 
 	LoadInventory();
 }
 
 void UAQ_PlayerChannels::InitBookQuestWidget()
 {
-	if (!QuestChannel)
-		return;
-
 	/* Add the Quest Book Widget to the viewport */
 	if (BookQuestWidget)
 	{

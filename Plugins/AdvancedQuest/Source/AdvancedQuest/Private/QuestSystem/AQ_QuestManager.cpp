@@ -59,6 +59,8 @@ void UAQ_QuestManager::LateBeginPlay()
 {
 	/* Get the Player Channels component */
 	UAQ_PlayerChannels* playerChannels = GetOwner()->GetComponentByClass<UAQ_PlayerChannels>();
+	if (!playerChannels)
+		return;
 
 	/* Generate an array with all the quests in the QuestDataCenter */
 	TArray<UAQ_Quest*> temporaryQuests;

@@ -16,7 +16,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define ADVANCEDQUEST_AQ_NotifyEventType_generated_h
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuestDemo_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_NotifyEventType_h
+#define CURRENT_FILE_ID FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_NotifyEventType_h
 
 
 #define FOREACH_ENUM_EAQ_NOTIFYEVENTTYPE(op) \
@@ -29,7 +29,6 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	op(EAQ_NotifyEventType::Deliver) \
 	op(EAQ_NotifyEventType::Interact) \
 	op(EAQ_NotifyEventType::Travel) \
-	op(EAQ_NotifyEventType::Puzzle) \
 	op(EAQ_NotifyEventType::MiniGame) \
 	op(EAQ_NotifyEventType::PlayerLevelUp) 
 

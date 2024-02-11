@@ -1,1 +1,0 @@
-#include "C:/Users/cpaya/Documents/ArtFx/Unreal/DemoreelRPG/Plugins/AdvancedQuest/Source/AdvancedQuest/Public/AdvancedQuestStyle.h"

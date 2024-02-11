@@ -8,6 +8,9 @@ void AAQ_PlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if (!Character)
+		return;
+
 	SetupCameraComponent();
 	SetupInputComponent();
 }
@@ -45,26 +48,16 @@ void AAQ_PlayerController::AddYawInput(float value)
 void AAQ_PlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
-
-	// Bind Movement Inputs
-	//InputComponent->BindAxis(MoveForwardInputName, this, &AAQ_PlayerController::MoveForward);
-	//InputComponent->BindAxis(MoveRightInputName, this, &AAQ_PlayerController::MoveRight);
-	//
-	//InputComponent->BindAction(JumpInputName, EInputEvent::IE_Pressed, this, &AAQ_PlayerController::Jump);
-
 }
 
 void AAQ_PlayerController::SetupCameraComponent()
 {
 	Character->bUseControllerRotationYaw = true;
-
-	//InputComponent->BindAxis(LookUpInputName, this, &AAQ_PlayerController::AddPitchInput);
-	//InputComponent->BindAxis(LookRightInputName, this, &AAQ_PlayerController::AddYawInput);
 }
 
 void AAQ_PlayerController::SetPawn(APawn* InPawn)
 {
 	Super::SetPawn(InPawn);
 
-	Character = Cast<AAQ_Player>(InPawn);
+	Character = Cast<ACharacter>(InPawn);
 }

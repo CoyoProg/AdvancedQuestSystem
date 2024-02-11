@@ -1,8 +1,0 @@
-{
-	"RemapUnityFiles": 
-	{
-		"Module.AdvancedQuest_Editor.cpp.obj": [
-			"AdvancedQuest_Editor.cpp.obj"
-		]
-	}
-}

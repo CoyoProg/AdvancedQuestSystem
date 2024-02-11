@@ -69,7 +69,7 @@ public:
 	class UInputAction* OpenJournalAction = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Advanced Quest | Inputs", meta = (AllowPrivateAccess = "true"))
-	class UInputAction* SaveQuestsAction;
+	class UInputAction* SaveQuestsAction = nullptr;
 
 	void SetPlayerInputComponent();
 

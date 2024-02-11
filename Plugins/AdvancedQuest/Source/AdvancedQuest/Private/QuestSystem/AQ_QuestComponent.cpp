@@ -34,16 +34,19 @@ void UAQ_QuestComponent::BeginPlay()
 		return;
 #endif
 
-	/* Get the quest manager */
-	QuestManager = GetWorld()->
-		GetFirstPlayerController()->GetPawn()->
-		GetComponentByClass<UAQ_QuestManager>();
-
 	GetWorld()->OnWorldBeginPlay.AddUObject(this, &UAQ_QuestComponent::LateBeginPlay);
 }
 
 void UAQ_QuestComponent::LateBeginPlay()
 {	
+	/* Get the local Player */
+	APawn* localPlayer = GetWorld()->GetFirstPlayerController()->GetPawn();
+	if (!localPlayer)
+		return;
+
+	/* Get the quest manager */
+	QuestManager = localPlayer->GetComponentByClass<UAQ_QuestManager>();
+
 	if (QuestMarkerClass)
 		CreateQuestMarkerWidget();
 

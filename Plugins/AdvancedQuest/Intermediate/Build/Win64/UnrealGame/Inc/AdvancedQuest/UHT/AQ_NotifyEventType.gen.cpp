@@ -43,7 +43,6 @@ void EmptyLinkFunctionForGeneratedCodeAQ_NotifyEventType() {}
 		{ "EAQ_NotifyEventType::Deliver", (int64)EAQ_NotifyEventType::Deliver },
 		{ "EAQ_NotifyEventType::Interact", (int64)EAQ_NotifyEventType::Interact },
 		{ "EAQ_NotifyEventType::Travel", (int64)EAQ_NotifyEventType::Travel },
-		{ "EAQ_NotifyEventType::Puzzle", (int64)EAQ_NotifyEventType::Puzzle },
 		{ "EAQ_NotifyEventType::MiniGame", (int64)EAQ_NotifyEventType::MiniGame },
 		{ "EAQ_NotifyEventType::PlayerLevelUp", (int64)EAQ_NotifyEventType::PlayerLevelUp },
 	};
@@ -80,8 +79,6 @@ void EmptyLinkFunctionForGeneratedCodeAQ_NotifyEventType() {}
 		{ "PlayerLevelUp.ToolTip", "Player Related" },
 		{ "Protect.DisplayName", "Protect" },
 		{ "Protect.Name", "EAQ_NotifyEventType::Protect" },
-		{ "Puzzle.DisplayName", "Puzzle" },
-		{ "Puzzle.Name", "EAQ_NotifyEventType::Puzzle" },
 		{ "RemovedFromInventory.DisplayName", "Remove From Inventory" },
 		{ "RemovedFromInventory.Name", "EAQ_NotifyEventType::RemovedFromInventory" },
 		{ "Travel.DisplayName", "Travel" },
@@ -108,15 +105,15 @@ void EmptyLinkFunctionForGeneratedCodeAQ_NotifyEventType() {}
 		}
 		return Z_Registration_Info_UEnum_EAQ_NotifyEventType.InnerSingleton;
 	}
-	struct Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuestDemo_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_NotifyEventType_h_Statics
+	struct Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_NotifyEventType_h_Statics
 	{
 		static const FEnumRegisterCompiledInInfo EnumInfo[];
 	};
-	const FEnumRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuestDemo_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_NotifyEventType_h_Statics::EnumInfo[] = {
-		{ EAQ_NotifyEventType_StaticEnum, TEXT("EAQ_NotifyEventType"), &Z_Registration_Info_UEnum_EAQ_NotifyEventType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2989188449U) },
+	const FEnumRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_NotifyEventType_h_Statics::EnumInfo[] = {
+		{ EAQ_NotifyEventType_StaticEnum, TEXT("EAQ_NotifyEventType"), &Z_Registration_Info_UEnum_EAQ_NotifyEventType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 390537601U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuestDemo_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_NotifyEventType_h_1605651348(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_NotifyEventType_h_2690999234(TEXT("/Script/AdvancedQuest"),
 		nullptr, 0,
 		nullptr, 0,
-		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuestDemo_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_NotifyEventType_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuestDemo_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_NotifyEventType_h_Statics::EnumInfo));
+		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_NotifyEventType_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_NotifyEventType_h_Statics::EnumInfo));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
