@@ -86,7 +86,6 @@ public:
 
 
 	/* Event Listeners */
-	UFUNCTION()
 	void OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP, float amount = 1);
 	void UpdateCurrentObjective(int i, float amount = 1);
 

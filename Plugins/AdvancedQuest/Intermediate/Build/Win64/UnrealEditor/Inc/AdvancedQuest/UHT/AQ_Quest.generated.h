@@ -10,8 +10,6 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class UAQ_Quest;
-class UObject;
-enum class EAQ_NotifyEventType : uint8;
 enum class EAQ_QuestState : uint8;
 #ifdef ADVANCEDQUEST_AQ_Quest_generated_h
 #error "AQ_Quest.generated.h already included, missing '#pragma once' in AQ_Quest.h"
@@ -37,7 +35,6 @@ ADVANCEDQUEST_API void FQuestRequirementMetDelegate_DelegateWrapper(const FMulti
  \
 	DECLARE_FUNCTION(execOnLevelRequirementChange); \
 	DECLARE_FUNCTION(execOnQuestRequirementChange); \
-	DECLARE_FUNCTION(execOnNotify_Implementation); \
 	DECLARE_FUNCTION(execQuestFailed); \
 	DECLARE_FUNCTION(execResetObjectives); \
 	DECLARE_FUNCTION(execResetQuest); \
