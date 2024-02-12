@@ -10,59 +10,14 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeAQ_QuestChannel() {}
 // Cross Module References
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_BookQuest_NoRegister();
-	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_Channels();
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_Quest_NoRegister();
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_QuestChannel();
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_QuestChannel_NoRegister();
 	ADVANCEDQUEST_API UEnum* Z_Construct_UEnum_AdvancedQuest_EAQ_QuestState();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_LevelRequirementChangedDelegate__DelegateSignature();
-	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementChangedDelegate__DelegateSignature();
+	COREUOBJECT_API UClass* Z_Construct_UClass_UObject();
 	UPackage* Z_Construct_UPackage__Script_AdvancedQuest();
 // End Cross Module References
-	struct Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementChangedDelegate__DelegateSignature_Statics
-	{
-		struct _Script_AdvancedQuest_eventQuestRequirementChangedDelegate_Parms
-		{
-			int32 QuestID;
-		};
-		static const UECodeGen_Private::FIntPropertyParams NewProp_QuestID;
-		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
-#endif
-		static const UECodeGen_Private::FFunctionParams FuncParams;
-	};
-	const UECodeGen_Private::FIntPropertyParams Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementChangedDelegate__DelegateSignature_Statics::NewProp_QuestID = { "QuestID", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(_Script_AdvancedQuest_eventQuestRequirementChangedDelegate_Parms, QuestID), METADATA_PARAMS(0, nullptr) };
-	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementChangedDelegate__DelegateSignature_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementChangedDelegate__DelegateSignature_Statics::NewProp_QuestID,
-	};
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementChangedDelegate__DelegateSignature_Statics::Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "Public/PlayersChannels/AQ_QuestChannel.h" },
-	};
-#endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementChangedDelegate__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UPackage__Script_AdvancedQuest, nullptr, "QuestRequirementChangedDelegate__DelegateSignature", nullptr, nullptr, Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementChangedDelegate__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementChangedDelegate__DelegateSignature_Statics::PropPointers), sizeof(Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementChangedDelegate__DelegateSignature_Statics::_Script_AdvancedQuest_eventQuestRequirementChangedDelegate_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementChangedDelegate__DelegateSignature_Statics::Function_MetaDataParams), Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementChangedDelegate__DelegateSignature_Statics::Function_MetaDataParams) };
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementChangedDelegate__DelegateSignature_Statics::PropPointers) < 2048);
-	static_assert(sizeof(Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementChangedDelegate__DelegateSignature_Statics::_Script_AdvancedQuest_eventQuestRequirementChangedDelegate_Parms) < MAX_uint16);
-	UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementChangedDelegate__DelegateSignature()
-	{
-		static UFunction* ReturnFunction = nullptr;
-		if (!ReturnFunction)
-		{
-			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementChangedDelegate__DelegateSignature_Statics::FuncParams);
-		}
-		return ReturnFunction;
-	}
-void FQuestRequirementChangedDelegate_DelegateWrapper(const FMulticastScriptDelegate& QuestRequirementChangedDelegate, int32 QuestID)
-{
-	struct _Script_AdvancedQuest_eventQuestRequirementChangedDelegate_Parms
-	{
-		int32 QuestID;
-	};
-	_Script_AdvancedQuest_eventQuestRequirementChangedDelegate_Parms Parms;
-	Parms.QuestID=QuestID;
-	QuestRequirementChangedDelegate.ProcessMulticastDelegate<UObject>(&Parms);
-}
 	struct Z_Construct_UDelegateFunction_AdvancedQuest_LevelRequirementChangedDelegate__DelegateSignature_Statics
 	{
 		struct _Script_AdvancedQuest_eventLevelRequirementChangedDelegate_Parms
@@ -107,14 +62,6 @@ void FLevelRequirementChangedDelegate_DelegateWrapper(const FMulticastScriptDele
 	Parms.PlayerLevel=PlayerLevel;
 	LevelRequirementChangedDelegate.ProcessMulticastDelegate<UObject>(&Parms);
 }
-	DEFINE_FUNCTION(UAQ_QuestChannel::execOnQuestRequirementMet)
-	{
-		P_GET_OBJECT(UAQ_Quest,Z_Param_quest);
-		P_FINISH;
-		P_NATIVE_BEGIN;
-		P_THIS->OnQuestRequirementMet(Z_Param_quest);
-		P_NATIVE_END;
-	}
 	DEFINE_FUNCTION(UAQ_QuestChannel::execOnQuestUpdate)
 	{
 		P_GET_OBJECT(UAQ_Quest,Z_Param_QuestUpdate);
@@ -136,45 +83,10 @@ void FLevelRequirementChangedDelegate_DelegateWrapper(const FMulticastScriptDele
 	{
 		UClass* Class = UAQ_QuestChannel::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
-			{ "OnQuestRequirementMet", &UAQ_QuestChannel::execOnQuestRequirementMet },
 			{ "OnQuestStateChanged", &UAQ_QuestChannel::execOnQuestStateChanged },
 			{ "OnQuestUpdate", &UAQ_QuestChannel::execOnQuestUpdate },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
-	}
-	struct Z_Construct_UFunction_UAQ_QuestChannel_OnQuestRequirementMet_Statics
-	{
-		struct AQ_QuestChannel_eventOnQuestRequirementMet_Parms
-		{
-			UAQ_Quest* quest;
-		};
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_quest;
-		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
-#endif
-		static const UECodeGen_Private::FFunctionParams FuncParams;
-	};
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_QuestChannel_OnQuestRequirementMet_Statics::NewProp_quest = { "quest", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_QuestChannel_eventOnQuestRequirementMet_Parms, quest), Z_Construct_UClass_UAQ_Quest_NoRegister, METADATA_PARAMS(0, nullptr) };
-	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_QuestChannel_OnQuestRequirementMet_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_QuestChannel_OnQuestRequirementMet_Statics::NewProp_quest,
-	};
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAQ_QuestChannel_OnQuestRequirementMet_Statics::Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "Public/PlayersChannels/AQ_QuestChannel.h" },
-	};
-#endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_QuestChannel_OnQuestRequirementMet_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_QuestChannel, nullptr, "OnQuestRequirementMet", nullptr, nullptr, Z_Construct_UFunction_UAQ_QuestChannel_OnQuestRequirementMet_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_QuestChannel_OnQuestRequirementMet_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAQ_QuestChannel_OnQuestRequirementMet_Statics::AQ_QuestChannel_eventOnQuestRequirementMet_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_QuestChannel_OnQuestRequirementMet_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAQ_QuestChannel_OnQuestRequirementMet_Statics::Function_MetaDataParams) };
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_QuestChannel_OnQuestRequirementMet_Statics::PropPointers) < 2048);
-	static_assert(sizeof(Z_Construct_UFunction_UAQ_QuestChannel_OnQuestRequirementMet_Statics::AQ_QuestChannel_eventOnQuestRequirementMet_Parms) < MAX_uint16);
-	UFunction* Z_Construct_UFunction_UAQ_QuestChannel_OnQuestRequirementMet()
-	{
-		static UFunction* ReturnFunction = nullptr;
-		if (!ReturnFunction)
-		{
-			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAQ_QuestChannel_OnQuestRequirementMet_Statics::FuncParams);
-		}
-		return ReturnFunction;
 	}
 	struct Z_Construct_UFunction_UAQ_QuestChannel_OnQuestStateChanged_Statics
 	{
@@ -278,12 +190,11 @@ void FLevelRequirementChangedDelegate_DelegateWrapper(const FMulticastScriptDele
 		static const UECodeGen_Private::FClassParams ClassParams;
 	};
 	UObject* (*const Z_Construct_UClass_UAQ_QuestChannel_Statics::DependentSingletons[])() = {
-		(UObject* (*)())Z_Construct_UClass_UAQ_Channels,
+		(UObject* (*)())Z_Construct_UClass_UObject,
 		(UObject* (*)())Z_Construct_UPackage__Script_AdvancedQuest,
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestChannel_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_UAQ_QuestChannel_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_UAQ_QuestChannel_OnQuestRequirementMet, "OnQuestRequirementMet" }, // 1798829588
 		{ &Z_Construct_UFunction_UAQ_QuestChannel_OnQuestStateChanged, "OnQuestStateChanged" }, // 560505581
 		{ &Z_Construct_UFunction_UAQ_QuestChannel_OnQuestUpdate, "OnQuestUpdate" }, // 382025335
 	};
@@ -347,9 +258,9 @@ void FLevelRequirementChangedDelegate_DelegateWrapper(const FMulticastScriptDele
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_QuestChannel_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_QuestChannel, UAQ_QuestChannel::StaticClass, TEXT("UAQ_QuestChannel"), &Z_Registration_Info_UClass_UAQ_QuestChannel, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_QuestChannel), 298865648U) },
+		{ Z_Construct_UClass_UAQ_QuestChannel, UAQ_QuestChannel::StaticClass, TEXT("UAQ_QuestChannel"), &Z_Registration_Info_UClass_UAQ_QuestChannel, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_QuestChannel), 728427747U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_QuestChannel_h_2045041877(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_QuestChannel_h_3012623989(TEXT("/Script/AdvancedQuest"),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_QuestChannel_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_QuestChannel_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

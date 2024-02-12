@@ -2,6 +2,7 @@
 
 #include "QuestSystem/AQ_Quest.h"
 
+#include "Enums/AQ_NotifyEventType.h"
 #include <DataAssets/AQ_ItemData.h>
 #include "Interactables/AQ_Collectable.h"
 #include "External/AQ_FilesManager.h"
@@ -202,12 +203,20 @@ void UAQ_Quest::UpdateCurrentObjective(int CurrentIndex, float amount)
 	}
 }
 
-void UAQ_Quest::OnQuestRequirementChange(int QuestID)
+void UAQ_Quest::OnQuestRequirementChange(UAQ_Quest* questUpdateP, EAQ_QuestState questStateP)
 {
+	if (questStateP != EAQ_QuestState::Archive)
+		return;
+
+	int targetID = questUpdateP->QuestData->QuestID;
+
 	for (auto requirementID : QuestData->questRequirements.QuestID)
 	{
-		if (requirementID == QuestID)
-			QuestData->requirementsProgression.QuestID.Add(QuestID);
+		if (requirementID == targetID)
+		{
+			QuestData->requirementsProgression.QuestID.Add(targetID);
+			questUpdateP->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_Quest::OnQuestRequirementChange);
+		}
 	}
 
 	CheckIfRequirementsMet();

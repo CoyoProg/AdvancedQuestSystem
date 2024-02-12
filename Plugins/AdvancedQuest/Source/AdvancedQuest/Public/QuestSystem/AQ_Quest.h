@@ -6,7 +6,6 @@
 #include "UObject/NoExportTypes.h"
 #include "Misc/Guid.h"
 
-#include "ObserverPattern/AQ_Observer.h"
 #include "QuestSystem/AQ_QuestData.h"
 
 #include "AQ_Quest.generated.h"
@@ -34,7 +33,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FQuestRequirementMetDelegate, UAQ_Qu
  * 
  */
 UCLASS(Blueprintable, BlueprintType)
-class ADVANCEDQUEST_API UAQ_Quest : public UObject, public IAQ_Observer
+class ADVANCEDQUEST_API UAQ_Quest : public UObject
 {
 	GENERATED_BODY()
 	
@@ -87,12 +86,13 @@ public:
 
 
 	/* Event Listeners */
+	UFUNCTION()
 	void OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP, float amount = 1);
 	void UpdateCurrentObjective(int i, float amount = 1);
 
-	UFUNCTION(Category = "Advanced Quest | Events")
-	void OnQuestRequirementChange(int QuestID);
-	UFUNCTION(Category = "Advanced Quest | Events")
+	UFUNCTION()
+	void OnQuestRequirementChange(UAQ_Quest* questUpdateP, EAQ_QuestState questStateP);
+	UFUNCTION()
 	void OnLevelRequirementChange(int PlayerLevel);
 
 	/* Delegates */

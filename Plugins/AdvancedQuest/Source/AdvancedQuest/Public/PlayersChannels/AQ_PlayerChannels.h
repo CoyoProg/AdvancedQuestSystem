@@ -14,6 +14,8 @@ class UAQ_EnvironmentChannel;
 class UAQ_CombatChannel;
 class UAQ_QuestChannel;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnPlayerEventDelegate, UObject*, entity, EAQ_NotifyEventType, eventType, float, amount);
+
 /**
  *
  */
@@ -35,16 +37,17 @@ public:
 	/* Observers Pattern */
 	/** Add Observer to the corresponding channel */
 	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
-	void AddObserver(UObject* entity, EAQ_ObjectivesType eventType);
+	void AddObserver(UAQ_Quest* entity, EAQ_ObjectivesType eventType);
 
 	/** Remove Observer to the corresponding channel */
 	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
-	void RemoveObserver(UObject* entity, EAQ_ObjectivesType eventType);
+	void RemoveObserver(UAQ_Quest* entity, EAQ_ObjectivesType eventType);
 
 
 	/* Delegates */
 	virtual void OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestState QuestState) override;
 	virtual void OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay) override;
+	FOnPlayerEventDelegate OnPlayerEventDelegate;
 
 	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
 	void OnPlayerLevelUp();
@@ -83,8 +86,6 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
-
 
 	/** Player Channels */
 	UPROPERTY(BlueprintReadOnly, Category = "Advanced Quest | Channels")
@@ -115,9 +116,6 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Advanced Quest | Save-Load")
 	void LoadInventory();
 
-
-	/* Observers of Player Channels */
 private:
-	void NotifyObservers(UObject* entity, enum class EAQ_NotifyEventType eventType, float amount = 1);
-	TArray<UObject*> Observers;
+	UAQ_QuestManager* QuestManager;
 };

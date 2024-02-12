@@ -2,8 +2,8 @@
 
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
 
-#include "PlayersChannels/AQ_Channels.h"
 #include "Enums/AQ_RequiermentEventType.h"
 
 #include "AQ_QuestChannel.generated.h"
@@ -14,14 +14,13 @@ class UAQ_QuestComponent;
 class IAQ_PlayerChannelsFacade;
 class UWidgetComponent;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FQuestRequirementChangedDelegate, int, QuestID);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FLevelRequirementChangedDelegate, int, PlayerLevel);
 
 /**
  * 
  */
 UCLASS()
-class ADVANCEDQUEST_API UAQ_QuestChannel : public UAQ_Channels
+class ADVANCEDQUEST_API UAQ_QuestChannel : public UObject
 {
 	GENERATED_BODY()
 
@@ -34,7 +33,6 @@ public:
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Advanced Quest | UI")
 	UAQ_BookQuest* BookQuest = nullptr;
 
-
 	/* Events */
 	void OnPlayerLevelChange(int newLevel);
 
@@ -45,9 +43,5 @@ public:
 	UFUNCTION()
 	void OnQuestUpdate(UAQ_Quest* QuestUpdate);
 
-	UFUNCTION()
-	void OnQuestRequirementMet(UAQ_Quest* quest);
-
-	FQuestRequirementChangedDelegate QuestRequirementChangedDelegate;
 	FLevelRequirementChangedDelegate LevelRequirementChangedDelegate;
 };
