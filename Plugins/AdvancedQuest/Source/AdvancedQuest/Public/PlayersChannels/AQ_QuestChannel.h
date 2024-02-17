@@ -26,12 +26,12 @@ class ADVANCEDQUEST_API UAQ_QuestChannel : public UObject
 
 public:
 	/* Widget */
-	TSubclassOf<UUserWidget> BookQuestWidgetClass;
-	void SetWidgetClass(TSubclassOf<UUserWidget> widgetClass) { BookQuestWidgetClass = widgetClass;}
+	TSubclassOf<UUserWidget> QuestWidgetsClass;
+	void SetWidgetClass(TSubclassOf<UUserWidget> widgetClass) { QuestWidgetsClass = widgetClass;}
 	void AddWidgetToViewport();
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Advanced Quest | UI")
-	UAQ_BookQuest* BookQuest = nullptr;
+	UAQ_BookQuest* QuestWidgets = nullptr;
 
 	/* Events */
 	void OnPlayerLevelChange(int newLevel);

@@ -632,9 +632,9 @@ void FOnPlayerEventDelegate_DelegateWrapper(const FMulticastScriptDelegate& OnPl
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_BookQuestWidget_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_QuestWidgetsClass_MetaData[];
 #endif
-		static const UECodeGen_Private::FClassPropertyParams NewProp_BookQuestWidget;
+		static const UECodeGen_Private::FClassPropertyParams NewProp_QuestWidgetsClass;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_OpenJournalAction_MetaData[];
 #endif
@@ -700,7 +700,7 @@ void FOnPlayerEventDelegate_DelegateWrapper(const FMulticastScriptDelegate& OnPl
 	};
 #endif
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_BookQuestWidget_MetaData[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_QuestWidgetsClass_MetaData[] = {
 		{ "Category", "Advanced Quest | UI" },
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "/* Book Quest Template */" },
@@ -711,7 +711,7 @@ void FOnPlayerEventDelegate_DelegateWrapper(const FMulticastScriptDelegate& OnPl
 #endif
 	};
 #endif
-	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_BookQuestWidget = { "BookQuestWidget", nullptr, (EPropertyFlags)0x0014000000000005, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAQ_PlayerChannels, BookQuestWidget), Z_Construct_UClass_UClass, Z_Construct_UClass_UUserWidget_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_BookQuestWidget_MetaData), Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_BookQuestWidget_MetaData) };
+	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_QuestWidgetsClass = { "QuestWidgetsClass", nullptr, (EPropertyFlags)0x0014000000000005, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAQ_PlayerChannels, QuestWidgetsClass), Z_Construct_UClass_UClass, Z_Construct_UClass_UUserWidget_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_QuestWidgetsClass_MetaData), Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_QuestWidgetsClass_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_OpenJournalAction_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
@@ -782,7 +782,7 @@ void FOnPlayerEventDelegate_DelegateWrapper(const FMulticastScriptDelegate& OnPl
 #endif
 	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_PlayerLevel = { "PlayerLevel", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAQ_PlayerChannels, PlayerLevel), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_PlayerLevel_MetaData), Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_PlayerLevel_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UAQ_PlayerChannels_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_BookQuestWidget,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_QuestWidgetsClass,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_OpenJournalAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_SaveQuestsAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_InventoryChannel,
@@ -832,9 +832,9 @@ void FOnPlayerEventDelegate_DelegateWrapper(const FMulticastScriptDelegate& OnPl
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannels_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_PlayerChannels, UAQ_PlayerChannels::StaticClass, TEXT("UAQ_PlayerChannels"), &Z_Registration_Info_UClass_UAQ_PlayerChannels, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_PlayerChannels), 2656564600U) },
+		{ Z_Construct_UClass_UAQ_PlayerChannels, UAQ_PlayerChannels::StaticClass, TEXT("UAQ_PlayerChannels"), &Z_Registration_Info_UClass_UAQ_PlayerChannels, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_PlayerChannels), 3342778029U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannels_h_1365329702(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannels_h_747244840(TEXT("/Script/AdvancedQuest"),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannels_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannels_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

@@ -22,19 +22,19 @@ class ADVANCEDQUEST_API UAQ_BookQuest : public UUserWidget
 public:
 	/* Widgets */
 	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "Advanced Quest | UI")
-	UUserWidget* JournalWidget = nullptr;
+	UUserWidget* QuestLogWidget = nullptr;
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "Advanced Quest | UI")
 	UUserWidget* QuestGiverWidget = nullptr;
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Advanced Quest | UI")
-	void UpdateQuestBook(UAQ_Quest* quest);
+	void UpdateQuestWidgets(UAQ_Quest* quest);
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Advanced Quest | UI")
 	void DisplayQuestGiverSummary(const TArray<UAQ_Quest*>& questsToDisplay);
 	
 	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | UI")
-	void OpenJournal();
+	void OpenQuestLog();
 
 	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | UI")
 	void OpenQuestGiverSummary();

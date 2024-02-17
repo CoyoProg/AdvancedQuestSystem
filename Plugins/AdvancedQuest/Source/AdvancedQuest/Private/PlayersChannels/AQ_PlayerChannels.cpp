@@ -44,26 +44,26 @@ void UAQ_PlayerChannels::BeginPlay()
 
 	QuestManager = GetOwner()->GetComponentByClass<UAQ_QuestManager>();
 
-	InitBookQuestWidget();
+	InitQuestWidgets();
 	SetPlayerInputComponent();
 
 	LoadInventory();
 }
 
-void UAQ_PlayerChannels::InitBookQuestWidget()
+void UAQ_PlayerChannels::InitQuestWidgets()
 {
 	/* Add the Quest Book Widget to the viewport */
-	if (BookQuestWidget)
+	if (QuestWidgetsClass)
 	{
-		QuestChannel->SetWidgetClass(BookQuestWidget);
+		QuestChannel->SetWidgetClass(QuestWidgetsClass);
 		QuestChannel->AddWidgetToViewport();
 	}
 
-	UAQ_BookQuest* BookQuest = QuestChannel->BookQuest;
-	if (BookQuest)
+	UAQ_BookQuest* QuestWidgets = QuestChannel->QuestWidgets;
+	if (QuestWidgets)
 	{
-		BookQuest->PlayerController = GetWorld()->GetFirstPlayerController();
-		BookQuest->OnQuestEnableDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestEnable_Implementation);
+		QuestWidgets->PlayerController = GetWorld()->GetFirstPlayerController();
+		QuestWidgets->OnQuestEnableDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestEnable_Implementation);
 	}
 }
 
@@ -75,7 +75,7 @@ void UAQ_PlayerChannels::SetPlayerInputComponent()
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		// Open Journal
-		EnhancedInputComponent->BindAction(OpenJournalAction, ETriggerEvent::Started, QuestChannel->BookQuest, &UAQ_BookQuest::OpenJournal);
+		EnhancedInputComponent->BindAction(OpenJournalAction, ETriggerEvent::Started, QuestChannel->QuestWidgets, &UAQ_BookQuest::OpenQuestLog);
 		
 		// Save Quests
 		EnhancedInputComponent->BindAction(SaveQuestsAction, ETriggerEvent::Started, this, &UAQ_PlayerChannels::SaveGame);
@@ -91,7 +91,7 @@ void UAQ_PlayerChannels::AddObserver(UAQ_Quest* entity, EAQ_ObjectivesType event
 	case EAQ_ObjectivesType::Kill:
 	case EAQ_ObjectivesType::Protect:
 	{
-		CombatChannel->OnCombatEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify_Implementation);
+		CombatChannel->OnCombatEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify);
 		break;
 	}
 
@@ -99,7 +99,7 @@ void UAQ_PlayerChannels::AddObserver(UAQ_Quest* entity, EAQ_ObjectivesType event
 	case EAQ_ObjectivesType::Collect:
 	case EAQ_ObjectivesType::Deliver:
 	{
-		InventoryChannel->OnInventoryEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify_Implementation);
+		InventoryChannel->OnInventoryEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify);
 		break;
 	}
 
@@ -108,14 +108,14 @@ void UAQ_PlayerChannels::AddObserver(UAQ_Quest* entity, EAQ_ObjectivesType event
 	case EAQ_ObjectivesType::Interact:
 	case EAQ_ObjectivesType::MiniGame:
 	{
-		EnvironmentChannel->OnEnvironmentEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify_Implementation);
+		EnvironmentChannel->OnEnvironmentEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify);
 		break;
 	}
 
 	/* Add Observer to Player Channel */
 	case EAQ_ObjectivesType::PlayerLevelUp:
 	{
-		OnPlayerEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify_Implementation);
+		OnPlayerEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify);
 		break;
 	}
 	}
@@ -129,7 +129,7 @@ void UAQ_PlayerChannels::RemoveObserver(UAQ_Quest* entity, EAQ_ObjectivesType ev
 	case EAQ_ObjectivesType::Kill:
 	case EAQ_ObjectivesType::Protect:
 	{
-		CombatChannel->OnCombatEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify_Implementation);
+		CombatChannel->OnCombatEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify);
 		break;
 	}
 
@@ -137,7 +137,7 @@ void UAQ_PlayerChannels::RemoveObserver(UAQ_Quest* entity, EAQ_ObjectivesType ev
 	case EAQ_ObjectivesType::Collect:
 	case EAQ_ObjectivesType::Deliver:
 	{
-		InventoryChannel->OnInventoryEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify_Implementation);
+		InventoryChannel->OnInventoryEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify);
 		break;
 	}
 
@@ -146,14 +146,14 @@ void UAQ_PlayerChannels::RemoveObserver(UAQ_Quest* entity, EAQ_ObjectivesType ev
 	case EAQ_ObjectivesType::Interact:
 	case EAQ_ObjectivesType::MiniGame:
 	{
-		EnvironmentChannel->OnEnvironmentEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify_Implementation);
+		EnvironmentChannel->OnEnvironmentEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify);
 		break;
 	}
 
 	/* Remove Observer from Player Channel */
 	case EAQ_ObjectivesType::PlayerLevelUp:
 	{
-		OnPlayerEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify_Implementation);
+		OnPlayerEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify);
 		break;
 	}
 
@@ -209,8 +209,8 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 	case EAQ_QuestState::Active:
 	{
 		OnQuestEnable_Implementation(quest);
-		if(QuestChannel->BookQuest)
-			QuestChannel->BookQuest->OnLoadQuests(quest);
+		if(QuestChannel->QuestWidgets)
+			QuestChannel->QuestWidgets->OnLoadQuests(quest);
 		break;
 	}
 
@@ -243,7 +243,7 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 		quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
 		quest->QuestStateChangedDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestStateChanged);
 
-		QuestChannel->BookQuest->OnLoadQuests(quest);
+		QuestChannel->QuestWidgets->OnLoadQuests(quest);
 		break;
 	}
 
@@ -333,10 +333,10 @@ void UAQ_PlayerChannels::OnCombatEventNotify_Implementation(EAQ_CombatEventType 
 void UAQ_PlayerChannels::OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay)
 {
 	/* Get the Book Quest and Display the Quests */
-	UAQ_BookQuest* BookQuest = QuestChannel->BookQuest;
+	UAQ_BookQuest* QuestWidgets = QuestChannel->QuestWidgets;
 
-	if (BookQuest)
-		BookQuest->DisplayQuestGiverSummary(questsToDisplay);
+	if (QuestWidgets)
+		QuestWidgets->DisplayQuestGiverSummary(questsToDisplay);
 }
 
 void UAQ_PlayerChannels::OnPlayerLevelUp()

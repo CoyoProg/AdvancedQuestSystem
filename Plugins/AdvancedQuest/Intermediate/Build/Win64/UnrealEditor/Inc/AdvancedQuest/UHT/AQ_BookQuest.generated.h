@@ -27,7 +27,7 @@ ADVANCEDQUEST_API void FOnQuestEnableDelegate_DelegateWrapper(const FMulticastSc
 	DECLARE_FUNCTION(execOnQuestEnableBroadcast); \
 	DECLARE_FUNCTION(execCloseAll); \
 	DECLARE_FUNCTION(execOpenQuestGiverSummary); \
-	DECLARE_FUNCTION(execOpenJournal);
+	DECLARE_FUNCTION(execOpenQuestLog);
 
 
 #define FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_BookQuest_h_20_ACCESSORS

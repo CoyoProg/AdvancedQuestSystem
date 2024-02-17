@@ -251,14 +251,14 @@ void FQuestRequirementMetDelegate_DelegateWrapper(const FMulticastScriptDelegate
 		P_THIS->OnQuestRequirementChange(Z_Param_questUpdateP,EAQ_QuestState(Z_Param_questStateP));
 		P_NATIVE_END;
 	}
-	DEFINE_FUNCTION(UAQ_Quest::execOnNotify_Implementation)
+	DEFINE_FUNCTION(UAQ_Quest::execOnNotify)
 	{
 		P_GET_OBJECT(UObject,Z_Param_entity);
 		P_GET_ENUM(EAQ_NotifyEventType,Z_Param_eventTypeP);
 		P_GET_PROPERTY(FFloatProperty,Z_Param_amount);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		P_THIS->OnNotify_Implementation(Z_Param_entity,EAQ_NotifyEventType(Z_Param_eventTypeP),Z_Param_amount);
+		P_THIS->OnNotify(Z_Param_entity,EAQ_NotifyEventType(Z_Param_eventTypeP),Z_Param_amount);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(UAQ_Quest::execQuestFailed)
@@ -303,7 +303,7 @@ void FQuestRequirementMetDelegate_DelegateWrapper(const FMulticastScriptDelegate
 			{ "DisableQuest", &UAQ_Quest::execDisableQuest },
 			{ "EnableQuest", &UAQ_Quest::execEnableQuest },
 			{ "OnLevelRequirementChange", &UAQ_Quest::execOnLevelRequirementChange },
-			{ "OnNotify_Implementation", &UAQ_Quest::execOnNotify_Implementation },
+			{ "OnNotify", &UAQ_Quest::execOnNotify },
 			{ "OnQuestRequirementChange", &UAQ_Quest::execOnQuestRequirementChange },
 			{ "QuestFailed", &UAQ_Quest::execQuestFailed },
 			{ "ResetObjectives", &UAQ_Quest::execResetObjectives },
@@ -391,9 +391,9 @@ void FQuestRequirementMetDelegate_DelegateWrapper(const FMulticastScriptDelegate
 		}
 		return ReturnFunction;
 	}
-	struct Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics
+	struct Z_Construct_UFunction_UAQ_Quest_OnNotify_Statics
 	{
-		struct AQ_Quest_eventOnNotify_Implementation_Parms
+		struct AQ_Quest_eventOnNotify_Parms
 		{
 			UObject* entity;
 			EAQ_NotifyEventType eventTypeP;
@@ -409,18 +409,18 @@ void FQuestRequirementMetDelegate_DelegateWrapper(const FMulticastScriptDelegate
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::NewProp_entity = { "entity", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_Quest_eventOnNotify_Implementation_Parms, entity), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(0, nullptr) };
-	const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::NewProp_eventTypeP_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
-	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::NewProp_eventTypeP = { "eventTypeP", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_Quest_eventOnNotify_Implementation_Parms, eventTypeP), Z_Construct_UEnum_AdvancedQuest_EAQ_NotifyEventType, METADATA_PARAMS(0, nullptr) }; // 390537601
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::NewProp_amount = { "amount", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_Quest_eventOnNotify_Implementation_Parms, amount), METADATA_PARAMS(0, nullptr) };
-	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::NewProp_entity,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::NewProp_eventTypeP_Underlying,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::NewProp_eventTypeP,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::NewProp_amount,
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_Quest_OnNotify_Statics::NewProp_entity = { "entity", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_Quest_eventOnNotify_Parms, entity), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAQ_Quest_OnNotify_Statics::NewProp_eventTypeP_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAQ_Quest_OnNotify_Statics::NewProp_eventTypeP = { "eventTypeP", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_Quest_eventOnNotify_Parms, eventTypeP), Z_Construct_UEnum_AdvancedQuest_EAQ_NotifyEventType, METADATA_PARAMS(0, nullptr) }; // 390537601
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UAQ_Quest_OnNotify_Statics::NewProp_amount = { "amount", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_Quest_eventOnNotify_Parms, amount), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_Quest_OnNotify_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_Quest_OnNotify_Statics::NewProp_entity,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_Quest_OnNotify_Statics::NewProp_eventTypeP_Underlying,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_Quest_OnNotify_Statics::NewProp_eventTypeP,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_Quest_OnNotify_Statics::NewProp_amount,
 	};
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::Function_MetaDataParams[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAQ_Quest_OnNotify_Statics::Function_MetaDataParams[] = {
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "/* Event Listeners */" },
 #endif
@@ -430,15 +430,15 @@ void FQuestRequirementMetDelegate_DelegateWrapper(const FMulticastScriptDelegate
 #endif
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_Quest, nullptr, "OnNotify_Implementation", nullptr, nullptr, Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::AQ_Quest_eventOnNotify_Implementation_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::Function_MetaDataParams) };
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::PropPointers) < 2048);
-	static_assert(sizeof(Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::AQ_Quest_eventOnNotify_Implementation_Parms) < MAX_uint16);
-	UFunction* Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation()
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_Quest_OnNotify_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_Quest, nullptr, "OnNotify", nullptr, nullptr, Z_Construct_UFunction_UAQ_Quest_OnNotify_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_Quest_OnNotify_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAQ_Quest_OnNotify_Statics::AQ_Quest_eventOnNotify_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_Quest_OnNotify_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAQ_Quest_OnNotify_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_Quest_OnNotify_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_UAQ_Quest_OnNotify_Statics::AQ_Quest_eventOnNotify_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_UAQ_Quest_OnNotify()
 	{
 		static UFunction* ReturnFunction = nullptr;
 		if (!ReturnFunction)
 		{
-			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::FuncParams);
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAQ_Quest_OnNotify_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -578,19 +578,19 @@ void FQuestRequirementMetDelegate_DelegateWrapper(const FMulticastScriptDelegate
 #endif
 		static const UECodeGen_Private::FIntPropertyParams NewProp_ObjectivesCompleted;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_bIsDisplayJournal_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bIsDisplayQuestLog_MetaData[];
 #endif
-		static void NewProp_bIsDisplayJournal_SetBit(void* Obj);
-		static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsDisplayJournal;
+		static void NewProp_bIsDisplayQuestLog_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsDisplayQuestLog;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_bIsDisplayQuickJournal_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bIsDisplayQuestTracker_MetaData[];
 #endif
-		static void NewProp_bIsDisplayQuickJournal_SetBit(void* Obj);
-		static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsDisplayQuickJournal;
+		static void NewProp_bIsDisplayQuestTracker_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsDisplayQuestTracker;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_IndexQuickDisplay_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_IndexQuestTracker_MetaData[];
 #endif
-		static const UECodeGen_Private::FIntPropertyParams NewProp_IndexQuickDisplay;
+		static const UECodeGen_Private::FIntPropertyParams NewProp_IndexQuestTracker;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_bIsRequirementMet_MetaData[];
 #endif
@@ -609,7 +609,7 @@ void FQuestRequirementMetDelegate_DelegateWrapper(const FMulticastScriptDelegate
 		{ &Z_Construct_UFunction_UAQ_Quest_DisableQuest, "DisableQuest" }, // 3499880422
 		{ &Z_Construct_UFunction_UAQ_Quest_EnableQuest, "EnableQuest" }, // 2726572292
 		{ &Z_Construct_UFunction_UAQ_Quest_OnLevelRequirementChange, "OnLevelRequirementChange" }, // 2635502684
-		{ &Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation, "OnNotify_Implementation" }, // 4218119343
+		{ &Z_Construct_UFunction_UAQ_Quest_OnNotify, "OnNotify" }, // 3735140991
 		{ &Z_Construct_UFunction_UAQ_Quest_OnQuestRequirementChange, "OnQuestRequirementChange" }, // 1371937028
 		{ &Z_Construct_UFunction_UAQ_Quest_QuestFailed, "QuestFailed" }, // 2402528187
 		{ &Z_Construct_UFunction_UAQ_Quest_ResetObjectives, "ResetObjectives" }, // 2519636557
@@ -656,7 +656,7 @@ void FQuestRequirementMetDelegate_DelegateWrapper(const FMulticastScriptDelegate
 #endif
 	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UAQ_Quest_Statics::NewProp_ObjectivesCompleted = { "ObjectivesCompleted", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAQ_Quest, ObjectivesCompleted), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_Quest_Statics::NewProp_ObjectivesCompleted_MetaData), Z_Construct_UClass_UAQ_Quest_Statics::NewProp_ObjectivesCompleted_MetaData) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayJournal_MetaData[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuestLog_MetaData[] = {
 		{ "Category", "Advanced Quest | UI" },
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "/* Display Properties */" },
@@ -667,29 +667,29 @@ void FQuestRequirementMetDelegate_DelegateWrapper(const FMulticastScriptDelegate
 #endif
 	};
 #endif
-	void Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayJournal_SetBit(void* Obj)
+	void Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuestLog_SetBit(void* Obj)
 	{
-		((UAQ_Quest*)Obj)->bIsDisplayJournal = 1;
+		((UAQ_Quest*)Obj)->bIsDisplayQuestLog = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayJournal = { "bIsDisplayJournal", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(UAQ_Quest), &Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayJournal_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayJournal_MetaData), Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayJournal_MetaData) };
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuestLog = { "bIsDisplayQuestLog", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(UAQ_Quest), &Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuestLog_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuestLog_MetaData), Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuestLog_MetaData) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuickJournal_MetaData[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuestTracker_MetaData[] = {
 		{ "Category", "Advanced Quest | UI" },
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_Quest.h" },
 	};
 #endif
-	void Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuickJournal_SetBit(void* Obj)
+	void Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuestTracker_SetBit(void* Obj)
 	{
-		((UAQ_Quest*)Obj)->bIsDisplayQuickJournal = 1;
+		((UAQ_Quest*)Obj)->bIsDisplayQuestTracker = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuickJournal = { "bIsDisplayQuickJournal", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(UAQ_Quest), &Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuickJournal_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuickJournal_MetaData), Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuickJournal_MetaData) };
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuestTracker = { "bIsDisplayQuestTracker", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(UAQ_Quest), &Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuestTracker_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuestTracker_MetaData), Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuestTracker_MetaData) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_Quest_Statics::NewProp_IndexQuickDisplay_MetaData[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_Quest_Statics::NewProp_IndexQuestTracker_MetaData[] = {
 		{ "Category", "Advanced Quest | UI" },
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_Quest.h" },
 	};
 #endif
-	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UAQ_Quest_Statics::NewProp_IndexQuickDisplay = { "IndexQuickDisplay", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAQ_Quest, IndexQuickDisplay), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_Quest_Statics::NewProp_IndexQuickDisplay_MetaData), Z_Construct_UClass_UAQ_Quest_Statics::NewProp_IndexQuickDisplay_MetaData) };
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UAQ_Quest_Statics::NewProp_IndexQuestTracker = { "IndexQuestTracker", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAQ_Quest, IndexQuestTracker), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_Quest_Statics::NewProp_IndexQuestTracker_MetaData), Z_Construct_UClass_UAQ_Quest_Statics::NewProp_IndexQuestTracker_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsRequirementMet_MetaData[] = {
 		{ "Category", "Advanced Quest | Quest" },
@@ -712,9 +712,9 @@ void FQuestRequirementMetDelegate_DelegateWrapper(const FMulticastScriptDelegate
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_Quest_Statics::NewProp_QuestState,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_Quest_Statics::NewProp_QuestData,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_Quest_Statics::NewProp_ObjectivesCompleted,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayJournal,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuickJournal,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_Quest_Statics::NewProp_IndexQuickDisplay,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuestLog,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsDisplayQuestTracker,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_Quest_Statics::NewProp_IndexQuestTracker,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_Quest_Statics::NewProp_bIsRequirementMet,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UAQ_Quest_Statics::StaticCppClassTypeInfo = {
@@ -758,9 +758,9 @@ void FQuestRequirementMetDelegate_DelegateWrapper(const FMulticastScriptDelegate
 		{ EAQ_QuestState_StaticEnum, TEXT("EAQ_QuestState"), &Z_Registration_Info_UEnum_EAQ_QuestState, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3956977008U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_Quest, UAQ_Quest::StaticClass, TEXT("UAQ_Quest"), &Z_Registration_Info_UClass_UAQ_Quest, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_Quest), 1515739531U) },
+		{ Z_Construct_UClass_UAQ_Quest, UAQ_Quest::StaticClass, TEXT("UAQ_Quest"), &Z_Registration_Info_UClass_UAQ_Quest, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_Quest), 3705154535U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_1329169542(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_3671209759(TEXT("/Script/AdvancedQuest"),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_Statics::EnumInfo));

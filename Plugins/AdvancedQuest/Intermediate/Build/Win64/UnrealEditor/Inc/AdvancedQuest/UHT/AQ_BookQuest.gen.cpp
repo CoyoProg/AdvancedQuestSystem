@@ -84,11 +84,11 @@ void FOnQuestEnableDelegate_DelegateWrapper(const FMulticastScriptDelegate& OnQu
 		P_THIS->OpenQuestGiverSummary();
 		P_NATIVE_END;
 	}
-	DEFINE_FUNCTION(UAQ_BookQuest::execOpenJournal)
+	DEFINE_FUNCTION(UAQ_BookQuest::execOpenQuestLog)
 	{
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		P_THIS->OpenJournal();
+		P_THIS->OpenQuestLog();
 		P_NATIVE_END;
 	}
 	struct AQ_BookQuest_eventAddQuest_Parms
@@ -107,7 +107,7 @@ void FOnQuestEnableDelegate_DelegateWrapper(const FMulticastScriptDelegate& OnQu
 	{
 		UAQ_Quest* quest;
 	};
-	struct AQ_BookQuest_eventUpdateQuestBook_Parms
+	struct AQ_BookQuest_eventUpdateQuestWidgets_Parms
 	{
 		UAQ_Quest* quest;
 	};
@@ -139,12 +139,12 @@ void FOnQuestEnableDelegate_DelegateWrapper(const FMulticastScriptDelegate& OnQu
 		Parms.quest=quest;
 		ProcessEvent(FindFunctionChecked(NAME_UAQ_BookQuest_RemoveQuest),&Parms);
 	}
-	static FName NAME_UAQ_BookQuest_UpdateQuestBook = FName(TEXT("UpdateQuestBook"));
-	void UAQ_BookQuest::UpdateQuestBook(UAQ_Quest* quest)
+	static FName NAME_UAQ_BookQuest_UpdateQuestWidgets = FName(TEXT("UpdateQuestWidgets"));
+	void UAQ_BookQuest::UpdateQuestWidgets(UAQ_Quest* quest)
 	{
-		AQ_BookQuest_eventUpdateQuestBook_Parms Parms;
+		AQ_BookQuest_eventUpdateQuestWidgets_Parms Parms;
 		Parms.quest=quest;
-		ProcessEvent(FindFunctionChecked(NAME_UAQ_BookQuest_UpdateQuestBook),&Parms);
+		ProcessEvent(FindFunctionChecked(NAME_UAQ_BookQuest_UpdateQuestWidgets),&Parms);
 	}
 	void UAQ_BookQuest::StaticRegisterNativesUAQ_BookQuest()
 	{
@@ -152,8 +152,8 @@ void FOnQuestEnableDelegate_DelegateWrapper(const FMulticastScriptDelegate& OnQu
 		static const FNameNativePtrPair Funcs[] = {
 			{ "CloseAll", &UAQ_BookQuest::execCloseAll },
 			{ "OnQuestEnableBroadcast", &UAQ_BookQuest::execOnQuestEnableBroadcast },
-			{ "OpenJournal", &UAQ_BookQuest::execOpenJournal },
 			{ "OpenQuestGiverSummary", &UAQ_BookQuest::execOpenQuestGiverSummary },
+			{ "OpenQuestLog", &UAQ_BookQuest::execOpenQuestLog },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 	}
@@ -325,29 +325,6 @@ void FOnQuestEnableDelegate_DelegateWrapper(const FMulticastScriptDelegate& OnQu
 		}
 		return ReturnFunction;
 	}
-	struct Z_Construct_UFunction_UAQ_BookQuest_OpenJournal_Statics
-	{
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
-#endif
-		static const UECodeGen_Private::FFunctionParams FuncParams;
-	};
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAQ_BookQuest_OpenJournal_Statics::Function_MetaDataParams[] = {
-		{ "Category", "Advanced Quest | UI" },
-		{ "ModuleRelativePath", "Public/QuestSystem/AQ_BookQuest.h" },
-	};
-#endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_BookQuest_OpenJournal_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_BookQuest, nullptr, "OpenJournal", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_BookQuest_OpenJournal_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAQ_BookQuest_OpenJournal_Statics::Function_MetaDataParams) };
-	UFunction* Z_Construct_UFunction_UAQ_BookQuest_OpenJournal()
-	{
-		static UFunction* ReturnFunction = nullptr;
-		if (!ReturnFunction)
-		{
-			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAQ_BookQuest_OpenJournal_Statics::FuncParams);
-		}
-		return ReturnFunction;
-	}
 	struct Z_Construct_UFunction_UAQ_BookQuest_OpenQuestGiverSummary_Statics
 	{
 #if WITH_METADATA
@@ -368,6 +345,29 @@ void FOnQuestEnableDelegate_DelegateWrapper(const FMulticastScriptDelegate& OnQu
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAQ_BookQuest_OpenQuestGiverSummary_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UAQ_BookQuest_OpenQuestLog_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAQ_BookQuest_OpenQuestLog_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Advanced Quest | UI" },
+		{ "ModuleRelativePath", "Public/QuestSystem/AQ_BookQuest.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_BookQuest_OpenQuestLog_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_BookQuest, nullptr, "OpenQuestLog", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_BookQuest_OpenQuestLog_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAQ_BookQuest_OpenQuestLog_Statics::Function_MetaDataParams) };
+	UFunction* Z_Construct_UFunction_UAQ_BookQuest_OpenQuestLog()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAQ_BookQuest_OpenQuestLog_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -402,7 +402,7 @@ void FOnQuestEnableDelegate_DelegateWrapper(const FMulticastScriptDelegate& OnQu
 		}
 		return ReturnFunction;
 	}
-	struct Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestBook_Statics
+	struct Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestWidgets_Statics
 	{
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_quest;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
@@ -411,25 +411,25 @@ void FOnQuestEnableDelegate_DelegateWrapper(const FMulticastScriptDelegate& OnQu
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestBook_Statics::NewProp_quest = { "quest", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_BookQuest_eventUpdateQuestBook_Parms, quest), Z_Construct_UClass_UAQ_Quest_NoRegister, METADATA_PARAMS(0, nullptr) };
-	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestBook_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestBook_Statics::NewProp_quest,
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestWidgets_Statics::NewProp_quest = { "quest", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_BookQuest_eventUpdateQuestWidgets_Parms, quest), Z_Construct_UClass_UAQ_Quest_NoRegister, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestWidgets_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestWidgets_Statics::NewProp_quest,
 	};
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestBook_Statics::Function_MetaDataParams[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestWidgets_Statics::Function_MetaDataParams[] = {
 		{ "Category", "Advanced Quest | UI" },
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_BookQuest.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestBook_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_BookQuest, nullptr, "UpdateQuestBook", nullptr, nullptr, Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestBook_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestBook_Statics::PropPointers), sizeof(AQ_BookQuest_eventUpdateQuestBook_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x0C020800, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestBook_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestBook_Statics::Function_MetaDataParams) };
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestBook_Statics::PropPointers) < 2048);
-	static_assert(sizeof(AQ_BookQuest_eventUpdateQuestBook_Parms) < MAX_uint16);
-	UFunction* Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestBook()
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestWidgets_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_BookQuest, nullptr, "UpdateQuestWidgets", nullptr, nullptr, Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestWidgets_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestWidgets_Statics::PropPointers), sizeof(AQ_BookQuest_eventUpdateQuestWidgets_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x0C020800, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestWidgets_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestWidgets_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestWidgets_Statics::PropPointers) < 2048);
+	static_assert(sizeof(AQ_BookQuest_eventUpdateQuestWidgets_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestWidgets()
 	{
 		static UFunction* ReturnFunction = nullptr;
 		if (!ReturnFunction)
 		{
-			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestBook_Statics::FuncParams);
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestWidgets_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -446,9 +446,9 @@ void FOnQuestEnableDelegate_DelegateWrapper(const FMulticastScriptDelegate& OnQu
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_JournalWidget_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_QuestLogWidget_MetaData[];
 #endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_JournalWidget;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_QuestLogWidget;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_QuestGiverWidget_MetaData[];
 #endif
@@ -481,10 +481,10 @@ void FOnQuestEnableDelegate_DelegateWrapper(const FMulticastScriptDelegate& OnQu
 		{ &Z_Construct_UFunction_UAQ_BookQuest_DisplayQuestGiverSummary, "DisplayQuestGiverSummary" }, // 403128928
 		{ &Z_Construct_UFunction_UAQ_BookQuest_OnLoadQuests, "OnLoadQuests" }, // 325499894
 		{ &Z_Construct_UFunction_UAQ_BookQuest_OnQuestEnableBroadcast, "OnQuestEnableBroadcast" }, // 3137072320
-		{ &Z_Construct_UFunction_UAQ_BookQuest_OpenJournal, "OpenJournal" }, // 1244681590
 		{ &Z_Construct_UFunction_UAQ_BookQuest_OpenQuestGiverSummary, "OpenQuestGiverSummary" }, // 2222889166
+		{ &Z_Construct_UFunction_UAQ_BookQuest_OpenQuestLog, "OpenQuestLog" }, // 1358067800
 		{ &Z_Construct_UFunction_UAQ_BookQuest_RemoveQuest, "RemoveQuest" }, // 1213552505
-		{ &Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestBook, "UpdateQuestBook" }, // 1296087300
+		{ &Z_Construct_UFunction_UAQ_BookQuest_UpdateQuestWidgets, "UpdateQuestWidgets" }, // 2510665964
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_BookQuest_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
@@ -500,7 +500,7 @@ void FOnQuestEnableDelegate_DelegateWrapper(const FMulticastScriptDelegate& OnQu
 	};
 #endif
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_BookQuest_Statics::NewProp_JournalWidget_MetaData[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_BookQuest_Statics::NewProp_QuestLogWidget_MetaData[] = {
 		{ "Category", "Advanced Quest | UI" },
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "/* Widgets */" },
@@ -512,7 +512,7 @@ void FOnQuestEnableDelegate_DelegateWrapper(const FMulticastScriptDelegate& OnQu
 #endif
 	};
 #endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UAQ_BookQuest_Statics::NewProp_JournalWidget = { "JournalWidget", nullptr, (EPropertyFlags)0x001000000008080d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAQ_BookQuest, JournalWidget), Z_Construct_UClass_UUserWidget_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_BookQuest_Statics::NewProp_JournalWidget_MetaData), Z_Construct_UClass_UAQ_BookQuest_Statics::NewProp_JournalWidget_MetaData) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UAQ_BookQuest_Statics::NewProp_QuestLogWidget = { "QuestLogWidget", nullptr, (EPropertyFlags)0x001000000008080d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAQ_BookQuest, QuestLogWidget), Z_Construct_UClass_UUserWidget_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_BookQuest_Statics::NewProp_QuestLogWidget_MetaData), Z_Construct_UClass_UAQ_BookQuest_Statics::NewProp_QuestLogWidget_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_BookQuest_Statics::NewProp_QuestGiverWidget_MetaData[] = {
 		{ "Category", "Advanced Quest | UI" },
@@ -562,7 +562,7 @@ void FOnQuestEnableDelegate_DelegateWrapper(const FMulticastScriptDelegate& OnQu
 #endif
 	const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UAQ_BookQuest_Statics::NewProp_OnQuestEnableDelegate = { "OnQuestEnableDelegate", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAQ_BookQuest, OnQuestEnableDelegate), Z_Construct_UDelegateFunction_AdvancedQuest_OnQuestEnableDelegate__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_BookQuest_Statics::NewProp_OnQuestEnableDelegate_MetaData), Z_Construct_UClass_UAQ_BookQuest_Statics::NewProp_OnQuestEnableDelegate_MetaData) }; // 1356420680
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UAQ_BookQuest_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_BookQuest_Statics::NewProp_JournalWidget,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_BookQuest_Statics::NewProp_QuestLogWidget,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_BookQuest_Statics::NewProp_QuestGiverWidget,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_BookQuest_Statics::NewProp_Quests_Inner,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_BookQuest_Statics::NewProp_Quests,
@@ -608,9 +608,9 @@ void FOnQuestEnableDelegate_DelegateWrapper(const FMulticastScriptDelegate& OnQu
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_BookQuest_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_BookQuest, UAQ_BookQuest::StaticClass, TEXT("UAQ_BookQuest"), &Z_Registration_Info_UClass_UAQ_BookQuest, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_BookQuest), 2085885222U) },
+		{ Z_Construct_UClass_UAQ_BookQuest, UAQ_BookQuest::StaticClass, TEXT("UAQ_BookQuest"), &Z_Registration_Info_UClass_UAQ_BookQuest, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_BookQuest), 1500885799U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_BookQuest_h_1286326743(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_BookQuest_h_890673503(TEXT("/Script/AdvancedQuest"),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_BookQuest_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_BookQuest_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

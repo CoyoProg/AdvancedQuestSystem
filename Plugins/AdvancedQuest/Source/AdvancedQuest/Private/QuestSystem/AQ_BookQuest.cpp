@@ -3,10 +3,10 @@
 
 #include "QuestSystem/AQ_BookQuest.h"
 
-void UAQ_BookQuest::OpenJournal()
+void UAQ_BookQuest::OpenQuestLog()
 {
 	/* Open/Close the Journal */
-	bool bIsJournalVisible = JournalWidget->IsVisible();
+	bool bIsJournalVisible = QuestLogWidget->IsVisible();
 
 	CloseAll();
 
@@ -19,7 +19,7 @@ void UAQ_BookQuest::OpenJournal()
 		}
 
 		SetKeyboardFocus();
-		JournalWidget->SetVisibility(ESlateVisibility::Visible);
+		QuestLogWidget->SetVisibility(ESlateVisibility::Visible);
 		return;
 	}
 
@@ -48,7 +48,7 @@ void UAQ_BookQuest::OpenQuestGiverSummary()
 void UAQ_BookQuest::CloseAll()
 {
 	/* Close all the widgets */
-	JournalWidget->SetVisibility(ESlateVisibility::Collapsed);
+	QuestLogWidget->SetVisibility(ESlateVisibility::Collapsed);
 	QuestGiverWidget->SetVisibility(ESlateVisibility::Collapsed);
 }
 

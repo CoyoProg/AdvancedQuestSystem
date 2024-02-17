@@ -12,20 +12,20 @@
 
 void UAQ_QuestChannel::AddWidgetToViewport()
 {
-	/* Check if there is a BookQuest Widget class */
-	if (!BookQuestWidgetClass)
+	/* Check if there is a QuestWidgets Widget class */
+	if (!QuestWidgetsClass)
 		return;
 
 	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
 	if (!PlayerController)
 		return;
 	
-	/* Create the BookQuest widget and add it to the viewport */
-	BookQuest = CreateWidget<UAQ_BookQuest>(PlayerController, BookQuestWidgetClass);
-	if (!BookQuest)
+	/* Create the QuestWidgets widget and add it to the viewport */
+	QuestWidgets = CreateWidget<UAQ_BookQuest>(PlayerController, QuestWidgetsClass);
+	if (!QuestWidgets)
 		return;
 
-	BookQuest->AddToViewport();
+	QuestWidgets->AddToViewport();
 }
 
 void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestState QuestState)
@@ -37,8 +37,8 @@ void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestStat
 	case EAQ_QuestState::Failed:
 	{
 		/* Update the Book Quest */
-		if (BookQuest)
-			BookQuest->UpdateQuestBook(QuestUpdate);
+		if (QuestWidgets)
+			QuestWidgets->UpdateQuestWidgets(QuestUpdate);
 		break;
 	}
 
@@ -46,8 +46,8 @@ void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestStat
 	case EAQ_QuestState::Archive:
 	{
 		/* Remove the Quest from the Book Quest */
-		if (BookQuest)
-			BookQuest->RemoveQuest(QuestUpdate);
+		if (QuestWidgets)
+			QuestWidgets->RemoveQuest(QuestUpdate);
 
 		/* Remove the Quest Channel to the Quest Update delegate*/
 		QuestUpdate->ObjectivesUpdatedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestUpdate);
@@ -65,6 +65,6 @@ void UAQ_QuestChannel::OnPlayerLevelChange(int newLevel)
 
 void UAQ_QuestChannel::OnQuestUpdate(UAQ_Quest* QuestUpdate)
 {
-	if (BookQuest)
-		BookQuest->UpdateQuestBook(QuestUpdate);
+	if (QuestWidgets)
+		QuestWidgets->UpdateQuestWidgets(QuestUpdate);
 }

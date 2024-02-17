@@ -31,8 +31,8 @@ public:
 
 	/* Book Quest Template */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | UI")
-	TSubclassOf<UUserWidget> BookQuestWidget = nullptr;
-	void InitBookQuestWidget();
+	TSubclassOf<UUserWidget> QuestWidgetsClass = nullptr;
+	void InitQuestWidgets();
 
 
 	/* Observers Pattern */

@@ -7,7 +7,6 @@
 #include "Misc/Guid.h"
 
 #include "QuestSystem/AQ_QuestData.h"
-
 #include "AQ_Quest.generated.h"
 
 
@@ -71,13 +70,13 @@ public:
 
 	/* Display Properties */
 	UPROPERTY(BlueprintReadWrite, Category = "Advanced Quest | UI")
-	bool bIsDisplayJournal = false;
+	bool bIsDisplayQuestLog = false;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Advanced Quest | UI")
-	bool bIsDisplayQuickJournal = false;
+	bool bIsDisplayQuestTracker = false;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Advanced Quest | UI")
-	int IndexQuickDisplay = 0;
+	int IndexQuestTracker = 0;
 
 
 	/* Requirements */
@@ -87,7 +86,7 @@ public:
 
 	/* Event Listeners */
 	UFUNCTION()
-	void OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP, float amount = 1);
+	void OnNotify(UObject* entity, EAQ_NotifyEventType eventTypeP, float amount = 1);
 	void UpdateCurrentObjective(int i, float amount = 1);
 
 	UFUNCTION()

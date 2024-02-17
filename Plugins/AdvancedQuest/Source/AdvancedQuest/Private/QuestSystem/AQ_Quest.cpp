@@ -57,8 +57,8 @@ void UAQ_Quest::DisableQuest()
 		QuestStateChangedDelegate.Broadcast(this, QuestState);
 
 	/* Reset display properties */
-	bIsDisplayJournal = false;
-	bIsDisplayQuickJournal = false;
+	bIsDisplayQuestLog = false;
+	bIsDisplayQuestTracker = false;
 }
 
 void UAQ_Quest::ResetQuest()
@@ -68,8 +68,8 @@ void UAQ_Quest::ResetQuest()
 	if (QuestStateChangedDelegate.IsBound())
 		QuestStateChangedDelegate.Broadcast(this, QuestState);
 
-	bIsDisplayJournal = false;
-	bIsDisplayQuickJournal = false;
+	bIsDisplayQuestLog = false;
+	bIsDisplayQuestTracker = false;
 
 	/* Reset all the objectives */
 	for (int i = 0; i < QuestData->objectives.Num(); i++)
@@ -78,7 +78,7 @@ void UAQ_Quest::ResetQuest()
 	}
 
 	ObjectivesCompleted = 0;
-	IndexQuickDisplay = 0;
+	IndexQuestTracker = 0;
 }
 
 void UAQ_Quest::ResetObjectives()
@@ -104,7 +104,7 @@ void UAQ_Quest::QuestFailed()
 		QuestStateChangedDelegate.Broadcast(this, QuestState);
 }
 
-void UAQ_Quest::OnNotify_Implementation(UObject* entity, EAQ_NotifyEventType eventTypeP, float amount)
+void UAQ_Quest::OnNotify(UObject* entity, EAQ_NotifyEventType eventTypeP, float amount)
 {
 	bool bIsEventRemovedFromInventory = false;
 
