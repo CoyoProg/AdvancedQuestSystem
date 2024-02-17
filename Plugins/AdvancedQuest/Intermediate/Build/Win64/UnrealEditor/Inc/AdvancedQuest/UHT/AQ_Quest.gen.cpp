@@ -12,11 +12,13 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Quest() {}
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_Quest();
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_Quest_NoRegister();
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_QuestData_NoRegister();
+	ADVANCEDQUEST_API UEnum* Z_Construct_UEnum_AdvancedQuest_EAQ_NotifyEventType();
 	ADVANCEDQUEST_API UEnum* Z_Construct_UEnum_AdvancedQuest_EAQ_QuestState();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_ObjectivesUpdatedDelegate__DelegateSignature();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementMetDelegate__DelegateSignature();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_QuestStateChangedDelegate__DelegateSignature();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UObject();
+	COREUOBJECT_API UClass* Z_Construct_UClass_UObject_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_AdvancedQuest();
 // End Cross Module References
 	static FEnumRegistrationInfo Z_Registration_Info_UEnum_EAQ_QuestState;
@@ -249,6 +251,16 @@ void FQuestRequirementMetDelegate_DelegateWrapper(const FMulticastScriptDelegate
 		P_THIS->OnQuestRequirementChange(Z_Param_questUpdateP,EAQ_QuestState(Z_Param_questStateP));
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(UAQ_Quest::execOnNotify_Implementation)
+	{
+		P_GET_OBJECT(UObject,Z_Param_entity);
+		P_GET_ENUM(EAQ_NotifyEventType,Z_Param_eventTypeP);
+		P_GET_PROPERTY(FFloatProperty,Z_Param_amount);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->OnNotify_Implementation(Z_Param_entity,EAQ_NotifyEventType(Z_Param_eventTypeP),Z_Param_amount);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UAQ_Quest::execQuestFailed)
 	{
 		P_FINISH;
@@ -291,6 +303,7 @@ void FQuestRequirementMetDelegate_DelegateWrapper(const FMulticastScriptDelegate
 			{ "DisableQuest", &UAQ_Quest::execDisableQuest },
 			{ "EnableQuest", &UAQ_Quest::execEnableQuest },
 			{ "OnLevelRequirementChange", &UAQ_Quest::execOnLevelRequirementChange },
+			{ "OnNotify_Implementation", &UAQ_Quest::execOnNotify_Implementation },
 			{ "OnQuestRequirementChange", &UAQ_Quest::execOnQuestRequirementChange },
 			{ "QuestFailed", &UAQ_Quest::execQuestFailed },
 			{ "ResetObjectives", &UAQ_Quest::execResetObjectives },
@@ -375,6 +388,57 @@ void FQuestRequirementMetDelegate_DelegateWrapper(const FMulticastScriptDelegate
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAQ_Quest_OnLevelRequirementChange_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics
+	{
+		struct AQ_Quest_eventOnNotify_Implementation_Parms
+		{
+			UObject* entity;
+			EAQ_NotifyEventType eventTypeP;
+			float amount;
+		};
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_entity;
+		static const UECodeGen_Private::FBytePropertyParams NewProp_eventTypeP_Underlying;
+		static const UECodeGen_Private::FEnumPropertyParams NewProp_eventTypeP;
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_amount;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::NewProp_entity = { "entity", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_Quest_eventOnNotify_Implementation_Parms, entity), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::NewProp_eventTypeP_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::NewProp_eventTypeP = { "eventTypeP", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_Quest_eventOnNotify_Implementation_Parms, eventTypeP), Z_Construct_UEnum_AdvancedQuest_EAQ_NotifyEventType, METADATA_PARAMS(0, nullptr) }; // 390537601
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::NewProp_amount = { "amount", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_Quest_eventOnNotify_Implementation_Parms, amount), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::NewProp_entity,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::NewProp_eventTypeP_Underlying,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::NewProp_eventTypeP,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::NewProp_amount,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/* Event Listeners */" },
+#endif
+		{ "ModuleRelativePath", "Public/QuestSystem/AQ_Quest.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Event Listeners" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_Quest, nullptr, "OnNotify_Implementation", nullptr, nullptr, Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::AQ_Quest_eventOnNotify_Implementation_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::AQ_Quest_eventOnNotify_Implementation_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -545,6 +609,7 @@ void FQuestRequirementMetDelegate_DelegateWrapper(const FMulticastScriptDelegate
 		{ &Z_Construct_UFunction_UAQ_Quest_DisableQuest, "DisableQuest" }, // 3499880422
 		{ &Z_Construct_UFunction_UAQ_Quest_EnableQuest, "EnableQuest" }, // 2726572292
 		{ &Z_Construct_UFunction_UAQ_Quest_OnLevelRequirementChange, "OnLevelRequirementChange" }, // 2635502684
+		{ &Z_Construct_UFunction_UAQ_Quest_OnNotify_Implementation, "OnNotify_Implementation" }, // 4218119343
 		{ &Z_Construct_UFunction_UAQ_Quest_OnQuestRequirementChange, "OnQuestRequirementChange" }, // 1371937028
 		{ &Z_Construct_UFunction_UAQ_Quest_QuestFailed, "QuestFailed" }, // 2402528187
 		{ &Z_Construct_UFunction_UAQ_Quest_ResetObjectives, "ResetObjectives" }, // 2519636557
@@ -693,9 +758,9 @@ void FQuestRequirementMetDelegate_DelegateWrapper(const FMulticastScriptDelegate
 		{ EAQ_QuestState_StaticEnum, TEXT("EAQ_QuestState"), &Z_Registration_Info_UEnum_EAQ_QuestState, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3956977008U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_Quest, UAQ_Quest::StaticClass, TEXT("UAQ_Quest"), &Z_Registration_Info_UClass_UAQ_Quest, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_Quest), 107630318U) },
+		{ Z_Construct_UClass_UAQ_Quest, UAQ_Quest::StaticClass, TEXT("UAQ_Quest"), &Z_Registration_Info_UClass_UAQ_Quest, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_Quest), 1515739531U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_585282360(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_1329169542(TEXT("/Script/AdvancedQuest"),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_Statics::EnumInfo));

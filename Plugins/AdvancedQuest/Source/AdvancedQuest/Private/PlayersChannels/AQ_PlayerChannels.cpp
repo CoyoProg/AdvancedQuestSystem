@@ -118,7 +118,6 @@ void UAQ_PlayerChannels::AddObserver(UAQ_Quest* entity, EAQ_ObjectivesType event
 		OnPlayerEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify_Implementation);
 		break;
 	}
-
 	}
 }
 

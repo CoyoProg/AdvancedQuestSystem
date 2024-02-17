@@ -9,10 +9,13 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeAdvancedQuest_init() {}
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_LevelRequirementChangedDelegate__DelegateSignature();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_ObjectivesUpdatedDelegate__DelegateSignature();
+	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnCombatEventDelegate__DelegateSignature();
+	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnEnvironmentEventDelegate__DelegateSignature();
+	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnInventoryEventDelegate__DelegateSignature();
+	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnQuestEnableDelegate__DelegateSignature();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnQuestStateChangedListenerDelegate__DelegateSignature();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnStateChangedBueprintDelegate__DelegateSignature();
-	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementChangedDelegate__DelegateSignature();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementMetDelegate__DelegateSignature();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_QuestStateChangedDelegate__DelegateSignature();
 	static FPackageRegistrationInfo Z_Registration_Info_UPackage__Script_AdvancedQuest;
@@ -23,10 +26,13 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedQuest_init() {}
 			static UObject* (*const SingletonFuncArray[])() = {
 				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_LevelRequirementChangedDelegate__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_ObjectivesUpdatedDelegate__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_OnCombatEventDelegate__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_OnEnvironmentEventDelegate__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_OnInventoryEventDelegate__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_OnQuestEnableDelegate__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_OnQuestStateChangedListenerDelegate__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_OnStateChangedBueprintDelegate__DelegateSignature,
-				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementChangedDelegate__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementMetDelegate__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_QuestStateChangedDelegate__DelegateSignature,
 			};
@@ -35,13 +41,13 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedQuest_init() {}
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0xF7BA531D,
-				0x61F79C70,
+				0xDEA9364C,
+				0xA3A27814,
 				METADATA_PARAMS(0, nullptr)
 			};
 			UECodeGen_Private::ConstructUPackage(Z_Registration_Info_UPackage__Script_AdvancedQuest.OuterSingleton, PackageParams);
 		}
 		return Z_Registration_Info_UPackage__Script_AdvancedQuest.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_AdvancedQuest(Z_Construct_UPackage__Script_AdvancedQuest, TEXT("/Script/AdvancedQuest"), Z_Registration_Info_UPackage__Script_AdvancedQuest, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0xF7BA531D, 0x61F79C70));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_AdvancedQuest(Z_Construct_UPackage__Script_AdvancedQuest, TEXT("/Script/AdvancedQuest"), Z_Registration_Info_UPackage__Script_AdvancedQuest, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0xDEA9364C, 0xA3A27814));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
