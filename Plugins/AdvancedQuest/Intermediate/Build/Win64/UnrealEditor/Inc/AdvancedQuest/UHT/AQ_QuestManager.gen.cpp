@@ -54,7 +54,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestManager() {}
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestManager.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_QuestManager_LoadQuestData_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_QuestManager, nullptr, "LoadQuestData", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x0C020800, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_QuestManager_LoadQuestData_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAQ_QuestManager_LoadQuestData_Statics::Function_MetaDataParams) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_QuestManager_LoadQuestData_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_QuestManager, nullptr, "LoadQuestData", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x0C020800, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAQ_QuestManager_LoadQuestData_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_QuestManager_LoadQuestData_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_UAQ_QuestManager_LoadQuestData()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -71,7 +71,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestManager() {}
 			int32 QuestID;
 			UAQ_Quest* ReturnValue;
 		};
-		static const UECodeGen_Private::FIntPropertyParams NewProp_QuestID;
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_QuestID;
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_ReturnValue;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
@@ -79,8 +79,8 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestManager() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::NewProp_QuestID = { "QuestID", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_QuestManager_eventQueryQuest_Parms, QuestID), METADATA_PARAMS(0, nullptr) };
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_QuestManager_eventQueryQuest_Parms, ReturnValue), Z_Construct_UClass_UAQ_Quest_NoRegister, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::NewProp_QuestID = { "QuestID", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_QuestManager_eventQueryQuest_Parms, QuestID), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_QuestManager_eventQueryQuest_Parms, ReturnValue), Z_Construct_UClass_UAQ_Quest_NoRegister, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::NewProp_QuestID,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::NewProp_ReturnValue,
@@ -91,9 +91,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestManager() {}
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestManager.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_QuestManager, nullptr, "QueryQuest", nullptr, nullptr, Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::AQ_QuestManager_eventQueryQuest_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::Function_MetaDataParams) };
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::PropPointers) < 2048);
-	static_assert(sizeof(Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::AQ_QuestManager_eventQueryQuest_Parms) < MAX_uint16);
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_QuestManager, nullptr, "QueryQuest", nullptr, nullptr, sizeof(Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::AQ_QuestManager_eventQueryQuest_Parms), Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_QuestManager_QueryQuest_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_UAQ_QuestManager_QueryQuest()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -116,7 +114,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestManager() {}
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestManager.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_QuestManager_SaveQuestData_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_QuestManager, nullptr, "SaveQuestData", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x0C020800, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_QuestManager_SaveQuestData_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAQ_QuestManager_SaveQuestData_Statics::Function_MetaDataParams) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_QuestManager_SaveQuestData_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_QuestManager, nullptr, "SaveQuestData", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x0C020800, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAQ_QuestManager_SaveQuestData_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_QuestManager_SaveQuestData_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_UAQ_QuestManager_SaveQuestData()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -139,7 +137,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestManager() {}
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_QuestDataCenter_ValueProp;
-		static const UECodeGen_Private::FIntPropertyParams NewProp_QuestDataCenter_Key_KeyProp;
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_QuestDataCenter_Key_KeyProp;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_QuestDataCenter_MetaData[];
 #endif
@@ -152,13 +150,11 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestManager() {}
 		(UObject* (*)())Z_Construct_UClass_UActorComponent,
 		(UObject* (*)())Z_Construct_UPackage__Script_AdvancedQuest,
 	};
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestManager_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_UAQ_QuestManager_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_UAQ_QuestManager_LoadQuestData, "LoadQuestData" }, // 3262811934
-		{ &Z_Construct_UFunction_UAQ_QuestManager_QueryQuest, "QueryQuest" }, // 1066675740
-		{ &Z_Construct_UFunction_UAQ_QuestManager_SaveQuestData, "SaveQuestData" }, // 885784153
+		{ &Z_Construct_UFunction_UAQ_QuestManager_LoadQuestData, "LoadQuestData" }, // 3634995301
+		{ &Z_Construct_UFunction_UAQ_QuestManager_QueryQuest, "QueryQuest" }, // 875797855
+		{ &Z_Construct_UFunction_UAQ_QuestManager_SaveQuestData, "SaveQuestData" }, // 992947828
 	};
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestManager_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestManager_Statics::Class_MetaDataParams[] = {
 		{ "ABSTRACT", "" },
@@ -168,15 +164,15 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestManager() {}
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestManager.h" },
 	};
 #endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_QuestDataCenter_ValueProp = { "QuestDataCenter", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, Z_Construct_UClass_UAQ_Quest_NoRegister, METADATA_PARAMS(0, nullptr) };
-	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_QuestDataCenter_Key_KeyProp = { "QuestDataCenter_Key", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_QuestDataCenter_ValueProp = { "QuestDataCenter", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 1, Z_Construct_UClass_UAQ_Quest_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_QuestDataCenter_Key_KeyProp = { "QuestDataCenter_Key", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 0, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_QuestDataCenter_MetaData[] = {
 		{ "Category", "Advanced Quest | Quest" },
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestManager.h" },
 	};
 #endif
-	const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_QuestDataCenter = { "QuestDataCenter", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAQ_QuestManager, QuestDataCenter), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_QuestDataCenter_MetaData), Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_QuestDataCenter_MetaData) };
+	const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_QuestDataCenter = { "QuestDataCenter", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_QuestManager, QuestDataCenter), EMapPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_QuestDataCenter_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_QuestDataCenter_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UAQ_QuestManager_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_QuestDataCenter_ValueProp,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_QuestDataCenter_Key_KeyProp,
@@ -198,9 +194,8 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestManager() {}
 		UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestManager_Statics::PropPointers),
 		0,
 		0x00B000A4u,
-		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestManager_Statics::Class_MetaDataParams), Z_Construct_UClass_UAQ_QuestManager_Statics::Class_MetaDataParams)
+		METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestManager_Statics::Class_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestManager_Statics::Class_MetaDataParams))
 	};
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestManager_Statics::PropPointers) < 2048);
 	UClass* Z_Construct_UClass_UAQ_QuestManager()
 	{
 		if (!Z_Registration_Info_UClass_UAQ_QuestManager.OuterSingleton)
@@ -215,15 +210,15 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestManager() {}
 	}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UAQ_QuestManager);
 	UAQ_QuestManager::~UAQ_QuestManager() {}
-	struct Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestManager_h_Statics
+	struct Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestManager_h_Statics
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestManager_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_QuestManager, UAQ_QuestManager::StaticClass, TEXT("UAQ_QuestManager"), &Z_Registration_Info_UClass_UAQ_QuestManager, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_QuestManager), 12341891U) },
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestManager_h_Statics::ClassInfo[] = {
+		{ Z_Construct_UClass_UAQ_QuestManager, UAQ_QuestManager::StaticClass, TEXT("UAQ_QuestManager"), &Z_Registration_Info_UClass_UAQ_QuestManager, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_QuestManager), 1372912146U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestManager_h_3038827144(TEXT("/Script/AdvancedQuest"),
-		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestManager_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestManager_h_Statics::ClassInfo),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestManager_h_1100021095(TEXT("/Script/AdvancedQuest"),
+		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestManager_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestManager_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

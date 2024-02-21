@@ -5,9 +5,8 @@
 ===========================================================================*/
 
 // IWYU pragma: private, include "Enums/AQ_ObjectivesType.h"
-#include "Templates/IsUEnumClass.h"
 #include "UObject/ObjectMacros.h"
-#include "UObject/ReflectedTypeAccessors.h"
+#include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #ifdef ADVANCEDQUEST_AQ_ObjectivesType_generated_h
@@ -16,7 +15,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define ADVANCEDQUEST_AQ_ObjectivesType_generated_h
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_ObjectivesType_h
+#define CURRENT_FILE_ID FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_ObjectivesType_h
 
 
 #define FOREACH_ENUM_EAQ_OBJECTIVESTYPE(op) \

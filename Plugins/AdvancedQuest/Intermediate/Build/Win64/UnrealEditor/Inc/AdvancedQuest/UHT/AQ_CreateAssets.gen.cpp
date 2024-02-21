@@ -111,21 +111,21 @@ void EmptyLinkFunctionForGeneratedCodeAQ_CreateAssets() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FClassPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_ComponentClass = { "ComponentClass", nullptr, (EPropertyFlags)0x0014000000000080, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_CreateAssets_eventAddComponent_Parms, ComponentClass), Z_Construct_UClass_UClass, Z_Construct_UClass_UActorComponent_NoRegister, METADATA_PARAMS(0, nullptr) };
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_Actor = { "Actor", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_CreateAssets_eventAddComponent_Parms, Actor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FClassPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_ComponentClass = { "ComponentClass", nullptr, (EPropertyFlags)0x0014000000000080, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_CreateAssets_eventAddComponent_Parms, ComponentClass), Z_Construct_UClass_UClass, Z_Construct_UClass_UActorComponent_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_Actor = { "Actor", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_CreateAssets_eventAddComponent_Parms, Actor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_ParentComponent_MetaData[] = {
 		{ "EditInline", "true" },
 	};
 #endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_ParentComponent = { "ParentComponent", nullptr, (EPropertyFlags)0x0010000000080080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_CreateAssets_eventAddComponent_Parms, ParentComponent), Z_Construct_UClass_USceneComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_ParentComponent_MetaData), Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_ParentComponent_MetaData) };
-	const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_Name = { "Name", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_CreateAssets_eventAddComponent_Parms, Name), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_ParentComponent = { "ParentComponent", nullptr, (EPropertyFlags)0x0010000000080080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_CreateAssets_eventAddComponent_Parms, ParentComponent), Z_Construct_UClass_USceneComponent_NoRegister, METADATA_PARAMS(Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_ParentComponent_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_ParentComponent_MetaData)) };
+	const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_Name = { "Name", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_CreateAssets_eventAddComponent_Parms, Name), METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_ReturnValue_MetaData[] = {
 		{ "EditInline", "true" },
 	};
 #endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000080588, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_CreateAssets_eventAddComponent_Parms, ReturnValue), Z_Construct_UClass_UActorComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_ReturnValue_MetaData), Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_ReturnValue_MetaData) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000080588, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_CreateAssets_eventAddComponent_Parms, ReturnValue), Z_Construct_UClass_UActorComponent_NoRegister, METADATA_PARAMS(Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_ReturnValue_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_ReturnValue_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_ComponentClass,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::NewProp_Actor,
@@ -139,9 +139,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_CreateAssets() {}
 		{ "ModuleRelativePath", "Public/Tools/AQ_CreateAssets.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_CreateAssets, nullptr, "AddComponent", nullptr, nullptr, Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::AQ_CreateAssets_eventAddComponent_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::Function_MetaDataParams) };
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::PropPointers) < 2048);
-	static_assert(sizeof(Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::AQ_CreateAssets_eventAddComponent_Parms) < MAX_uint16);
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_CreateAssets, nullptr, "AddComponent", nullptr, nullptr, sizeof(Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::AQ_CreateAssets_eventAddComponent_Parms), Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_AddComponent_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_UAQ_CreateAssets_AddComponent()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -162,7 +160,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_CreateAssets() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_valueName_MetaData[];
 #endif
 		static const UECodeGen_Private::FStrPropertyParams NewProp_valueName;
-		static const UECodeGen_Private::FIntPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_ReturnValue;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
@@ -174,8 +172,8 @@ void EmptyLinkFunctionForGeneratedCodeAQ_CreateAssets() {}
 		{ "NativeConst", "" },
 	};
 #endif
-	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::NewProp_valueName = { "valueName", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_CreateAssets_eventAssignUniqueID_Parms, valueName), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::NewProp_valueName_MetaData), Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::NewProp_valueName_MetaData) };
-	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_CreateAssets_eventAssignUniqueID_Parms, ReturnValue), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::NewProp_valueName = { "valueName", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_CreateAssets_eventAssignUniqueID_Parms, valueName), METADATA_PARAMS(Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::NewProp_valueName_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::NewProp_valueName_MetaData)) };
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_CreateAssets_eventAssignUniqueID_Parms, ReturnValue), METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::NewProp_valueName,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::NewProp_ReturnValue,
@@ -186,9 +184,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_CreateAssets() {}
 		{ "ModuleRelativePath", "Public/Tools/AQ_CreateAssets.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_CreateAssets, nullptr, "AssignUniqueID", nullptr, nullptr, Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::AQ_CreateAssets_eventAssignUniqueID_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::Function_MetaDataParams) };
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::PropPointers) < 2048);
-	static_assert(sizeof(Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::AQ_CreateAssets_eventAssignUniqueID_Parms) < MAX_uint16);
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_CreateAssets, nullptr, "AssignUniqueID", nullptr, nullptr, sizeof(Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::AQ_CreateAssets_eventAssignUniqueID_Parms), Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -221,8 +217,8 @@ void EmptyLinkFunctionForGeneratedCodeAQ_CreateAssets() {}
 		{ "EditInline", "true" },
 	};
 #endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::NewProp_ActorComponent = { "ActorComponent", nullptr, (EPropertyFlags)0x0010000000080080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_CreateAssets_eventRemoveComponent_Parms, ActorComponent), Z_Construct_UClass_UActorComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::NewProp_ActorComponent_MetaData), Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::NewProp_ActorComponent_MetaData) };
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::NewProp_Actors = { "Actors", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_CreateAssets_eventRemoveComponent_Parms, Actors), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::NewProp_ActorComponent = { "ActorComponent", nullptr, (EPropertyFlags)0x0010000000080080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_CreateAssets_eventRemoveComponent_Parms, ActorComponent), Z_Construct_UClass_UActorComponent_NoRegister, METADATA_PARAMS(Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::NewProp_ActorComponent_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::NewProp_ActorComponent_MetaData)) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::NewProp_Actors = { "Actors", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_CreateAssets_eventRemoveComponent_Parms, Actors), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::NewProp_ActorComponent,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::NewProp_Actors,
@@ -233,9 +229,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_CreateAssets() {}
 		{ "ModuleRelativePath", "Public/Tools/AQ_CreateAssets.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_CreateAssets, nullptr, "RemoveComponent", nullptr, nullptr, Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::AQ_CreateAssets_eventRemoveComponent_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::Function_MetaDataParams) };
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::PropPointers) < 2048);
-	static_assert(sizeof(Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::AQ_CreateAssets_eventRemoveComponent_Parms) < MAX_uint16);
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_CreateAssets, nullptr, "RemoveComponent", nullptr, nullptr, sizeof(Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::AQ_CreateAssets_eventRemoveComponent_Parms), Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -258,7 +252,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_CreateAssets() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_SavePackage_Statics::NewProp_Object = { "Object", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_CreateAssets_eventSavePackage_Parms, Object), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_SavePackage_Statics::NewProp_Object = { "Object", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_CreateAssets_eventSavePackage_Parms, Object), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_CreateAssets_SavePackage_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_CreateAssets_SavePackage_Statics::NewProp_Object,
 	};
@@ -268,9 +262,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_CreateAssets() {}
 		{ "ModuleRelativePath", "Public/Tools/AQ_CreateAssets.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_CreateAssets_SavePackage_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_CreateAssets, nullptr, "SavePackage", nullptr, nullptr, Z_Construct_UFunction_UAQ_CreateAssets_SavePackage_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_SavePackage_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAQ_CreateAssets_SavePackage_Statics::AQ_CreateAssets_eventSavePackage_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_SavePackage_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAQ_CreateAssets_SavePackage_Statics::Function_MetaDataParams) };
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_SavePackage_Statics::PropPointers) < 2048);
-	static_assert(sizeof(Z_Construct_UFunction_UAQ_CreateAssets_SavePackage_Statics::AQ_CreateAssets_eventSavePackage_Parms) < MAX_uint16);
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_CreateAssets_SavePackage_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_CreateAssets, nullptr, "SavePackage", nullptr, nullptr, sizeof(Z_Construct_UFunction_UAQ_CreateAssets_SavePackage_Statics::AQ_CreateAssets_eventSavePackage_Parms), Z_Construct_UFunction_UAQ_CreateAssets_SavePackage_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_SavePackage_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAQ_CreateAssets_SavePackage_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_SavePackage_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_UAQ_CreateAssets_SavePackage()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -301,7 +293,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_CreateAssets() {}
 		{ "NativeConst", "" },
 	};
 #endif
-	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::NewProp_InFileName = { "InFileName", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_CreateAssets_eventShowFormattedDialog_Parms, InFileName), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::NewProp_InFileName_MetaData), Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::NewProp_InFileName_MetaData) };
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::NewProp_InFileName = { "InFileName", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_CreateAssets_eventShowFormattedDialog_Parms, InFileName), METADATA_PARAMS(Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::NewProp_InFileName_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::NewProp_InFileName_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::NewProp_InFileName,
 	};
@@ -311,9 +303,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_CreateAssets() {}
 		{ "ModuleRelativePath", "Public/Tools/AQ_CreateAssets.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_CreateAssets, nullptr, "ShowFormattedDialog", nullptr, nullptr, Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::AQ_CreateAssets_eventShowFormattedDialog_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::Function_MetaDataParams) };
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::PropPointers) < 2048);
-	static_assert(sizeof(Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::AQ_CreateAssets_eventShowFormattedDialog_Parms) < MAX_uint16);
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_CreateAssets, nullptr, "ShowFormattedDialog", nullptr, nullptr, sizeof(Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::AQ_CreateAssets_eventShowFormattedDialog_Parms), Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -336,7 +326,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_CreateAssets() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor_Statics::NewProp_Actor = { "Actor", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_CreateAssets_eventUpdateActor_Parms, Actor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor_Statics::NewProp_Actor = { "Actor", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_CreateAssets_eventUpdateActor_Parms, Actor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor_Statics::NewProp_Actor,
 	};
@@ -346,9 +336,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_CreateAssets() {}
 		{ "ModuleRelativePath", "Public/Tools/AQ_CreateAssets.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_CreateAssets, nullptr, "UpdateActor", nullptr, nullptr, Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor_Statics::AQ_CreateAssets_eventUpdateActor_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor_Statics::Function_MetaDataParams) };
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor_Statics::PropPointers) < 2048);
-	static_assert(sizeof(Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor_Statics::AQ_CreateAssets_eventUpdateActor_Parms) < MAX_uint16);
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_CreateAssets, nullptr, "UpdateActor", nullptr, nullptr, sizeof(Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor_Statics::AQ_CreateAssets_eventUpdateActor_Parms), Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -377,21 +365,17 @@ void EmptyLinkFunctionForGeneratedCodeAQ_CreateAssets() {}
 		(UObject* (*)())Z_Construct_UClass_UBlueprintFunctionLibrary,
 		(UObject* (*)())Z_Construct_UPackage__Script_AdvancedQuest,
 	};
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_CreateAssets_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_UAQ_CreateAssets_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_UAQ_CreateAssets_AddComponent, "AddComponent" }, // 2576196222
-		{ &Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID, "AssignUniqueID" }, // 3922110163
-		{ &Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent, "RemoveComponent" }, // 3537184985
-		{ &Z_Construct_UFunction_UAQ_CreateAssets_SavePackage, "SavePackage" }, // 1479531482
-		{ &Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog, "ShowFormattedDialog" }, // 1314647823
-		{ &Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor, "UpdateActor" }, // 2375512817
+		{ &Z_Construct_UFunction_UAQ_CreateAssets_AddComponent, "AddComponent" }, // 3996875271
+		{ &Z_Construct_UFunction_UAQ_CreateAssets_AssignUniqueID, "AssignUniqueID" }, // 1321023333
+		{ &Z_Construct_UFunction_UAQ_CreateAssets_RemoveComponent, "RemoveComponent" }, // 2798314273
+		{ &Z_Construct_UFunction_UAQ_CreateAssets_SavePackage, "SavePackage" }, // 361034614
+		{ &Z_Construct_UFunction_UAQ_CreateAssets_ShowFormattedDialog, "ShowFormattedDialog" }, // 2923118277
+		{ &Z_Construct_UFunction_UAQ_CreateAssets_UpdateActor, "UpdateActor" }, // 3103038127
 	};
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_CreateAssets_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_CreateAssets_Statics::Class_MetaDataParams[] = {
-#if !UE_BUILD_SHIPPING
 		{ "Comment", "/**\n * \n */" },
-#endif
 		{ "IncludePath", "Tools/AQ_CreateAssets.h" },
 		{ "ModuleRelativePath", "Public/Tools/AQ_CreateAssets.h" },
 	};
@@ -412,7 +396,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_CreateAssets() {}
 		0,
 		0,
 		0x001000A0u,
-		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_CreateAssets_Statics::Class_MetaDataParams), Z_Construct_UClass_UAQ_CreateAssets_Statics::Class_MetaDataParams)
+		METADATA_PARAMS(Z_Construct_UClass_UAQ_CreateAssets_Statics::Class_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_CreateAssets_Statics::Class_MetaDataParams))
 	};
 	UClass* Z_Construct_UClass_UAQ_CreateAssets()
 	{
@@ -426,18 +410,17 @@ void EmptyLinkFunctionForGeneratedCodeAQ_CreateAssets() {}
 	{
 		return UAQ_CreateAssets::StaticClass();
 	}
-	UAQ_CreateAssets::UAQ_CreateAssets(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UAQ_CreateAssets);
 	UAQ_CreateAssets::~UAQ_CreateAssets() {}
-	struct Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Tools_AQ_CreateAssets_h_Statics
+	struct Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Tools_AQ_CreateAssets_h_Statics
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Tools_AQ_CreateAssets_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_CreateAssets, UAQ_CreateAssets::StaticClass, TEXT("UAQ_CreateAssets"), &Z_Registration_Info_UClass_UAQ_CreateAssets, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_CreateAssets), 2218005752U) },
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Tools_AQ_CreateAssets_h_Statics::ClassInfo[] = {
+		{ Z_Construct_UClass_UAQ_CreateAssets, UAQ_CreateAssets::StaticClass, TEXT("UAQ_CreateAssets"), &Z_Registration_Info_UClass_UAQ_CreateAssets, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_CreateAssets), 2431583830U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Tools_AQ_CreateAssets_h_1855827916(TEXT("/Script/AdvancedQuest"),
-		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Tools_AQ_CreateAssets_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Tools_AQ_CreateAssets_h_Statics::ClassInfo),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Tools_AQ_CreateAssets_h_896601415(TEXT("/Script/AdvancedQuest"),
+		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Tools_AQ_CreateAssets_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Tools_AQ_CreateAssets_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

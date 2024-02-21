@@ -27,7 +27,7 @@ void UAQ_QuestManager::InitializeComponent()
 	TArray<FAssetData> QuestDataAssets;
 
 	/* Get all the Quest Data within the PLUGIN FOLDER */
-#if UE_VERSION_NEWER_THAN(5, 1, 0)
+#if UE_VERSION_NEWER_THAN(5, 1, 9)
 	FTopLevelAssetPath assetPath = UKismetSystemLibrary::MakeTopLevelAssetPath("/Script/AdvancedQuest", "AQ_QuestData");
 	AssetRegistry.GetAssetsByClass(assetPath, QuestDataAssets, true);
 #else 

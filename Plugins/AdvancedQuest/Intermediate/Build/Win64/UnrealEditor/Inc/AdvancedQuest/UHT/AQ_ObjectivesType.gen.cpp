@@ -18,7 +18,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_ObjectivesType() {}
 	{
 		if (!Z_Registration_Info_UEnum_EAQ_ObjectivesType.OuterSingleton)
 		{
-			Z_Registration_Info_UEnum_EAQ_ObjectivesType.OuterSingleton = GetStaticEnum(Z_Construct_UEnum_AdvancedQuest_EAQ_ObjectivesType, (UObject*)Z_Construct_UPackage__Script_AdvancedQuest(), TEXT("EAQ_ObjectivesType"));
+			Z_Registration_Info_UEnum_EAQ_ObjectivesType.OuterSingleton = GetStaticEnum(Z_Construct_UEnum_AdvancedQuest_EAQ_ObjectivesType, Z_Construct_UPackage__Script_AdvancedQuest(), TEXT("EAQ_ObjectivesType"));
 		}
 		return Z_Registration_Info_UEnum_EAQ_ObjectivesType.OuterSingleton;
 	}
@@ -50,9 +50,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_ObjectivesType() {}
 		{ "Collect.Comment", "/**\n *\n */" },
 		{ "Collect.DisplayName", "Collect" },
 		{ "Collect.Name", "EAQ_ObjectivesType::Collect" },
-#if !UE_BUILD_SHIPPING
 		{ "Comment", "/**\n *\n */" },
-#endif
 		{ "Deliver.Comment", "/**\n *\n */" },
 		{ "Deliver.DisplayName", "Deliver" },
 		{ "Deliver.Name", "EAQ_ObjectivesType::Deliver" },
@@ -83,11 +81,11 @@ void EmptyLinkFunctionForGeneratedCodeAQ_ObjectivesType() {}
 		"EAQ_ObjectivesType",
 		"EAQ_ObjectivesType",
 		Z_Construct_UEnum_AdvancedQuest_EAQ_ObjectivesType_Statics::Enumerators,
-		RF_Public|RF_Transient|RF_MarkAsNative,
 		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedQuest_EAQ_ObjectivesType_Statics::Enumerators),
+		RF_Public|RF_Transient|RF_MarkAsNative,
 		EEnumFlags::None,
 		(uint8)UEnum::ECppForm::EnumClass,
-		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedQuest_EAQ_ObjectivesType_Statics::Enum_MetaDataParams), Z_Construct_UEnum_AdvancedQuest_EAQ_ObjectivesType_Statics::Enum_MetaDataParams)
+		METADATA_PARAMS(Z_Construct_UEnum_AdvancedQuest_EAQ_ObjectivesType_Statics::Enum_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedQuest_EAQ_ObjectivesType_Statics::Enum_MetaDataParams))
 	};
 	UEnum* Z_Construct_UEnum_AdvancedQuest_EAQ_ObjectivesType()
 	{
@@ -102,7 +100,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_ObjectivesType() {}
 	{
 		if (!Z_Registration_Info_UEnum_EAQ_ObjectivesSpecifier.OuterSingleton)
 		{
-			Z_Registration_Info_UEnum_EAQ_ObjectivesSpecifier.OuterSingleton = GetStaticEnum(Z_Construct_UEnum_AdvancedQuest_EAQ_ObjectivesSpecifier, (UObject*)Z_Construct_UPackage__Script_AdvancedQuest(), TEXT("EAQ_ObjectivesSpecifier"));
+			Z_Registration_Info_UEnum_EAQ_ObjectivesSpecifier.OuterSingleton = GetStaticEnum(Z_Construct_UEnum_AdvancedQuest_EAQ_ObjectivesSpecifier, Z_Construct_UPackage__Script_AdvancedQuest(), TEXT("EAQ_ObjectivesSpecifier"));
 		}
 		return Z_Registration_Info_UEnum_EAQ_ObjectivesSpecifier.OuterSingleton;
 	}
@@ -138,11 +136,11 @@ void EmptyLinkFunctionForGeneratedCodeAQ_ObjectivesType() {}
 		"EAQ_ObjectivesSpecifier",
 		"EAQ_ObjectivesSpecifier",
 		Z_Construct_UEnum_AdvancedQuest_EAQ_ObjectivesSpecifier_Statics::Enumerators,
-		RF_Public|RF_Transient|RF_MarkAsNative,
 		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedQuest_EAQ_ObjectivesSpecifier_Statics::Enumerators),
+		RF_Public|RF_Transient|RF_MarkAsNative,
 		EEnumFlags::None,
 		(uint8)UEnum::ECppForm::EnumClass,
-		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedQuest_EAQ_ObjectivesSpecifier_Statics::Enum_MetaDataParams), Z_Construct_UEnum_AdvancedQuest_EAQ_ObjectivesSpecifier_Statics::Enum_MetaDataParams)
+		METADATA_PARAMS(Z_Construct_UEnum_AdvancedQuest_EAQ_ObjectivesSpecifier_Statics::Enum_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedQuest_EAQ_ObjectivesSpecifier_Statics::Enum_MetaDataParams))
 	};
 	UEnum* Z_Construct_UEnum_AdvancedQuest_EAQ_ObjectivesSpecifier()
 	{
@@ -152,16 +150,16 @@ void EmptyLinkFunctionForGeneratedCodeAQ_ObjectivesType() {}
 		}
 		return Z_Registration_Info_UEnum_EAQ_ObjectivesSpecifier.InnerSingleton;
 	}
-	struct Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_ObjectivesType_h_Statics
+	struct Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_ObjectivesType_h_Statics
 	{
 		static const FEnumRegisterCompiledInInfo EnumInfo[];
 	};
-	const FEnumRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_ObjectivesType_h_Statics::EnumInfo[] = {
-		{ EAQ_ObjectivesType_StaticEnum, TEXT("EAQ_ObjectivesType"), &Z_Registration_Info_UEnum_EAQ_ObjectivesType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 1194056288U) },
-		{ EAQ_ObjectivesSpecifier_StaticEnum, TEXT("EAQ_ObjectivesSpecifier"), &Z_Registration_Info_UEnum_EAQ_ObjectivesSpecifier, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 296202151U) },
+	const FEnumRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_ObjectivesType_h_Statics::EnumInfo[] = {
+		{ EAQ_ObjectivesType_StaticEnum, TEXT("EAQ_ObjectivesType"), &Z_Registration_Info_UEnum_EAQ_ObjectivesType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 878154254U) },
+		{ EAQ_ObjectivesSpecifier_StaticEnum, TEXT("EAQ_ObjectivesSpecifier"), &Z_Registration_Info_UEnum_EAQ_ObjectivesSpecifier, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2238121112U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_ObjectivesType_h_823714912(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_ObjectivesType_h_1244366770(TEXT("/Script/AdvancedQuest"),
 		nullptr, 0,
 		nullptr, 0,
-		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_ObjectivesType_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_ObjectivesType_h_Statics::EnumInfo));
+		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_ObjectivesType_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_ObjectivesType_h_Statics::EnumInfo));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

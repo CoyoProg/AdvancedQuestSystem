@@ -74,7 +74,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Interactable() {}
 	{
 		((AQ_Interactable_eventEnableParticles_Parms*)Obj)->isEnable = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_AAQ_Interactable_EnableParticles_Statics::NewProp_isEnable = { "isEnable", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AQ_Interactable_eventEnableParticles_Parms), &Z_Construct_UFunction_AAQ_Interactable_EnableParticles_Statics::NewProp_isEnable_SetBit, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_AAQ_Interactable_EnableParticles_Statics::NewProp_isEnable = { "isEnable", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(AQ_Interactable_eventEnableParticles_Parms), &Z_Construct_UFunction_AAQ_Interactable_EnableParticles_Statics::NewProp_isEnable_SetBit, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AAQ_Interactable_EnableParticles_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AAQ_Interactable_EnableParticles_Statics::NewProp_isEnable,
 	};
@@ -84,9 +84,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Interactable() {}
 		{ "ModuleRelativePath", "Public/Interactables/AQ_Interactable.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AAQ_Interactable_EnableParticles_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AAQ_Interactable, nullptr, "EnableParticles", nullptr, nullptr, Z_Construct_UFunction_AAQ_Interactable_EnableParticles_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AAQ_Interactable_EnableParticles_Statics::PropPointers), sizeof(Z_Construct_UFunction_AAQ_Interactable_EnableParticles_Statics::AQ_Interactable_eventEnableParticles_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AAQ_Interactable_EnableParticles_Statics::Function_MetaDataParams), Z_Construct_UFunction_AAQ_Interactable_EnableParticles_Statics::Function_MetaDataParams) };
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AAQ_Interactable_EnableParticles_Statics::PropPointers) < 2048);
-	static_assert(sizeof(Z_Construct_UFunction_AAQ_Interactable_EnableParticles_Statics::AQ_Interactable_eventEnableParticles_Parms) < MAX_uint16);
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AAQ_Interactable_EnableParticles_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AAQ_Interactable, nullptr, "EnableParticles", nullptr, nullptr, sizeof(Z_Construct_UFunction_AAQ_Interactable_EnableParticles_Statics::AQ_Interactable_eventEnableParticles_Parms), Z_Construct_UFunction_AAQ_Interactable_EnableParticles_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AAQ_Interactable_EnableParticles_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AAQ_Interactable_EnableParticles_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AAQ_Interactable_EnableParticles_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_AAQ_Interactable_EnableParticles()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -112,9 +110,9 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Interactable() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::NewProp_quest = { "quest", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_Interactable_eventOnQuestStateChanged_Parms, quest), Z_Construct_UClass_UAQ_Quest_NoRegister, METADATA_PARAMS(0, nullptr) };
-	const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::NewProp_questState_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
-	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::NewProp_questState = { "questState", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_Interactable_eventOnQuestStateChanged_Parms, questState), Z_Construct_UEnum_AdvancedQuest_EAQ_QuestState, METADATA_PARAMS(0, nullptr) }; // 859247259
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::NewProp_quest = { "quest", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_Interactable_eventOnQuestStateChanged_Parms, quest), Z_Construct_UClass_UAQ_Quest_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::NewProp_questState_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::NewProp_questState = { "questState", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_Interactable_eventOnQuestStateChanged_Parms, questState), Z_Construct_UEnum_AdvancedQuest_EAQ_QuestState, METADATA_PARAMS(nullptr, 0) }; // 1583766727
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::NewProp_quest,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::NewProp_questState_Underlying,
@@ -122,18 +120,12 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Interactable() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::Function_MetaDataParams[] = {
-#if !UE_BUILD_SHIPPING
 		{ "Comment", "/* Delegates */" },
-#endif
 		{ "ModuleRelativePath", "Public/Interactables/AQ_Interactable.h" },
-#if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Delegates" },
-#endif
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AAQ_Interactable, nullptr, "OnQuestStateChanged", nullptr, nullptr, Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::PropPointers), sizeof(Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::AQ_Interactable_eventOnQuestStateChanged_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::Function_MetaDataParams), Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::Function_MetaDataParams) };
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::PropPointers) < 2048);
-	static_assert(sizeof(Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::AQ_Interactable_eventOnQuestStateChanged_Parms) < MAX_uint16);
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AAQ_Interactable, nullptr, "OnQuestStateChanged", nullptr, nullptr, sizeof(Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::AQ_Interactable_eventOnQuestStateChanged_Parms), Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -156,7 +148,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Interactable() {}
 		{ "ModuleRelativePath", "Public/Interactables/AQ_Interactable.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AAQ_Interactable_ResetToInitialState_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AAQ_Interactable, nullptr, "ResetToInitialState", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x0C020800, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AAQ_Interactable_ResetToInitialState_Statics::Function_MetaDataParams), Z_Construct_UFunction_AAQ_Interactable_ResetToInitialState_Statics::Function_MetaDataParams) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AAQ_Interactable_ResetToInitialState_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AAQ_Interactable, nullptr, "ResetToInitialState", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x0C020800, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AAQ_Interactable_ResetToInitialState_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AAQ_Interactable_ResetToInitialState_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_AAQ_Interactable_ResetToInitialState()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -179,7 +171,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Interactable() {}
 		{ "ModuleRelativePath", "Public/Interactables/AQ_Interactable.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AAQ_Interactable_SaveInitialState_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AAQ_Interactable, nullptr, "SaveInitialState", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x0C020800, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AAQ_Interactable_SaveInitialState_Statics::Function_MetaDataParams), Z_Construct_UFunction_AAQ_Interactable_SaveInitialState_Statics::Function_MetaDataParams) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AAQ_Interactable_SaveInitialState_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AAQ_Interactable, nullptr, "SaveInitialState", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x0C020800, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AAQ_Interactable_SaveInitialState_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AAQ_Interactable_SaveInitialState_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_AAQ_Interactable_SaveInitialState()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -231,7 +223,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Interactable() {}
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_QuestID_MetaData[];
 #endif
-		static const UECodeGen_Private::FIntPropertyParams NewProp_QuestID;
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_QuestID;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const UECodeGen_Private::FImplementedInterfaceParams InterfaceParams[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
@@ -241,14 +233,12 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Interactable() {}
 		(UObject* (*)())Z_Construct_UClass_AActor,
 		(UObject* (*)())Z_Construct_UPackage__Script_AdvancedQuest,
 	};
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_AAQ_Interactable_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_AAQ_Interactable_EnableParticles, "EnableParticles" }, // 596488896
-		{ &Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged, "OnQuestStateChanged" }, // 3056399334
-		{ &Z_Construct_UFunction_AAQ_Interactable_ResetToInitialState, "ResetToInitialState" }, // 2620367541
-		{ &Z_Construct_UFunction_AAQ_Interactable_SaveInitialState, "SaveInitialState" }, // 1753744330
+		{ &Z_Construct_UFunction_AAQ_Interactable_EnableParticles, "EnableParticles" }, // 186589724
+		{ &Z_Construct_UFunction_AAQ_Interactable_OnQuestStateChanged, "OnQuestStateChanged" }, // 2542152012
+		{ &Z_Construct_UFunction_AAQ_Interactable_ResetToInitialState, "ResetToInitialState" }, // 47745852
+		{ &Z_Construct_UFunction_AAQ_Interactable_SaveInitialState, "SaveInitialState" }, // 931357411
 	};
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAQ_Interactable_Statics::Class_MetaDataParams[] = {
 		{ "IncludePath", "Interactables/AQ_Interactable.h" },
@@ -258,17 +248,13 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Interactable() {}
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_NiagaraComponent_MetaData[] = {
 		{ "Category", "Advanced Quest | Interactable" },
-#if !UE_BUILD_SHIPPING
 		{ "Comment", "/* Components */" },
-#endif
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/Interactables/AQ_Interactable.h" },
-#if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Components" },
-#endif
 	};
 #endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_NiagaraComponent = { "NiagaraComponent", nullptr, (EPropertyFlags)0x00100000000a000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AAQ_Interactable, NiagaraComponent), Z_Construct_UClass_UNiagaraComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_NiagaraComponent_MetaData), Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_NiagaraComponent_MetaData) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_NiagaraComponent = { "NiagaraComponent", nullptr, (EPropertyFlags)0x00100000000a000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AAQ_Interactable, NiagaraComponent), Z_Construct_UClass_UNiagaraComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_NiagaraComponent_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_NiagaraComponent_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_StaticMesh_MetaData[] = {
 		{ "Category", "Advanced Quest | Interactable" },
@@ -276,7 +262,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Interactable() {}
 		{ "ModuleRelativePath", "Public/Interactables/AQ_Interactable.h" },
 	};
 #endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_StaticMesh = { "StaticMesh", nullptr, (EPropertyFlags)0x00100000000a000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AAQ_Interactable, StaticMesh), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_StaticMesh_MetaData), Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_StaticMesh_MetaData) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_StaticMesh = { "StaticMesh", nullptr, (EPropertyFlags)0x00100000000a000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AAQ_Interactable, StaticMesh), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_StaticMesh_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_StaticMesh_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_SceneRoot_MetaData[] = {
 		{ "Category", "Advanced Quest | Interactable" },
@@ -284,7 +270,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Interactable() {}
 		{ "ModuleRelativePath", "Public/Interactables/AQ_Interactable.h" },
 	};
 #endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_SceneRoot = { "SceneRoot", nullptr, (EPropertyFlags)0x00100000000a000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AAQ_Interactable, SceneRoot), Z_Construct_UClass_USceneComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_SceneRoot_MetaData), Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_SceneRoot_MetaData) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_SceneRoot = { "SceneRoot", nullptr, (EPropertyFlags)0x00100000000a000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AAQ_Interactable, SceneRoot), Z_Construct_UClass_USceneComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_SceneRoot_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_SceneRoot_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsSleeping_MetaData[] = {
 		{ "Category", "Advanced Quest | Interactable" },
@@ -295,7 +281,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Interactable() {}
 	{
 		((AAQ_Interactable*)Obj)->bIsSleeping = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsSleeping = { "bIsSleeping", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AAQ_Interactable), &Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsSleeping_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsSleeping_MetaData), Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsSleeping_MetaData) };
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsSleeping = { "bIsSleeping", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(AAQ_Interactable), &Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsSleeping_SetBit, METADATA_PARAMS(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsSleeping_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsSleeping_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsInitialStateSaved_MetaData[] = {
 		{ "Category", "Advanced Quest | Interactable | Reset" },
@@ -306,7 +292,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Interactable() {}
 	{
 		((AAQ_Interactable*)Obj)->bIsInitialStateSaved = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsInitialStateSaved = { "bIsInitialStateSaved", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AAQ_Interactable), &Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsInitialStateSaved_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsInitialStateSaved_MetaData), Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsInitialStateSaved_MetaData) };
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsInitialStateSaved = { "bIsInitialStateSaved", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(AAQ_Interactable), &Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsInitialStateSaved_SetBit, METADATA_PARAMS(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsInitialStateSaved_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsInitialStateSaved_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsQuestActor_MetaData[] = {
 		{ "Category", "Quest" },
@@ -317,7 +303,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Interactable() {}
 	{
 		((AAQ_Interactable*)Obj)->bIsQuestActor = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsQuestActor = { "bIsQuestActor", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AAQ_Interactable), &Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsQuestActor_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsQuestActor_MetaData), Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsQuestActor_MetaData) };
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsQuestActor = { "bIsQuestActor", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(AAQ_Interactable), &Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsQuestActor_SetBit, METADATA_PARAMS(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsQuestActor_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_bIsQuestActor_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_QuestID_MetaData[] = {
 		{ "Category", "Quest" },
@@ -326,7 +312,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Interactable() {}
 		{ "ModuleRelativePath", "Public/Interactables/AQ_Interactable.h" },
 	};
 #endif
-	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_QuestID = { "QuestID", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AAQ_Interactable, QuestID), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_QuestID_MetaData), Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_QuestID_MetaData) };
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_QuestID = { "QuestID", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AAQ_Interactable, QuestID), METADATA_PARAMS(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_QuestID_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_QuestID_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AAQ_Interactable_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_NiagaraComponent,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_StaticMesh,
@@ -337,9 +323,8 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Interactable() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAQ_Interactable_Statics::NewProp_QuestID,
 	};
 		const UECodeGen_Private::FImplementedInterfaceParams Z_Construct_UClass_AAQ_Interactable_Statics::InterfaceParams[] = {
-			{ Z_Construct_UClass_UAQ_IInteractable_NoRegister, (int32)VTABLE_OFFSET(AAQ_Interactable, IAQ_IInteractable), false },  // 1604001344
+			{ Z_Construct_UClass_UAQ_IInteractable_NoRegister, (int32)VTABLE_OFFSET(AAQ_Interactable, IAQ_IInteractable), false },  // 3347338288
 		};
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::InterfaceParams) < 64);
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AAQ_Interactable_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AAQ_Interactable>::IsAbstract,
 	};
@@ -356,9 +341,8 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Interactable() {}
 		UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::PropPointers),
 		UE_ARRAY_COUNT(InterfaceParams),
 		0x009000A4u,
-		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::Class_MetaDataParams), Z_Construct_UClass_AAQ_Interactable_Statics::Class_MetaDataParams)
+		METADATA_PARAMS(Z_Construct_UClass_AAQ_Interactable_Statics::Class_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::Class_MetaDataParams))
 	};
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_Interactable_Statics::PropPointers) < 2048);
 	UClass* Z_Construct_UClass_AAQ_Interactable()
 	{
 		if (!Z_Registration_Info_UClass_AAQ_Interactable.OuterSingleton)
@@ -373,15 +357,15 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Interactable() {}
 	}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AAQ_Interactable);
 	AAQ_Interactable::~AAQ_Interactable() {}
-	struct Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_Interactable_h_Statics
+	struct Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_Interactable_h_Statics
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_Interactable_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AAQ_Interactable, AAQ_Interactable::StaticClass, TEXT("AAQ_Interactable"), &Z_Registration_Info_UClass_AAQ_Interactable, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AAQ_Interactable), 2192700507U) },
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_Interactable_h_Statics::ClassInfo[] = {
+		{ Z_Construct_UClass_AAQ_Interactable, AAQ_Interactable::StaticClass, TEXT("AAQ_Interactable"), &Z_Registration_Info_UClass_AAQ_Interactable, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AAQ_Interactable), 803848127U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_Interactable_h_1372224570(TEXT("/Script/AdvancedQuest"),
-		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_Interactable_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_Interactable_h_Statics::ClassInfo),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_Interactable_h_995001302(TEXT("/Script/AdvancedQuest"),
+		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_Interactable_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_Interactable_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

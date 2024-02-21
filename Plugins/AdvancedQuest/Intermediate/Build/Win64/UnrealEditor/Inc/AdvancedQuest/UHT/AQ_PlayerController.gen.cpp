@@ -44,20 +44,15 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerController() {}
 		(UObject* (*)())Z_Construct_UClass_APlayerController,
 		(UObject* (*)())Z_Construct_UPackage__Script_AdvancedQuest,
 	};
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_PlayerController_Statics::DependentSingletons) < 16);
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAQ_PlayerController_Statics::Class_MetaDataParams[] = {
 		{ "BlueprintType", "true" },
-#if !UE_BUILD_SHIPPING
 		{ "Comment", "/**\n\x09IMPORTANT: This class is not meant to be used in your projects, this is just\n\x09""an example to showcase how to use the plugin.\n\x09""Everything in here will be less well-thought-out and Optimized.\n\x09It's just a very quick implementation of a very basic Player Controller.\n */" },
-#endif
 		{ "HideCategories", "Collision Rendering Transformation" },
 		{ "IncludePath", "Character/AQ_PlayerController.h" },
 		{ "IsBlueprintBase", "true" },
 		{ "ModuleRelativePath", "Public/Character/AQ_PlayerController.h" },
-#if !UE_BUILD_SHIPPING
 		{ "ToolTip", "IMPORTANT: This class is not meant to be used in your projects, this is just\nan example to showcase how to use the plugin.\nEverything in here will be less well-thought-out and Optimized.\nIt's just a very quick implementation of a very basic Player Controller." },
-#endif
 	};
 #endif
 #if WITH_METADATA
@@ -66,14 +61,14 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerController() {}
 		{ "ModuleRelativePath", "Public/Character/AQ_PlayerController.h" },
 	};
 #endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityX = { "MouseSensitivityX", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AAQ_PlayerController, MouseSensitivityX), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityX_MetaData), Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityX_MetaData) };
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityX = { "MouseSensitivityX", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AAQ_PlayerController, MouseSensitivityX), METADATA_PARAMS(Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityX_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityX_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityY_MetaData[] = {
 		{ "Category", "Input|Mouse" },
 		{ "ModuleRelativePath", "Public/Character/AQ_PlayerController.h" },
 	};
 #endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityY = { "MouseSensitivityY", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AAQ_PlayerController, MouseSensitivityY), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityY_MetaData), Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityY_MetaData) };
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityY = { "MouseSensitivityY", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AAQ_PlayerController, MouseSensitivityY), METADATA_PARAMS(Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityY_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityY_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AAQ_PlayerController_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityX,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityY,
@@ -94,9 +89,8 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerController() {}
 		UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_PlayerController_Statics::PropPointers),
 		0,
 		0x009002A4u,
-		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_PlayerController_Statics::Class_MetaDataParams), Z_Construct_UClass_AAQ_PlayerController_Statics::Class_MetaDataParams)
+		METADATA_PARAMS(Z_Construct_UClass_AAQ_PlayerController_Statics::Class_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_PlayerController_Statics::Class_MetaDataParams))
 	};
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_PlayerController_Statics::PropPointers) < 2048);
 	UClass* Z_Construct_UClass_AAQ_PlayerController()
 	{
 		if (!Z_Registration_Info_UClass_AAQ_PlayerController.OuterSingleton)
@@ -109,18 +103,17 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerController() {}
 	{
 		return AAQ_PlayerController::StaticClass();
 	}
-	AAQ_PlayerController::AAQ_PlayerController(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AAQ_PlayerController);
 	AAQ_PlayerController::~AAQ_PlayerController() {}
-	struct Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Character_AQ_PlayerController_h_Statics
+	struct Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Character_AQ_PlayerController_h_Statics
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Character_AQ_PlayerController_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AAQ_PlayerController, AAQ_PlayerController::StaticClass, TEXT("AAQ_PlayerController"), &Z_Registration_Info_UClass_AAQ_PlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AAQ_PlayerController), 1573447974U) },
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Character_AQ_PlayerController_h_Statics::ClassInfo[] = {
+		{ Z_Construct_UClass_AAQ_PlayerController, AAQ_PlayerController::StaticClass, TEXT("AAQ_PlayerController"), &Z_Registration_Info_UClass_AAQ_PlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AAQ_PlayerController), 15930752U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Character_AQ_PlayerController_h_4064150653(TEXT("/Script/AdvancedQuest"),
-		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Character_AQ_PlayerController_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Character_AQ_PlayerController_h_Statics::ClassInfo),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Character_AQ_PlayerController_h_2066161552(TEXT("/Script/AdvancedQuest"),
+		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Character_AQ_PlayerController_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Character_AQ_PlayerController_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

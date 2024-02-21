@@ -60,7 +60,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_UniqueIDComponent() {}
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_UniqueIDComponent.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_UniqueIDComponent_GenerateUniqueID_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_UniqueIDComponent, nullptr, "GenerateUniqueID", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_UniqueIDComponent_GenerateUniqueID_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAQ_UniqueIDComponent_GenerateUniqueID_Statics::Function_MetaDataParams) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_UniqueIDComponent_GenerateUniqueID_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_UniqueIDComponent, nullptr, "GenerateUniqueID", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAQ_UniqueIDComponent_GenerateUniqueID_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_UniqueIDComponent_GenerateUniqueID_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_UAQ_UniqueIDComponent_GenerateUniqueID()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -79,7 +79,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_UniqueIDComponent() {}
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_ReturnValue_MetaData[];
 #endif
-		static const UECodeGen_Private::FIntPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_ReturnValue;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
@@ -91,7 +91,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_UniqueIDComponent() {}
 		{ "NativeConst", "" },
 	};
 #endif
-	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000582, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_UniqueIDComponent_eventGetUniqueID_Parms, ReturnValue), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::NewProp_ReturnValue_MetaData), Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::NewProp_ReturnValue_MetaData) };
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000582, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_UniqueIDComponent_eventGetUniqueID_Parms, ReturnValue), METADATA_PARAMS(Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::NewProp_ReturnValue_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::NewProp_ReturnValue_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::NewProp_ReturnValue,
 	};
@@ -101,9 +101,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_UniqueIDComponent() {}
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_UniqueIDComponent.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_UniqueIDComponent, nullptr, "GetUniqueID", nullptr, nullptr, Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::AQ_UniqueIDComponent_eventGetUniqueID_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::Function_MetaDataParams) };
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::PropPointers) < 2048);
-	static_assert(sizeof(Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::AQ_UniqueIDComponent_eventGetUniqueID_Parms) < MAX_uint16);
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_UniqueIDComponent, nullptr, "GetUniqueID", nullptr, nullptr, sizeof(Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::AQ_UniqueIDComponent_eventGetUniqueID_Parms), Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -119,14 +117,14 @@ void EmptyLinkFunctionForGeneratedCodeAQ_UniqueIDComponent() {}
 		{
 			int32 InUniqueID;
 		};
-		static const UECodeGen_Private::FIntPropertyParams NewProp_InUniqueID;
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_InUniqueID;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID_Statics::NewProp_InUniqueID = { "InUniqueID", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AQ_UniqueIDComponent_eventSetUniqueID_Parms, InUniqueID), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID_Statics::NewProp_InUniqueID = { "InUniqueID", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_UniqueIDComponent_eventSetUniqueID_Parms, InUniqueID), METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID_Statics::NewProp_InUniqueID,
 	};
@@ -136,9 +134,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_UniqueIDComponent() {}
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_UniqueIDComponent.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_UniqueIDComponent, nullptr, "SetUniqueID", nullptr, nullptr, Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID_Statics::AQ_UniqueIDComponent_eventSetUniqueID_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID_Statics::Function_MetaDataParams) };
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID_Statics::PropPointers) < 2048);
-	static_assert(sizeof(Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID_Statics::AQ_UniqueIDComponent_eventSetUniqueID_Parms) < MAX_uint16);
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_UniqueIDComponent, nullptr, "SetUniqueID", nullptr, nullptr, sizeof(Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID_Statics::AQ_UniqueIDComponent_eventSetUniqueID_Parms), Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -163,7 +159,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_UniqueIDComponent() {}
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_UniqueID_MetaData[];
 #endif
-		static const UECodeGen_Private::FIntPropertyParams NewProp_UniqueID;
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_UniqueID;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -172,13 +168,11 @@ void EmptyLinkFunctionForGeneratedCodeAQ_UniqueIDComponent() {}
 		(UObject* (*)())Z_Construct_UClass_UActorComponent,
 		(UObject* (*)())Z_Construct_UPackage__Script_AdvancedQuest,
 	};
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_UniqueIDComponent_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_UAQ_UniqueIDComponent_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_UAQ_UniqueIDComponent_GenerateUniqueID, "GenerateUniqueID" }, // 811088275
-		{ &Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID, "GetUniqueID" }, // 1175512706
-		{ &Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID, "SetUniqueID" }, // 1976323545
+		{ &Z_Construct_UFunction_UAQ_UniqueIDComponent_GenerateUniqueID, "GenerateUniqueID" }, // 4208527602
+		{ &Z_Construct_UFunction_UAQ_UniqueIDComponent_GetUniqueID, "GetUniqueID" }, // 2475424689
+		{ &Z_Construct_UFunction_UAQ_UniqueIDComponent_SetUniqueID, "SetUniqueID" }, // 1731552414
 	};
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_UniqueIDComponent_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_UniqueIDComponent_Statics::Class_MetaDataParams[] = {
 		{ "BlueprintSpawnableComponent", "" },
@@ -193,7 +187,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_UniqueIDComponent() {}
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_UniqueIDComponent.h" },
 	};
 #endif
-	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UAQ_UniqueIDComponent_Statics::NewProp_UniqueID = { "UniqueID", nullptr, (EPropertyFlags)0x0040000000020001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAQ_UniqueIDComponent, UniqueID), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_UniqueIDComponent_Statics::NewProp_UniqueID_MetaData), Z_Construct_UClass_UAQ_UniqueIDComponent_Statics::NewProp_UniqueID_MetaData) };
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UAQ_UniqueIDComponent_Statics::NewProp_UniqueID = { "UniqueID", nullptr, (EPropertyFlags)0x0040000000020001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_UniqueIDComponent, UniqueID), METADATA_PARAMS(Z_Construct_UClass_UAQ_UniqueIDComponent_Statics::NewProp_UniqueID_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_UniqueIDComponent_Statics::NewProp_UniqueID_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UAQ_UniqueIDComponent_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_UniqueIDComponent_Statics::NewProp_UniqueID,
 	};
@@ -213,9 +207,8 @@ void EmptyLinkFunctionForGeneratedCodeAQ_UniqueIDComponent() {}
 		UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_UniqueIDComponent_Statics::PropPointers),
 		0,
 		0x00B000A4u,
-		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_UniqueIDComponent_Statics::Class_MetaDataParams), Z_Construct_UClass_UAQ_UniqueIDComponent_Statics::Class_MetaDataParams)
+		METADATA_PARAMS(Z_Construct_UClass_UAQ_UniqueIDComponent_Statics::Class_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_UniqueIDComponent_Statics::Class_MetaDataParams))
 	};
-	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_UniqueIDComponent_Statics::PropPointers) < 2048);
 	UClass* Z_Construct_UClass_UAQ_UniqueIDComponent()
 	{
 		if (!Z_Registration_Info_UClass_UAQ_UniqueIDComponent.OuterSingleton)
@@ -230,15 +223,15 @@ void EmptyLinkFunctionForGeneratedCodeAQ_UniqueIDComponent() {}
 	}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UAQ_UniqueIDComponent);
 	UAQ_UniqueIDComponent::~UAQ_UniqueIDComponent() {}
-	struct Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_UniqueIDComponent_h_Statics
+	struct Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_UniqueIDComponent_h_Statics
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_UniqueIDComponent_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_UniqueIDComponent, UAQ_UniqueIDComponent::StaticClass, TEXT("UAQ_UniqueIDComponent"), &Z_Registration_Info_UClass_UAQ_UniqueIDComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_UniqueIDComponent), 993489310U) },
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_UniqueIDComponent_h_Statics::ClassInfo[] = {
+		{ Z_Construct_UClass_UAQ_UniqueIDComponent, UAQ_UniqueIDComponent::StaticClass, TEXT("UAQ_UniqueIDComponent"), &Z_Registration_Info_UClass_UAQ_UniqueIDComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_UniqueIDComponent), 566363780U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_UniqueIDComponent_h_2993942235(TEXT("/Script/AdvancedQuest"),
-		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_UniqueIDComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_UniqueIDComponent_h_Statics::ClassInfo),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_UniqueIDComponent_h_3657395911(TEXT("/Script/AdvancedQuest"),
+		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_UniqueIDComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_UniqueIDComponent_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
