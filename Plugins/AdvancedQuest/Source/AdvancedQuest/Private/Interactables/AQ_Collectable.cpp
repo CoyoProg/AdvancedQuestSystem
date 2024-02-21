@@ -15,7 +15,7 @@ AAQ_Collectable::AAQ_Collectable()
 
 void AAQ_Collectable::BeginPlay()
 {
-	if (ItemData->itemType == EAQ_ItemType::Quest)
+	if (ItemData && ItemData->itemType == EAQ_ItemType::Quest)
 	{
 		UAQ_QuestItemData* QuestItem = Cast<UAQ_QuestItemData>(ItemData);
 		SetQuestItem(QuestItem->QuestID);
@@ -23,10 +23,5 @@ void AAQ_Collectable::BeginPlay()
 
 
 	Super::BeginPlay();
-}
-
-void AAQ_Collectable::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 }
 

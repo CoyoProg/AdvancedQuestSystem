@@ -4,6 +4,8 @@
 #include <QuestSystem/AQ_QuestManager.h>
 #include "QuestSystem/AQ_Quest.h"
 
+#include "GameFramework/PlayerController.h"
+
 UAQ_QuestListenerComponent::UAQ_QuestListenerComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
@@ -24,7 +26,7 @@ void UAQ_QuestListenerComponent::BeginPlay()
 		return;
 
 	/* Get the quest manager */
-	QuestManager = localPlayer->GetComponentByClass<UAQ_QuestManager>();
+	QuestManager = localPlayer->FindComponentByClass<UAQ_QuestManager>();
 }
 
 void UAQ_QuestListenerComponent::OnQuestStateChangedWrapper(UAQ_Quest* questUpdate, EAQ_QuestState QuestState)

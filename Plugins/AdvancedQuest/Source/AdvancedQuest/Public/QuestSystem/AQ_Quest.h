@@ -10,9 +10,6 @@
 #include "AQ_Quest.generated.h"
 
 
-/**
- *
- */
 UENUM(BlueprintType)
 enum class EAQ_QuestState : uint8
 {
@@ -22,6 +19,17 @@ enum class EAQ_QuestState : uint8
 	Archive				UMETA(DisplayName = "Archive"),
 
 	Failed				UMETA(DisplayName = "Failed"),
+};
+
+
+/* Added for future implementation*/
+UENUM(BlueprintType)
+enum class EAQ_QuestType : uint8
+{
+	Daily					UMETA(DisplayName = "Daily Quest"),
+	Weekly					UMETA(DisplayName = "Weekly Quest"),
+	MainQuest				UMETA(DisplayName = "Main Quest"),
+	SideQuest				UMETA(DisplayName = "Side Quest"),
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FQuestStateChangedDelegate, UAQ_Quest*, QuestUpdate, EAQ_QuestState, QuestState);
@@ -43,6 +51,9 @@ public:
 	/* Quest Data */
 	UPROPERTY(BlueprintReadWrite, Category = "Advanced Quest | Quest")
 	EAQ_QuestState QuestState = EAQ_QuestState::Pending;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Advanced Quest | Quest")
+	EAQ_QuestType QuestType = EAQ_QuestType::MainQuest;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest")
 	UAQ_QuestData* QuestData = nullptr;

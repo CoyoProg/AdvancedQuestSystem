@@ -42,7 +42,7 @@ void UAQ_PlayerChannels::BeginPlay()
 		return;
 	}
 
-	QuestManager = GetOwner()->GetComponentByClass<UAQ_QuestManager>();
+	QuestManager = GetOwner()->FindComponentByClass<UAQ_QuestManager>();
 
 	InitQuestWidgets();
 	SetPlayerInputComponent();

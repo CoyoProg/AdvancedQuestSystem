@@ -18,22 +18,6 @@ class ADVANCEDQUEST_API AAQ_PlayerController : public APlayerController
 	GENERATED_BODY()
 	
 public:
-	// Inputs
-	UPROPERTY(EditAnywhere, Category = "Input|Movement")
-	FName MoveForwardInputName = FName();
-
-	UPROPERTY(EditAnywhere, Category = "Input|Movement")
-	FName MoveRightInputName = FName();
-
-	UPROPERTY(EditAnywhere, Category = "Input|Movement")
-	FName JumpInputName = FName();
-
-	UPROPERTY(EditAnywhere, Category = "Input|Mouse")
-	FName LookUpInputName = FName();
-
-	UPROPERTY(EditAnywhere, Category = "Input|Mouse")
-	FName LookRightInputName = FName();
-
 	UPROPERTY(EditAnywhere, Category = "Input|Mouse")
 	float MouseSensitivityX = 1.f;
 

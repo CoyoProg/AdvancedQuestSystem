@@ -2,10 +2,11 @@
 
 #include "Interactables/AQ_Interactable.h"
 
-#include <QuestSystem/AQ_QuestManager.h>
-#include <QuestSystem/AQ_Quest.h>
-#include "Components/StaticMeshComponent.h"
+#include "QuestSystem/AQ_QuestManager.h"
+#include "QuestSystem/AQ_Quest.h"
 
+#include "Components/StaticMeshComponent.h"
+#include "GameFramework/PlayerController.h"
 #include "NiagaraComponent.h"
 
 AAQ_Interactable::AAQ_Interactable()
@@ -63,7 +64,7 @@ void AAQ_Interactable::LateBeginPlay()
 		return;
 
 	/* Get the quest manager */
-	QuestManager = localPlayer->GetComponentByClass<UAQ_QuestManager>();
+	QuestManager = localPlayer->FindComponentByClass<UAQ_QuestManager>();
 
 	if (QuestManager)
 	{

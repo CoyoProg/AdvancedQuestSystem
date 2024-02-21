@@ -8,6 +8,8 @@
 
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+
+#include "Misc/EngineVersionComparison.h"
 #include <Kismet/KismetSystemLibrary.h>
 
 UAQ_QuestManager::UAQ_QuestManager()
@@ -22,24 +24,31 @@ void UAQ_QuestManager::InitializeComponent()
 	FAssetRegistryModule& AssetRegistryModule = FModuleManager::LoadModuleChecked<FAssetRegistryModule>("AssetRegistry");
 	IAssetRegistry& AssetRegistry = AssetRegistryModule.Get();
 
-	/* Get all the Quest Data within the PLUGIN FOLDER */
-	FTopLevelAssetPath assetPath = UKismetSystemLibrary::MakeTopLevelAssetPath("/Script/AdvancedQuest", "AQ_QuestData");
 	TArray<FAssetData> QuestDataAssets;
-	AssetRegistry.GetAssetsByClass(assetPath, QuestDataAssets, true);
 
+	/* Get all the Quest Data within the PLUGIN FOLDER */
+#if UE_VERSION_NEWER_THAN(5, 1, 0)
+	FTopLevelAssetPath assetPath = UKismetSystemLibrary::MakeTopLevelAssetPath("/Script/AdvancedQuest", "AQ_QuestData");
+	AssetRegistry.GetAssetsByClass(assetPath, QuestDataAssets, true);
+#else 
+	FName className = "AQ_QuestData";
+	AssetRegistry.GetAssetsByClass(className, QuestDataAssets, true);
+#endif
+
+	
 	/* Create a quest for each Quest Data found */
 	for (auto assets : QuestDataAssets)
 	{
 		UAQ_QuestData* QuestData = Cast<UAQ_QuestData>(assets.GetAsset());
-
+	
 		if (!QuestData)
 			return;
-
+	
 		UAQ_Quest* newQuest = NewObject<UAQ_Quest>(this, UAQ_Quest::StaticClass());
 		newQuest->SetQuestData(QuestData);
-
+	
 		int QuestID = QuestData->QuestID;
-
+	
 		/* Add the quest in QuestDataCenter with it's ID as key to retrieve it easily*/
 		QuestDataCenter.Add(QuestID, newQuest);
 	}
@@ -58,7 +67,7 @@ void UAQ_QuestManager::BeginPlay()
 void UAQ_QuestManager::LateBeginPlay()
 {
 	/* Get the Player Channels component */
-	UAQ_PlayerChannels* playerChannels = GetOwner()->GetComponentByClass<UAQ_PlayerChannels>();
+	UAQ_PlayerChannels* playerChannels = GetOwner()->FindComponentByClass<UAQ_PlayerChannels>();
 	if (!playerChannels)
 		return;
 

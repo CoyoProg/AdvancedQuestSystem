@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
 	"Version": 1,
-	"VersionName": "1.0",
+	"VersionName": "1.1",
 	"FriendlyName": "Advanced Quest",
 	"Description": "Effortlessly craft quests with streamlined implementation. An extensible quest system for limitless creativity and seamless integration.",
 	"Category": "Other",
@@ -11,19 +11,23 @@
 	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/4d8b26923c06423fbeaeab1cb2cf6d4b",
 	"SupportURL": "https://discord.gg/etdaQ45EqY",
 	"CanContainContent": true,
-	"Installed": false,
+	"Installed": true,
 	"Modules": [
 		{
 			"Name": "AdvancedQuest",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
-			"PlatformAllowList": [ "Win64" ]
+			"PlatformAllowList": [
+				"Win64"
+			]
 		},
 		{
 			"Name": "AdvancedQuest_Editor",
 			"Type": "Editor",
 			"LoadingPhase": "PostEngineInit",
-			"PlatformAllowList": [ "Win64" ]
+			"PlatformAllowList": [
+				"Win64"
+			]
 		}
 	],
 	"Plugins": [

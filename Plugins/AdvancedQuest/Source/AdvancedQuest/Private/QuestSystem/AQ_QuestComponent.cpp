@@ -45,7 +45,7 @@ void UAQ_QuestComponent::LateBeginPlay()
 		return;
 
 	/* Get the quest manager */
-	QuestManager = localPlayer->GetComponentByClass<UAQ_QuestManager>();
+	QuestManager = localPlayer->FindComponentByClass<UAQ_QuestManager>();
 
 	if (QuestMarkerClass)
 		CreateQuestMarkerWidget();
@@ -78,6 +78,7 @@ void UAQ_QuestComponent::UpdateQuestMarker()
 {
 	if (!QuestMarkerClass || !QuestManager)
 		return;
+
 
 	/* If there is no quest we hide the quest Marker and return */
 	if (QuestsList.Num() == 0)
@@ -233,9 +234,9 @@ void UAQ_QuestComponent::BindFunctionsToQuestDelegates()
 				break;
 			}
 
-			if(bIsAnyQuestValid)
+			if (bIsAnyQuestValid)
 				SetQuestMarker(true, true);
-			else if(bIsAnyQuestPending)
+			else if (bIsAnyQuestPending)
 				SetQuestMarker(true, false);
 		}
 	}

@@ -29,26 +29,6 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerController() {}
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_MoveForwardInputName_MetaData[];
-#endif
-		static const UECodeGen_Private::FNamePropertyParams NewProp_MoveForwardInputName;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_MoveRightInputName_MetaData[];
-#endif
-		static const UECodeGen_Private::FNamePropertyParams NewProp_MoveRightInputName;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_JumpInputName_MetaData[];
-#endif
-		static const UECodeGen_Private::FNamePropertyParams NewProp_JumpInputName;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_LookUpInputName_MetaData[];
-#endif
-		static const UECodeGen_Private::FNamePropertyParams NewProp_LookUpInputName;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_LookRightInputName_MetaData[];
-#endif
-		static const UECodeGen_Private::FNamePropertyParams NewProp_LookRightInputName;
-#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_MouseSensitivityX_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_MouseSensitivityX;
@@ -81,47 +61,6 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerController() {}
 	};
 #endif
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MoveForwardInputName_MetaData[] = {
-		{ "Category", "Input|Movement" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "// Inputs\n" },
-#endif
-		{ "ModuleRelativePath", "Public/Character/AQ_PlayerController.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Inputs" },
-#endif
-	};
-#endif
-	const UECodeGen_Private::FNamePropertyParams Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MoveForwardInputName = { "MoveForwardInputName", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AAQ_PlayerController, MoveForwardInputName), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MoveForwardInputName_MetaData), Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MoveForwardInputName_MetaData) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MoveRightInputName_MetaData[] = {
-		{ "Category", "Input|Movement" },
-		{ "ModuleRelativePath", "Public/Character/AQ_PlayerController.h" },
-	};
-#endif
-	const UECodeGen_Private::FNamePropertyParams Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MoveRightInputName = { "MoveRightInputName", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AAQ_PlayerController, MoveRightInputName), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MoveRightInputName_MetaData), Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MoveRightInputName_MetaData) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_JumpInputName_MetaData[] = {
-		{ "Category", "Input|Movement" },
-		{ "ModuleRelativePath", "Public/Character/AQ_PlayerController.h" },
-	};
-#endif
-	const UECodeGen_Private::FNamePropertyParams Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_JumpInputName = { "JumpInputName", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AAQ_PlayerController, JumpInputName), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_JumpInputName_MetaData), Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_JumpInputName_MetaData) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_LookUpInputName_MetaData[] = {
-		{ "Category", "Input|Mouse" },
-		{ "ModuleRelativePath", "Public/Character/AQ_PlayerController.h" },
-	};
-#endif
-	const UECodeGen_Private::FNamePropertyParams Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_LookUpInputName = { "LookUpInputName", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AAQ_PlayerController, LookUpInputName), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_LookUpInputName_MetaData), Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_LookUpInputName_MetaData) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_LookRightInputName_MetaData[] = {
-		{ "Category", "Input|Mouse" },
-		{ "ModuleRelativePath", "Public/Character/AQ_PlayerController.h" },
-	};
-#endif
-	const UECodeGen_Private::FNamePropertyParams Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_LookRightInputName = { "LookRightInputName", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AAQ_PlayerController, LookRightInputName), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_LookRightInputName_MetaData), Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_LookRightInputName_MetaData) };
-#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityX_MetaData[] = {
 		{ "Category", "Input|Mouse" },
 		{ "ModuleRelativePath", "Public/Character/AQ_PlayerController.h" },
@@ -136,11 +75,6 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerController() {}
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityY = { "MouseSensitivityY", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AAQ_PlayerController, MouseSensitivityY), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityY_MetaData), Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityY_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AAQ_PlayerController_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MoveForwardInputName,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MoveRightInputName,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_JumpInputName,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_LookUpInputName,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_LookRightInputName,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityX,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAQ_PlayerController_Statics::NewProp_MouseSensitivityY,
 	};
@@ -183,9 +117,9 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerController() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Character_AQ_PlayerController_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AAQ_PlayerController, AAQ_PlayerController::StaticClass, TEXT("AAQ_PlayerController"), &Z_Registration_Info_UClass_AAQ_PlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AAQ_PlayerController), 2562241906U) },
+		{ Z_Construct_UClass_AAQ_PlayerController, AAQ_PlayerController::StaticClass, TEXT("AAQ_PlayerController"), &Z_Registration_Info_UClass_AAQ_PlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AAQ_PlayerController), 1573447974U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Character_AQ_PlayerController_h_1555719096(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Character_AQ_PlayerController_h_4064150653(TEXT("/Script/AdvancedQuest"),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Character_AQ_PlayerController_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_AdvancedQuest_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Character_AQ_PlayerController_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

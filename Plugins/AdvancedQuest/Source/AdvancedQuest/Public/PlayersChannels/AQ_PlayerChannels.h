@@ -6,6 +6,7 @@
 
 #include "AQ_PlayerChannelsFacade.h"
 #include "Enums/AQ_ObjectivesType.h"
+#include "QuestSystem/AQ_QuestData.h"
 
 #include "AQ_PlayerChannels.generated.h"
 
@@ -14,6 +15,7 @@ class UAQ_EnvironmentChannel;
 class UAQ_CombatChannel;
 class UAQ_QuestChannel;
 class UAQ_QuestManager;
+
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnPlayerEventDelegate, UObject*, entity, EAQ_NotifyEventType, eventType, float, amount);
 

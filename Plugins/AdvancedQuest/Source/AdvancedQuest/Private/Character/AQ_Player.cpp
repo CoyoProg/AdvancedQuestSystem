@@ -2,12 +2,12 @@
 
 #include "Character/AQ_Player.h"
 
-#include <PlayersChannels/AQ_PlayerChannels.h>
-#include <QuestSystem/AQ_QuestManager.h>
+#include "PlayersChannels/AQ_PlayerChannels.h"
 
 #include "InputActionValue.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Engine/LocalPlayer.h"
 #include <Kismet/GameplayStatics.h>
 
 

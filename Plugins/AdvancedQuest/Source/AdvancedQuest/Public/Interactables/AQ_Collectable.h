@@ -14,7 +14,6 @@ class ADVANCEDQUEST_API AAQ_Collectable : public AAQ_Interactable
 	
 public:	
 	AAQ_Collectable();
-	virtual void Tick(float DeltaTime) override;
 
 	/* Item Reference */
 	class UAQ_ItemData* const GetItemData() { return ItemData; }
