@@ -33,8 +33,16 @@ void UAQ_Quest::UpdateQuestState()
 	if (ObjectivesUpdatedDelegate.IsBound())
 		ObjectivesUpdatedDelegate.Broadcast(this);
 
+	AllObjectivesCompleted = true;
+	int objectivesCount = QuestData->objectives.Num();
+	for (int i = 0; i < objectivesCount; i++)
+	{
+		if (!QuestData->objectives[i].isObjectiveComplete)
+			AllObjectivesCompleted = false;
+	}
+
 	/** Check if all the objectives are completed */
-	if (ObjectivesCompleted >= QuestData->objectives.Num())
+	if (AllObjectivesCompleted)
 	{
 		QuestState = EAQ_QuestState::Valid;
 		if (QuestStateChangedDelegate.IsBound())
@@ -75,9 +83,9 @@ void UAQ_Quest::ResetQuest()
 	for (int i = 0; i < QuestData->objectives.Num(); i++)
 	{
 		QuestData->objectives[i].CurrentAmount = 0;
+		QuestData->objectives[i].isObjectiveComplete = false;
 	}
 
-	ObjectivesCompleted = 0;
 	IndexQuestTracker = 0;
 }
 
@@ -89,8 +97,6 @@ void UAQ_Quest::ResetObjectives()
 		Objectives.CurrentAmount = 0;
 		Objectives.isObjectiveComplete = false;
 	}
-
-	ObjectivesCompleted = 0;
 
 	if (ObjectivesUpdatedDelegate.IsBound())
 		ObjectivesUpdatedDelegate.Broadcast(this);
@@ -107,6 +113,7 @@ void UAQ_Quest::QuestFailed()
 void UAQ_Quest::OnNotify(UObject* entity, EAQ_NotifyEventType eventTypeP, float amount)
 {
 	bool bIsEventRemovedFromInventory = false;
+	int objectivesCount = QuestData->objectives.Num();
 
 	if (eventTypeP == EAQ_NotifyEventType::RemovedFromInventory)
 		bIsEventRemovedFromInventory = true;
@@ -114,7 +121,7 @@ void UAQ_Quest::OnNotify(UObject* entity, EAQ_NotifyEventType eventTypeP, float 
 	/* Check all condition if the event Type is Collect or RemovedFromInventory*/
 	if (eventTypeP == EAQ_NotifyEventType::Collect || bIsEventRemovedFromInventory)
 	{
-		for (int i = 0; i < QuestData->objectives.Num(); i++)
+		for (int i = 0; i < objectivesCount; i++)
 		{
 			if (!IsSameItem(i, entity))
 				continue;
@@ -134,7 +141,7 @@ void UAQ_Quest::OnNotify(UObject* entity, EAQ_NotifyEventType eventTypeP, float 
 		/* Go through each Objectives and:
 		Check if the Objective Target is the same as the entity notified
 		Check if the Objective Type is the same as the eventType notified */
-		for (int i = 0; i < QuestData->objectives.Num(); i++)
+		for (int i = 0; i < objectivesCount; i++)
 		{
 			/* Check if there is already the right amount */
 			if (QuestData->objectives[i].CurrentAmount >= QuestData->objectives[i].amountNeeded)
@@ -152,9 +159,15 @@ void UAQ_Quest::OnNotify(UObject* entity, EAQ_NotifyEventType eventTypeP, float 
 		}
 	}
 
+	AllObjectivesCompleted = true;
+	for (int i = 0; i < objectivesCount; i++)
+	{
+		if (!QuestData->objectives[i].isObjectiveComplete)
+			AllObjectivesCompleted = false;
+	}
+
 	/** Check if all the objectives are completed */
-	int objectivesCount = QuestData->objectives.Num();
-	if (ObjectivesCompleted >= objectivesCount && QuestState != EAQ_QuestState::Valid)
+	if (AllObjectivesCompleted && QuestState != EAQ_QuestState::Valid)
 	{
 		QuestState = EAQ_QuestState::Valid;
 		if (QuestStateChangedDelegate.IsBound())
@@ -164,7 +177,7 @@ void UAQ_Quest::OnNotify(UObject* entity, EAQ_NotifyEventType eventTypeP, float 
 	}
 
 	/* Update the state if the objective was valid but isn't anymore */
-	if (ObjectivesCompleted < objectivesCount && QuestState == EAQ_QuestState::Valid)
+	if (AllObjectivesCompleted && QuestState == EAQ_QuestState::Valid)
 	{
 		QuestState = EAQ_QuestState::Active;
 		if (QuestStateChangedDelegate.IsBound())
@@ -185,12 +198,10 @@ void UAQ_Quest::UpdateCurrentObjective(int CurrentIndex, float amount)
 	/** Check if the Objective is completed */
 	if (currentAmount >= amountNeeded && !QuestData->objectives[CurrentIndex].isObjectiveComplete)
 	{
-		ObjectivesCompleted++; // Keep track of all objectives completed
 		QuestData->objectives[CurrentIndex].isObjectiveComplete = true;
 	}
 	else if (currentAmount < amountNeeded && QuestData->objectives[CurrentIndex].isObjectiveComplete)
 	{
-		ObjectivesCompleted--;
 		QuestData->objectives[CurrentIndex].isObjectiveComplete = false;
 	}
 	
@@ -228,6 +239,14 @@ void UAQ_Quest::OnLevelRequirementChange(int PlayerLevel)
 		QuestData->requirementsProgression.PlayerLevel = PlayerLevel;
 
 	CheckIfRequirementsMet();
+}
+
+void UAQ_Quest::OnNewDay()
+{
+	/* Reset the Quest only if it's Archived.
+	If the quest is still under progress, or valid, it will not be reset */
+	if (QuestState == EAQ_QuestState::Archive)
+		ResetQuest();
 }
 
 void UAQ_Quest::CheckIfRequirementsMet()

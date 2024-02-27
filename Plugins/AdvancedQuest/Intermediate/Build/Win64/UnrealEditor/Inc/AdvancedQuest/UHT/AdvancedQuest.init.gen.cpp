@@ -12,6 +12,8 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedQuest_init() {}
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnCombatEventDelegate__DelegateSignature();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnEnvironmentEventDelegate__DelegateSignature();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnInventoryEventDelegate__DelegateSignature();
+	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnNewDayDelegate__DelegateSignature();
+	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnNewWeekDelegate__DelegateSignature();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnQuestEnableDelegate__DelegateSignature();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnQuestStateChangedListenerDelegate__DelegateSignature();
@@ -29,6 +31,8 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedQuest_init() {}
 				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_OnCombatEventDelegate__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_OnEnvironmentEventDelegate__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_OnInventoryEventDelegate__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_OnNewDayDelegate__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_OnNewWeekDelegate__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_OnQuestEnableDelegate__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_OnQuestStateChangedListenerDelegate__DelegateSignature,
@@ -41,13 +45,13 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedQuest_init() {}
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x755709B7,
-				0x1610AF37,
+				0x90B10DFD,
+				0x316FAAF6,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UECodeGen_Private::ConstructUPackage(Z_Registration_Info_UPackage__Script_AdvancedQuest.OuterSingleton, PackageParams);
 		}
 		return Z_Registration_Info_UPackage__Script_AdvancedQuest.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_AdvancedQuest(Z_Construct_UPackage__Script_AdvancedQuest, TEXT("/Script/AdvancedQuest"), Z_Registration_Info_UPackage__Script_AdvancedQuest, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x755709B7, 0x1610AF37));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_AdvancedQuest(Z_Construct_UPackage__Script_AdvancedQuest, TEXT("/Script/AdvancedQuest"), Z_Registration_Info_UPackage__Script_AdvancedQuest, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x90B10DFD, 0x316FAAF6));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

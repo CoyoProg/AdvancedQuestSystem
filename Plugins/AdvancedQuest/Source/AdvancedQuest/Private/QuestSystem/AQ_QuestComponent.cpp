@@ -166,8 +166,13 @@ void UAQ_QuestComponent::OnQuestStateChangedWrapper(UAQ_Quest* questUpdate, EAQ_
 	OnQuestStateChanged.Broadcast(QuestState); // Trigger the blueprint event
 
 	/* If the Quest is now archive, we unbind to the delegates */
-	if(questUpdate->QuestState == EAQ_QuestState::Archive)
-		questUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_QuestComponent::OnQuestStateChangedWrapper);
+	if (questUpdate->QuestState == EAQ_QuestState::Archive)
+	{
+		/* Unbind only if it's not a daily quest */
+		if (questUpdate->QuestData->QuestType != EAQ_QuestType::Daily &&
+			questUpdate->QuestData->QuestType != EAQ_QuestType::Weekly)
+			questUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_QuestComponent::OnQuestStateChangedWrapper);
+	}
 }
 
 void UAQ_QuestComponent::OnQuestRequirementMet(UAQ_Quest* quest)
@@ -232,6 +237,14 @@ void UAQ_QuestComponent::BindFunctionsToQuestDelegates()
 
 			default:
 				break;
+			}
+
+			/* Bind also to QuestStateChangedDelegate if the quest is a daily */
+			if (newQuest->QuestData->QuestType == EAQ_QuestType::Daily || 
+				newQuest->QuestData->QuestType == EAQ_QuestType::Weekly)
+			{
+				if(newQuest->QuestState == EAQ_QuestState::Archive)
+					newQuest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChangedWrapper);
 			}
 
 			if (bIsAnyQuestValid)

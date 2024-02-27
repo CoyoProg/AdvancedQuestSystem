@@ -8,6 +8,10 @@
 
 class UAQ_Quest;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnNewDayDelegate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnNewWeekDelegate);
+
+
 UCLASS(Blueprintable, meta = (ABSTRACT))
 class ADVANCEDQUEST_API UAQ_QuestManager : public UActorComponent
 {
@@ -32,6 +36,13 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Advanced Quest | Quest")
 	TMap<int, UAQ_Quest*> QuestDataCenter;
 
+
+	/* Delegates */
+	UPROPERTY(BlueprintCallable, Category = "Advanced Quest | Date")
+	FOnNewDayDelegate OnNewDayDelegate;
+
+	UPROPERTY(BlueprintCallable, Category = "Advanced Quest | Date")
+	FOnNewWeekDelegate OnNewWeekDelegate;
 
 	/* Load & Save */
 public:

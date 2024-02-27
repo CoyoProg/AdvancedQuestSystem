@@ -14,6 +14,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestData() {}
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_QuestData();
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_QuestData_NoRegister();
 	ADVANCEDQUEST_API UEnum* Z_Construct_UEnum_AdvancedQuest_EAQ_ObjectivesType();
+	ADVANCEDQUEST_API UEnum* Z_Construct_UEnum_AdvancedQuest_EAQ_QuestType();
 	ADVANCEDQUEST_API UScriptStruct* Z_Construct_UScriptStruct_FAQ_Objectives();
 	ADVANCEDQUEST_API UScriptStruct* Z_Construct_UScriptStruct_FAQ_RequiermentData();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
@@ -21,6 +22,67 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestData() {}
 	ENGINE_API UClass* Z_Construct_UClass_UPrimaryDataAsset();
 	UPackage* Z_Construct_UPackage__Script_AdvancedQuest();
 // End Cross Module References
+	static FEnumRegistrationInfo Z_Registration_Info_UEnum_EAQ_QuestType;
+	static UEnum* EAQ_QuestType_StaticEnum()
+	{
+		if (!Z_Registration_Info_UEnum_EAQ_QuestType.OuterSingleton)
+		{
+			Z_Registration_Info_UEnum_EAQ_QuestType.OuterSingleton = GetStaticEnum(Z_Construct_UEnum_AdvancedQuest_EAQ_QuestType, Z_Construct_UPackage__Script_AdvancedQuest(), TEXT("EAQ_QuestType"));
+		}
+		return Z_Registration_Info_UEnum_EAQ_QuestType.OuterSingleton;
+	}
+	template<> ADVANCEDQUEST_API UEnum* StaticEnum<EAQ_QuestType>()
+	{
+		return EAQ_QuestType_StaticEnum();
+	}
+	struct Z_Construct_UEnum_AdvancedQuest_EAQ_QuestType_Statics
+	{
+		static const UECodeGen_Private::FEnumeratorParam Enumerators[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Enum_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FEnumParams EnumParams;
+	};
+	const UECodeGen_Private::FEnumeratorParam Z_Construct_UEnum_AdvancedQuest_EAQ_QuestType_Statics::Enumerators[] = {
+		{ "EAQ_QuestType::Daily", (int64)EAQ_QuestType::Daily },
+		{ "EAQ_QuestType::Weekly", (int64)EAQ_QuestType::Weekly },
+		{ "EAQ_QuestType::MainQuest", (int64)EAQ_QuestType::MainQuest },
+		{ "EAQ_QuestType::SideQuest", (int64)EAQ_QuestType::SideQuest },
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UEnum_AdvancedQuest_EAQ_QuestType_Statics::Enum_MetaDataParams[] = {
+		{ "BlueprintType", "true" },
+		{ "Daily.DisplayName", "Daily Quest" },
+		{ "Daily.Name", "EAQ_QuestType::Daily" },
+		{ "MainQuest.DisplayName", "Main Quest" },
+		{ "MainQuest.Name", "EAQ_QuestType::MainQuest" },
+		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestData.h" },
+		{ "SideQuest.DisplayName", "Side Quest" },
+		{ "SideQuest.Name", "EAQ_QuestType::SideQuest" },
+		{ "Weekly.DisplayName", "Weekly Quest" },
+		{ "Weekly.Name", "EAQ_QuestType::Weekly" },
+	};
+#endif
+	const UECodeGen_Private::FEnumParams Z_Construct_UEnum_AdvancedQuest_EAQ_QuestType_Statics::EnumParams = {
+		(UObject*(*)())Z_Construct_UPackage__Script_AdvancedQuest,
+		nullptr,
+		"EAQ_QuestType",
+		"EAQ_QuestType",
+		Z_Construct_UEnum_AdvancedQuest_EAQ_QuestType_Statics::Enumerators,
+		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedQuest_EAQ_QuestType_Statics::Enumerators),
+		RF_Public|RF_Transient|RF_MarkAsNative,
+		EEnumFlags::None,
+		(uint8)UEnum::ECppForm::EnumClass,
+		METADATA_PARAMS(Z_Construct_UEnum_AdvancedQuest_EAQ_QuestType_Statics::Enum_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedQuest_EAQ_QuestType_Statics::Enum_MetaDataParams))
+	};
+	UEnum* Z_Construct_UEnum_AdvancedQuest_EAQ_QuestType()
+	{
+		if (!Z_Registration_Info_UEnum_EAQ_QuestType.InnerSingleton)
+		{
+			UECodeGen_Private::ConstructUEnum(Z_Registration_Info_UEnum_EAQ_QuestType.InnerSingleton, Z_Construct_UEnum_AdvancedQuest_EAQ_QuestType_Statics::EnumParams);
+		}
+		return Z_Registration_Info_UEnum_EAQ_QuestType.InnerSingleton;
+	}
 	static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_AQ_Objectives;
 class UScriptStruct* FAQ_Objectives::StaticStruct()
 {
@@ -226,6 +288,11 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_Objectives>()
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
+		static const UECodeGen_Private::FBytePropertyParams NewProp_QuestType_Underlying;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_QuestType_MetaData[];
+#endif
+		static const UECodeGen_Private::FEnumPropertyParams NewProp_QuestType;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_questTitle_MetaData[];
 #endif
@@ -285,46 +352,56 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_Objectives>()
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestData.h" },
 	};
 #endif
+	const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_QuestType_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_questTitle_MetaData[] = {
-		{ "Category", "Quest" },
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_QuestType_MetaData[] = {
+		{ "Category", "Advanced Quest | Quest Data" },
 		{ "Comment", "/* Quest properties */" },
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestData.h" },
 		{ "ToolTip", "Quest properties" },
 	};
 #endif
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_QuestType = { "QuestType", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_QuestData, QuestType), Z_Construct_UEnum_AdvancedQuest_EAQ_QuestType, METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_QuestType_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_QuestType_MetaData)) }; // 2952427223
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_questTitle_MetaData[] = {
+		{ "Category", "Advanced Quest | Quest Data" },
+		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestData.h" },
+	};
+#endif
 	const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_questTitle = { "questTitle", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_QuestData, questTitle), METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_questTitle_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_questTitle_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_questDescription_MetaData[] = {
-		{ "Category", "Quest" },
+		{ "Category", "Advanced Quest | Quest Data" },
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestData.h" },
 	};
 #endif
 	const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_questDescription = { "questDescription", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_QuestData, questDescription), METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_questDescription_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_questDescription_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_questSummary_MetaData[] = {
-		{ "Category", "Quest" },
+		{ "Category", "Advanced Quest | Quest Data" },
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestData.h" },
 	};
 #endif
 	const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_questSummary = { "questSummary", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_QuestData, questSummary), METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_questSummary_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_questSummary_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_QuestID_MetaData[] = {
-		{ "Category", "Quest" },
+		{ "Category", "Advanced Quest | Quest Data" },
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestData.h" },
 	};
 #endif
 	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_QuestID = { "QuestID", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_QuestData, QuestID), METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_QuestID_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_QuestID_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_questRequirements_MetaData[] = {
-		{ "Category", "Quest" },
+		{ "Category", "Advanced Quest | Quest Data" },
+		{ "Comment", "/* Requirements */" },
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestData.h" },
+		{ "ToolTip", "Requirements" },
 	};
 #endif
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_questRequirements = { "questRequirements", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_QuestData, questRequirements), Z_Construct_UScriptStruct_FAQ_RequiermentData, METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_questRequirements_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_questRequirements_MetaData)) }; // 3568302361
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_requirementsProgression_MetaData[] = {
-		{ "Category", "Quest" },
+		{ "Category", "Advanced Quest | Quest Data" },
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestData.h" },
 	};
 #endif
@@ -332,7 +409,7 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_Objectives>()
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_objectives_Inner = { "objectives", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 0, Z_Construct_UScriptStruct_FAQ_Objectives, METADATA_PARAMS(nullptr, 0) }; // 3106947802
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_objectives_MetaData[] = {
-		{ "Category", "Quest" },
+		{ "Category", "Advanced Quest | Quest Data" },
 		{ "Comment", "/* Objectives */" },
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestData.h" },
 		{ "ToolTip", "Objectives" },
@@ -341,7 +418,7 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_Objectives>()
 	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_objectives = { "objectives", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_QuestData, objectives), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_objectives_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_objectives_MetaData)) }; // 3106947802
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_xpReward_MetaData[] = {
-		{ "Category", "Quest" },
+		{ "Category", "Advanced Quest | Quest Data" },
 		{ "Comment", "/** Rewards */" },
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestData.h" },
 		{ "ToolTip", "Rewards" },
@@ -350,7 +427,7 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_Objectives>()
 	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_xpReward = { "xpReward", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_QuestData, xpReward), METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_xpReward_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_xpReward_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_goldReward_MetaData[] = {
-		{ "Category", "Quest" },
+		{ "Category", "Advanced Quest | Quest Data" },
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestData.h" },
 	};
 #endif
@@ -358,12 +435,14 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_Objectives>()
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_itemsReward_Inner = { "itemsReward", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 0, Z_Construct_UClass_UAQ_ItemData_NoRegister, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_itemsReward_MetaData[] = {
-		{ "Category", "Quest" },
+		{ "Category", "Advanced Quest | Quest Data" },
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestData.h" },
 	};
 #endif
 	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_itemsReward = { "itemsReward", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_QuestData, itemsReward), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_itemsReward_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_itemsReward_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UAQ_QuestData_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_QuestType_Underlying,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_QuestType,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_questTitle,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_questDescription,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_questSummary,
@@ -411,17 +490,21 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_Objectives>()
 	UAQ_QuestData::~UAQ_QuestData() {}
 	struct Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_Statics
 	{
+		static const FEnumRegisterCompiledInInfo EnumInfo[];
 		static const FStructRegisterCompiledInInfo ScriptStructInfo[];
 		static const FClassRegisterCompiledInInfo ClassInfo[];
+	};
+	const FEnumRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_Statics::EnumInfo[] = {
+		{ EAQ_QuestType_StaticEnum, TEXT("EAQ_QuestType"), &Z_Registration_Info_UEnum_EAQ_QuestType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2952427223U) },
 	};
 	const FStructRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_Statics::ScriptStructInfo[] = {
 		{ FAQ_Objectives::StaticStruct, Z_Construct_UScriptStruct_FAQ_Objectives_Statics::NewStructOps, TEXT("AQ_Objectives"), &Z_Registration_Info_UScriptStruct_AQ_Objectives, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FAQ_Objectives), 3106947802U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_QuestData, UAQ_QuestData::StaticClass, TEXT("UAQ_QuestData"), &Z_Registration_Info_UClass_UAQ_QuestData, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_QuestData), 3154132851U) },
+		{ Z_Construct_UClass_UAQ_QuestData, UAQ_QuestData::StaticClass, TEXT("UAQ_QuestData"), &Z_Registration_Info_UClass_UAQ_QuestData, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_QuestData), 77392804U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_3408906179(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_78988861(TEXT("/Script/AdvancedQuest"),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_Statics::ClassInfo),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_Statics::ScriptStructInfo),
-		nullptr, 0);
+		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_Statics::EnumInfo));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

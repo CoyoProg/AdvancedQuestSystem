@@ -22,16 +22,6 @@ enum class EAQ_QuestState : uint8
 };
 
 
-/* Added for future implementation*/
-UENUM(BlueprintType)
-enum class EAQ_QuestType : uint8
-{
-	Daily					UMETA(DisplayName = "Daily Quest"),
-	Weekly					UMETA(DisplayName = "Weekly Quest"),
-	MainQuest				UMETA(DisplayName = "Main Quest"),
-	SideQuest				UMETA(DisplayName = "Side Quest"),
-};
-
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FQuestStateChangedDelegate, UAQ_Quest*, QuestUpdate, EAQ_QuestState, QuestState);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FObjectivesUpdatedDelegate, UAQ_Quest*, QuestUpdate);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FQuestRequirementMetDelegate, UAQ_Quest*, QuestUpdate);
@@ -52,14 +42,11 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "Advanced Quest | Quest")
 	EAQ_QuestState QuestState = EAQ_QuestState::Pending;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Advanced Quest | Quest")
-	EAQ_QuestType QuestType = EAQ_QuestType::MainQuest;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest")
 	UAQ_QuestData* QuestData = nullptr;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Advanced Quest | Quest")
-	int ObjectivesCompleted = 0;
+	bool AllObjectivesCompleted = false;
 
 	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
 	void EnableQuest();
@@ -104,6 +91,8 @@ public:
 	void OnQuestRequirementChange(UAQ_Quest* questUpdateP, EAQ_QuestState questStateP);
 	UFUNCTION()
 	void OnLevelRequirementChange(int PlayerLevel);
+	UFUNCTION()
+	void OnNewDay();
 
 	/* Delegates */
 	FQuestStateChangedDelegate QuestStateChangedDelegate;

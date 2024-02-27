@@ -81,25 +81,41 @@ void AAQ_Interactable::LateBeginPlay()
 			bIsSleeping = false;
 		}
 
-		if (quest->QuestState != EAQ_QuestState::Archive)
-			quest->QuestStateChangedDelegate.AddDynamic(this, &AAQ_Interactable::OnQuestStateChanged);
+		if (quest->QuestData->QuestType != EAQ_QuestType::Daily &&
+			quest->QuestData->QuestType != EAQ_QuestType::Weekly &&
+			quest->QuestState == EAQ_QuestState::Archive)
+			return;
+
+		quest->QuestStateChangedDelegate.AddDynamic(this, &AAQ_Interactable::OnQuestStateChanged);
 	}
 }
 
 void AAQ_Interactable::OnQuestStateChanged(UAQ_Quest* quest, EAQ_QuestState questState)
 {
-	if (questState == EAQ_QuestState::Active)
+	switch (questState)
+	{
+	case EAQ_QuestState::Active:
 	{
 		bIsSleeping = false;
 		EnableParticles(!bIsSleeping);
 		return;
 	}
-	else if (questState == EAQ_QuestState::Archive)
+
+	case EAQ_QuestState::Archive:
 	{
-		quest->QuestStateChangedDelegate.RemoveDynamic(this, &AAQ_Interactable::OnQuestStateChanged);
+		if(quest->QuestData->QuestType != EAQ_QuestType::Daily &&
+			quest->QuestData->QuestType != EAQ_QuestType::Weekly)
+			quest->QuestStateChangedDelegate.RemoveDynamic(this, &AAQ_Interactable::OnQuestStateChanged);
+		break;
 	}
-	else if (questState == EAQ_QuestState::Pending && bIsInitialStateSaved) // Called only when the Quest is Abandoned
-		ResetToInitialState();
+
+	case EAQ_QuestState::Pending:
+	{
+		if (bIsInitialStateSaved) // Called only when the Quest is Abandoned
+			ResetToInitialState();
+		break;
+	}
+	}
 
 	bIsSleeping = true;
 	EnableParticles(!bIsSleeping);

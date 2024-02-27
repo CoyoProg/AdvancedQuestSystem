@@ -12,9 +12,55 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestManager() {}
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_Quest_NoRegister();
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_QuestManager();
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_QuestManager_NoRegister();
+	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnNewDayDelegate__DelegateSignature();
+	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnNewWeekDelegate__DelegateSignature();
 	ENGINE_API UClass* Z_Construct_UClass_UActorComponent();
 	UPackage* Z_Construct_UPackage__Script_AdvancedQuest();
 // End Cross Module References
+	struct Z_Construct_UDelegateFunction_AdvancedQuest_OnNewDayDelegate__DelegateSignature_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_AdvancedQuest_OnNewDayDelegate__DelegateSignature_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestManager.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_AdvancedQuest_OnNewDayDelegate__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UPackage__Script_AdvancedQuest, nullptr, "OnNewDayDelegate__DelegateSignature", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(Z_Construct_UDelegateFunction_AdvancedQuest_OnNewDayDelegate__DelegateSignature_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_AdvancedQuest_OnNewDayDelegate__DelegateSignature_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnNewDayDelegate__DelegateSignature()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UDelegateFunction_AdvancedQuest_OnNewDayDelegate__DelegateSignature_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UDelegateFunction_AdvancedQuest_OnNewWeekDelegate__DelegateSignature_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_AdvancedQuest_OnNewWeekDelegate__DelegateSignature_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestManager.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_AdvancedQuest_OnNewWeekDelegate__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UPackage__Script_AdvancedQuest, nullptr, "OnNewWeekDelegate__DelegateSignature", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(Z_Construct_UDelegateFunction_AdvancedQuest_OnNewWeekDelegate__DelegateSignature_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_AdvancedQuest_OnNewWeekDelegate__DelegateSignature_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnNewWeekDelegate__DelegateSignature()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UDelegateFunction_AdvancedQuest_OnNewWeekDelegate__DelegateSignature_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	DEFINE_FUNCTION(UAQ_QuestManager::execQueryQuest)
 	{
 		P_GET_PROPERTY(FIntProperty,Z_Param_QuestID);
@@ -142,6 +188,14 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestManager() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_QuestDataCenter_MetaData[];
 #endif
 		static const UECodeGen_Private::FMapPropertyParams NewProp_QuestDataCenter;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_OnNewDayDelegate_MetaData[];
+#endif
+		static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnNewDayDelegate;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_OnNewWeekDelegate_MetaData[];
+#endif
+		static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnNewWeekDelegate;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -173,10 +227,28 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestManager() {}
 	};
 #endif
 	const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_QuestDataCenter = { "QuestDataCenter", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_QuestManager, QuestDataCenter), EMapPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_QuestDataCenter_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_QuestDataCenter_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_OnNewDayDelegate_MetaData[] = {
+		{ "Category", "Advanced Quest | Date" },
+		{ "Comment", "/* Delegates */" },
+		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestManager.h" },
+		{ "ToolTip", "Delegates" },
+	};
+#endif
+	const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_OnNewDayDelegate = { "OnNewDayDelegate", nullptr, (EPropertyFlags)0x0020180000080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_QuestManager, OnNewDayDelegate), Z_Construct_UDelegateFunction_AdvancedQuest_OnNewDayDelegate__DelegateSignature, METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_OnNewDayDelegate_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_OnNewDayDelegate_MetaData)) }; // 4268023475
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_OnNewWeekDelegate_MetaData[] = {
+		{ "Category", "Advanced Quest | Date" },
+		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestManager.h" },
+	};
+#endif
+	const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_OnNewWeekDelegate = { "OnNewWeekDelegate", nullptr, (EPropertyFlags)0x0020180000080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_QuestManager, OnNewWeekDelegate), Z_Construct_UDelegateFunction_AdvancedQuest_OnNewWeekDelegate__DelegateSignature, METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_OnNewWeekDelegate_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_OnNewWeekDelegate_MetaData)) }; // 2459498385
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UAQ_QuestManager_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_QuestDataCenter_ValueProp,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_QuestDataCenter_Key_KeyProp,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_QuestDataCenter,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_OnNewDayDelegate,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestManager_Statics::NewProp_OnNewWeekDelegate,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UAQ_QuestManager_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UAQ_QuestManager>::IsAbstract,
@@ -215,9 +287,9 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestManager() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestManager_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_QuestManager, UAQ_QuestManager::StaticClass, TEXT("UAQ_QuestManager"), &Z_Registration_Info_UClass_UAQ_QuestManager, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_QuestManager), 1372912146U) },
+		{ Z_Construct_UClass_UAQ_QuestManager, UAQ_QuestManager::StaticClass, TEXT("UAQ_QuestManager"), &Z_Registration_Info_UClass_UAQ_QuestManager, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_QuestManager), 4199855556U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestManager_h_1100021095(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestManager_h_3318270716(TEXT("/Script/AdvancedQuest"),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestManager_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestManager_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

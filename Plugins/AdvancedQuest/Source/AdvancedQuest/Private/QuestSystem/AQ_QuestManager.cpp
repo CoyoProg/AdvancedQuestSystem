@@ -31,8 +31,8 @@ void UAQ_QuestManager::InitializeComponent()
 	FTopLevelAssetPath assetPath = UKismetSystemLibrary::MakeTopLevelAssetPath("/Script/AdvancedQuest", "AQ_QuestData");
 	AssetRegistry.GetAssetsByClass(assetPath, QuestDataAssets, true);
 #else 
-	FName className = "AQ_QuestData";
-	AssetRegistry.GetAssetsByClass(className, QuestDataAssets, true);
+	FTopLevelAssetPath assetPath = FTopLevelAssetPath("/Script/AdvancedQuest", "AQ_QuestData");
+	AssetRegistry.GetAssetsByClass(assetPath, QuestDataAssets, true);
 #endif
 
 	
@@ -51,6 +51,12 @@ void UAQ_QuestManager::InitializeComponent()
 	
 		/* Add the quest in QuestDataCenter with it's ID as key to retrieve it easily*/
 		QuestDataCenter.Add(QuestID, newQuest);
+
+		if (QuestData->QuestType == EAQ_QuestType::Daily)
+			OnNewDayDelegate.AddUniqueDynamic(newQuest, &UAQ_Quest::OnNewDay);
+
+		if (QuestData->QuestType == EAQ_QuestType::Weekly)
+			OnNewWeekDelegate.AddUniqueDynamic(newQuest, &UAQ_Quest::OnNewDay);
 	}
 
 	/* Load the save to update all the Objectives & current state for each quests */

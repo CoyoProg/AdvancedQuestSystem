@@ -313,7 +313,7 @@ void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 			/* Update the current amount of the quest */
 			questObjectives.CurrentAmount = currentAmount;
 			if (currentAmount >= questObjectives.amountNeeded)
-				quest->ObjectivesCompleted++;
+				questObjectives.isObjectiveComplete = true;
 
 			quest->UpdateQuestState();
 		}

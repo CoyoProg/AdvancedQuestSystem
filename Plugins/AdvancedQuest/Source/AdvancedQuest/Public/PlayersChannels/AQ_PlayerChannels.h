@@ -15,7 +15,7 @@ class UAQ_EnvironmentChannel;
 class UAQ_CombatChannel;
 class UAQ_QuestChannel;
 class UAQ_QuestManager;
-
+class UUserWidget;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnPlayerEventDelegate, UObject*, entity, EAQ_NotifyEventType, eventType, float, amount);
 
