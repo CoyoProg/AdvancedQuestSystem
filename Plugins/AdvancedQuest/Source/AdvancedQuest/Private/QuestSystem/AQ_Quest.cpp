@@ -136,6 +136,9 @@ void UAQ_Quest::OnNotify(UObject* entity, EAQ_NotifyEventType eventTypeP, float 
 	}
 	else
 	{
+		if (QuestState == EAQ_QuestState::Valid)
+			return;
+
 		/* Check all conditions for all the others types */
 		
 		/* Go through each Objectives and:
@@ -177,7 +180,7 @@ void UAQ_Quest::OnNotify(UObject* entity, EAQ_NotifyEventType eventTypeP, float 
 	}
 
 	/* Update the state if the objective was valid but isn't anymore */
-	if (AllObjectivesCompleted && QuestState == EAQ_QuestState::Valid)
+	if (!AllObjectivesCompleted && QuestState == EAQ_QuestState::Valid)
 	{
 		QuestState = EAQ_QuestState::Active;
 		if (QuestStateChangedDelegate.IsBound())

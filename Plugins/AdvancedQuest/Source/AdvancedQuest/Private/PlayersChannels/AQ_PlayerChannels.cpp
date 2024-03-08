@@ -175,13 +175,14 @@ void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestSt
 			RemoveObserver(QuestUpdate, eventType);
 
 			/* Remove all the quest items */
-			if ((questObjectives.objectiveType == EAQ_ObjectivesType::Collect
+			if ((questObjectives.objectiveType == EAQ_ObjectivesType::Collect 
+				&& questObjectives.itemTarget
+				&& questObjectives.itemTarget->itemType == EAQ_ItemType::Quest)
 				|| questObjectives.objectiveType == EAQ_ObjectivesType::Deliver)
-				&& questObjectives.itemTarget)
-			{
-				if (questObjectives.itemTarget->itemType == EAQ_ItemType::Quest)
-					Execute_RemoveItemFromInvetory(this, questObjectives.itemTarget, 1, true);
-			}
+				Execute_RemoveItemFromInvetory(this, questObjectives.itemTarget, 1, true);
+
+			/*if(questObjectives.objectiveType == EAQ_ObjectivesType::Deliver)
+				Execute_RemoveItemFromInvetory(this, questObjectives.itemTarget, 1, true);*/
 		}
 
 		/* Remove the Player Channels from the Quest State Changed delegate */
