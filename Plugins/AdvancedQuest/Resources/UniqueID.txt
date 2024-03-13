@@ -1,2 +1,2 @@
-LastQuestId: 10000
+LastQuestId: 10001
 LastUniqueActorID: 1000
