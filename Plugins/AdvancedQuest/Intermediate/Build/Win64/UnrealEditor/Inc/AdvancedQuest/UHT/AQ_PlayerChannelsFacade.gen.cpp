@@ -20,6 +20,15 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannelsFacade() {}
 	COREUOBJECT_API UClass* Z_Construct_UClass_UObject_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_AdvancedQuest();
 // End Cross Module References
+	DEFINE_FUNCTION(IAQ_PlayerChannelsFacade::execOnSpecialEventNotify)
+	{
+		P_GET_PROPERTY(FIntProperty,Z_Param_questID);
+		P_GET_PROPERTY(FIntProperty,Z_Param_eventID);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->OnSpecialEventNotify_Implementation(Z_Param_questID,Z_Param_eventID);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(IAQ_PlayerChannelsFacade::execOnCombatEventNotify)
 	{
 		P_GET_ENUM(EAQ_CombatEventType,Z_Param_eventType);
@@ -76,6 +85,11 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannelsFacade() {}
 	{
 		UAQ_Quest* quest;
 	};
+	struct AQ_PlayerChannelsFacade_eventOnSpecialEventNotify_Parms
+	{
+		int32 questID;
+		int32 eventID;
+	};
 	struct AQ_PlayerChannelsFacade_eventRemoveItemFromInvetory_Parms
 	{
 		UAQ_ItemData* item;
@@ -98,6 +112,10 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannelsFacade() {}
 	{
 		check(0 && "Do not directly call Event functions in Interfaces. Call Execute_OnQuestEnable instead.");
 	}
+	void IAQ_PlayerChannelsFacade::OnSpecialEventNotify(int32 questID, int32 eventID)
+	{
+		check(0 && "Do not directly call Event functions in Interfaces. Call Execute_OnSpecialEventNotify instead.");
+	}
 	void IAQ_PlayerChannelsFacade::RemoveItemFromInvetory(UAQ_ItemData* item, int32 amount, bool bRemoveCompletely)
 	{
 		check(0 && "Do not directly call Event functions in Interfaces. Call Execute_RemoveItemFromInvetory instead.");
@@ -110,6 +128,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannelsFacade() {}
 			{ "OnEnvironmentEventNotify", &IAQ_PlayerChannelsFacade::execOnEnvironmentEventNotify },
 			{ "OnQuestEnable", &IAQ_PlayerChannelsFacade::execOnQuestEnable },
 			{ "OnQuestStateChanged", &IAQ_PlayerChannelsFacade::execOnQuestStateChanged },
+			{ "OnSpecialEventNotify", &IAQ_PlayerChannelsFacade::execOnSpecialEventNotify },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 	}
@@ -289,6 +308,38 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannelsFacade() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_UAQ_PlayerChannelsFacade_OnSpecialEventNotify_Statics
+	{
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_questID;
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_eventID;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UFunction_UAQ_PlayerChannelsFacade_OnSpecialEventNotify_Statics::NewProp_questID = { "questID", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_PlayerChannelsFacade_eventOnSpecialEventNotify_Parms, questID), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UFunction_UAQ_PlayerChannelsFacade_OnSpecialEventNotify_Statics::NewProp_eventID = { "eventID", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_PlayerChannelsFacade_eventOnSpecialEventNotify_Parms, eventID), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_PlayerChannelsFacade_OnSpecialEventNotify_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_PlayerChannelsFacade_OnSpecialEventNotify_Statics::NewProp_questID,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_PlayerChannelsFacade_OnSpecialEventNotify_Statics::NewProp_eventID,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAQ_PlayerChannelsFacade_OnSpecialEventNotify_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Advanced Quest | Events" },
+		{ "ModuleRelativePath", "Public/PlayersChannels/AQ_PlayerChannelsFacade.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_PlayerChannelsFacade_OnSpecialEventNotify_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_PlayerChannelsFacade, nullptr, "OnSpecialEventNotify", nullptr, nullptr, sizeof(AQ_PlayerChannelsFacade_eventOnSpecialEventNotify_Parms), Z_Construct_UFunction_UAQ_PlayerChannelsFacade_OnSpecialEventNotify_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_PlayerChannelsFacade_OnSpecialEventNotify_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x0C020C00, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAQ_PlayerChannelsFacade_OnSpecialEventNotify_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_PlayerChannelsFacade_OnSpecialEventNotify_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UAQ_PlayerChannelsFacade_OnSpecialEventNotify()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAQ_PlayerChannelsFacade_OnSpecialEventNotify_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_UAQ_PlayerChannelsFacade_RemoveItemFromInvetory_Statics
 	{
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_item;
@@ -355,6 +406,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannelsFacade() {}
 		{ &Z_Construct_UFunction_UAQ_PlayerChannelsFacade_OnEnvironmentEventNotify, "OnEnvironmentEventNotify" }, // 1965337183
 		{ &Z_Construct_UFunction_UAQ_PlayerChannelsFacade_OnQuestEnable, "OnQuestEnable" }, // 3167559996
 		{ &Z_Construct_UFunction_UAQ_PlayerChannelsFacade_OnQuestStateChanged, "OnQuestStateChanged" }, // 3096239665
+		{ &Z_Construct_UFunction_UAQ_PlayerChannelsFacade_OnSpecialEventNotify, "OnSpecialEventNotify" }, // 3568491707
 		{ &Z_Construct_UFunction_UAQ_PlayerChannelsFacade_RemoveItemFromInvetory, "RemoveItemFromInvetory" }, // 2179572988
 	};
 #if WITH_METADATA
@@ -464,6 +516,24 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannelsFacade() {}
 			I->OnQuestEnable_Implementation(quest);
 		}
 	}
+	static FName NAME_UAQ_PlayerChannelsFacade_OnSpecialEventNotify = FName(TEXT("OnSpecialEventNotify"));
+	void IAQ_PlayerChannelsFacade::Execute_OnSpecialEventNotify(UObject* O, int32 questID, int32 eventID)
+	{
+		check(O != NULL);
+		check(O->GetClass()->ImplementsInterface(UAQ_PlayerChannelsFacade::StaticClass()));
+		AQ_PlayerChannelsFacade_eventOnSpecialEventNotify_Parms Parms;
+		UFunction* const Func = O->FindFunction(NAME_UAQ_PlayerChannelsFacade_OnSpecialEventNotify);
+		if (Func)
+		{
+			Parms.questID=questID;
+			Parms.eventID=eventID;
+			O->ProcessEvent(Func, &Parms);
+		}
+		else if (auto I = (IAQ_PlayerChannelsFacade*)(O->GetNativeInterfaceAddress(UAQ_PlayerChannelsFacade::StaticClass())))
+		{
+			I->OnSpecialEventNotify_Implementation(questID,eventID);
+		}
+	}
 	static FName NAME_UAQ_PlayerChannelsFacade_RemoveItemFromInvetory = FName(TEXT("RemoveItemFromInvetory"));
 	void IAQ_PlayerChannelsFacade::Execute_RemoveItemFromInvetory(UObject* O, UAQ_ItemData* item, int32 amount, bool bRemoveCompletely)
 	{
@@ -484,9 +554,9 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannelsFacade() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannelsFacade_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_PlayerChannelsFacade, UAQ_PlayerChannelsFacade::StaticClass, TEXT("UAQ_PlayerChannelsFacade"), &Z_Registration_Info_UClass_UAQ_PlayerChannelsFacade, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_PlayerChannelsFacade), 1596013219U) },
+		{ Z_Construct_UClass_UAQ_PlayerChannelsFacade, UAQ_PlayerChannelsFacade::StaticClass, TEXT("UAQ_PlayerChannelsFacade"), &Z_Registration_Info_UClass_UAQ_PlayerChannelsFacade, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_PlayerChannelsFacade), 964818267U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannelsFacade_h_2765749516(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannelsFacade_h_3920319941(TEXT("/Script/AdvancedQuest"),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannelsFacade_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannelsFacade_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

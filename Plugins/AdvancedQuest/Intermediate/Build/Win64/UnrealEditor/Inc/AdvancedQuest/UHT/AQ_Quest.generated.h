@@ -64,6 +64,7 @@ static inline void FQuestRequirementMetDelegate_DelegateWrapper(const FMulticast
  \
 	DECLARE_FUNCTION(execOnNewDay); \
 	DECLARE_FUNCTION(execOnLevelRequirementChange); \
+	DECLARE_FUNCTION(execOnEventRequirementChange); \
 	DECLARE_FUNCTION(execOnQuestRequirementChange); \
 	DECLARE_FUNCTION(execOnNotify); \
 	DECLARE_FUNCTION(execQuestFailed); \
@@ -77,6 +78,7 @@ static inline void FQuestRequirementMetDelegate_DelegateWrapper(const FMulticast
  \
 	DECLARE_FUNCTION(execOnNewDay); \
 	DECLARE_FUNCTION(execOnLevelRequirementChange); \
+	DECLARE_FUNCTION(execOnEventRequirementChange); \
 	DECLARE_FUNCTION(execOnQuestRequirementChange); \
 	DECLARE_FUNCTION(execOnNotify); \
 	DECLARE_FUNCTION(execQuestFailed); \

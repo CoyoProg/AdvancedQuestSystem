@@ -24,7 +24,9 @@ void UAQ_Quest::SetQuestData(UAQ_QuestData* questDataP)
 
 	/* Check if there is any requirements*/
 	FAQ_RequiermentData requirements = QuestData->questRequirements;
-	if (requirements.PlayerLevel != 0 || requirements.QuestID.Num() > 0)
+	if (requirements.PlayerLevel != 0 
+		|| requirements.QuestID.Num() > 0 
+		|| requirements.EventID.Num() > 0)
 		bIsRequirementMet = false;
 }
 
@@ -228,8 +230,21 @@ void UAQ_Quest::OnQuestRequirementChange(UAQ_Quest* questUpdateP, EAQ_QuestState
 	{
 		if (requirementID == targetID)
 		{
-			QuestData->requirementsProgression.QuestID.Add(targetID);
+			QuestData->requirementsProgression.QuestID.AddUnique(targetID);
 			questUpdateP->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_Quest::OnQuestRequirementChange);
+		}
+	}
+
+	CheckIfRequirementsMet();
+}
+
+void UAQ_Quest::OnEventRequirementChange(int eventID)
+{
+	for (auto requirementID : QuestData->questRequirements.EventID)
+	{
+		if (requirementID == eventID)
+		{
+			QuestData->requirementsProgression.EventID.AddUnique(eventID);
 		}
 	}
 
@@ -261,9 +276,15 @@ void UAQ_Quest::CheckIfRequirementsMet()
 	if (requierments.PlayerLevel != requiermentsProgression.PlayerLevel)
 		return;
 
-	for(auto requirementID : QuestData->questRequirements.QuestID)
+	for(auto questID : QuestData->questRequirements.QuestID)
 	{
-		if(!QuestData->requirementsProgression.QuestID.Contains(requirementID))
+		if(!QuestData->requirementsProgression.QuestID.Contains(questID))
+			return;
+	}
+
+	for (auto eventID : QuestData->questRequirements.EventID)
+	{
+		if (!QuestData->requirementsProgression.EventID.Contains(eventID))
 			return;
 	}
 

@@ -41,6 +41,7 @@ static inline void FOnPlayerEventDelegate_DelegateWrapper(const FMulticastScript
 #define FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannels_h_28_SPARSE_DATA
 #define FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannels_h_28_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execOnSpecialEventNotify_Implementation); \
 	DECLARE_FUNCTION(execOnCombatEventNotify_Implementation); \
 	DECLARE_FUNCTION(execOnEnvironmentEventNotify_Implementation); \
 	DECLARE_FUNCTION(execOnQuestEnable_Implementation); \
@@ -51,6 +52,7 @@ static inline void FOnPlayerEventDelegate_DelegateWrapper(const FMulticastScript
 
 #define FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannels_h_28_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execOnSpecialEventNotify_Implementation); \
 	DECLARE_FUNCTION(execOnCombatEventNotify_Implementation); \
 	DECLARE_FUNCTION(execOnEnvironmentEventNotify_Implementation); \
 	DECLARE_FUNCTION(execOnQuestEnable_Implementation); \

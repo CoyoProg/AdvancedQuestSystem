@@ -64,7 +64,8 @@ public:
 	void OnEnvironmentEventNotify_Implementation(EAQ_EnvironmentEventType eventType, UObject* entity);
 	UFUNCTION(Category = "Advanced Quest | Events")
 	void OnCombatEventNotify_Implementation(EAQ_CombatEventType eventType, UObject* entity, float amount = 1);
-
+	UFUNCTION(Category = "Advanced Quest | Events")
+	void OnSpecialEventNotify_Implementation(int questID, int eventID);
 
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Advanced Quest | Events")
 	void OnQuestEnded(UAQ_Quest* quest);

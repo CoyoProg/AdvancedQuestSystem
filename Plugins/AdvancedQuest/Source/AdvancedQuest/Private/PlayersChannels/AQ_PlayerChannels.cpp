@@ -331,6 +331,19 @@ void UAQ_PlayerChannels::OnCombatEventNotify_Implementation(EAQ_CombatEventType 
 	CombatChannel->OnCombatEventNotify(eventType, entity, amount);
 }
 
+void UAQ_PlayerChannels::OnSpecialEventNotify_Implementation(int questID, int eventID)
+{
+	if (!QuestManager || questID == 0)
+		return;
+
+	UAQ_Quest* quest = QuestManager->QueryQuest(questID);
+
+	if (!quest || quest->bIsRequirementMet)
+		return;
+
+	quest->OnEventRequirementChange(eventID);
+}
+
 void UAQ_PlayerChannels::OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay)
 {
 	/* Get the Book Quest and Display the Quests */

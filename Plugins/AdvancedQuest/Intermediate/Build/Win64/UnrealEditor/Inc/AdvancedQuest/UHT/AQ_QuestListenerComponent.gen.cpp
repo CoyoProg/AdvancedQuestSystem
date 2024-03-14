@@ -190,9 +190,10 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestListenerComponent() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestListenerComponent_Statics::Class_MetaDataParams[] = {
-		{ "BlueprintSpawnableComponent", "" },
-		{ "ClassGroupNames", "Custom" },
+		{ "ABSTRACT", "" },
+		{ "BlueprintType", "true" },
 		{ "IncludePath", "QuestSystem/AQ_QuestListenerComponent.h" },
+		{ "IsBlueprintBase", "true" },
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestListenerComponent.h" },
 	};
 #endif
@@ -256,9 +257,9 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestListenerComponent() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestListenerComponent_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_QuestListenerComponent, UAQ_QuestListenerComponent::StaticClass, TEXT("UAQ_QuestListenerComponent"), &Z_Registration_Info_UClass_UAQ_QuestListenerComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_QuestListenerComponent), 2915706940U) },
+		{ Z_Construct_UClass_UAQ_QuestListenerComponent, UAQ_QuestListenerComponent::StaticClass, TEXT("UAQ_QuestListenerComponent"), &Z_Registration_Info_UClass_UAQ_QuestListenerComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_QuestListenerComponent), 1248933354U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestListenerComponent_h_2645576615(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestListenerComponent_h_4015985345(TEXT("/Script/AdvancedQuest"),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestListenerComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestListenerComponent_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

@@ -8,7 +8,9 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnQuestStateChangedListenerDelegate, UAQ_Quest*, questUpdate, EAQ_QuestState, QuestState);
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+class UAQ_Quest;
+
+UCLASS(Blueprintable, meta = (ABSTRACT))
 class ADVANCEDQUEST_API UAQ_QuestListenerComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -24,7 +26,7 @@ protected:
 	class UAQ_QuestManager* QuestManager = nullptr;
 
 	UFUNCTION(Category = "Advanced Quest | Events")
-	void OnQuestStateChangedWrapper(class UAQ_Quest* questUpdate, EAQ_QuestState QuestState);
+	void OnQuestStateChangedWrapper(UAQ_Quest* questUpdate, EAQ_QuestState QuestState);
 
 	// Use this delegate to be able to update actors in blueprint
 	// when OnQuestStateChanged is triggered
@@ -32,5 +34,5 @@ protected:
 	FOnQuestStateChangedListenerDelegate OnQuestStateChanged;
 
 	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
-	void BindFunctionsToQuestDelegates(class UAQ_Quest* quest);
+	void BindFunctionsToQuestDelegates(UAQ_Quest* quest);
 };

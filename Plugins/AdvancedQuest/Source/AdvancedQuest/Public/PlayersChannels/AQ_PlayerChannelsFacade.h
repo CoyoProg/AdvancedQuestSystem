@@ -40,6 +40,9 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Advanced Quest | Events")
 	void OnCombatEventNotify(EAQ_CombatEventType eventType, UObject* entity, float amount = 1);
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Advanced Quest | Events")
+	void OnSpecialEventNotify(int questID, int eventID);
+
 
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Advanced Quest | Inventory")
 	void AddItemToInvetory(UAQ_ItemData* item, int amount);
