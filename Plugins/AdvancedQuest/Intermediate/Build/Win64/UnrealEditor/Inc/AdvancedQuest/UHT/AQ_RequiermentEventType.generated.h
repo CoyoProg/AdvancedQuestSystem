@@ -25,12 +25,4 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<struct FAQ_RequiermentD
 #define CURRENT_FILE_ID FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_RequiermentEventType_h
 
 
-#define FOREACH_ENUM_EAQ_REQUIERMENTEVENTTYPE(op) \
-	op(EAQ_RequiermentEventType::Level) \
-	op(EAQ_RequiermentEventType::Quest) 
-
-enum class EAQ_RequiermentEventType : uint8;
-template<> struct TIsUEnumClass<EAQ_RequiermentEventType> { enum { Value = true }; };
-template<> ADVANCEDQUEST_API UEnum* StaticEnum<EAQ_RequiermentEventType>();
-
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

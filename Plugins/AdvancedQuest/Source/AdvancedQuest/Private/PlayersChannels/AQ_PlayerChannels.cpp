@@ -226,11 +226,11 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 		
 		if (quest->QuestData->questRequirements.QuestID.Num() > 0)
 		{
-			for (auto const& requirements : quest->QuestData->questRequirements.QuestID)
+			for (auto questID = quest->QuestData->questRequirements.QuestID.CreateConstIterator(); questID; ++questID)
 			{
 				if (QuestManager)
 				{
-					UAQ_Quest* questRequirement = QuestManager->QueryQuest(requirements);
+					UAQ_Quest* questRequirement = QuestManager->QueryQuest(questID.Key());
 					questRequirement->QuestStateChangedDelegate.AddUniqueDynamic(quest, &UAQ_Quest::OnQuestRequirementChange);
 				}
 			}

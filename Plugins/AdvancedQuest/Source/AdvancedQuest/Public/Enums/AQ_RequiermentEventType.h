@@ -15,21 +15,11 @@ struct FAQ_RequiermentData
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest | Requirement")
 	int PlayerLevel;
+	bool LevelMet = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest | Requirement")
-	TArray<int> QuestID;
+	TMap<int, bool> QuestID;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest | Requirement")
-	TArray<int> EventID;
-};
-
-
-/**
- *
- */
-UENUM(BlueprintType)
-enum class EAQ_RequiermentEventType : uint8
-{
-    Level		UMETA(DisplayName = "Level Requierment"),
-    Quest       UMETA(DisplayName = "Quest Requierment")
+	TMap<int, bool> EventID;
 };

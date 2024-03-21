@@ -86,9 +86,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Data")
 	FAQ_RequiermentData questRequirements;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Data")
-	FAQ_RequiermentData requirementsProgression;
-
 
 	/* Objectives */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Data")
