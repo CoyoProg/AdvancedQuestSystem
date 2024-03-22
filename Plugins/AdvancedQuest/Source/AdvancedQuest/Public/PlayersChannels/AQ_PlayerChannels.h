@@ -85,7 +85,7 @@ public:
 	int CheckInventoryForItem(FAQ_Objectives currentObjective);	// This is implemented in blueprint 
 	
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Advanced Quest | Quest")
-	int CheckForPlayerStats(FAQ_Objectives currentObjective);		// This is implemented in blueprint 
+	int CheckForPlayerStats(FAQ_Objectives currentObjective);	// This is implemented in blueprint 
 
 
 protected:
