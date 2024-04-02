@@ -10,39 +10,36 @@ void UAQ_BookQuest::OpenQuestLog()
 
 	CloseAll();
 
-	if (!bIsJournalVisible)
+	if (bIsJournalVisible)
 	{
-		if (PlayerController)
-		{
-			PlayerController->SetShowMouseCursor(true);
-			PlayerController->SetInputMode(FInputModeUIOnly{});
-		}
-
-		SetKeyboardFocus();
-		QuestLogWidget->SetVisibility(ESlateVisibility::Visible);
+		PlayerController->SetInputMode(FInputModeGameOnly{});
 		return;
 	}
 
-	if (PlayerController)
-	{
-		PlayerController->SetShowMouseCursor(false);
-		PlayerController->SetInputMode(FInputModeGameOnly{});
-	}
+	if (!PlayerController)
+		return;
+
+	PlayerController->SetInputMode(FInputModeUIOnly{});
+	PlayerController->SetShowMouseCursor(true);
+
+	QuestLogWidget->SetVisibility(ESlateVisibility::Visible);
+	QuestLogWidget->SetKeyboardFocus();
 }
 
 void UAQ_BookQuest::OpenQuestGiverSummary()
 {
 	CloseAll();
 
+	if (!PlayerController)
+		return;
+
+	PlayerController->SetInputMode(FInputModeUIOnly{});
+	PlayerController->SetShowMouseCursor(true);
+	PlayerController->SetIgnoreMoveInput(true);
+
 	/* Open the Quest Giver Summary */
 	QuestGiverWidget->SetVisibility(ESlateVisibility::Visible);
-	PlayerController->SetInputMode(FInputModeUIOnly{});
-
-	if (PlayerController)
-	{
-		PlayerController->SetShowMouseCursor(true);
-		PlayerController->SetIgnoreMoveInput(true);
-	}
+	QuestGiverWidget->SetKeyboardFocus();	
 }
 
 void UAQ_BookQuest::CloseAll()
@@ -50,6 +47,13 @@ void UAQ_BookQuest::CloseAll()
 	/* Close all the widgets */
 	QuestLogWidget->SetVisibility(ESlateVisibility::Collapsed);
 	QuestGiverWidget->SetVisibility(ESlateVisibility::Collapsed);
+
+	if (!PlayerController)
+		return;
+
+	PlayerController->SetShowMouseCursor(false);
+	PlayerController->SetIgnoreMoveInput(false);
+
 }
 
 void UAQ_BookQuest::OnQuestEnableBroadcast(UAQ_Quest* quest)
