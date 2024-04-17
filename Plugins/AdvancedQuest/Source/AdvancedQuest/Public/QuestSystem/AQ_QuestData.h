@@ -100,5 +100,5 @@ public:
 	int goldReward = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Data")
-	TArray<class UAQ_ItemData*> itemsReward; // Need to be replaced with your Own ItemData
+	TMap<class UAQ_ItemData*, int> itemsReward; // Need to be replaced with your Own ItemData
 };

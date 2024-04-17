@@ -326,11 +326,12 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_Objectives>()
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_goldReward_MetaData[];
 #endif
 		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_goldReward;
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_itemsReward_Inner;
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_itemsReward_ValueProp;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_itemsReward_Key_KeyProp;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_itemsReward_MetaData[];
 #endif
-		static const UECodeGen_Private::FArrayPropertyParams NewProp_itemsReward;
+		static const UECodeGen_Private::FMapPropertyParams NewProp_itemsReward;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -421,14 +422,15 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_Objectives>()
 	};
 #endif
 	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_goldReward = { "goldReward", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_QuestData, goldReward), METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_goldReward_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_goldReward_MetaData)) };
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_itemsReward_Inner = { "itemsReward", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 0, Z_Construct_UClass_UAQ_ItemData_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_itemsReward_ValueProp = { "itemsReward", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 1, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_itemsReward_Key_KeyProp = { "itemsReward_Key", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 0, Z_Construct_UClass_UAQ_ItemData_NoRegister, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_itemsReward_MetaData[] = {
 		{ "Category", "Advanced Quest | Quest Data" },
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestData.h" },
 	};
 #endif
-	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_itemsReward = { "itemsReward", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_QuestData, itemsReward), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_itemsReward_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_itemsReward_MetaData)) };
+	const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_itemsReward = { "itemsReward", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_QuestData, itemsReward), EMapPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_itemsReward_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_itemsReward_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UAQ_QuestData_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_QuestType_Underlying,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_QuestType,
@@ -441,7 +443,8 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_Objectives>()
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_objectives,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_xpReward,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_goldReward,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_itemsReward_Inner,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_itemsReward_ValueProp,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_itemsReward_Key_KeyProp,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestData_Statics::NewProp_itemsReward,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UAQ_QuestData_Statics::StaticCppClassTypeInfo = {
@@ -489,9 +492,9 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_Objectives>()
 		{ FAQ_Objectives::StaticStruct, Z_Construct_UScriptStruct_FAQ_Objectives_Statics::NewStructOps, TEXT("AQ_Objectives"), &Z_Registration_Info_UScriptStruct_AQ_Objectives, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FAQ_Objectives), 3106947802U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_QuestData, UAQ_QuestData::StaticClass, TEXT("UAQ_QuestData"), &Z_Registration_Info_UClass_UAQ_QuestData, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_QuestData), 4172432486U) },
+		{ Z_Construct_UClass_UAQ_QuestData, UAQ_QuestData::StaticClass, TEXT("UAQ_QuestData"), &Z_Registration_Info_UClass_UAQ_QuestData, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_QuestData), 1298107244U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_1772594548(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_3980522088(TEXT("/Script/AdvancedQuest"),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_Statics::ClassInfo),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_Statics::ScriptStructInfo),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestData_h_Statics::EnumInfo));
