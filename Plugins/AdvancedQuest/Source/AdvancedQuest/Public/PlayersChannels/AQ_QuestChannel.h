@@ -15,6 +15,7 @@ class IAQ_PlayerChannelsFacade;
 class UWidgetComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FLevelRequirementChangedDelegate, int, PlayerLevel);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSpecialEventTriggerDelegate, UAQ_SpecialEventData*, SpecialEvent);
 
 /**
  * 
@@ -35,6 +36,7 @@ public:
 
 	/* Events */
 	void OnPlayerLevelChange(int newLevel);
+	void OnSpecialEventTrigger(UAQ_SpecialEventData* specialEvent);
 
 	/* Delegates */
 	UFUNCTION()
@@ -44,4 +46,5 @@ public:
 	void OnQuestUpdate(UAQ_Quest* QuestUpdate);
 
 	FLevelRequirementChangedDelegate LevelRequirementChangedDelegate;
+	FSpecialEventTriggerDelegate SpecialEventTriggerDelegate;
 };

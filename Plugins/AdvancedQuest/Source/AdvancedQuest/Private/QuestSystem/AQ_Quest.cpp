@@ -22,14 +22,15 @@ void UAQ_Quest::SetQuestData(UAQ_QuestData* questDataP)
 	QuestData = DuplicateObject<UAQ_QuestData>(questDataP, this);
 
 	/* Check if there is any requirements*/
-	FAQ_RequiermentData requirements = QuestData->questRequirements;
-	if (requirements.PlayerLevel != 0
+	FAQ_RequiermentData& requirements = QuestData->questRequirements;
+	
+	if (requirements.PlayerLevel != 0)
+		requirements.LevelMet = false;
+
+	if(!requirements.LevelMet
 		|| requirements.QuestID.Num() > 0
 		|| requirements.EventID.Num() > 0)
-	{
-		requirements.LevelMet = false;
 		bIsRequirementMet = false;
-	}
 }
 
 void UAQ_Quest::UpdateQuestState()
@@ -236,12 +237,12 @@ void UAQ_Quest::OnQuestRequirementChange(UAQ_Quest* questUpdateP, EAQ_QuestState
 	CheckIfRequirementsMet();
 }
 
-void UAQ_Quest::OnEventRequirementChange(int eventID)
+void UAQ_Quest::OnEventRequirementChange(UAQ_SpecialEventData* specialEvent)
 {
-	if (!QuestData->questRequirements.EventID.Contains(eventID))
+	if (!QuestData->questRequirements.EventID.Contains(specialEvent))
 		return;
 
-	QuestData->questRequirements.EventID[eventID] = true;
+	QuestData->questRequirements.EventID[specialEvent] = true;
 	CheckIfRequirementsMet();
 }
 
@@ -265,10 +266,22 @@ void UAQ_Quest::OnNewDay()
 void UAQ_Quest::CheckIfRequirementsMet()
 {
 	/* Check if all the requirements are met */
-	FAQ_RequiermentData requirements = QuestData->questRequirements;
+	FAQ_RequiermentData& requirements = QuestData->questRequirements;
 
 	if (!requirements.LevelMet)
 		return;
+
+	if (!requirements.AllEventsMet)
+	{
+		for (auto eventID = requirements.EventID.CreateConstIterator(); eventID; ++eventID)
+		{
+			if (!eventID.Value())
+				return;
+		}
+
+		requirements.AllEventsMet = true;
+	}
+
 
 	for(auto questID = requirements.QuestID.CreateConstIterator(); questID; ++questID)
 	{
@@ -276,11 +289,6 @@ void UAQ_Quest::CheckIfRequirementsMet()
 			return;
 	}
 
-	for (auto eventID = requirements.EventID.CreateConstIterator(); eventID; ++eventID)
-	{
-		if (!eventID.Value())
-			return;
-	}
 
 	bIsRequirementMet = true;
 

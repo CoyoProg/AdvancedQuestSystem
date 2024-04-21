@@ -12,6 +12,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Quest() {}
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_Quest();
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_Quest_NoRegister();
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_QuestData_NoRegister();
+	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_SpecialEventData_NoRegister();
 	ADVANCEDQUEST_API UEnum* Z_Construct_UEnum_AdvancedQuest_EAQ_NotifyEventType();
 	ADVANCEDQUEST_API UEnum* Z_Construct_UEnum_AdvancedQuest_EAQ_QuestState();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_ObjectivesUpdatedDelegate__DelegateSignature();
@@ -205,10 +206,10 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Quest() {}
 	}
 	DEFINE_FUNCTION(UAQ_Quest::execOnEventRequirementChange)
 	{
-		P_GET_PROPERTY(FIntProperty,Z_Param_eventID);
+		P_GET_OBJECT(UAQ_SpecialEventData,Z_Param_specialEvent);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		P_THIS->OnEventRequirementChange(Z_Param_eventID);
+		P_THIS->OnEventRequirementChange(Z_Param_specialEvent);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(UAQ_Quest::execOnQuestRequirementChange)
@@ -332,18 +333,18 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Quest() {}
 	{
 		struct AQ_Quest_eventOnEventRequirementChange_Parms
 		{
-			int32 eventID;
+			UAQ_SpecialEventData* specialEvent;
 		};
-		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_eventID;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_specialEvent;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UFunction_UAQ_Quest_OnEventRequirementChange_Statics::NewProp_eventID = { "eventID", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_Quest_eventOnEventRequirementChange_Parms, eventID), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_Quest_OnEventRequirementChange_Statics::NewProp_specialEvent = { "specialEvent", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_Quest_eventOnEventRequirementChange_Parms, specialEvent), Z_Construct_UClass_UAQ_SpecialEventData_NoRegister, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_Quest_OnEventRequirementChange_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_Quest_OnEventRequirementChange_Statics::NewProp_eventID,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_Quest_OnEventRequirementChange_Statics::NewProp_specialEvent,
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAQ_Quest_OnEventRequirementChange_Statics::Function_MetaDataParams[] = {
@@ -623,7 +624,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Quest() {}
 	const FClassFunctionLinkInfo Z_Construct_UClass_UAQ_Quest_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_UAQ_Quest_DisableQuest, "DisableQuest" }, // 3496998491
 		{ &Z_Construct_UFunction_UAQ_Quest_EnableQuest, "EnableQuest" }, // 3573683529
-		{ &Z_Construct_UFunction_UAQ_Quest_OnEventRequirementChange, "OnEventRequirementChange" }, // 840237151
+		{ &Z_Construct_UFunction_UAQ_Quest_OnEventRequirementChange, "OnEventRequirementChange" }, // 1932380148
 		{ &Z_Construct_UFunction_UAQ_Quest_OnLevelRequirementChange, "OnLevelRequirementChange" }, // 2080967878
 		{ &Z_Construct_UFunction_UAQ_Quest_OnNewDay, "OnNewDay" }, // 1938496830
 		{ &Z_Construct_UFunction_UAQ_Quest_OnNotify, "OnNotify" }, // 1027516544
@@ -763,9 +764,9 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Quest() {}
 		{ EAQ_QuestState_StaticEnum, TEXT("EAQ_QuestState"), &Z_Registration_Info_UEnum_EAQ_QuestState, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 1583766727U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_Quest, UAQ_Quest::StaticClass, TEXT("UAQ_Quest"), &Z_Registration_Info_UClass_UAQ_Quest, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_Quest), 2881101798U) },
+		{ Z_Construct_UClass_UAQ_Quest, UAQ_Quest::StaticClass, TEXT("UAQ_Quest"), &Z_Registration_Info_UClass_UAQ_Quest, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_Quest), 1717059082U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_782968552(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_541202533(TEXT("/Script/AdvancedQuest"),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_Quest_h_Statics::EnumInfo));

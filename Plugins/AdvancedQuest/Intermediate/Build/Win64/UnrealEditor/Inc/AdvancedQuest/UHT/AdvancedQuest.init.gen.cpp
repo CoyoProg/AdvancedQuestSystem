@@ -20,6 +20,7 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedQuest_init() {}
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnStateChangedBueprintDelegate__DelegateSignature();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementMetDelegate__DelegateSignature();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_QuestStateChangedDelegate__DelegateSignature();
+	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_SpecialEventTriggerDelegate__DelegateSignature();
 	static FPackageRegistrationInfo Z_Registration_Info_UPackage__Script_AdvancedQuest;
 	FORCENOINLINE UPackage* Z_Construct_UPackage__Script_AdvancedQuest()
 	{
@@ -39,19 +40,20 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedQuest_init() {}
 				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_OnStateChangedBueprintDelegate__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_QuestRequirementMetDelegate__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_QuestStateChangedDelegate__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_AdvancedQuest_SpecialEventTriggerDelegate__DelegateSignature,
 			};
 			static const UECodeGen_Private::FPackageParams PackageParams = {
 				"/Script/AdvancedQuest",
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x4662EA3D,
-				0x3CFFCE68,
+				0x1B347F26,
+				0x99A6844D,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UECodeGen_Private::ConstructUPackage(Z_Registration_Info_UPackage__Script_AdvancedQuest.OuterSingleton, PackageParams);
 		}
 		return Z_Registration_Info_UPackage__Script_AdvancedQuest.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_AdvancedQuest(Z_Construct_UPackage__Script_AdvancedQuest, TEXT("/Script/AdvancedQuest"), Z_Registration_Info_UPackage__Script_AdvancedQuest, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x4662EA3D, 0x3CFFCE68));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_AdvancedQuest(Z_Construct_UPackage__Script_AdvancedQuest, TEXT("/Script/AdvancedQuest"), Z_Registration_Info_UPackage__Script_AdvancedQuest, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x1B347F26, 0x99A6844D));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

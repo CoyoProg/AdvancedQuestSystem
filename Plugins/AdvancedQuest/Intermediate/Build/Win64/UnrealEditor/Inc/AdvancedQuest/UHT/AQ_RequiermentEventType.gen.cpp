@@ -9,6 +9,7 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeAQ_RequiermentEventType() {}
 // Cross Module References
+	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_SpecialEventData_NoRegister();
 	ADVANCEDQUEST_API UScriptStruct* Z_Construct_UScriptStruct_FAQ_RequiermentData();
 	UPackage* Z_Construct_UPackage__Script_AdvancedQuest();
 // End Cross Module References
@@ -42,7 +43,7 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_RequiermentData>()
 #endif
 		static const UECodeGen_Private::FMapPropertyParams NewProp_QuestID;
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_EventID_ValueProp;
-		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_EventID_Key_KeyProp;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_EventID_Key_KeyProp;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_EventID_MetaData[];
 #endif
@@ -78,7 +79,7 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_RequiermentData>()
 #endif
 	const UECodeGen_Private::FMapPropertyParams Z_Construct_UScriptStruct_FAQ_RequiermentData_Statics::NewProp_QuestID = { "QuestID", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FAQ_RequiermentData, QuestID), EMapPropertyFlags::None, METADATA_PARAMS(Z_Construct_UScriptStruct_FAQ_RequiermentData_Statics::NewProp_QuestID_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FAQ_RequiermentData_Statics::NewProp_QuestID_MetaData)) };
 	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FAQ_RequiermentData_Statics::NewProp_EventID_ValueProp = { "EventID", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), 0, nullptr, METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UScriptStruct_FAQ_RequiermentData_Statics::NewProp_EventID_Key_KeyProp = { "EventID_Key", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 0, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UScriptStruct_FAQ_RequiermentData_Statics::NewProp_EventID_Key_KeyProp = { "EventID_Key", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 0, Z_Construct_UClass_UAQ_SpecialEventData_NoRegister, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FAQ_RequiermentData_Statics::NewProp_EventID_MetaData[] = {
 		{ "Category", "Advanced Quest | Quest | Requirement" },
@@ -121,9 +122,9 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_RequiermentData>()
 		static const FStructRegisterCompiledInInfo ScriptStructInfo[];
 	};
 	const FStructRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_RequiermentEventType_h_Statics::ScriptStructInfo[] = {
-		{ FAQ_RequiermentData::StaticStruct, Z_Construct_UScriptStruct_FAQ_RequiermentData_Statics::NewStructOps, TEXT("AQ_RequiermentData"), &Z_Registration_Info_UScriptStruct_AQ_RequiermentData, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FAQ_RequiermentData), 1479924U) },
+		{ FAQ_RequiermentData::StaticStruct, Z_Construct_UScriptStruct_FAQ_RequiermentData_Statics::NewStructOps, TEXT("AQ_RequiermentData"), &Z_Registration_Info_UScriptStruct_AQ_RequiermentData, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FAQ_RequiermentData), 253613641U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_RequiermentEventType_h_761785756(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_RequiermentEventType_h_1609945707(TEXT("/Script/AdvancedQuest"),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_RequiermentEventType_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_RequiermentEventType_h_Statics::ScriptStructInfo),
 		nullptr, 0);

@@ -10,6 +10,7 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class UAQ_Quest;
+class UAQ_SpecialEventData;
 class UObject;
 enum class EAQ_NotifyEventType : uint8;
 enum class EAQ_QuestState : uint8;

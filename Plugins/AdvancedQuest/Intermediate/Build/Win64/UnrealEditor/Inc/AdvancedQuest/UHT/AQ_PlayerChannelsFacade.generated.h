@@ -11,6 +11,7 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class UAQ_ItemData;
 class UAQ_Quest;
+class UAQ_SpecialEventData;
 class UObject;
 enum class EAQ_CombatEventType : uint8;
 enum class EAQ_EnvironmentEventType : uint8;
@@ -22,7 +23,7 @@ enum class EAQ_QuestState : uint8;
 
 #define FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannelsFacade_h_19_SPARSE_DATA
 #define FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannelsFacade_h_19_RPC_WRAPPERS \
-	virtual void OnSpecialEventNotify_Implementation(int32 questID, int32 eventID) {}; \
+	virtual void OnSpecialEventNotify_Implementation(UAQ_SpecialEventData* specialEvent) {}; \
 	virtual void OnCombatEventNotify_Implementation(EAQ_CombatEventType eventType, UObject* entity, float amount) {}; \
 	virtual void OnEnvironmentEventNotify_Implementation(EAQ_EnvironmentEventType eventType, UObject* entity) {}; \
 	virtual void OnQuestEnable_Implementation(UAQ_Quest* quest) {}; \
@@ -35,7 +36,7 @@ enum class EAQ_QuestState : uint8;
 
 
 #define FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannelsFacade_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
-	virtual void OnSpecialEventNotify_Implementation(int32 questID, int32 eventID) {}; \
+	virtual void OnSpecialEventNotify_Implementation(UAQ_SpecialEventData* specialEvent) {}; \
 	virtual void OnCombatEventNotify_Implementation(EAQ_CombatEventType eventType, UObject* entity, float amount) {}; \
 	virtual void OnEnvironmentEventNotify_Implementation(EAQ_EnvironmentEventType eventType, UObject* entity) {}; \
 	virtual void OnQuestEnable_Implementation(UAQ_Quest* quest) {}; \
@@ -111,7 +112,7 @@ public: \
 	static void Execute_OnCombatEventNotify(UObject* O, EAQ_CombatEventType eventType, UObject* entity, float amount); \
 	static void Execute_OnEnvironmentEventNotify(UObject* O, EAQ_EnvironmentEventType eventType, UObject* entity); \
 	static void Execute_OnQuestEnable(UObject* O, UAQ_Quest* quest); \
-	static void Execute_OnSpecialEventNotify(UObject* O, int32 questID, int32 eventID); \
+	static void Execute_OnSpecialEventNotify(UObject* O, UAQ_SpecialEventData* specialEvent); \
 	static void Execute_RemoveItemFromInvetory(UObject* O, UAQ_ItemData* item, int32 amount, bool bRemoveCompletely); \
 	virtual UObject* _getUObject() const { return nullptr; }
 
@@ -126,7 +127,7 @@ public: \
 	static void Execute_OnCombatEventNotify(UObject* O, EAQ_CombatEventType eventType, UObject* entity, float amount); \
 	static void Execute_OnEnvironmentEventNotify(UObject* O, EAQ_EnvironmentEventType eventType, UObject* entity); \
 	static void Execute_OnQuestEnable(UObject* O, UAQ_Quest* quest); \
-	static void Execute_OnSpecialEventNotify(UObject* O, int32 questID, int32 eventID); \
+	static void Execute_OnSpecialEventNotify(UObject* O, UAQ_SpecialEventData* specialEvent); \
 	static void Execute_RemoveItemFromInvetory(UObject* O, UAQ_ItemData* item, int32 amount, bool bRemoveCompletely); \
 	virtual UObject* _getUObject() const { return nullptr; }
 

@@ -55,12 +55,30 @@ void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestStat
 		break;
 	}
 	}
+
+	if (QuestState == EAQ_QuestState::Pending)
+	{
+		FAQ_RequiermentData& requirements = QuestUpdate->QuestData->questRequirements;
+
+		/* Unbind from delegates */
+		if (requirements.EventID.Num() > 0)
+			SpecialEventTriggerDelegate.RemoveDynamic(QuestUpdate, &UAQ_Quest::OnEventRequirementChange);
+
+		if (requirements.PlayerLevel != 0)
+			LevelRequirementChangedDelegate.RemoveDynamic(QuestUpdate, &UAQ_Quest::OnLevelRequirementChange);
+	}
 }
 
 void UAQ_QuestChannel::OnPlayerLevelChange(int newLevel)
 {
 	if (LevelRequirementChangedDelegate.IsBound())
 		LevelRequirementChangedDelegate.Broadcast(newLevel);
+}
+
+void UAQ_QuestChannel::OnSpecialEventTrigger(UAQ_SpecialEventData* specialEvent)
+{
+	if (SpecialEventTriggerDelegate.IsBound())
+		SpecialEventTriggerDelegate.Broadcast(specialEvent);
 }
 
 void UAQ_QuestChannel::OnQuestUpdate(UAQ_Quest* QuestUpdate)

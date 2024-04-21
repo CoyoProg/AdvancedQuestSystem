@@ -90,7 +90,7 @@ public:
 	UFUNCTION()
 	void OnQuestRequirementChange(UAQ_Quest* questUpdateP, EAQ_QuestState questStateP);
 	UFUNCTION()
-	void OnEventRequirementChange(int eventID);
+	void OnEventRequirementChange(UAQ_SpecialEventData* specialEvent);
 	UFUNCTION()
 	void OnLevelRequirementChange(int PlayerLevel);
 	UFUNCTION()

@@ -156,7 +156,6 @@ void UAQ_PlayerChannels::RemoveObserver(UAQ_Quest* entity, EAQ_ObjectivesType ev
 		OnPlayerEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify);
 		break;
 	}
-
 	}
 }
 
@@ -180,9 +179,6 @@ void UAQ_PlayerChannels::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestSt
 				&& questObjectives.itemTarget->itemType == EAQ_ItemType::Quest)
 				|| questObjectives.objectiveType == EAQ_ObjectivesType::Deliver)
 				Execute_RemoveItemFromInvetory(this, questObjectives.itemTarget, 1, true);
-
-			/*if(questObjectives.objectiveType == EAQ_ObjectivesType::Deliver)
-				Execute_RemoveItemFromInvetory(this, questObjectives.itemTarget, 1, true);*/
 		}
 
 		/* Remove the Player Channels from the Quest State Changed delegate */
@@ -217,19 +213,29 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 
 	case EAQ_QuestState::Pending:
 	{
+		FAQ_RequiermentData& requirements = quest->QuestData->questRequirements;
+
 		/* Check the requirements & bind delegates */
 		if (quest->bIsRequirementMet)
 			break;
 
-		if (quest->QuestData->questRequirements.PlayerLevel != 0)
+		if (!requirements.LevelMet)
 			QuestChannel->LevelRequirementChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnLevelRequirementChange);
 		
-		if (quest->QuestData->questRequirements.QuestID.Num() > 0)
+		if (requirements.EventID.Num() > 0)
 		{
-			for (auto questID = quest->QuestData->questRequirements.QuestID.CreateConstIterator(); questID; ++questID)
+			QuestChannel->SpecialEventTriggerDelegate.AddDynamic(quest, &UAQ_Quest::OnEventRequirementChange);
+			UE_LOG(LogTemp, Warning, TEXT("Add delegate"));
+		}
+
+		if (requirements.QuestID.Num() > 0)
+		{
+			for (auto questID = requirements.QuestID.CreateConstIterator(); questID; ++questID)
 			{
-				if (QuestManager)
+				/* If the current Quest Requirement isn't met */
+				if (QuestManager && !questID.Value())
 				{
+					/* Bind to its QuestStateChanged */
 					UAQ_Quest* questRequirement = QuestManager->QueryQuest(questID.Key());
 					questRequirement->QuestStateChangedDelegate.AddUniqueDynamic(quest, &UAQ_Quest::OnQuestRequirementChange);
 				}
@@ -331,17 +337,12 @@ void UAQ_PlayerChannels::OnCombatEventNotify_Implementation(EAQ_CombatEventType 
 	CombatChannel->OnCombatEventNotify(eventType, entity, amount);
 }
 
-void UAQ_PlayerChannels::OnSpecialEventNotify_Implementation(int questID, int eventID)
+void UAQ_PlayerChannels::OnSpecialEventNotify_Implementation(UAQ_SpecialEventData* specialEvent)
 {
-	if (!QuestManager || questID == 0)
+	if (!QuestManager)
 		return;
 
-	UAQ_Quest* quest = QuestManager->QueryQuest(questID);
-
-	if (!quest || quest->bIsRequirementMet)
-		return;
-
-	quest->OnEventRequirementChange(eventID);
+	QuestChannel->OnSpecialEventTrigger(specialEvent);
 }
 
 void UAQ_PlayerChannels::OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay)
