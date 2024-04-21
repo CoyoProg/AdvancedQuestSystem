@@ -222,11 +222,9 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 		if (!requirements.LevelMet)
 			QuestChannel->LevelRequirementChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnLevelRequirementChange);
 		
-		if (requirements.EventID.Num() > 0)
-		{
+		if (!requirements.AllEventsMet)
 			QuestChannel->SpecialEventTriggerDelegate.AddDynamic(quest, &UAQ_Quest::OnEventRequirementChange);
-			UE_LOG(LogTemp, Warning, TEXT("Add delegate"));
-		}
+
 
 		if (requirements.QuestID.Num() > 0)
 		{

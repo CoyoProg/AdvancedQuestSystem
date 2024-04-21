@@ -61,7 +61,7 @@ void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestStat
 		FAQ_RequiermentData& requirements = QuestUpdate->QuestData->questRequirements;
 
 		/* Unbind from delegates */
-		if (requirements.EventID.Num() > 0)
+		if (requirements.SpecialEvents.Num() > 0)
 			SpecialEventTriggerDelegate.RemoveDynamic(QuestUpdate, &UAQ_Quest::OnEventRequirementChange);
 
 		if (requirements.PlayerLevel != 0)

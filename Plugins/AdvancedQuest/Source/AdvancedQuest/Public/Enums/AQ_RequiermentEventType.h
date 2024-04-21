@@ -11,13 +11,13 @@ struct FAQ_RequiermentData
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest | Requirement")
-	int PlayerLevel;
+	int PlayerLevel = 0;
 	bool LevelMet = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest | Requirement")
 	TMap<int, bool> QuestID;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest | Requirement")
-	TMap<UAQ_SpecialEventData*, bool> EventID;
+	TMap<UAQ_SpecialEventData*, bool> SpecialEvents;
 	bool AllEventsMet = true;
 };

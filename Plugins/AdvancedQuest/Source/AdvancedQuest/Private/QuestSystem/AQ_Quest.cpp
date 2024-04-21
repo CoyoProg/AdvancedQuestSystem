@@ -27,9 +27,12 @@ void UAQ_Quest::SetQuestData(UAQ_QuestData* questDataP)
 	if (requirements.PlayerLevel != 0)
 		requirements.LevelMet = false;
 
+	if (requirements.SpecialEvents.Num() > 0)
+		requirements.AllEventsMet = false;
+
 	if(!requirements.LevelMet
-		|| requirements.QuestID.Num() > 0
-		|| requirements.EventID.Num() > 0)
+		|| !requirements.AllEventsMet
+		|| requirements.QuestID.Num() > 0)
 		bIsRequirementMet = false;
 }
 
@@ -239,10 +242,10 @@ void UAQ_Quest::OnQuestRequirementChange(UAQ_Quest* questUpdateP, EAQ_QuestState
 
 void UAQ_Quest::OnEventRequirementChange(UAQ_SpecialEventData* specialEvent)
 {
-	if (!QuestData->questRequirements.EventID.Contains(specialEvent))
+	if (!QuestData->questRequirements.SpecialEvents.Contains(specialEvent))
 		return;
 
-	QuestData->questRequirements.EventID[specialEvent] = true;
+	QuestData->questRequirements.SpecialEvents[specialEvent] = true;
 	CheckIfRequirementsMet();
 }
 
@@ -268,12 +271,14 @@ void UAQ_Quest::CheckIfRequirementsMet()
 	/* Check if all the requirements are met */
 	FAQ_RequiermentData& requirements = QuestData->questRequirements;
 
+	/* Check Level Requirement */
 	if (!requirements.LevelMet)
 		return;
 
+	/* Chech Events Requirements */
 	if (!requirements.AllEventsMet)
 	{
-		for (auto eventID = requirements.EventID.CreateConstIterator(); eventID; ++eventID)
+		for (auto eventID = requirements.SpecialEvents.CreateConstIterator(); eventID; ++eventID)
 		{
 			if (!eventID.Value())
 				return;
@@ -282,13 +287,12 @@ void UAQ_Quest::CheckIfRequirementsMet()
 		requirements.AllEventsMet = true;
 	}
 
-
+	/* Chech Quest Requirements */
 	for(auto questID = requirements.QuestID.CreateConstIterator(); questID; ++questID)
 	{
 		if (!questID.Value())
 			return;
 	}
-
 
 	bIsRequirementMet = true;
 
