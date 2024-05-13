@@ -4,7 +4,9 @@
 #include <QuestSystem/AQ_QuestManager.h>
 #include "QuestSystem/AQ_Quest.h"
 
+#include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
+#include "GameFramework/Pawn.h"
 
 UAQ_QuestListenerComponent::UAQ_QuestListenerComponent()
 {

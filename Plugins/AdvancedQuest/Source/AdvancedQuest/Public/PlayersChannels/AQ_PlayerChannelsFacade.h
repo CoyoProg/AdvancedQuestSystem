@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "CoreMinimal.h"
+#include "UObject/Interface.h"
 #include "AQ_PlayerChannelsFacade.generated.h"
 
 class UAQ_Quest;

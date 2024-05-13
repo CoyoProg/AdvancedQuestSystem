@@ -13,6 +13,7 @@ class UAQ_BookQuest;
 class UAQ_QuestComponent;
 class IAQ_PlayerChannelsFacade;
 class UWidgetComponent;
+class UUserWidget;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FLevelRequirementChangedDelegate, int, PlayerLevel);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSpecialEventTriggerDelegate, UAQ_SpecialEventData*, SpecialEvent);

@@ -1,6 +1,11 @@
 // Copyright 2024, Coyo Prog, All rights reserved.
 
 #include "Tools/AQ_CreateAssets.h"
+#include "UObject/Package.h"
+#include "UObject/UObjectGlobals.h"
+#include "Components/SceneComponent.h"
+#include "GameFramework/Actor.h"
+
 #include "External/AQ_FilesManager.h"
 
 #if WITH_EDITOR
@@ -32,10 +37,11 @@ UActorComponent* UAQ_CreateAssets::AddComponent(TSubclassOf<class UActorComponen
 #endif
 
 	UActorComponent* Result = nullptr;
-	if (!ComponentClass.Get())
+	const UClass* NewComponentClass = ComponentClass.Get();
+	if (!NewComponentClass)
 		return nullptr;
 
-	Result = NewObject<UActorComponent>(Actor, ComponentClass.Get(), Name);
+	Result = NewObject<UActorComponent>((UObject*)Actor, NewComponentClass, Name);
 	USceneComponent* AsSceneComponent = Cast<USceneComponent>(Result);
 	if (AsSceneComponent)
 	{

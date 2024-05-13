@@ -9,6 +9,7 @@
 
 #include <Kismet/GameplayStatics.h>
 #include "Components/WidgetComponent.h"
+#include "Blueprint/UserWidget.h"
 
 void UAQ_QuestChannel::AddWidgetToViewport()
 {

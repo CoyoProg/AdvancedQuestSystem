@@ -8,7 +8,9 @@
 #include "QuestSystem/AQ_Quest.h"
 
 #include "GameFramework/Actor.h"
+#include "GameFramework/Pawn.h"
 #include "Components/WidgetComponent.h"
+#include "Blueprint/UserWidget.h"
 
 #if WITH_EDITOR
 #include "Editor.h"

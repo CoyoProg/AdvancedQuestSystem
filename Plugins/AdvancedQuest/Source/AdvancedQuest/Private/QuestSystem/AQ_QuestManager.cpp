@@ -12,6 +12,9 @@
 #include "Misc/EngineVersionComparison.h"
 #include <Kismet/KismetSystemLibrary.h>
 
+#include "Engine/World.h"
+#include "GameFramework/Actor.h"
+
 UAQ_QuestManager::UAQ_QuestManager()
 {
 	PrimaryComponentTick.bCanEverTick = true;

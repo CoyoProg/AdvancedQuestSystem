@@ -5,8 +5,10 @@
 #include "QuestSystem/AQ_QuestManager.h"
 #include "QuestSystem/AQ_Quest.h"
 
+#include "Engine/World.h"
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/PlayerController.h"
+#include "GameFramework/Pawn.h"
 #include "NiagaraComponent.h"
 
 AAQ_Interactable::AAQ_Interactable()
