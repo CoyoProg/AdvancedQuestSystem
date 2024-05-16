@@ -24,4 +24,7 @@ class ADVANCEDQUEST_API IAQ_IInteractable
 public:
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Advanced Quest | Events")
 	void Interact(const TScriptInterface<IAQ_PlayerChannelsFacade>& PlayerChannel);
+
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Advanced Quest | Events")
+	bool IsActorSleeping();
 };

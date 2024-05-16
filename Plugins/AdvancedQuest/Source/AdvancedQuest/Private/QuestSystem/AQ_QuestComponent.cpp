@@ -63,6 +63,8 @@ void UAQ_QuestComponent::SetQuestMarker(bool isMarkerVisible, bool isQuestValid)
 	else
 		bIsComponentSilent = true;
 
+	OnSleepStateChanged.Broadcast(bIsComponentSilent);
+
 	if (!QuestMarkerClass)
 		return;
 

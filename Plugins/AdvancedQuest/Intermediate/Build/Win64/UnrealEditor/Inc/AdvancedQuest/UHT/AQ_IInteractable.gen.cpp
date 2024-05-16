@@ -19,9 +19,25 @@ void EmptyLinkFunctionForGeneratedCodeAQ_IInteractable() {}
 	{
 		TScriptInterface<IAQ_PlayerChannelsFacade> PlayerChannel;
 	};
+	struct AQ_IInteractable_eventIsActorSleeping_Parms
+	{
+		bool ReturnValue;
+
+		/** Constructor, initializes return property only **/
+		AQ_IInteractable_eventIsActorSleeping_Parms()
+			: ReturnValue(false)
+		{
+		}
+	};
 	void IAQ_IInteractable::Interact(TScriptInterface<IAQ_PlayerChannelsFacade> const& PlayerChannel)
 	{
 		check(0 && "Do not directly call Event functions in Interfaces. Call Execute_Interact instead.");
+	}
+	bool IAQ_IInteractable::IsActorSleeping()
+	{
+		check(0 && "Do not directly call Event functions in Interfaces. Call Execute_IsActorSleeping instead.");
+		AQ_IInteractable_eventIsActorSleeping_Parms Parms;
+		return Parms.ReturnValue;
 	}
 	void UAQ_IInteractable::StaticRegisterNativesUAQ_IInteractable()
 	{
@@ -63,6 +79,40 @@ void EmptyLinkFunctionForGeneratedCodeAQ_IInteractable() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_UAQ_IInteractable_IsActorSleeping_Statics
+	{
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_UAQ_IInteractable_IsActorSleeping_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((AQ_IInteractable_eventIsActorSleeping_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UAQ_IInteractable_IsActorSleeping_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(AQ_IInteractable_eventIsActorSleeping_Parms), &Z_Construct_UFunction_UAQ_IInteractable_IsActorSleeping_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_IInteractable_IsActorSleeping_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_IInteractable_IsActorSleeping_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAQ_IInteractable_IsActorSleeping_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Advanced Quest | Events" },
+		{ "ModuleRelativePath", "Public/Interactables/AQ_IInteractable.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_IInteractable_IsActorSleeping_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_IInteractable, nullptr, "IsActorSleeping", nullptr, nullptr, sizeof(AQ_IInteractable_eventIsActorSleeping_Parms), Z_Construct_UFunction_UAQ_IInteractable_IsActorSleeping_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_IInteractable_IsActorSleeping_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x0C020800, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAQ_IInteractable_IsActorSleeping_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_IInteractable_IsActorSleeping_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UAQ_IInteractable_IsActorSleeping()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAQ_IInteractable_IsActorSleeping_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(UAQ_IInteractable);
 	UClass* Z_Construct_UClass_UAQ_IInteractable_NoRegister()
 	{
@@ -84,6 +134,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_IInteractable() {}
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_UAQ_IInteractable_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_UAQ_IInteractable_Interact, "Interact" }, // 306483872
+		{ &Z_Construct_UFunction_UAQ_IInteractable_IsActorSleeping, "IsActorSleeping" }, // 3217956711
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_IInteractable_Statics::Class_MetaDataParams[] = {
@@ -137,14 +188,27 @@ void EmptyLinkFunctionForGeneratedCodeAQ_IInteractable() {}
 			O->ProcessEvent(Func, &Parms);
 		}
 	}
+	static FName NAME_UAQ_IInteractable_IsActorSleeping = FName(TEXT("IsActorSleeping"));
+	bool IAQ_IInteractable::Execute_IsActorSleeping(UObject* O)
+	{
+		check(O != NULL);
+		check(O->GetClass()->ImplementsInterface(UAQ_IInteractable::StaticClass()));
+		AQ_IInteractable_eventIsActorSleeping_Parms Parms;
+		UFunction* const Func = O->FindFunction(NAME_UAQ_IInteractable_IsActorSleeping);
+		if (Func)
+		{
+			O->ProcessEvent(Func, &Parms);
+		}
+		return Parms.ReturnValue;
+	}
 	struct Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_IInteractable_h_Statics
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_IInteractable_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_IInteractable, UAQ_IInteractable::StaticClass, TEXT("UAQ_IInteractable"), &Z_Registration_Info_UClass_UAQ_IInteractable, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_IInteractable), 3347338288U) },
+		{ Z_Construct_UClass_UAQ_IInteractable, UAQ_IInteractable::StaticClass, TEXT("UAQ_IInteractable"), &Z_Registration_Info_UClass_UAQ_IInteractable, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_IInteractable), 1024133815U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_IInteractable_h_1931642552(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_IInteractable_h_2389463056(TEXT("/Script/AdvancedQuest"),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_IInteractable_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_IInteractable_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

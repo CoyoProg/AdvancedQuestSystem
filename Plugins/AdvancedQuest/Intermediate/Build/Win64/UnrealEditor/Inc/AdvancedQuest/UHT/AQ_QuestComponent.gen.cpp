@@ -15,6 +15,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestComponent() {}
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_QuestComponent_NoRegister();
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_QuestManager_NoRegister();
 	ADVANCEDQUEST_API UEnum* Z_Construct_UEnum_AdvancedQuest_EAQ_QuestState();
+	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnSleepStateChangedBueprintDelegate__DelegateSignature();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnStateChangedBueprintDelegate__DelegateSignature();
 	ADVANCEDQUEST_API UScriptStruct* Z_Construct_UScriptStruct_FAQ_IsGiverOrReceiver();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
@@ -145,6 +146,43 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_IsGiverOrReceiver>(
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UDelegateFunction_AdvancedQuest_OnStateChangedBueprintDelegate__DelegateSignature_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UDelegateFunction_AdvancedQuest_OnSleepStateChangedBueprintDelegate__DelegateSignature_Statics
+	{
+		struct _Script_AdvancedQuest_eventOnSleepStateChangedBueprintDelegate_Parms
+		{
+			bool bIsComponentSilent;
+		};
+		static void NewProp_bIsComponentSilent_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsComponentSilent;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UDelegateFunction_AdvancedQuest_OnSleepStateChangedBueprintDelegate__DelegateSignature_Statics::NewProp_bIsComponentSilent_SetBit(void* Obj)
+	{
+		((_Script_AdvancedQuest_eventOnSleepStateChangedBueprintDelegate_Parms*)Obj)->bIsComponentSilent = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UDelegateFunction_AdvancedQuest_OnSleepStateChangedBueprintDelegate__DelegateSignature_Statics::NewProp_bIsComponentSilent = { "bIsComponentSilent", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(_Script_AdvancedQuest_eventOnSleepStateChangedBueprintDelegate_Parms), &Z_Construct_UDelegateFunction_AdvancedQuest_OnSleepStateChangedBueprintDelegate__DelegateSignature_Statics::NewProp_bIsComponentSilent_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UDelegateFunction_AdvancedQuest_OnSleepStateChangedBueprintDelegate__DelegateSignature_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_AdvancedQuest_OnSleepStateChangedBueprintDelegate__DelegateSignature_Statics::NewProp_bIsComponentSilent,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_AdvancedQuest_OnSleepStateChangedBueprintDelegate__DelegateSignature_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_AdvancedQuest_OnSleepStateChangedBueprintDelegate__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UPackage__Script_AdvancedQuest, nullptr, "OnSleepStateChangedBueprintDelegate__DelegateSignature", nullptr, nullptr, sizeof(Z_Construct_UDelegateFunction_AdvancedQuest_OnSleepStateChangedBueprintDelegate__DelegateSignature_Statics::_Script_AdvancedQuest_eventOnSleepStateChangedBueprintDelegate_Parms), Z_Construct_UDelegateFunction_AdvancedQuest_OnSleepStateChangedBueprintDelegate__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_AdvancedQuest_OnSleepStateChangedBueprintDelegate__DelegateSignature_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(Z_Construct_UDelegateFunction_AdvancedQuest_OnSleepStateChangedBueprintDelegate__DelegateSignature_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_AdvancedQuest_OnSleepStateChangedBueprintDelegate__DelegateSignature_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnSleepStateChangedBueprintDelegate__DelegateSignature()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UDelegateFunction_AdvancedQuest_OnSleepStateChangedBueprintDelegate__DelegateSignature_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -444,6 +482,11 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_IsGiverOrReceiver>(
 		static void NewProp_bIsComponentSilent_SetBit(void* Obj);
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsComponentSilent;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bHasPriority_MetaData[];
+#endif
+		static void NewProp_bHasPriority_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bHasPriority;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_QuestMarkerClass_MetaData[];
 #endif
 		static const UECodeGen_Private::FClassPropertyParams NewProp_QuestMarkerClass;
@@ -463,6 +506,10 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_IsGiverOrReceiver>(
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_OnQuestStateChanged_MetaData[];
 #endif
 		static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnQuestStateChanged;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_OnSleepStateChanged_MetaData[];
+#endif
+		static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnSleepStateChanged;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -511,6 +558,19 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_IsGiverOrReceiver>(
 	}
 	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_bIsComponentSilent = { "bIsComponentSilent", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(UAQ_QuestComponent), &Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_bIsComponentSilent_SetBit, METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_bIsComponentSilent_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_bIsComponentSilent_MetaData)) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_bHasPriority_MetaData[] = {
+		{ "Category", "Advanced Quest | Component" },
+		{ "Comment", "// Should the Quest Component be triggered before any other interaction\n" },
+		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestComponent.h" },
+		{ "ToolTip", "Should the Quest Component be triggered before any other interaction" },
+	};
+#endif
+	void Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_bHasPriority_SetBit(void* Obj)
+	{
+		((UAQ_QuestComponent*)Obj)->bHasPriority = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_bHasPriority = { "bHasPriority", nullptr, (EPropertyFlags)0x0010000000000015, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(UAQ_QuestComponent), &Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_bHasPriority_SetBit, METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_bHasPriority_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_bHasPriority_MetaData)) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_QuestMarkerClass_MetaData[] = {
 		{ "Category", "Advanced Quest | UI" },
 		{ "Comment", "/* Widgets */" },
@@ -552,16 +612,25 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_IsGiverOrReceiver>(
 	};
 #endif
 	const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_OnQuestStateChanged = { "OnQuestStateChanged", nullptr, (EPropertyFlags)0x0020080010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_QuestComponent, OnQuestStateChanged), Z_Construct_UDelegateFunction_AdvancedQuest_OnStateChangedBueprintDelegate__DelegateSignature, METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_OnQuestStateChanged_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_OnQuestStateChanged_MetaData)) }; // 18666912
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_OnSleepStateChanged_MetaData[] = {
+		{ "Category", "Advanced Quest | Events" },
+		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_OnSleepStateChanged = { "OnSleepStateChanged", nullptr, (EPropertyFlags)0x0020080010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_QuestComponent, OnSleepStateChanged), Z_Construct_UDelegateFunction_AdvancedQuest_OnSleepStateChangedBueprintDelegate__DelegateSignature, METADATA_PARAMS(Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_OnSleepStateChanged_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_OnSleepStateChanged_MetaData)) }; // 3015441194
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UAQ_QuestComponent_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_QuestsList_ValueProp,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_QuestsList_Key_KeyProp,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_QuestsList,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_bIsComponentSilent,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_bHasPriority,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_QuestMarkerClass,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_QuestMarkerMaterial,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_zOffset,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_QuestManager,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_OnQuestStateChanged,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_QuestComponent_Statics::NewProp_OnSleepStateChanged,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UAQ_QuestComponent_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UAQ_QuestComponent>::IsAbstract,
@@ -603,9 +672,9 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_IsGiverOrReceiver>(
 		{ FAQ_IsGiverOrReceiver::StaticStruct, Z_Construct_UScriptStruct_FAQ_IsGiverOrReceiver_Statics::NewStructOps, TEXT("AQ_IsGiverOrReceiver"), &Z_Registration_Info_UScriptStruct_AQ_IsGiverOrReceiver, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FAQ_IsGiverOrReceiver), 1810159506U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestComponent_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_QuestComponent, UAQ_QuestComponent::StaticClass, TEXT("UAQ_QuestComponent"), &Z_Registration_Info_UClass_UAQ_QuestComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_QuestComponent), 3446049043U) },
+		{ Z_Construct_UClass_UAQ_QuestComponent, UAQ_QuestComponent::StaticClass, TEXT("UAQ_QuestComponent"), &Z_Registration_Info_UClass_UAQ_QuestComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_QuestComponent), 1180848326U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestComponent_h_3073510239(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestComponent_h_895547272(TEXT("/Script/AdvancedQuest"),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestComponent_h_Statics::ClassInfo),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestComponent_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestComponent_h_Statics::ScriptStructInfo),
 		nullptr, 0);

@@ -79,6 +79,7 @@ public: \
 	typedef UAQ_IInteractable UClassType; \
 	typedef IAQ_IInteractable ThisClass; \
 	static void Execute_Interact(UObject* O, TScriptInterface<IAQ_PlayerChannelsFacade> const& PlayerChannel); \
+	static bool Execute_IsActorSleeping(UObject* O); \
 	virtual UObject* _getUObject() const { return nullptr; }
 
 
@@ -89,6 +90,7 @@ public: \
 	typedef UAQ_IInteractable UClassType; \
 	typedef IAQ_IInteractable ThisClass; \
 	static void Execute_Interact(UObject* O, TScriptInterface<IAQ_PlayerChannelsFacade> const& PlayerChannel); \
+	static bool Execute_IsActorSleeping(UObject* O); \
 	virtual UObject* _getUObject() const { return nullptr; }
 
 

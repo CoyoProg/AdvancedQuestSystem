@@ -26,6 +26,7 @@ struct FAQ_IsGiverOrReceiver
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnStateChangedBueprintDelegate, EAQ_QuestState, QuestState);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSleepStateChangedBueprintDelegate, bool, bIsComponentSilent);
 
 UCLASS(Blueprintable, meta = (ABSTRACT))
 class ADVANCEDQUEST_API UAQ_QuestComponent : public UActorComponent
@@ -61,6 +62,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Advanced Quest | Component")
 	bool bIsComponentSilent = true;
 
+	// Should the Quest Component be triggered before any other interaction
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Advanced Quest | Component")
+	bool bHasPriority = true;
 
 	/* Widgets */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | UI")
@@ -92,6 +96,9 @@ protected:
 	// when OnQuestStateChanged is triggered
 	UPROPERTY(BlueprintAssignable, Category = "Advanced Quest | Events")
 	FOnStateChangedBueprintDelegate OnQuestStateChanged;
+
+	UPROPERTY(BlueprintAssignable, Category = "Advanced Quest | Events")
+	FOnSleepStateChangedBueprintDelegate OnSleepStateChanged;
 
 private:
 	UWidgetComponent* QuestMarkerWidget = nullptr;
