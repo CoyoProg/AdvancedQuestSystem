@@ -352,12 +352,23 @@ void UAQ_PlayerChannels::OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay
 		QuestWidgets->DisplayQuestGiverSummary(questsToDisplay);
 }
 
-void UAQ_PlayerChannels::OnPlayerLevelUp()
+void UAQ_PlayerChannels::OnPlayerLevelUp(int InPlayerLevel)
+{
+	/* 
+	PlayerLevel is a Debug Purpose only because I don't have any Stats Component 
+	where stores the player Level in this plugin.
+	*/ 	
+	PlayerLevel = InPlayerLevel;
+
+	OnPlayerEventDelegate.Broadcast(GetOwner(), EAQ_NotifyEventType::PlayerLevelUp, 1);
+	QuestChannel->OnPlayerLevelChange(InPlayerLevel);
+}
+
+void UAQ_PlayerChannels::LevelUp()
 {
 	PlayerLevel++;
 
-	OnPlayerEventDelegate.Broadcast(GetOwner(), EAQ_NotifyEventType::PlayerLevelUp, 1);
-	QuestChannel->OnPlayerLevelChange(PlayerLevel);
+	OnPlayerLevelUp(PlayerLevel);
 }
 
 void UAQ_PlayerChannels::SaveGame()

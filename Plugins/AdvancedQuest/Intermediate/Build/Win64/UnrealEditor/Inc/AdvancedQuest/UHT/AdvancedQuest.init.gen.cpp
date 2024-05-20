@@ -49,7 +49,7 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedQuest_init() {}
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x656DC580,
+				0x31C02C9B,
 				0xD424FD62,
 				METADATA_PARAMS(nullptr, 0)
 			};
@@ -57,5 +57,5 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedQuest_init() {}
 		}
 		return Z_Registration_Info_UPackage__Script_AdvancedQuest.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_AdvancedQuest(Z_Construct_UPackage__Script_AdvancedQuest, TEXT("/Script/AdvancedQuest"), Z_Registration_Info_UPackage__Script_AdvancedQuest, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x656DC580, 0xD424FD62));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_AdvancedQuest(Z_Construct_UPackage__Script_AdvancedQuest, TEXT("/Script/AdvancedQuest"), Z_Registration_Info_UPackage__Script_AdvancedQuest, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x31C02C9B, 0xD424FD62));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

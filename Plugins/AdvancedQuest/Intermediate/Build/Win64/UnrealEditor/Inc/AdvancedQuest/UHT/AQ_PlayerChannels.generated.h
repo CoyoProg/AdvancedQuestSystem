@@ -46,6 +46,7 @@ static inline void FOnPlayerEventDelegate_DelegateWrapper(const FMulticastScript
 	DECLARE_FUNCTION(execOnCombatEventNotify_Implementation); \
 	DECLARE_FUNCTION(execOnEnvironmentEventNotify_Implementation); \
 	DECLARE_FUNCTION(execOnQuestEnable_Implementation); \
+	DECLARE_FUNCTION(execLevelUp); \
 	DECLARE_FUNCTION(execOnPlayerLevelUp); \
 	DECLARE_FUNCTION(execRemoveObserver); \
 	DECLARE_FUNCTION(execAddObserver);
@@ -57,6 +58,7 @@ static inline void FOnPlayerEventDelegate_DelegateWrapper(const FMulticastScript
 	DECLARE_FUNCTION(execOnCombatEventNotify_Implementation); \
 	DECLARE_FUNCTION(execOnEnvironmentEventNotify_Implementation); \
 	DECLARE_FUNCTION(execOnQuestEnable_Implementation); \
+	DECLARE_FUNCTION(execLevelUp); \
 	DECLARE_FUNCTION(execOnPlayerLevelUp); \
 	DECLARE_FUNCTION(execRemoveObserver); \
 	DECLARE_FUNCTION(execAddObserver);

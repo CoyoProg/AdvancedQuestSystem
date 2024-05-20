@@ -53,7 +53,12 @@ public:
 	FOnPlayerEventDelegate OnPlayerEventDelegate;
 
 	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
-	void OnPlayerLevelUp();
+	void OnPlayerLevelUp(int PlayerLevel);
+
+	/* This function is only for debug purpose, as there isn't any Stats Component to store
+	Player's level and others data. */
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
+	void LevelUp();
 
 	void OnQuestCreated(UAQ_Quest* quest);
 
