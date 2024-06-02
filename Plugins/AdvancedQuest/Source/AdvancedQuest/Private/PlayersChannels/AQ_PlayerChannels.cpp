@@ -5,6 +5,7 @@
 #include "PlayersChannels/AQ_InventoryChannel.h"
 #include "PlayersChannels/AQ_EnvironmentChannel.h"
 #include "PlayersChannels/AQ_CombatChannel.h"
+#include "PlayersChannels/AQ_StatsChannel.h"
 #include "PlayersChannels/AQ_QuestChannel.h"
 #include <QuestSystem/AQ_QuestManager.h>
 #include "QuestSystem/AQ_BookQuest.h"
@@ -22,6 +23,7 @@ UAQ_PlayerChannels::UAQ_PlayerChannels()
 	InventoryChannel = CreateDefaultSubobject<UAQ_InventoryChannel>(TEXT("Inventory Channel"));
 	EnvironmentChannel = CreateDefaultSubobject<UAQ_EnvironmentChannel>(TEXT("Environment Channel"));
 	CombatChannel = CreateDefaultSubobject<UAQ_CombatChannel>(TEXT("Combat Channel"));
+	StatsChannel = CreateDefaultSubobject<UAQ_StatsChannel>(TEXT("Stats Channel"));
 	QuestChannel = CreateDefaultSubobject<UAQ_QuestChannel>(TEXT("Quest Channel"));
 
 	PrimaryComponentTick.bCanEverTick = true;
@@ -65,6 +67,18 @@ void UAQ_PlayerChannels::InitQuestWidgets()
 		QuestWidgets->PlayerController = GetWorld()->GetFirstPlayerController();
 		QuestWidgets->OnQuestEnableDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestEnable_Implementation);
 	}
+}
+
+void UAQ_PlayerChannels::ForceInitQuestWidget()
+{
+	UAQ_BookQuest* QuestWidgets = QuestChannel->QuestWidgets;
+	if (QuestWidgets)
+	{
+		QuestWidgets->PlayerController = GetWorld()->GetFirstPlayerController();
+		QuestWidgets->OnQuestEnableDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestEnable_Implementation);
+	}
+
+	SetPlayerInputComponent();
 }
 
 void UAQ_PlayerChannels::SetPlayerInputComponent()
@@ -112,10 +126,10 @@ void UAQ_PlayerChannels::AddObserver(UAQ_Quest* entity, EAQ_ObjectivesType event
 		break;
 	}
 
-	/* Add Observer to Player Channel */
+	/* Add Observer to Stats Channel */
 	case EAQ_ObjectivesType::PlayerLevelUp:
 	{
-		OnPlayerEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify);
+		StatsChannel->OnStatsEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify);
 		break;
 	}
 	}
@@ -150,10 +164,11 @@ void UAQ_PlayerChannels::RemoveObserver(UAQ_Quest* entity, EAQ_ObjectivesType ev
 		break;
 	}
 
-	/* Remove Observer from Player Channel */
+	/* Remove Observer from Stats Channel */
 	case EAQ_ObjectivesType::PlayerLevelUp:
 	{
-		OnPlayerEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify);
+		StatsChannel->OnStatsEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify);
+		//OnPlayerEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify);
 		break;
 	}
 	}
@@ -335,6 +350,11 @@ void UAQ_PlayerChannels::OnCombatEventNotify_Implementation(EAQ_CombatEventType 
 	CombatChannel->OnCombatEventNotify(eventType, entity, amount);
 }
 
+void UAQ_PlayerChannels::OnStatsEventNotify_Implementation(EAQ_StatsEventType eventType, UObject* entity, float amount)
+{
+	StatsChannel->OnStatsEventNotify(eventType, entity, amount);
+}
+
 void UAQ_PlayerChannels::OnSpecialEventNotify_Implementation(UAQ_SpecialEventData* specialEvent)
 {
 	if (!QuestManager)
@@ -352,23 +372,12 @@ void UAQ_PlayerChannels::OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay
 		QuestWidgets->DisplayQuestGiverSummary(questsToDisplay);
 }
 
-void UAQ_PlayerChannels::OnPlayerLevelUp(int InPlayerLevel)
-{
-	/* 
-	PlayerLevel is a Debug Purpose only because I don't have any Stats Component 
-	where stores the player Level in this plugin.
-	*/ 	
-	PlayerLevel = InPlayerLevel;
-
-	OnPlayerEventDelegate.Broadcast(GetOwner(), EAQ_NotifyEventType::PlayerLevelUp, 1);
-	QuestChannel->OnPlayerLevelChange(InPlayerLevel);
-}
 
 void UAQ_PlayerChannels::LevelUp()
 {
 	PlayerLevel++;
 
-	OnPlayerLevelUp(PlayerLevel);
+	StatsChannel->OnStatsEventNotify(EAQ_StatsEventType::PlayerLevelUp, GetOwner(), PlayerLevel);
 }
 
 void UAQ_PlayerChannels::SaveGame()

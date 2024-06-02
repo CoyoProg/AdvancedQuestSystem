@@ -11,6 +11,7 @@ class UAQ_ItemData;
 enum class EAQ_QuestState : uint8;
 enum class EAQ_EnvironmentEventType : uint8;
 enum class EAQ_CombatEventType : uint8;
+enum class EAQ_StatsEventType : uint8;
 
 /**
  * 
@@ -41,6 +42,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Advanced Quest | Events")
 	void OnCombatEventNotify(EAQ_CombatEventType eventType, UObject* entity, float amount = 1);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Advanced Quest | Events")
+	void OnStatsEventNotify(EAQ_StatsEventType eventType, UObject* entity, float InStatValue = 1);
+
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Advanced Quest | Events")
 	void OnSpecialEventNotify(UAQ_SpecialEventData* specialEvent);

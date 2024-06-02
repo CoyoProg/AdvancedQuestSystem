@@ -26,6 +26,6 @@ enum class EAQ_NotifyEventType : uint8
     MiniGame                UMETA(DisplayName = "Mini-Game"),
 
 
-    // Player Related
+    // Stats
     PlayerLevelUp           UMETA(DisplayName = "Player Level Up"),
 };

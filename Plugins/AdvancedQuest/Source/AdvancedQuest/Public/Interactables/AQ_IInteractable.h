@@ -25,6 +25,6 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Advanced Quest | Events")
 	void Interact(const TScriptInterface<IAQ_PlayerChannelsFacade>& PlayerChannel);
 
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Advanced Quest | Events")
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Advanced Quest | Events")
 	bool IsActorSleeping();
 };

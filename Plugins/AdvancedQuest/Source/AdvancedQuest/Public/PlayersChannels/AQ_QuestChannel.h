@@ -32,6 +32,10 @@ public:
 	void SetWidgetClass(TSubclassOf<UUserWidget> widgetClass) { QuestWidgetsClass = widgetClass;}
 	void AddWidgetToViewport();
 
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
+	void SetQuestWidget(UAQ_BookQuest* InQuestWidget) { QuestWidgets = InQuestWidget; }
+
+
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Advanced Quest | UI")
 	UAQ_BookQuest* QuestWidgets = nullptr;
 

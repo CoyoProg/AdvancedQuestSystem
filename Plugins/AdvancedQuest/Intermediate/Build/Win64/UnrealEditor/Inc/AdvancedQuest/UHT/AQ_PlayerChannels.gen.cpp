@@ -19,11 +19,11 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannels() {}
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_Quest_NoRegister();
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_QuestChannel_NoRegister();
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_SpecialEventData_NoRegister();
+	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_StatsChannel_NoRegister();
 	ADVANCEDQUEST_API UEnum* Z_Construct_UEnum_AdvancedQuest_EAQ_CombatEventType();
 	ADVANCEDQUEST_API UEnum* Z_Construct_UEnum_AdvancedQuest_EAQ_EnvironmentEventType();
-	ADVANCEDQUEST_API UEnum* Z_Construct_UEnum_AdvancedQuest_EAQ_NotifyEventType();
 	ADVANCEDQUEST_API UEnum* Z_Construct_UEnum_AdvancedQuest_EAQ_ObjectivesType();
-	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature();
+	ADVANCEDQUEST_API UEnum* Z_Construct_UEnum_AdvancedQuest_EAQ_StatsEventType();
 	ADVANCEDQUEST_API UScriptStruct* Z_Construct_UScriptStruct_FAQ_Objectives();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UObject_NoRegister();
@@ -32,55 +32,22 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannels() {}
 	UMG_API UClass* Z_Construct_UClass_UUserWidget_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_AdvancedQuest();
 // End Cross Module References
-	struct Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature_Statics
-	{
-		struct _Script_AdvancedQuest_eventOnPlayerEventDelegate_Parms
-		{
-			UObject* entity;
-			EAQ_NotifyEventType eventType;
-			float amount;
-		};
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_entity;
-		static const UECodeGen_Private::FBytePropertyParams NewProp_eventType_Underlying;
-		static const UECodeGen_Private::FEnumPropertyParams NewProp_eventType;
-		static const UECodeGen_Private::FFloatPropertyParams NewProp_amount;
-		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
-#endif
-		static const UECodeGen_Private::FFunctionParams FuncParams;
-	};
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature_Statics::NewProp_entity = { "entity", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(_Script_AdvancedQuest_eventOnPlayerEventDelegate_Parms, entity), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FBytePropertyParams Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature_Statics::NewProp_eventType_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature_Statics::NewProp_eventType = { "eventType", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(_Script_AdvancedQuest_eventOnPlayerEventDelegate_Parms, eventType), Z_Construct_UEnum_AdvancedQuest_EAQ_NotifyEventType, METADATA_PARAMS(nullptr, 0) }; // 4210330728
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature_Statics::NewProp_amount = { "amount", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(_Script_AdvancedQuest_eventOnPlayerEventDelegate_Parms, amount), METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature_Statics::NewProp_entity,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature_Statics::NewProp_eventType_Underlying,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature_Statics::NewProp_eventType,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature_Statics::NewProp_amount,
-	};
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature_Statics::Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "Public/PlayersChannels/AQ_PlayerChannels.h" },
-	};
-#endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UPackage__Script_AdvancedQuest, nullptr, "OnPlayerEventDelegate__DelegateSignature", nullptr, nullptr, sizeof(Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature_Statics::_Script_AdvancedQuest_eventOnPlayerEventDelegate_Parms), Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature_Statics::Function_MetaDataParams)) };
-	UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature()
-	{
-		static UFunction* ReturnFunction = nullptr;
-		if (!ReturnFunction)
-		{
-			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UDelegateFunction_AdvancedQuest_OnPlayerEventDelegate__DelegateSignature_Statics::FuncParams);
-		}
-		return ReturnFunction;
-	}
 	DEFINE_FUNCTION(UAQ_PlayerChannels::execOnSpecialEventNotify_Implementation)
 	{
 		P_GET_OBJECT(UAQ_SpecialEventData,Z_Param_specialEvent);
 		P_FINISH;
 		P_NATIVE_BEGIN;
 		P_THIS->OnSpecialEventNotify_Implementation(Z_Param_specialEvent);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(UAQ_PlayerChannels::execOnStatsEventNotify_Implementation)
+	{
+		P_GET_ENUM(EAQ_StatsEventType,Z_Param_eventType);
+		P_GET_OBJECT(UObject,Z_Param_entity);
+		P_GET_PROPERTY(FFloatProperty,Z_Param_InStatValue);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->OnStatsEventNotify_Implementation(EAQ_StatsEventType(Z_Param_eventType),Z_Param_entity,Z_Param_InStatValue);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(UAQ_PlayerChannels::execOnCombatEventNotify_Implementation)
@@ -117,14 +84,6 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannels() {}
 		P_THIS->LevelUp();
 		P_NATIVE_END;
 	}
-	DEFINE_FUNCTION(UAQ_PlayerChannels::execOnPlayerLevelUp)
-	{
-		P_GET_PROPERTY(FIntProperty,Z_Param_PlayerLevel);
-		P_FINISH;
-		P_NATIVE_BEGIN;
-		P_THIS->OnPlayerLevelUp(Z_Param_PlayerLevel);
-		P_NATIVE_END;
-	}
 	DEFINE_FUNCTION(UAQ_PlayerChannels::execRemoveObserver)
 	{
 		P_GET_OBJECT(UAQ_Quest,Z_Param_entity);
@@ -141,6 +100,13 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannels() {}
 		P_FINISH;
 		P_NATIVE_BEGIN;
 		P_THIS->AddObserver(Z_Param_entity,EAQ_ObjectivesType(Z_Param_eventType));
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(UAQ_PlayerChannels::execForceInitQuestWidget)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->ForceInitQuestWidget();
 		P_NATIVE_END;
 	}
 	struct AQ_PlayerChannels_eventCheckForPlayerStats_Parms
@@ -207,12 +173,13 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannels() {}
 		UClass* Class = UAQ_PlayerChannels::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
 			{ "AddObserver", &UAQ_PlayerChannels::execAddObserver },
+			{ "ForceInitQuestWidget", &UAQ_PlayerChannels::execForceInitQuestWidget },
 			{ "LevelUp", &UAQ_PlayerChannels::execLevelUp },
 			{ "OnCombatEventNotify_Implementation", &UAQ_PlayerChannels::execOnCombatEventNotify_Implementation },
 			{ "OnEnvironmentEventNotify_Implementation", &UAQ_PlayerChannels::execOnEnvironmentEventNotify_Implementation },
-			{ "OnPlayerLevelUp", &UAQ_PlayerChannels::execOnPlayerLevelUp },
 			{ "OnQuestEnable_Implementation", &UAQ_PlayerChannels::execOnQuestEnable_Implementation },
 			{ "OnSpecialEventNotify_Implementation", &UAQ_PlayerChannels::execOnSpecialEventNotify_Implementation },
+			{ "OnStatsEventNotify_Implementation", &UAQ_PlayerChannels::execOnStatsEventNotify_Implementation },
 			{ "RemoveObserver", &UAQ_PlayerChannels::execRemoveObserver },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -324,6 +291,29 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannels() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAQ_PlayerChannels_CheckInventoryForItem_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UAQ_PlayerChannels_ForceInitQuestWidget_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAQ_PlayerChannels_ForceInitQuestWidget_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Advanced Quest | Events" },
+		{ "ModuleRelativePath", "Public/PlayersChannels/AQ_PlayerChannels.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_PlayerChannels_ForceInitQuestWidget_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_PlayerChannels, nullptr, "ForceInitQuestWidget", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAQ_PlayerChannels_ForceInitQuestWidget_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_PlayerChannels_ForceInitQuestWidget_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UAQ_PlayerChannels_ForceInitQuestWidget()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAQ_PlayerChannels_ForceInitQuestWidget_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -459,39 +449,6 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannels() {}
 		}
 		return ReturnFunction;
 	}
-	struct Z_Construct_UFunction_UAQ_PlayerChannels_OnPlayerLevelUp_Statics
-	{
-		struct AQ_PlayerChannels_eventOnPlayerLevelUp_Parms
-		{
-			int32 PlayerLevel;
-		};
-		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_PlayerLevel;
-		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
-#endif
-		static const UECodeGen_Private::FFunctionParams FuncParams;
-	};
-	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UFunction_UAQ_PlayerChannels_OnPlayerLevelUp_Statics::NewProp_PlayerLevel = { "PlayerLevel", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_PlayerChannels_eventOnPlayerLevelUp_Parms, PlayerLevel), METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_PlayerChannels_OnPlayerLevelUp_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_PlayerChannels_OnPlayerLevelUp_Statics::NewProp_PlayerLevel,
-	};
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAQ_PlayerChannels_OnPlayerLevelUp_Statics::Function_MetaDataParams[] = {
-		{ "Category", "Advanced Quest | Events" },
-		{ "ModuleRelativePath", "Public/PlayersChannels/AQ_PlayerChannels.h" },
-	};
-#endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_PlayerChannels_OnPlayerLevelUp_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_PlayerChannels, nullptr, "OnPlayerLevelUp", nullptr, nullptr, sizeof(Z_Construct_UFunction_UAQ_PlayerChannels_OnPlayerLevelUp_Statics::AQ_PlayerChannels_eventOnPlayerLevelUp_Parms), Z_Construct_UFunction_UAQ_PlayerChannels_OnPlayerLevelUp_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_PlayerChannels_OnPlayerLevelUp_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAQ_PlayerChannels_OnPlayerLevelUp_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_PlayerChannels_OnPlayerLevelUp_Statics::Function_MetaDataParams)) };
-	UFunction* Z_Construct_UFunction_UAQ_PlayerChannels_OnPlayerLevelUp()
-	{
-		static UFunction* ReturnFunction = nullptr;
-		if (!ReturnFunction)
-		{
-			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAQ_PlayerChannels_OnPlayerLevelUp_Statics::FuncParams);
-		}
-		return ReturnFunction;
-	}
 	struct Z_Construct_UFunction_UAQ_PlayerChannels_OnQuestEnable_Implementation_Statics
 	{
 		struct AQ_PlayerChannels_eventOnQuestEnable_Implementation_Parms
@@ -584,6 +541,50 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannels() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAQ_PlayerChannels_OnSpecialEventNotify_Implementation_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UAQ_PlayerChannels_OnStatsEventNotify_Implementation_Statics
+	{
+		struct AQ_PlayerChannels_eventOnStatsEventNotify_Implementation_Parms
+		{
+			EAQ_StatsEventType eventType;
+			UObject* entity;
+			float InStatValue;
+		};
+		static const UECodeGen_Private::FBytePropertyParams NewProp_eventType_Underlying;
+		static const UECodeGen_Private::FEnumPropertyParams NewProp_eventType;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_entity;
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_InStatValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAQ_PlayerChannels_OnStatsEventNotify_Implementation_Statics::NewProp_eventType_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAQ_PlayerChannels_OnStatsEventNotify_Implementation_Statics::NewProp_eventType = { "eventType", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_PlayerChannels_eventOnStatsEventNotify_Implementation_Parms, eventType), Z_Construct_UEnum_AdvancedQuest_EAQ_StatsEventType, METADATA_PARAMS(nullptr, 0) }; // 2655987038
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_PlayerChannels_OnStatsEventNotify_Implementation_Statics::NewProp_entity = { "entity", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_PlayerChannels_eventOnStatsEventNotify_Implementation_Parms, entity), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UAQ_PlayerChannels_OnStatsEventNotify_Implementation_Statics::NewProp_InStatValue = { "InStatValue", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_PlayerChannels_eventOnStatsEventNotify_Implementation_Parms, InStatValue), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_PlayerChannels_OnStatsEventNotify_Implementation_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_PlayerChannels_OnStatsEventNotify_Implementation_Statics::NewProp_eventType_Underlying,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_PlayerChannels_OnStatsEventNotify_Implementation_Statics::NewProp_eventType,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_PlayerChannels_OnStatsEventNotify_Implementation_Statics::NewProp_entity,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_PlayerChannels_OnStatsEventNotify_Implementation_Statics::NewProp_InStatValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAQ_PlayerChannels_OnStatsEventNotify_Implementation_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Advanced Quest | Events" },
+		{ "ModuleRelativePath", "Public/PlayersChannels/AQ_PlayerChannels.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_PlayerChannels_OnStatsEventNotify_Implementation_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_PlayerChannels, nullptr, "OnStatsEventNotify_Implementation", nullptr, nullptr, sizeof(Z_Construct_UFunction_UAQ_PlayerChannels_OnStatsEventNotify_Implementation_Statics::AQ_PlayerChannels_eventOnStatsEventNotify_Implementation_Parms), Z_Construct_UFunction_UAQ_PlayerChannels_OnStatsEventNotify_Implementation_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_PlayerChannels_OnStatsEventNotify_Implementation_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAQ_PlayerChannels_OnStatsEventNotify_Implementation_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_PlayerChannels_OnStatsEventNotify_Implementation_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UAQ_PlayerChannels_OnStatsEventNotify_Implementation()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAQ_PlayerChannels_OnStatsEventNotify_Implementation_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -695,6 +696,10 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannels() {}
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_QuestChannel;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_StatsChannel_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_StatsChannel;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_PlayerLevel_MetaData[];
 #endif
 		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_PlayerLevel;
@@ -711,14 +716,15 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannels() {}
 		{ &Z_Construct_UFunction_UAQ_PlayerChannels_AddObserver, "AddObserver" }, // 3954811869
 		{ &Z_Construct_UFunction_UAQ_PlayerChannels_CheckForPlayerStats, "CheckForPlayerStats" }, // 773718926
 		{ &Z_Construct_UFunction_UAQ_PlayerChannels_CheckInventoryForItem, "CheckInventoryForItem" }, // 1790143912
+		{ &Z_Construct_UFunction_UAQ_PlayerChannels_ForceInitQuestWidget, "ForceInitQuestWidget" }, // 3846813401
 		{ &Z_Construct_UFunction_UAQ_PlayerChannels_LevelUp, "LevelUp" }, // 347870397
 		{ &Z_Construct_UFunction_UAQ_PlayerChannels_LoadInventory, "LoadInventory" }, // 1408931264
 		{ &Z_Construct_UFunction_UAQ_PlayerChannels_OnCombatEventNotify_Implementation, "OnCombatEventNotify_Implementation" }, // 2921251773
 		{ &Z_Construct_UFunction_UAQ_PlayerChannels_OnEnvironmentEventNotify_Implementation, "OnEnvironmentEventNotify_Implementation" }, // 2713681127
-		{ &Z_Construct_UFunction_UAQ_PlayerChannels_OnPlayerLevelUp, "OnPlayerLevelUp" }, // 2537124228
 		{ &Z_Construct_UFunction_UAQ_PlayerChannels_OnQuestEnable_Implementation, "OnQuestEnable_Implementation" }, // 1471329926
 		{ &Z_Construct_UFunction_UAQ_PlayerChannels_OnQuestEnded, "OnQuestEnded" }, // 1972641467
 		{ &Z_Construct_UFunction_UAQ_PlayerChannels_OnSpecialEventNotify_Implementation, "OnSpecialEventNotify_Implementation" }, // 1197783405
+		{ &Z_Construct_UFunction_UAQ_PlayerChannels_OnStatsEventNotify_Implementation, "OnStatsEventNotify_Implementation" }, // 4200753868
 		{ &Z_Construct_UFunction_UAQ_PlayerChannels_RemoveObserver, "RemoveObserver" }, // 4253305612
 		{ &Z_Construct_UFunction_UAQ_PlayerChannels_SaveInventory, "SaveInventory" }, // 1798324085
 	};
@@ -790,6 +796,13 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannels() {}
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_QuestChannel = { "QuestChannel", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_PlayerChannels, QuestChannel), Z_Construct_UClass_UAQ_QuestChannel_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_QuestChannel_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_QuestChannel_MetaData)) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_StatsChannel_MetaData[] = {
+		{ "Category", "Advanced Quest | Channels" },
+		{ "ModuleRelativePath", "Public/PlayersChannels/AQ_PlayerChannels.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_StatsChannel = { "StatsChannel", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UAQ_PlayerChannels, StatsChannel), Z_Construct_UClass_UAQ_StatsChannel_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_StatsChannel_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_StatsChannel_MetaData)) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_PlayerLevel_MetaData[] = {
 		{ "Category", "Advanced Quest | Player" },
 		{ "Comment", "/* Player Stats */" },
@@ -806,10 +819,11 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannels() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_EnvironmentChannel,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_CombatChannel,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_QuestChannel,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_StatsChannel,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAQ_PlayerChannels_Statics::NewProp_PlayerLevel,
 	};
 		const UECodeGen_Private::FImplementedInterfaceParams Z_Construct_UClass_UAQ_PlayerChannels_Statics::InterfaceParams[] = {
-			{ Z_Construct_UClass_UAQ_PlayerChannelsFacade_NoRegister, (int32)VTABLE_OFFSET(UAQ_PlayerChannels, IAQ_PlayerChannelsFacade), false },  // 360335617
+			{ Z_Construct_UClass_UAQ_PlayerChannelsFacade_NoRegister, (int32)VTABLE_OFFSET(UAQ_PlayerChannels, IAQ_PlayerChannelsFacade), false },  // 1562390720
 		};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UAQ_PlayerChannels_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UAQ_PlayerChannels>::IsAbstract,
@@ -847,9 +861,9 @@ void EmptyLinkFunctionForGeneratedCodeAQ_PlayerChannels() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannels_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_PlayerChannels, UAQ_PlayerChannels::StaticClass, TEXT("UAQ_PlayerChannels"), &Z_Registration_Info_UClass_UAQ_PlayerChannels, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_PlayerChannels), 1236356123U) },
+		{ Z_Construct_UClass_UAQ_PlayerChannels, UAQ_PlayerChannels::StaticClass, TEXT("UAQ_PlayerChannels"), &Z_Registration_Info_UClass_UAQ_PlayerChannels, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_PlayerChannels), 2957807103U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannels_h_2076290875(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannels_h_3007469218(TEXT("/Script/AdvancedQuest"),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannels_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_PlayerChannels_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

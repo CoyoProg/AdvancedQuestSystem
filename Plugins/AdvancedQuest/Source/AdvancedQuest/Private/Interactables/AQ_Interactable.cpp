@@ -31,6 +31,11 @@ void AAQ_Interactable::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+bool AAQ_Interactable::IsActorSleeping_Implementation()
+{
+	return bIsSleeping;
+}
+
 void AAQ_Interactable::EnableParticles(bool isEnable)
 {
 	if (!NiagaraComponent)

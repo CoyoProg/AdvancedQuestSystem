@@ -26,6 +26,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Interactable")
 	class USceneComponent* SceneRoot = nullptr;
 
+	UFUNCTION(Category = "Advanced Quest | Interactable")
+	bool IsActorSleeping_Implementation();
+
 	UPROPERTY(BlueprintReadWrite, Category = "Advanced Quest | Interactable")
 	bool bIsSleeping = false;
 
@@ -45,8 +48,6 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = "Advanced Quest | Interactable | Reset")
 	bool bIsInitialStateSaved = false;
-
-
 
 protected:
 	virtual void BeginPlay() override;

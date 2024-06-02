@@ -13,11 +13,10 @@
 class UAQ_InventoryChannel;
 class UAQ_EnvironmentChannel;
 class UAQ_CombatChannel;
+class UAQ_StatsChannel;
 class UAQ_QuestChannel;
 class UAQ_QuestManager;
 class UUserWidget;
-
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnPlayerEventDelegate, UObject*, entity, EAQ_NotifyEventType, eventType, float, amount);
 
 /**
  *
@@ -36,6 +35,8 @@ public:
 	TSubclassOf<UUserWidget> QuestWidgetsClass = nullptr;
 	void InitQuestWidgets();
 
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
+	void ForceInitQuestWidget();
 
 	/* Observers Pattern */
 	/** Add Observer to the corresponding channel */
@@ -50,15 +51,13 @@ public:
 	/* Delegates */
 	virtual void OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestState QuestState) override;
 	virtual void OnInteractQuestGiver(TArray<UAQ_Quest*> questsToDisplay) override;
-	FOnPlayerEventDelegate OnPlayerEventDelegate;
-
-	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
-	void OnPlayerLevelUp(int PlayerLevel);
+	
 
 	/* This function is only for debug purpose, as there isn't any Stats Component to store
 	Player's level and others data. */
 	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
 	void LevelUp();
+
 
 	void OnQuestCreated(UAQ_Quest* quest);
 
@@ -69,6 +68,9 @@ public:
 	void OnEnvironmentEventNotify_Implementation(EAQ_EnvironmentEventType eventType, UObject* entity);
 	UFUNCTION(Category = "Advanced Quest | Events")
 	void OnCombatEventNotify_Implementation(EAQ_CombatEventType eventType, UObject* entity, float amount = 1);
+	UFUNCTION(Category = "Advanced Quest | Events")
+	void OnStatsEventNotify_Implementation(EAQ_StatsEventType eventType, UObject* entity, float InStatValue = 1);
+	
 	UFUNCTION(Category = "Advanced Quest | Events")
 	void OnSpecialEventNotify_Implementation(UAQ_SpecialEventData* specialEvent);
 
@@ -109,6 +111,8 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Advanced Quest | Channels")
 	UAQ_QuestChannel* QuestChannel = nullptr;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Advanced Quest | Channels")
+	UAQ_StatsChannel* StatsChannel = nullptr;
 
 	/* Player Stats */
 	UPROPERTY(BlueprintReadOnly, Category = "Advanced Quest | Player")

@@ -9,6 +9,7 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class UAQ_BookQuest;
 class UAQ_Quest;
 class UAQ_SpecialEventData;
 enum class EAQ_QuestState : uint8;
@@ -47,13 +48,15 @@ static inline void FSpecialEventTriggerDelegate_DelegateWrapper(const FMulticast
 #define FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_QuestChannel_h_27_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execOnQuestUpdate); \
-	DECLARE_FUNCTION(execOnQuestStateChanged);
+	DECLARE_FUNCTION(execOnQuestStateChanged); \
+	DECLARE_FUNCTION(execSetQuestWidget);
 
 
 #define FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_QuestChannel_h_27_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execOnQuestUpdate); \
-	DECLARE_FUNCTION(execOnQuestStateChanged);
+	DECLARE_FUNCTION(execOnQuestStateChanged); \
+	DECLARE_FUNCTION(execSetQuestWidget);
 
 
 #define FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_QuestChannel_h_27_ACCESSORS

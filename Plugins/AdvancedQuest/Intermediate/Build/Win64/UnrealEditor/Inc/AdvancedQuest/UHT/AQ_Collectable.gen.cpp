@@ -94,9 +94,9 @@ void EmptyLinkFunctionForGeneratedCodeAQ_Collectable() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_Collectable_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AAQ_Collectable, AAQ_Collectable::StaticClass, TEXT("AAQ_Collectable"), &Z_Registration_Info_UClass_AAQ_Collectable, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AAQ_Collectable), 2053884156U) },
+		{ Z_Construct_UClass_AAQ_Collectable, AAQ_Collectable::StaticClass, TEXT("AAQ_Collectable"), &Z_Registration_Info_UClass_AAQ_Collectable, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AAQ_Collectable), 1251276319U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_Collectable_h_275053944(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_Collectable_h_3502526845(TEXT("/Script/AdvancedQuest"),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_Collectable_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_Collectable_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

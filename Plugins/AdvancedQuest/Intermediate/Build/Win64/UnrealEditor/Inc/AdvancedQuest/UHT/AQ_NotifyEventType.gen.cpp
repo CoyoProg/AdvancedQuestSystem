@@ -71,10 +71,10 @@ void EmptyLinkFunctionForGeneratedCodeAQ_NotifyEventType() {}
 		{ "MiniGame.DisplayName", "Mini-Game" },
 		{ "MiniGame.Name", "EAQ_NotifyEventType::MiniGame" },
 		{ "ModuleRelativePath", "Public/Enums/AQ_NotifyEventType.h" },
-		{ "PlayerLevelUp.Comment", "// Player Related\n" },
+		{ "PlayerLevelUp.Comment", "// Stats\n" },
 		{ "PlayerLevelUp.DisplayName", "Player Level Up" },
 		{ "PlayerLevelUp.Name", "EAQ_NotifyEventType::PlayerLevelUp" },
-		{ "PlayerLevelUp.ToolTip", "Player Related" },
+		{ "PlayerLevelUp.ToolTip", "Stats" },
 		{ "Protect.DisplayName", "Protect" },
 		{ "Protect.Name", "EAQ_NotifyEventType::Protect" },
 		{ "RemovedFromInventory.DisplayName", "Remove From Inventory" },
@@ -108,9 +108,9 @@ void EmptyLinkFunctionForGeneratedCodeAQ_NotifyEventType() {}
 		static const FEnumRegisterCompiledInInfo EnumInfo[];
 	};
 	const FEnumRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_NotifyEventType_h_Statics::EnumInfo[] = {
-		{ EAQ_NotifyEventType_StaticEnum, TEXT("EAQ_NotifyEventType"), &Z_Registration_Info_UEnum_EAQ_NotifyEventType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 4210330728U) },
+		{ EAQ_NotifyEventType_StaticEnum, TEXT("EAQ_NotifyEventType"), &Z_Registration_Info_UEnum_EAQ_NotifyEventType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 4064980091U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_NotifyEventType_h_2791754519(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_NotifyEventType_h_201332224(TEXT("/Script/AdvancedQuest"),
 		nullptr, 0,
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_NotifyEventType_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Enums_AQ_NotifyEventType_h_Statics::EnumInfo));

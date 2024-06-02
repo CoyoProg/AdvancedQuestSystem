@@ -20,13 +20,15 @@ enum class EAQ_QuestState : uint8;
 #define FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_Interactable_h_13_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execOnQuestStateChanged); \
-	DECLARE_FUNCTION(execEnableParticles);
+	DECLARE_FUNCTION(execEnableParticles); \
+	DECLARE_FUNCTION(execIsActorSleeping_Implementation);
 
 
 #define FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_Interactable_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execOnQuestStateChanged); \
-	DECLARE_FUNCTION(execEnableParticles);
+	DECLARE_FUNCTION(execEnableParticles); \
+	DECLARE_FUNCTION(execIsActorSleeping_Implementation);
 
 
 #define FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_Interactables_AQ_Interactable_h_13_ACCESSORS

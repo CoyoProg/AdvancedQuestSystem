@@ -101,12 +101,21 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestChannel() {}
 		P_THIS->OnQuestStateChanged(Z_Param_QuestUpdate,EAQ_QuestState(Z_Param_QuestState));
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(UAQ_QuestChannel::execSetQuestWidget)
+	{
+		P_GET_OBJECT(UAQ_BookQuest,Z_Param_InQuestWidget);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->SetQuestWidget(Z_Param_InQuestWidget);
+		P_NATIVE_END;
+	}
 	void UAQ_QuestChannel::StaticRegisterNativesUAQ_QuestChannel()
 	{
 		UClass* Class = UAQ_QuestChannel::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
 			{ "OnQuestStateChanged", &UAQ_QuestChannel::execOnQuestStateChanged },
 			{ "OnQuestUpdate", &UAQ_QuestChannel::execOnQuestUpdate },
+			{ "SetQuestWidget", &UAQ_QuestChannel::execSetQuestWidget },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 	}
@@ -183,6 +192,47 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestChannel() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_UAQ_QuestChannel_SetQuestWidget_Statics
+	{
+		struct AQ_QuestChannel_eventSetQuestWidget_Parms
+		{
+			UAQ_BookQuest* InQuestWidget;
+		};
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_InQuestWidget_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_InQuestWidget;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAQ_QuestChannel_SetQuestWidget_Statics::NewProp_InQuestWidget_MetaData[] = {
+		{ "EditInline", "true" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAQ_QuestChannel_SetQuestWidget_Statics::NewProp_InQuestWidget = { "InQuestWidget", nullptr, (EPropertyFlags)0x0010000000080080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_QuestChannel_eventSetQuestWidget_Parms, InQuestWidget), Z_Construct_UClass_UAQ_BookQuest_NoRegister, METADATA_PARAMS(Z_Construct_UFunction_UAQ_QuestChannel_SetQuestWidget_Statics::NewProp_InQuestWidget_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_QuestChannel_SetQuestWidget_Statics::NewProp_InQuestWidget_MetaData)) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_QuestChannel_SetQuestWidget_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_QuestChannel_SetQuestWidget_Statics::NewProp_InQuestWidget,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAQ_QuestChannel_SetQuestWidget_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Advanced Quest | Events" },
+		{ "ModuleRelativePath", "Public/PlayersChannels/AQ_QuestChannel.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAQ_QuestChannel_SetQuestWidget_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAQ_QuestChannel, nullptr, "SetQuestWidget", nullptr, nullptr, sizeof(Z_Construct_UFunction_UAQ_QuestChannel_SetQuestWidget_Statics::AQ_QuestChannel_eventSetQuestWidget_Parms), Z_Construct_UFunction_UAQ_QuestChannel_SetQuestWidget_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_QuestChannel_SetQuestWidget_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAQ_QuestChannel_SetQuestWidget_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAQ_QuestChannel_SetQuestWidget_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UAQ_QuestChannel_SetQuestWidget()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAQ_QuestChannel_SetQuestWidget_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(UAQ_QuestChannel);
 	UClass* Z_Construct_UClass_UAQ_QuestChannel_NoRegister()
 	{
@@ -210,6 +260,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestChannel() {}
 	const FClassFunctionLinkInfo Z_Construct_UClass_UAQ_QuestChannel_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_UAQ_QuestChannel_OnQuestStateChanged, "OnQuestStateChanged" }, // 1998122879
 		{ &Z_Construct_UFunction_UAQ_QuestChannel_OnQuestUpdate, "OnQuestUpdate" }, // 1721844293
+		{ &Z_Construct_UFunction_UAQ_QuestChannel_SetQuestWidget, "SetQuestWidget" }, // 4041273938
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAQ_QuestChannel_Statics::Class_MetaDataParams[] = {
@@ -266,9 +317,9 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestChannel() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_QuestChannel_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_QuestChannel, UAQ_QuestChannel::StaticClass, TEXT("UAQ_QuestChannel"), &Z_Registration_Info_UClass_UAQ_QuestChannel, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_QuestChannel), 1861248248U) },
+		{ Z_Construct_UClass_UAQ_QuestChannel, UAQ_QuestChannel::StaticClass, TEXT("UAQ_QuestChannel"), &Z_Registration_Info_UClass_UAQ_QuestChannel, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_QuestChannel), 77885713U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_QuestChannel_h_2889092307(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_QuestChannel_h_837147994(TEXT("/Script/AdvancedQuest"),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_QuestChannel_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_PlayersChannels_AQ_QuestChannel_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
