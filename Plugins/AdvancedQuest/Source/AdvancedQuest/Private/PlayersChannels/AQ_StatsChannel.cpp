@@ -3,11 +3,11 @@
 #include "PlayersChannels/AQ_StatsChannel.h"
 #include "Enums/AQ_NotifyEventType.h"
 
-void UAQ_StatsChannel::OnStatsEventNotify(EAQ_StatsEventType eventType, UObject* entity, float InStatValue)
+void UAQ_StatsChannel::OnStatsEventNotify(EAQ_StatsEventType eventType, UObject* entity, float amount)
 {
 	switch (eventType)
 	{
 	case EAQ_StatsEventType::PlayerLevelUp:
-		OnStatsEventDelegate.Broadcast(entity, EAQ_NotifyEventType::PlayerLevelUp, InStatValue);
+		OnStatsEventDelegate.Broadcast(entity, EAQ_NotifyEventType::PlayerLevelUp, amount);
 	}
 }

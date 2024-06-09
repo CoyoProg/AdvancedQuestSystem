@@ -24,7 +24,7 @@ class ADVANCEDQUEST_API UAQ_StatsChannel : public UObject
 	
 public:
 	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
-	void OnStatsEventNotify(EAQ_StatsEventType eventType, UObject* entity, float InStatValue = 1);
+	void OnStatsEventNotify(EAQ_StatsEventType eventType, UObject* entity, float amount = 1);
 
 	FOnStatsEventDelegate OnStatsEventDelegate;
 };
