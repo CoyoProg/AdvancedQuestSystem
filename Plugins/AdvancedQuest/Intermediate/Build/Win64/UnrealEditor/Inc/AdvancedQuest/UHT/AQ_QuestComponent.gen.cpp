@@ -15,6 +15,7 @@ void EmptyLinkFunctionForGeneratedCodeAQ_QuestComponent() {}
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_QuestComponent_NoRegister();
 	ADVANCEDQUEST_API UClass* Z_Construct_UClass_UAQ_QuestManager_NoRegister();
 	ADVANCEDQUEST_API UEnum* Z_Construct_UEnum_AdvancedQuest_EAQ_QuestState();
+	ADVANCEDQUEST_API UEnum* Z_Construct_UEnum_AdvancedQuest_EAQ_QuestType();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnSleepStateChangedBueprintDelegate__DelegateSignature();
 	ADVANCEDQUEST_API UFunction* Z_Construct_UDelegateFunction_AdvancedQuest_OnStateChangedBueprintDelegate__DelegateSignature();
 	ADVANCEDQUEST_API UScriptStruct* Z_Construct_UScriptStruct_FAQ_IsGiverOrReceiver();
@@ -204,9 +205,10 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_IsGiverOrReceiver>(
 	{
 		P_GET_UBOOL(Z_Param_isMarkerVisible);
 		P_GET_UBOOL(Z_Param_isQuestValid);
+		P_GET_ENUM(EAQ_QuestType,Z_Param_QuestState);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		P_THIS->SetQuestMarker(Z_Param_isMarkerVisible,Z_Param_isQuestValid);
+		P_THIS->SetQuestMarker(Z_Param_isMarkerVisible,Z_Param_isQuestValid,EAQ_QuestType(Z_Param_QuestState));
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(UAQ_QuestComponent::execInteract)
@@ -394,11 +396,14 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_IsGiverOrReceiver>(
 		{
 			bool isMarkerVisible;
 			bool isQuestValid;
+			EAQ_QuestType QuestState;
 		};
 		static void NewProp_isMarkerVisible_SetBit(void* Obj);
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_isMarkerVisible;
 		static void NewProp_isQuestValid_SetBit(void* Obj);
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_isQuestValid;
+		static const UECodeGen_Private::FBytePropertyParams NewProp_QuestState_Underlying;
+		static const UECodeGen_Private::FEnumPropertyParams NewProp_QuestState;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
@@ -415,13 +420,18 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_IsGiverOrReceiver>(
 		((AQ_QuestComponent_eventSetQuestMarker_Parms*)Obj)->isQuestValid = 1;
 	}
 	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UAQ_QuestComponent_SetQuestMarker_Statics::NewProp_isQuestValid = { "isQuestValid", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(AQ_QuestComponent_eventSetQuestMarker_Parms), &Z_Construct_UFunction_UAQ_QuestComponent_SetQuestMarker_Statics::NewProp_isQuestValid_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAQ_QuestComponent_SetQuestMarker_Statics::NewProp_QuestState_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAQ_QuestComponent_SetQuestMarker_Statics::NewProp_QuestState = { "QuestState", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AQ_QuestComponent_eventSetQuestMarker_Parms, QuestState), Z_Construct_UEnum_AdvancedQuest_EAQ_QuestType, METADATA_PARAMS(nullptr, 0) }; // 2952427223
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAQ_QuestComponent_SetQuestMarker_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_QuestComponent_SetQuestMarker_Statics::NewProp_isMarkerVisible,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_QuestComponent_SetQuestMarker_Statics::NewProp_isQuestValid,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_QuestComponent_SetQuestMarker_Statics::NewProp_QuestState_Underlying,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAQ_QuestComponent_SetQuestMarker_Statics::NewProp_QuestState,
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAQ_QuestComponent_SetQuestMarker_Statics::Function_MetaDataParams[] = {
 		{ "Category", "Advanced Quest | UI" },
+		{ "CPP_Default_QuestState", "MainQuest" },
 		{ "ModuleRelativePath", "Public/QuestSystem/AQ_QuestComponent.h" },
 	};
 #endif
@@ -523,7 +533,7 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_IsGiverOrReceiver>(
 		{ &Z_Construct_UFunction_UAQ_QuestComponent_OnQuestRequirementMet, "OnQuestRequirementMet" }, // 3233459685
 		{ &Z_Construct_UFunction_UAQ_QuestComponent_OnQuestStateChangedWrapper, "OnQuestStateChangedWrapper" }, // 1466831928
 		{ &Z_Construct_UFunction_UAQ_QuestComponent_RerunScript, "RerunScript" }, // 714523530
-		{ &Z_Construct_UFunction_UAQ_QuestComponent_SetQuestMarker, "SetQuestMarker" }, // 2448421268
+		{ &Z_Construct_UFunction_UAQ_QuestComponent_SetQuestMarker, "SetQuestMarker" }, // 1182073125
 		{ &Z_Construct_UFunction_UAQ_QuestComponent_UpdateQuestMarker, "UpdateQuestMarker" }, // 2662775819
 	};
 #if WITH_METADATA
@@ -672,9 +682,9 @@ template<> ADVANCEDQUEST_API UScriptStruct* StaticStruct<FAQ_IsGiverOrReceiver>(
 		{ FAQ_IsGiverOrReceiver::StaticStruct, Z_Construct_UScriptStruct_FAQ_IsGiverOrReceiver_Statics::NewStructOps, TEXT("AQ_IsGiverOrReceiver"), &Z_Registration_Info_UScriptStruct_AQ_IsGiverOrReceiver, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FAQ_IsGiverOrReceiver), 1810159506U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestComponent_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAQ_QuestComponent, UAQ_QuestComponent::StaticClass, TEXT("UAQ_QuestComponent"), &Z_Registration_Info_UClass_UAQ_QuestComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_QuestComponent), 1180848326U) },
+		{ Z_Construct_UClass_UAQ_QuestComponent, UAQ_QuestComponent::StaticClass, TEXT("UAQ_QuestComponent"), &Z_Registration_Info_UClass_UAQ_QuestComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAQ_QuestComponent), 1172176574U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestComponent_h_895547272(TEXT("/Script/AdvancedQuest"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestComponent_h_7930194(TEXT("/Script/AdvancedQuest"),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestComponent_h_Statics::ClassInfo),
 		Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestComponent_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_cpaya_Documents_ArtFx_Unreal_QuestPlugin_Plugins_AdvancedQuest_Source_AdvancedQuest_Public_QuestSystem_AQ_QuestComponent_h_Statics::ScriptStructInfo),
 		nullptr, 0);

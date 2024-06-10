@@ -7,6 +7,8 @@
 
 #include "AQ_QuestMarkerWidget.generated.h"
 
+enum class EAQ_QuestType : uint8;
+
 /**
  * 
  */
@@ -17,5 +19,5 @@ class ADVANCEDQUEST_API UAQ_QuestMarkerWidget : public UUserWidget
 	
 public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Advanced Quest | UI")
-	void SetImageQuest(bool isEnded);
+	void SetImageQuest(bool isEnded, EAQ_QuestType questType = EAQ_QuestType::MainQuest);
 };

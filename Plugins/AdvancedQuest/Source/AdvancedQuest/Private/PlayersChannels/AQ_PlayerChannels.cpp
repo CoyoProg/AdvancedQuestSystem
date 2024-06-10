@@ -377,6 +377,7 @@ void UAQ_PlayerChannels::LevelUp()
 {
 	PlayerLevel++;
 
+	QuestChannel->OnPlayerLevelChange(PlayerLevel);
 	StatsChannel->OnStatsEventNotify(EAQ_StatsEventType::PlayerLevelUp, GetOwner(), 1);
 }
 

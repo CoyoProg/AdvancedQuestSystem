@@ -55,7 +55,7 @@ void UAQ_QuestComponent::LateBeginPlay()
 	BindFunctionsToQuestDelegates();
 }
 
-void UAQ_QuestComponent::SetQuestMarker(bool isMarkerVisible, bool isQuestValid)
+void UAQ_QuestComponent::SetQuestMarker(bool isMarkerVisible, bool isQuestValid, EAQ_QuestType QuestState)
 {
 	/* If no quest to show, set the component to be silent */
 	if (isMarkerVisible)
@@ -74,7 +74,7 @@ void UAQ_QuestComponent::SetQuestMarker(bool isMarkerVisible, bool isQuestValid)
 	if (widget)
 	{
 		QuestMarkerWidget->SetVisibility(isMarkerVisible);
-		widget->SetImageQuest(isQuestValid); 
+		widget->SetImageQuest(isQuestValid, QuestState);
 	}
 }
 
@@ -91,7 +91,13 @@ void UAQ_QuestComponent::UpdateQuestMarker()
 		return;
 	}
 
+
+	// SORT 
+	bool bIsAnyQuestValid = false;
 	bool bIsAnyQuestPending = false;
+	TArray<UAQ_Quest*> PendingQuests;
+	TArray<UAQ_Quest*> ValidQuests;
+
 	for (auto QuestData : QuestsList)
 	{
 		/* Query to the QuestManager the quest of the corresponding ID */
@@ -100,30 +106,67 @@ void UAQ_QuestComponent::UpdateQuestMarker()
 		if (quest == nullptr)
 			continue;
 
-		/* Check if any quest is valid, and if this is the QuestReceiver */
-		if (QuestData.Value.bIsQuestReceiver)
+		/* Check if there is any Valid Quests */
+		if (QuestData.Value.bIsQuestReceiver && quest->QuestState == EAQ_QuestState::Valid)
 		{
-			if (quest->QuestState == EAQ_QuestState::Valid)
-			{
-				SetQuestMarker(true, true);
-				return;
-			}
+			ValidQuests.Add(quest);
+			bIsAnyQuestValid = true;
 		}
-
-		/* If none, check if any quest is pending and if this is the QuestGiver */
-		if (QuestData.Value.bIsQuestGiver)
+		/* Check if there is any Pending Quests*/
+		else if (QuestData.Value.bIsQuestGiver 
+			&& quest->QuestState == EAQ_QuestState::Pending 
+			&& quest->bIsRequirementMet
+			&& !bIsAnyQuestValid)
 		{
-			if (quest->QuestState == EAQ_QuestState::Pending && quest->bIsRequirementMet)
-			{
-				SetQuestMarker(true, false);
-				bIsAnyQuestPending = true;
-			}
+			PendingQuests.Add(quest);
+			bIsAnyQuestPending = true;
 		}
 	}
 
-	/* Update the Quest Marker accordingly */
-	if(!bIsAnyQuestPending)
-		SetQuestMarker(false, false);
+	/* Check the Quest Type of the Valid Quests */
+	EAQ_QuestType currentType = EAQ_QuestType::Weekly;
+	if (bIsAnyQuestValid)
+	{
+		CheckQuestTypes(ValidQuests, currentType);
+		SetQuestMarker(true, true, currentType);
+		return;
+	}
+
+	/* Check the Quest Type of the Pending Quests */
+	if (bIsAnyQuestPending)
+	{
+		CheckQuestTypes(PendingQuests, currentType);
+		SetQuestMarker(true, false, currentType);
+		return;
+	}
+
+	/* If no Pending nor Valid Quests, hide the Quest Marker */
+	SetQuestMarker(false, false);
+}
+
+void UAQ_QuestComponent::CheckQuestTypes(TArray<UAQ_Quest*>& ValidQuests, EAQ_QuestType& currentType)
+{
+	for (auto quests : ValidQuests)
+	{
+		switch (quests->QuestData->QuestType)
+		{
+		case EAQ_QuestType::MainQuest:
+			currentType = EAQ_QuestType::MainQuest;
+			return;
+
+		case EAQ_QuestType::SideQuest:
+			currentType = EAQ_QuestType::SideQuest;
+			break;
+
+		case EAQ_QuestType::Daily:
+		case EAQ_QuestType::Weekly:
+		{
+			if (currentType != EAQ_QuestType::SideQuest)
+				currentType = quests->QuestData->QuestType;
+			break;
+		}
+		}
+	}
 }
 
 void UAQ_QuestComponent::RerunScript()
@@ -216,28 +259,10 @@ void UAQ_QuestComponent::BindFunctionsToQuestDelegates()
 			switch (newQuest->QuestState)
 			{
 			case EAQ_QuestState::Valid:
-			{
-				if (QuestData.Value.bIsQuestReceiver)
-					bIsAnyQuestValid = true;
-
-				newQuest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChangedWrapper);
-				break;
-			}
-
 			case EAQ_QuestState::Pending:
-			{
-				if (QuestData.Value.bIsQuestGiver)
-					bIsAnyQuestPending = true;
-
-				newQuest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChangedWrapper);
-				break;
-			}
-				
 			case EAQ_QuestState::Active:
-			{
 				newQuest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChangedWrapper);
 				break;
-			}
 
 			default:
 				break;
@@ -250,13 +275,11 @@ void UAQ_QuestComponent::BindFunctionsToQuestDelegates()
 				if(newQuest->QuestState == EAQ_QuestState::Archive)
 					newQuest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_QuestComponent::OnQuestStateChangedWrapper);
 			}
-
-			if (bIsAnyQuestValid)
-				SetQuestMarker(true, true);
-			else if (bIsAnyQuestPending)
-				SetQuestMarker(true, false);
 		}
 	}
+	
+	UpdateQuestMarker();
+
 }
 
 void UAQ_QuestComponent::CreateQuestMarkerWidget()

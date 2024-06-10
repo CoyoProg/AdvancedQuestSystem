@@ -7,6 +7,8 @@
 #include "AQ_QuestComponent.generated.h"
 
 class UAQ_QuestData;
+enum class EAQ_QuestType : uint8;
+
 class UWidgetComponent;
 class UUserWidget;
 class UAQ_QuestManager;
@@ -78,10 +80,12 @@ public:
 	float zOffset = 0;
 
 	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | UI")
-	void SetQuestMarker(bool isMarkerVisible, bool isQuestValid);
+	void SetQuestMarker(bool isMarkerVisible, bool isQuestValid, EAQ_QuestType QuestState = EAQ_QuestType::MainQuest);
 
 	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | UI")
 	void UpdateQuestMarker();
+
+	void CheckQuestTypes(TArray<UAQ_Quest*>& ValidQuests, EAQ_QuestType& currentType);
 
 
 	/* References */
