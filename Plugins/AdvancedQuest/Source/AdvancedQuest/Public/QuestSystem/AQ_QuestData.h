@@ -67,38 +67,41 @@ class ADVANCEDQUEST_API UAQ_QuestData : public UPrimaryDataAsset
 	
 public:
 	/* Quest properties */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Data")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Overview")
 	EAQ_QuestType QuestType = EAQ_QuestType::MainQuest;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Data")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Overview")
+	FString QuestLocation = FString();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Overview")
 	FString questTitle = FString();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Data")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Overview")
 	FString questDescription = FString();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Data")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Overview")
 	FString questSummary = FString();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Data")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Overview")
 	int QuestID = 0;
 
 	/* Requirements */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Data")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Overview")
 	FAQ_RequiermentData questRequirements;
 
 
 	/* Objectives */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Data")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Overview")
 	TArray<FAQ_Objectives> objectives;
 
 
 	/** Rewards */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Data")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Overview")
 	int xpReward = 0;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Data")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Overview")
 	int goldReward = 0;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Data")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest Overview")
 	TMap<class UAQ_ItemData*, int> itemsReward; // Need to be replaced with your Own ItemData
 };

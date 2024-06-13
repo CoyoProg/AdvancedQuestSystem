@@ -193,9 +193,8 @@ void UAQ_QuestComponent::Interact(const TScriptInterface<IAQ_PlayerChannelsFacad
 		if (quest == nullptr)
 			continue;
 
-		if(quest->QuestState == EAQ_QuestState::Pending &&
-			quest->bIsRequirementMet &&
-			QuestID.Value.bIsQuestGiver)
+		if(quest->QuestState == EAQ_QuestState::Pending 
+			&& QuestID.Value.bIsQuestGiver)
 			quests.Add(quest);
 
 		if (quest->QuestState == EAQ_QuestState::Valid &&
@@ -307,6 +306,8 @@ void UAQ_QuestComponent::CreateQuestMarkerWidget()
 
 			float zCoord = extent.Z * 2 + zOffset;
 			QuestMarkerWidget->SetRelativeLocation(FVector(0, 0, zCoord));
+			QuestMarkerWidget->SetDrawSize(FVector2D(1024.f));
+			QuestMarkerWidget->SetWorldScale3D(FVector(.1f));
 		}
 	}
 	else
