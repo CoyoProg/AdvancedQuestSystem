@@ -306,8 +306,8 @@ void UAQ_QuestComponent::CreateQuestMarkerWidget()
 
 			float zCoord = extent.Z * 2 + zOffset;
 			QuestMarkerWidget->SetRelativeLocation(FVector(0, 0, zCoord));
-			QuestMarkerWidget->SetDrawSize(FVector2D(1024.f));
-			QuestMarkerWidget->SetWorldScale3D(FVector(.1f));
+			QuestMarkerWidget->SetDrawSize(FVector2D(256.f));
+			QuestMarkerWidget->SetWorldScale3D(FVector(.5f));
 		}
 	}
 	else
