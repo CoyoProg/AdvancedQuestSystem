@@ -11,10 +11,12 @@
 #include "GameFramework/Pawn.h"
 #include "Components/WidgetComponent.h"
 #include "Blueprint/UserWidget.h"
+#include <Kismet/KismetMathLibrary.h>
 
 #if WITH_EDITOR
 #include "Editor.h"
 #endif
+
 
 UAQ_QuestComponent::UAQ_QuestComponent()
 {
@@ -53,6 +55,25 @@ void UAQ_QuestComponent::LateBeginPlay()
 		CreateQuestMarkerWidget();
 
 	BindFunctionsToQuestDelegates();
+}
+
+void UAQ_QuestComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	APlayerCameraManager* cameraManager = GetWorld()->GetFirstLocalPlayerFromController()->PlayerController->PlayerCameraManager;
+	
+	CurrentDelta += DeltaTime;
+	if (CurrentDelta >= 2 * PI)
+		CurrentDelta = 0;
+
+	float floatingEffect = sin(CurrentDelta * FloatingSpeed) * FloatingLength;
+
+	if (cameraManager && QuestMarkerWidget && QuestMarkerWidget->IsVisible())
+	{
+		QuestMarkerWidget->SetWorldRotation(UKismetMathLibrary::FindLookAtRotation(QuestMarkerWidget->GetComponentLocation(), cameraManager->GetCameraLocation()));
+		QuestMarkerWidget->AddWorldOffset(FVector(0, 0, floatingEffect));
+	}
 }
 
 void UAQ_QuestComponent::SetQuestMarker(bool isMarkerVisible, bool isQuestValid, EAQ_QuestType QuestState)
@@ -306,8 +327,8 @@ void UAQ_QuestComponent::CreateQuestMarkerWidget()
 
 			float zCoord = extent.Z * 2 + zOffset;
 			QuestMarkerWidget->SetRelativeLocation(FVector(0, 0, zCoord));
-			QuestMarkerWidget->SetDrawSize(FVector2D(256.f));
-			QuestMarkerWidget->SetWorldScale3D(FVector(.5f));
+			QuestMarkerWidget->SetDrawSize(FVector2D(512.f));
+			QuestMarkerWidget->SetWorldScale3D(FVector(.2f));
 		}
 	}
 	else

@@ -43,6 +43,8 @@ protected:
 	virtual void BeginPlay() override;
 	void LateBeginPlay();
 
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
 public:
 	/* Quests */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Component")
@@ -112,4 +114,8 @@ private:
 	/* DEBUG */
 	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Debug")
 	void RerunScript(); // Usefull only to see all the quest Marker when using the Tool
+
+	float CurrentDelta = 0.f;
+	float FloatingSpeed = 2.f;
+	float FloatingLength = .05f;
 };
