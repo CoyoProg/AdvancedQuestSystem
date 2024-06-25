@@ -13,9 +13,12 @@
 class UAQ_InventoryChannel;
 class UAQ_EnvironmentChannel;
 class UAQ_CombatChannel;
-class UAQ_StatsChannel;
 class UAQ_QuestChannel;
+class UAQ_StatsChannel;
+class UAQ_AudioChannel;
+
 class UAQ_QuestManager;
+class UAQ_QuestSounds;
 class UUserWidget;
 
 /**
@@ -94,6 +97,9 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Advanced Quest | Quest")
 	int CheckForPlayerStats(FAQ_Objectives currentObjective);	// This is implemented in blueprint 
 
+	/* Sounds */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Advanced Quest | Sounds | Quest")
+	UAQ_QuestSounds* QuestSounds = nullptr;
 
 protected:
 	virtual void BeginPlay() override;
@@ -114,6 +120,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Advanced Quest | Channels")
 	UAQ_StatsChannel* StatsChannel = nullptr;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Advanced Quest | Channels")
+	UAQ_AudioChannel* AudioChannel = nullptr;
+
 	/* Player Stats */
 	UPROPERTY(BlueprintReadOnly, Category = "Advanced Quest | Player")
 	int PlayerLevel = 1;
@@ -131,4 +140,6 @@ protected:
 
 private:
 	UAQ_QuestManager* QuestManager;
+
+	bool OnLoad = false;
 };

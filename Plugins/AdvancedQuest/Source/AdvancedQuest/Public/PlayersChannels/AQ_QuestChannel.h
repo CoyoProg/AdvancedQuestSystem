@@ -11,7 +11,7 @@
 class UAQ_Quest;
 class UAQ_BookQuest;
 class UAQ_QuestComponent;
-class IAQ_PlayerChannelsFacade;
+class UAQ_QuestSounds;
 class UWidgetComponent;
 class UUserWidget;
 
@@ -35,7 +35,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
 	void SetQuestWidget(UAQ_BookQuest* InQuestWidget) { QuestWidgets = InQuestWidget; }
 
-
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Advanced Quest | UI")
 	UAQ_BookQuest* QuestWidgets = nullptr;
 
@@ -52,4 +51,11 @@ public:
 
 	FLevelRequirementChangedDelegate LevelRequirementChangedDelegate;
 	FSpecialEventTriggerDelegate SpecialEventTriggerDelegate;
+
+	/* References */
+	UPROPERTY(BlueprintReadOnly, Category = "Advanced Quest | Audio")
+	UAQ_AudioChannel* AudioChannel = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Advanced Quest | Sounds | Quest")
+	UAQ_QuestSounds* SoundBank = nullptr;
 };

@@ -67,7 +67,7 @@ void UAQ_QuestComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	if (CurrentDelta >= 2 * PI)
 		CurrentDelta = 0;
 
-	float floatingEffect = sin(CurrentDelta * FloatingSpeed) * FloatingLength;
+	float floatingEffect = sin(CurrentDelta * FloatingSpeed) * FloatingAmplitude;
 
 	if (cameraManager && QuestMarkerWidget && QuestMarkerWidget->IsVisible())
 	{

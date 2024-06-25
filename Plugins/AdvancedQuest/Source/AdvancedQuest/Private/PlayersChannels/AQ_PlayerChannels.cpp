@@ -7,10 +7,12 @@
 #include "PlayersChannels/AQ_CombatChannel.h"
 #include "PlayersChannels/AQ_StatsChannel.h"
 #include "PlayersChannels/AQ_QuestChannel.h"
+#include "PlayersChannels/AQ_AudioChannel.h"
 #include <QuestSystem/AQ_QuestManager.h>
 #include "QuestSystem/AQ_BookQuest.h"
 #include "QuestSystem/AQ_Quest.h"
 #include "DataAssets/AQ_ItemData.h"
+#include "DataAssets/AQ_QuestSounds.h"
 #include "Enums/AQ_NotifyEventType.h"
 
 #include "EnhancedInputComponent.h"
@@ -24,6 +26,7 @@ UAQ_PlayerChannels::UAQ_PlayerChannels()
 	EnvironmentChannel = CreateDefaultSubobject<UAQ_EnvironmentChannel>(TEXT("Environment Channel"));
 	CombatChannel = CreateDefaultSubobject<UAQ_CombatChannel>(TEXT("Combat Channel"));
 	StatsChannel = CreateDefaultSubobject<UAQ_StatsChannel>(TEXT("Stats Channel"));
+	AudioChannel = CreateDefaultSubobject<UAQ_AudioChannel>(TEXT("Audio Channel"));
 	QuestChannel = CreateDefaultSubobject<UAQ_QuestChannel>(TEXT("Quest Channel"));
 
 	PrimaryComponentTick.bCanEverTick = true;
@@ -45,6 +48,11 @@ void UAQ_PlayerChannels::BeginPlay()
 	}
 
 	QuestManager = GetOwner()->FindComponentByClass<UAQ_QuestManager>();
+
+	/* Setup Audio Channel & Sound Banks*/
+	AudioChannel->CurrentWorldContext = this;
+	QuestChannel->AudioChannel = AudioChannel;
+	QuestChannel->SoundBank = QuestSounds;
 
 	InitQuestWidgets();
 	SetPlayerInputComponent();
@@ -220,6 +228,7 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 	{
 	case EAQ_QuestState::Active:
 	{
+		OnLoad = true;
 		OnQuestEnable_Implementation(quest);
 		if(QuestChannel->QuestWidgets)
 			QuestChannel->QuestWidgets->OnLoadQuests(quest);
@@ -274,6 +283,9 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 
 void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 {
+	if (!OnLoad)
+		AudioChannel->Play2DSound(QuestSounds->QuestStart);
+
 	/* Subscribe the player Channel to the OnStateChanged delegate */
 	quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
 
@@ -338,6 +350,8 @@ void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 			quest->UpdateQuestState();
 		}
 	}
+
+	OnLoad = false;
 }
 
 void UAQ_PlayerChannels::OnEnvironmentEventNotify_Implementation(EAQ_EnvironmentEventType eventType, UObject* entity)

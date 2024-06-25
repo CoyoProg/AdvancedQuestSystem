@@ -98,6 +98,14 @@ protected:
 	UAQ_QuestManager* QuestManager = nullptr;
 
 
+	/* Floating movement */
+	float CurrentDelta = 0.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Floating Movement")
+	float FloatingSpeed = 2.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Floating Movement")
+	float FloatingAmplitude = .05f;
+
+
 	// Use this delegate to be able to update actors in blueprint
 	// when OnQuestStateChanged is triggered
 	UPROPERTY(BlueprintAssignable, Category = "Advanced Quest | Events")
@@ -114,8 +122,4 @@ private:
 	/* DEBUG */
 	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Debug")
 	void RerunScript(); // Usefull only to see all the quest Marker when using the Tool
-
-	float CurrentDelta = 0.f;
-	float FloatingSpeed = 2.f;
-	float FloatingLength = .05f;
 };

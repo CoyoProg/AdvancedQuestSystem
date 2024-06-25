@@ -2,10 +2,11 @@
 
 #include "PlayersChannels/AQ_QuestChannel.h"
 
-#include <PlayersChannels/AQ_PlayerChannelsFacade.h>
+#include "PlayersChannels/AQ_AudioChannel.h"
 #include "QuestSystem/AQ_BookQuest.h"
 #include "QuestSystem/AQ_QuestComponent.h"
 #include "QuestSystem/AQ_Quest.h"
+#include "DataAssets/AQ_QuestSounds.h"
 
 #include <Kismet/GameplayStatics.h>
 #include "Components/WidgetComponent.h"
@@ -34,9 +35,25 @@ void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestStat
 	switch (QuestState)
 	{
 	case EAQ_QuestState::Active:
+	{
+		/* Update the Book Quest */
+		if (QuestWidgets)
+			QuestWidgets->UpdateQuestWidgets(QuestUpdate);
+		break;
+	}
 	case EAQ_QuestState::Valid:
+	{
+		AudioChannel->Play2DSound(SoundBank->QuestValid);
+
+		/* Update the Book Quest */
+		if (QuestWidgets)
+			QuestWidgets->UpdateQuestWidgets(QuestUpdate);
+		break;
+	}
 	case EAQ_QuestState::Failed:
 	{
+		AudioChannel->Play2DSound(SoundBank->QuestFailed);
+
 		/* Update the Book Quest */
 		if (QuestWidgets)
 			QuestWidgets->UpdateQuestWidgets(QuestUpdate);
@@ -44,8 +61,22 @@ void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestStat
 	}
 
 	case EAQ_QuestState::Pending:
+	{
+		AudioChannel->Play2DSound(SoundBank->AbandonQuest);
+
+		/* Remove the Quest from the Book Quest */
+		if (QuestWidgets)
+			QuestWidgets->RemoveQuest(QuestUpdate);
+
+		/* Remove the Quest Channel to the Quest Update delegate*/
+		QuestUpdate->ObjectivesUpdatedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestUpdate);
+		QuestUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestStateChanged);
+		break;
+	}
 	case EAQ_QuestState::Archive:
 	{
+		AudioChannel->Play2DSound(SoundBank->QuestEnd);
+
 		/* Remove the Quest from the Book Quest */
 		if (QuestWidgets)
 			QuestWidgets->RemoveQuest(QuestUpdate);
