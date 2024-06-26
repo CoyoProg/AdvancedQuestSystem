@@ -6,6 +6,9 @@
 #include "Components/AudioComponent.h"
 void UAQ_AudioChannel::Play2DSound(USoundBase* SoundToPlay)
 {
+	if (!SoundToPlay)
+		return;
+
 	if(AudioSound)
 		AudioSound->Stop();
 

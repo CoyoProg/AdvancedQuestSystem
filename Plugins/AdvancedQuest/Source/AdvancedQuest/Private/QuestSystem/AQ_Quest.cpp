@@ -38,8 +38,8 @@ void UAQ_Quest::SetQuestData(UAQ_QuestData* questDataP)
 
 void UAQ_Quest::UpdateQuestState()
 {
-	if (ObjectivesUpdatedDelegate.IsBound())
-		ObjectivesUpdatedDelegate.Broadcast(this);
+	if (PositiveObjectiveUpdateDelegate.IsBound())
+		PositiveObjectiveUpdateDelegate.Broadcast(this);
 
 	AllObjectivesCompleted = true;
 	int objectivesCount = QuestData->objectives.Num();
@@ -106,8 +106,8 @@ void UAQ_Quest::ResetObjectives()
 		Objectives.isObjectiveComplete = false;
 	}
 
-	if (ObjectivesUpdatedDelegate.IsBound())
-		ObjectivesUpdatedDelegate.Broadcast(this);
+	if (NegativeObjectiveUpdateDelegate.IsBound())
+		NegativeObjectiveUpdateDelegate.Broadcast(this);
 }
 
 void UAQ_Quest::QuestFailed()
@@ -220,8 +220,14 @@ void UAQ_Quest::UpdateCurrentObjective(int CurrentIndex, float amount)
 	   We don't want to have a bigger number showing in the quest Log */
 	if (currentAmount <= amountNeeded)
 	{
-		if (ObjectivesUpdatedDelegate.IsBound())
-			ObjectivesUpdatedDelegate.Broadcast(this);
+		if (amount < 0 && NegativeObjectiveUpdateDelegate.IsBound())
+		{
+			NegativeObjectiveUpdateDelegate.Broadcast(this);
+			return;
+		}
+
+		if (PositiveObjectiveUpdateDelegate.IsBound())
+			PositiveObjectiveUpdateDelegate.Broadcast(this);
 	}
 }
 

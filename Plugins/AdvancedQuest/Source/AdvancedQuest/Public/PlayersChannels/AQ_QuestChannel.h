@@ -46,8 +46,14 @@ public:
 	UFUNCTION()
 	void OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestState QuestState);
 
+	void PlayQuestEndSound(UAQ_Quest* InQuest);
+	void PlayQuestStartSound(UAQ_Quest* InQuest);
+
 	UFUNCTION()
-	void OnQuestUpdate(UAQ_Quest* QuestUpdate);
+	void OnQuestProgress(UAQ_Quest* QuestUpdate);
+
+	UFUNCTION()
+	void OnQuestRegression(UAQ_Quest* QuestUpdate);
 
 	FLevelRequirementChangedDelegate LevelRequirementChangedDelegate;
 	FSpecialEventTriggerDelegate SpecialEventTriggerDelegate;

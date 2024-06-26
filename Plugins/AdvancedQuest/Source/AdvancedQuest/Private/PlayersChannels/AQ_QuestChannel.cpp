@@ -69,20 +69,22 @@ void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestStat
 			QuestWidgets->RemoveQuest(QuestUpdate);
 
 		/* Remove the Quest Channel to the Quest Update delegate*/
-		QuestUpdate->ObjectivesUpdatedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestUpdate);
+		QuestUpdate->PositiveObjectiveUpdateDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestProgress);
+		QuestUpdate->NegativeObjectiveUpdateDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestRegression);
 		QuestUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestStateChanged);
 		break;
 	}
 	case EAQ_QuestState::Archive:
 	{
-		AudioChannel->Play2DSound(SoundBank->QuestEnd);
+		PlayQuestEndSound(QuestUpdate);
 
 		/* Remove the Quest from the Book Quest */
 		if (QuestWidgets)
 			QuestWidgets->RemoveQuest(QuestUpdate);
 
 		/* Remove the Quest Channel to the Quest Update delegate*/
-		QuestUpdate->ObjectivesUpdatedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestUpdate);
+		QuestUpdate->PositiveObjectiveUpdateDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestProgress);
+		QuestUpdate->NegativeObjectiveUpdateDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestRegression);
 		QuestUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestStateChanged);
 		break;
 	}
@@ -101,6 +103,54 @@ void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestStat
 	}
 }
 
+void UAQ_QuestChannel::PlayQuestEndSound(UAQ_Quest* InQuest)
+{
+	if (SoundBank->bUseAdvancedSound)
+	{
+		switch (InQuest->QuestData->QuestType)
+		{
+		case EAQ_QuestType::MainQuest:
+			AudioChannel->Play2DSound(SoundBank->MainQuestEnd);
+			break;
+		case EAQ_QuestType::SideQuest:
+			AudioChannel->Play2DSound(SoundBank->SideQuestEnd);
+			break;
+		case EAQ_QuestType::Daily:
+			AudioChannel->Play2DSound(SoundBank->DailyQuestEnd);
+			break;
+		case EAQ_QuestType::Weekly:
+			AudioChannel->Play2DSound(SoundBank->WeeklyQuestEnd);
+			break;
+		}
+	}
+	else
+		AudioChannel->Play2DSound(SoundBank->QuestEnd);
+}
+
+void UAQ_QuestChannel::PlayQuestStartSound(UAQ_Quest* InQuest)
+{
+	if (SoundBank->bUseAdvancedSound)
+	{
+		switch (InQuest->QuestData->QuestType)
+		{
+		case EAQ_QuestType::MainQuest:
+			AudioChannel->Play2DSound(SoundBank->MainQuestStart);
+			break;
+		case EAQ_QuestType::SideQuest:
+			AudioChannel->Play2DSound(SoundBank->SideQuestStart);
+			break;
+		case EAQ_QuestType::Daily:
+			AudioChannel->Play2DSound(SoundBank->DailyQuestStart);
+			break;
+		case EAQ_QuestType::Weekly:
+			AudioChannel->Play2DSound(SoundBank->WeeklyQuestStart);
+			break;
+		}
+	}
+	else
+		AudioChannel->Play2DSound(SoundBank->QuestStart);
+}
+
 void UAQ_QuestChannel::OnPlayerLevelChange(int newLevel)
 {
 	if (LevelRequirementChangedDelegate.IsBound())
@@ -113,7 +163,15 @@ void UAQ_QuestChannel::OnSpecialEventTrigger(UAQ_SpecialEventData* specialEvent)
 		SpecialEventTriggerDelegate.Broadcast(specialEvent);
 }
 
-void UAQ_QuestChannel::OnQuestUpdate(UAQ_Quest* QuestUpdate)
+void UAQ_QuestChannel::OnQuestProgress(UAQ_Quest* QuestUpdate)
+{
+	AudioChannel->Play2DSound(SoundBank->ObjectiveUpdate);
+
+	if (QuestWidgets)
+		QuestWidgets->UpdateQuestWidgets(QuestUpdate);
+}
+
+void UAQ_QuestChannel::OnQuestRegression(UAQ_Quest* QuestUpdate)
 {
 	if (QuestWidgets)
 		QuestWidgets->UpdateQuestWidgets(QuestUpdate);

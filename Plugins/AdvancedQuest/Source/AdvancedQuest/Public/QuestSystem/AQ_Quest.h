@@ -23,7 +23,8 @@ enum class EAQ_QuestState : uint8
 
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FQuestStateChangedDelegate, UAQ_Quest*, QuestUpdate, EAQ_QuestState, QuestState);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FObjectivesUpdatedDelegate, UAQ_Quest*, QuestUpdate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPositiveObjectiveUpdateDelegate, UAQ_Quest*, QuestUpdate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FNegativeObjectiveUpdateDelegate, UAQ_Quest*, QuestUpdate);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FQuestRequirementMetDelegate, UAQ_Quest*, QuestUpdate);
 
 /**
@@ -98,7 +99,8 @@ public:
 
 	/* Delegates */
 	FQuestStateChangedDelegate QuestStateChangedDelegate;
-	FObjectivesUpdatedDelegate ObjectivesUpdatedDelegate;
+	FPositiveObjectiveUpdateDelegate PositiveObjectiveUpdateDelegate;
+	FNegativeObjectiveUpdateDelegate NegativeObjectiveUpdateDelegate;
 	FQuestRequirementMetDelegate QuestRequirementMetDelegate;
 
 

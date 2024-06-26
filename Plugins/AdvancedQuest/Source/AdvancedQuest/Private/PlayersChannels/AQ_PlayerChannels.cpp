@@ -232,6 +232,8 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 		OnQuestEnable_Implementation(quest);
 		if(QuestChannel->QuestWidgets)
 			QuestChannel->QuestWidgets->OnLoadQuests(quest);
+
+		OnLoad = false;
 		break;
 	}
 
@@ -284,14 +286,10 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 {
 	if (!OnLoad)
-		AudioChannel->Play2DSound(QuestSounds->QuestStart);
+	{
+		QuestChannel->PlayQuestStartSound(quest);
+	}
 
-	/* Subscribe the player Channel to the OnStateChanged delegate */
-	quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
-
-	/* Subscribe the quest Channel to the ObjectivesUpdate & OnStateChanged delegate*/
-	quest->QuestStateChangedDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestStateChanged);
-	quest->ObjectivesUpdatedDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestUpdate);
 
 	/* Add the quest as Observer to the different channels */
 	for (auto& questObjectives : quest->QuestData->objectives)
@@ -351,7 +349,13 @@ void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 		}
 	}
 
-	OnLoad = false;
+	/* Subscribe the player Channel to the OnStateChanged delegate */
+	quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
+
+	/* Subscribe the quest Channel to the ObjectivesUpdate & OnStateChanged delegate*/
+	quest->QuestStateChangedDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestStateChanged);
+	quest->PositiveObjectiveUpdateDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestProgress);
+	quest->NegativeObjectiveUpdateDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestRegression);
 }
 
 void UAQ_PlayerChannels::OnEnvironmentEventNotify_Implementation(EAQ_EnvironmentEventType eventType, UObject* entity)
