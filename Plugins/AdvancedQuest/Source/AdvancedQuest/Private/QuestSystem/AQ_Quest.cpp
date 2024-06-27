@@ -257,7 +257,14 @@ void UAQ_Quest::OnEventRequirementChange(UAQ_SpecialEventData* specialEvent)
 
 void UAQ_Quest::OnLevelRequirementChange(int PlayerLevel)
 {
-	if (QuestData->questRequirements.PlayerLevel != PlayerLevel)
+	FString DebugMessage = TEXT("OnLevelR Trigger");
+	float TimeToDisplay = 5.0f; // Display time in seconds
+	FColor TextColor = FColor::Green; // Message text color
+
+	// Create the debug message
+	GEngine->AddOnScreenDebugMessage(-1, TimeToDisplay, TextColor, DebugMessage);
+
+	if (QuestData->questRequirements.PlayerLevel > PlayerLevel)
 		return;
 
 	QuestData->questRequirements.LevelMet = true;

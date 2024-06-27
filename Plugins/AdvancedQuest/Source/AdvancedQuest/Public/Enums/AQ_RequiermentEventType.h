@@ -12,6 +12,8 @@ struct FAQ_RequiermentData
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest | Requirement")
 	int PlayerLevel = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest | Requirement")
 	bool LevelMet = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest | Requirement")

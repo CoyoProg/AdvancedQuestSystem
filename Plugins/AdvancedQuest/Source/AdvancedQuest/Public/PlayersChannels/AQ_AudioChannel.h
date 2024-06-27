@@ -18,6 +18,7 @@ public:
 	void Play2DSound(USoundBase* SoundToPlay);
 
 	UObject* CurrentWorldContext;
+	bool bIsMuted = false;
 
 private:
 	UAudioComponent* AudioSound;

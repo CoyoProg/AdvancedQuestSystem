@@ -101,7 +101,6 @@ void UAQ_PlayerChannels::SetPlayerInputComponent()
 		
 		// Save Quests
 		EnhancedInputComponent->BindAction(SaveQuestsAction, ETriggerEvent::Started, this, &UAQ_PlayerChannels::SaveGame);
-
 	}
 }
 
@@ -176,7 +175,6 @@ void UAQ_PlayerChannels::RemoveObserver(UAQ_Quest* entity, EAQ_ObjectivesType ev
 	case EAQ_ObjectivesType::PlayerLevelUp:
 	{
 		StatsChannel->OnStatsEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify);
-		//OnPlayerEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify);
 		break;
 	}
 	}
@@ -228,12 +226,13 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 	{
 	case EAQ_QuestState::Active:
 	{
-		OnLoad = true;
+		AudioChannel->bIsMuted = true;
+
 		OnQuestEnable_Implementation(quest);
 		if(QuestChannel->QuestWidgets)
 			QuestChannel->QuestWidgets->OnLoadQuests(quest);
 
-		OnLoad = false;
+		AudioChannel->bIsMuted = false;
 		break;
 	}
 
@@ -285,11 +284,15 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 
 void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 {
-	if (!OnLoad)
-	{
-		QuestChannel->PlayQuestStartSound(quest);
-	}
+	QuestChannel->PlayQuestStartSound(quest);
+	
+	/* Subscribe the player Channel to the OnStateChanged delegate */
+	quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
 
+	/* Subscribe the quest Channel to the ObjectivesUpdate & OnStateChanged delegate*/
+	quest->QuestStateChangedDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestStateChanged);
+	quest->PositiveObjectiveUpdateDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestProgress);
+	quest->NegativeObjectiveUpdateDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestRegression);
 
 	/* Add the quest as Observer to the different channels */
 	for (auto& questObjectives : quest->QuestData->objectives)
@@ -345,17 +348,12 @@ void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 			if (currentAmount >= questObjectives.amountNeeded)
 				questObjectives.isObjectiveComplete = true;
 
+			/* We mute the audio so their is no Objective Update Sound when a Quest Start */
+			AudioChannel->bIsMuted = true;
 			quest->UpdateQuestState();
+			AudioChannel->bIsMuted = false;
 		}
 	}
-
-	/* Subscribe the player Channel to the OnStateChanged delegate */
-	quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
-
-	/* Subscribe the quest Channel to the ObjectivesUpdate & OnStateChanged delegate*/
-	quest->QuestStateChangedDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestStateChanged);
-	quest->PositiveObjectiveUpdateDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestProgress);
-	quest->NegativeObjectiveUpdateDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestRegression);
 }
 
 void UAQ_PlayerChannels::OnEnvironmentEventNotify_Implementation(EAQ_EnvironmentEventType eventType, UObject* entity)

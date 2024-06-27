@@ -6,11 +6,11 @@
 #include "Components/AudioComponent.h"
 void UAQ_AudioChannel::Play2DSound(USoundBase* SoundToPlay)
 {
-	if (!SoundToPlay)
+	if (!SoundToPlay || bIsMuted)
 		return;
-
-	if(AudioSound)
+	
+	if(AudioSound && AudioSound->IsPlaying())
 		AudioSound->Stop();
-
+	
 	AudioSound = UGameplayStatics::SpawnSound2D(CurrentWorldContext, SoundToPlay);
 }

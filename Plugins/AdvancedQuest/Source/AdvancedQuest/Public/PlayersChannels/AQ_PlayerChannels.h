@@ -140,6 +140,4 @@ protected:
 
 private:
 	UAQ_QuestManager* QuestManager;
-
-	bool OnLoad = false;
 };

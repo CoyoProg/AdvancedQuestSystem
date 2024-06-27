@@ -59,9 +59,6 @@ public:
 	FSpecialEventTriggerDelegate SpecialEventTriggerDelegate;
 
 	/* References */
-	UPROPERTY(BlueprintReadOnly, Category = "Advanced Quest | Audio")
 	UAQ_AudioChannel* AudioChannel = nullptr;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Advanced Quest | Sounds | Quest")
 	UAQ_QuestSounds* SoundBank = nullptr;
 };
