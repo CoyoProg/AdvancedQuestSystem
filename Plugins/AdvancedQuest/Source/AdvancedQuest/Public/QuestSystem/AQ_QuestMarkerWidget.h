@@ -4,10 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-
+#include "AQ_QuestData.h"
 #include "AQ_QuestMarkerWidget.generated.h"
-
-enum class EAQ_QuestType : uint8;
 
 /**
  * 

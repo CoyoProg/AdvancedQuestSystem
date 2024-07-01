@@ -4,6 +4,8 @@
 
 #include <Kismet/GameplayStatics.h>
 #include "Components/AudioComponent.h"
+#include "Sound/SoundBase.h"
+
 void UAQ_AudioChannel::Play2DSound(USoundBase* SoundToPlay)
 {
 	if (!SoundToPlay || bIsMuted)

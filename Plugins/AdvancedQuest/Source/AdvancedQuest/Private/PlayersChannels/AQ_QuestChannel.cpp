@@ -107,10 +107,7 @@ void UAQ_QuestChannel::PlayQuestEndSound(UAQ_Quest* InQuest)
 {
 	if (!SoundBank->bUseAdvancedSound)
 	{
-		if (AudioChannel)
-		{
-			AudioChannel->Play2DSound(SoundBank->QuestEnd);
-		}
+		AudioChannel->Play2DSound(SoundBank->QuestEnd);
 		return;
 	}
 	

@@ -6,6 +6,9 @@
 #include "UObject/NoExportTypes.h"
 #include "AQ_AudioChannel.generated.h"
 
+class USoundBase;
+class UAudioComponent;
+
 /**
  * 
  */

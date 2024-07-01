@@ -4,10 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "AQ_QuestData.h"
 #include "AQ_QuestComponent.generated.h"
-
-class UAQ_QuestData;
-enum class EAQ_QuestType : uint8;
 
 class UWidgetComponent;
 class UUserWidget;

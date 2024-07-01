@@ -12,6 +12,7 @@ class UAQ_Quest;
 class UAQ_BookQuest;
 class UAQ_QuestComponent;
 class UAQ_QuestSounds;
+class UAQ_AudioChannel;
 class UWidgetComponent;
 class UUserWidget;
 
