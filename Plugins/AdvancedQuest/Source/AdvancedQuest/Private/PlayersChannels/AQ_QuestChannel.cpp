@@ -43,7 +43,7 @@ void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestStat
 	}
 	case EAQ_QuestState::Valid:
 	{
-		AudioChannel->Play2DSound(SoundBank->QuestValid);
+		AudioChannel->Play2DSound(this, SoundBank->QuestValid);
 
 		/* Update the Book Quest */
 		if (QuestWidgets)
@@ -52,7 +52,7 @@ void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestStat
 	}
 	case EAQ_QuestState::Failed:
 	{
-		AudioChannel->Play2DSound(SoundBank->QuestFailed);
+		AudioChannel->Play2DSound(this, SoundBank->QuestFailed);
 
 		/* Update the Book Quest */
 		if (QuestWidgets)
@@ -62,7 +62,7 @@ void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestStat
 
 	case EAQ_QuestState::Pending:
 	{
-		AudioChannel->Play2DSound(SoundBank->AbandonQuest);
+		AudioChannel->Play2DSound(this, SoundBank->AbandonQuest);
 
 		/* Remove the Quest from the Book Quest */
 		if (QuestWidgets)
@@ -107,23 +107,23 @@ void UAQ_QuestChannel::PlayQuestEndSound(UAQ_Quest* InQuest)
 {
 	if (!SoundBank->bUseAdvancedSound)
 	{
-		AudioChannel->Play2DSound(SoundBank->QuestEnd);
+		AudioChannel->Play2DSound(this, SoundBank->QuestEnd);
 		return;
 	}
-	
+
 	switch (InQuest->QuestData->QuestType)
 	{
 	case EAQ_QuestType::MainQuest:
-		AudioChannel->Play2DSound(SoundBank->MainQuestEnd);
+		AudioChannel->Play2DSound(this, SoundBank->MainQuestEnd);
 		break;
 	case EAQ_QuestType::SideQuest:
-		AudioChannel->Play2DSound(SoundBank->SideQuestEnd);
+		AudioChannel->Play2DSound(this, SoundBank->SideQuestEnd);
 		break;
 	case EAQ_QuestType::Daily:
-		AudioChannel->Play2DSound(SoundBank->DailyQuestEnd);
+		AudioChannel->Play2DSound(this, SoundBank->DailyQuestEnd);
 		break;
 	case EAQ_QuestType::Weekly:
-		AudioChannel->Play2DSound(SoundBank->WeeklyQuestEnd);
+		AudioChannel->Play2DSound(this, SoundBank->WeeklyQuestEnd);
 		break;
 	}
 }
@@ -132,26 +132,26 @@ void UAQ_QuestChannel::PlayQuestStartSound(UAQ_Quest* InQuest)
 {
 	if (!SoundBank->bUseAdvancedSound)
 	{
-		AudioChannel->Play2DSound(SoundBank->QuestStart);
+		AudioChannel->Play2DSound(this, SoundBank->QuestStart);
 		return;
 	}
 
 	switch (InQuest->QuestData->QuestType)
 	{
 	case EAQ_QuestType::MainQuest:
-		AudioChannel->Play2DSound(SoundBank->MainQuestStart);
+		AudioChannel->Play2DSound(this, SoundBank->MainQuestStart);
 		break;
 
 	case EAQ_QuestType::SideQuest:
-		AudioChannel->Play2DSound(SoundBank->SideQuestStart);
+		AudioChannel->Play2DSound(this, SoundBank->SideQuestStart);
 		break;
 
 	case EAQ_QuestType::Daily:
-		AudioChannel->Play2DSound(SoundBank->DailyQuestStart);
+		AudioChannel->Play2DSound(this, SoundBank->DailyQuestStart);
 		break;
 
 	case EAQ_QuestType::Weekly:
-		AudioChannel->Play2DSound(SoundBank->WeeklyQuestStart);
+		AudioChannel->Play2DSound(this, SoundBank->WeeklyQuestStart);
 		break;
 	}
 }
@@ -170,7 +170,7 @@ void UAQ_QuestChannel::OnSpecialEventTrigger(UAQ_SpecialEventData* specialEvent)
 
 void UAQ_QuestChannel::OnQuestProgress(UAQ_Quest* QuestUpdate)
 {
-	AudioChannel->Play2DSound(SoundBank->ObjectiveUpdate);
+	AudioChannel->Play2DSound(this, SoundBank->ObjectiveUpdate);
 
 	if (QuestWidgets)
 		QuestWidgets->UpdateQuestWidgets(QuestUpdate);

@@ -7,7 +7,6 @@
 #include "AQ_AudioChannel.generated.h"
 
 class USoundBase;
-class UAudioComponent;
 
 /**
  * 
@@ -18,11 +17,6 @@ class ADVANCEDQUEST_API UAQ_AudioChannel : public UObject
 	GENERATED_BODY()
 	
 public:
-	void Play2DSound(USoundBase* SoundToPlay);
-
-	UObject* CurrentWorldContext;
+	void Play2DSound(UObject* WorldContext, USoundBase* SoundToPlay);
 	bool bIsMuted = false;
-
-private:
-	UAudioComponent* AudioSound;
 };

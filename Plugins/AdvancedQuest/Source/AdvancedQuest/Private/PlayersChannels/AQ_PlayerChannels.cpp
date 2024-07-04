@@ -50,7 +50,6 @@ void UAQ_PlayerChannels::BeginPlay()
 	QuestManager = GetOwner()->FindComponentByClass<UAQ_QuestManager>();
 
 	/* Setup Audio Channel & Sound Banks*/
-	AudioChannel->CurrentWorldContext = this;
 	QuestChannel->AudioChannel = AudioChannel;
 	QuestChannel->SoundBank = QuestSounds;
 
@@ -260,7 +259,9 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 				{
 					/* Bind to its QuestStateChanged */
 					UAQ_Quest* questRequirement = QuestManager->QueryQuest(questID.Key());
-					questRequirement->QuestStateChangedDelegate.AddUniqueDynamic(quest, &UAQ_Quest::OnQuestRequirementChange);
+
+					if(questRequirement)
+						questRequirement->QuestStateChangedDelegate.AddUniqueDynamic(quest, &UAQ_Quest::OnQuestRequirementChange);
 				}
 			}
 		}

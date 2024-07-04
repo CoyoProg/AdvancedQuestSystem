@@ -3,16 +3,12 @@
 #include "PlayersChannels/AQ_AudioChannel.h"
 
 #include <Kismet/GameplayStatics.h>
-#include "Components/AudioComponent.h"
 #include "Sound/SoundBase.h"
 
-void UAQ_AudioChannel::Play2DSound(USoundBase* SoundToPlay)
+void UAQ_AudioChannel::Play2DSound(UObject* WorldContext, USoundBase* SoundToPlay)
 {
 	if (!SoundToPlay || bIsMuted)
 		return;
-	
-	if(AudioSound && AudioSound->IsPlaying())
-		AudioSound->Stop();
-	
-	AudioSound = UGameplayStatics::SpawnSound2D(CurrentWorldContext, SoundToPlay);
+
+	UGameplayStatics::PlaySound2D(WorldContext, SoundToPlay);
 }

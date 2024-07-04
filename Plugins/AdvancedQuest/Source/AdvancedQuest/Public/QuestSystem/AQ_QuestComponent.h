@@ -11,7 +11,7 @@ class UWidgetComponent;
 class UUserWidget;
 class UAQ_QuestManager;
 class IAQ_PlayerChannelsFacade;
-
+class APlayerCameraManager;
 
 USTRUCT(Blueprintable, BlueprintType)
 struct FAQ_IsGiverOrReceiver
@@ -115,7 +115,10 @@ protected:
 private:
 	UWidgetComponent* QuestMarkerWidget = nullptr;
 	void CreateQuestMarkerWidget();
+	void MarkerFloatingMovement(float DeltaTime);
 
+	/* References */
+	APlayerCameraManager* cameraManager = nullptr;
 
 	/* DEBUG */
 	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Debug")

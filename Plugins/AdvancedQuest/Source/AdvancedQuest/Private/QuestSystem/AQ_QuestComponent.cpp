@@ -61,16 +61,23 @@ void UAQ_QuestComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	APlayerCameraManager* cameraManager = GetWorld()->GetFirstLocalPlayerFromController()->PlayerController->PlayerCameraManager;
-	
-	CurrentDelta += DeltaTime;
-	if (CurrentDelta >= 2 * PI)
-		CurrentDelta = 0;
+	if(QuestMarkerWidget && QuestMarkerWidget->IsVisible())
+		MarkerFloatingMovement(DeltaTime);
+}
 
-	float floatingEffect = sin(CurrentDelta * FloatingSpeed) * FloatingAmplitude;
+void UAQ_QuestComponent::MarkerFloatingMovement(float DeltaTime)
+{
+	if (!cameraManager)
+		cameraManager = GetWorld()->GetFirstLocalPlayerFromController()->PlayerController->PlayerCameraManager;
 
-	if (cameraManager && QuestMarkerWidget && QuestMarkerWidget->IsVisible())
+	if (cameraManager)
 	{
+		CurrentDelta += DeltaTime;
+		if (CurrentDelta >= 2 * PI)
+			CurrentDelta = 0;
+
+		float floatingEffect = sin(CurrentDelta * FloatingSpeed) * FloatingAmplitude;
+
 		QuestMarkerWidget->SetWorldRotation(UKismetMathLibrary::FindLookAtRotation(QuestMarkerWidget->GetComponentLocation(), cameraManager->GetCameraLocation()));
 		QuestMarkerWidget->AddWorldOffset(FVector(0, 0, floatingEffect));
 	}
