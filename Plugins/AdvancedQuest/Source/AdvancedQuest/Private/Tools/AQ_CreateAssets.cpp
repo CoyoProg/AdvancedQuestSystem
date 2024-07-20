@@ -59,6 +59,9 @@ UActorComponent* UAQ_CreateAssets::AddComponent(TSubclassOf<class UActorComponen
 
 void UAQ_CreateAssets::RemoveComponent(UActorComponent* ActorComponent, AActor* Actor)
 {
+	if (!Actor || !ActorComponent)
+		return;
+
 	Actor->RemoveInstanceComponent(ActorComponent);
 	ActorComponent->DestroyComponent();
 
