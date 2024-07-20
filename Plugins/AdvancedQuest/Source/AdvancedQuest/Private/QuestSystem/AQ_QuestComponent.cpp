@@ -73,8 +73,6 @@ void UAQ_QuestComponent::MarkerFloatingMovement(float DeltaTime)
 	if (cameraManager)
 	{
 		CurrentDelta += DeltaTime;
-		if (CurrentDelta >= 2 * PI)
-			CurrentDelta = 0;
 
 		float floatingEffect = sin(CurrentDelta * FloatingSpeed) * FloatingAmplitude;
 
@@ -314,32 +312,24 @@ void UAQ_QuestComponent::CreateQuestMarkerWidget()
 	FVector origin, extent;
 	GetOwner()->GetActorBounds(false, origin, extent);
 
-	// Check if the owner already has a UWidgetComponent
-	QuestMarkerWidget = Cast<UWidgetComponent>(GetOwner()->GetComponentByClass(UWidgetComponent::StaticClass()));
 
-	// If the UWidgetComponent doesn't exist, add it to the owner
-	if (!QuestMarkerWidget)
+	QuestMarkerWidget = Cast<UWidgetComponent>(GetOwner()->AddComponentByClass(UWidgetComponent::StaticClass(), false, FTransform(), false));
+
+	// Check if the WidgetComponent was successfully added
+	if (QuestMarkerWidget)
 	{
-		QuestMarkerWidget = Cast<UWidgetComponent>(GetOwner()->AddComponentByClass(UWidgetComponent::StaticClass(), false, FTransform(), false));
-
-		// Check if the WidgetComponent was successfully added
-		if (QuestMarkerWidget)
-		{
-			QuestMarkerWidget->AttachToComponent(GetOwner()->GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
-			QuestMarkerWidget->SetWidgetClass(QuestMarkerClass);
-			QuestMarkerWidget->SetMaterial(0, QuestMarkerMaterial);
-			QuestMarkerWidget->SetWidgetSpace(EWidgetSpace::World);
-			QuestMarkerWidget->RegisterComponent();
-			QuestMarkerWidget->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-
-			float zCoord = extent.Z * 2 + zOffset;
-			QuestMarkerWidget->SetRelativeLocation(FVector(0, 0, zCoord));
-			QuestMarkerWidget->SetDrawSize(FVector2D(512.f));
-			QuestMarkerWidget->SetWorldScale3D(FVector(.2f));
-		}
-	}
-	else
+		QuestMarkerWidget->AttachToComponent(GetOwner()->GetRootComponent(), FAttachmentTransformRules::SnapToTargetIncludingScale);
 		QuestMarkerWidget->SetWidgetClass(QuestMarkerClass);
+		QuestMarkerWidget->SetMaterial(0, QuestMarkerMaterial);
+		QuestMarkerWidget->SetWidgetSpace(EWidgetSpace::World);
+		QuestMarkerWidget->RegisterComponent();
+		QuestMarkerWidget->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+		float zCoord = extent.Z * 2 + zOffset;
+		QuestMarkerWidget->SetRelativeLocation(FVector(0, 0, zCoord));
+		QuestMarkerWidget->SetDrawSize(FVector2D(512.f));
+		QuestMarkerWidget->SetWorldScale3D(FVector(.2f));
+	}
 
 	SetQuestMarker(false, false);
 }
