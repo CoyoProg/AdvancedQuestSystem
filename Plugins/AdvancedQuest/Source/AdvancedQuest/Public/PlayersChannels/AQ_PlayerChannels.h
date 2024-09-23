@@ -127,12 +127,20 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Advanced Quest | Player")
 	int PlayerLevel = 1;
 
+	UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Player")
+	void SetPlayerLevel(int inPlayerLevel) { PlayerLevel = inPlayerLevel;}
+
+	// Those functions should be implemented in the Character Stats Component
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Advanced Quest | Save-Load")
+	void SavePlayerStats();
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Advanced Quest | Save-Load")
+	void LoadPlayerStats();
 
 	/* Saving system */
 	void SaveGame();
 
 
-	// Those functions should be in the Inventory Component
+	// Those functions should be implemented in the Inventory Component
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Advanced Quest | Save-Load")
 	void SaveInventory(); 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Advanced Quest | Save-Load")

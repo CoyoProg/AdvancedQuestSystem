@@ -7,7 +7,7 @@ void UAQ_StatsChannel::OnStatsEventNotify(EAQ_StatsEventType eventType, UObject*
 {
 	switch (eventType)
 	{
-	case EAQ_StatsEventType::PlayerLevelUp:
-		OnStatsEventDelegate.Broadcast(entity, EAQ_NotifyEventType::PlayerLevelUp, amount);
+		case EAQ_StatsEventType::PlayerLevelUp:
+			OnStatsEventDelegate.Broadcast(entity, EAQ_NotifyEventType::PlayerLevelUp, amount);
 	}
 }

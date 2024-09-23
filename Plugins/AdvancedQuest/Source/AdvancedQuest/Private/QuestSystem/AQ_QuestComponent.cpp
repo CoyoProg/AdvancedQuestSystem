@@ -310,7 +310,7 @@ void UAQ_QuestComponent::BindFunctionsToQuestDelegates()
 void UAQ_QuestComponent::CreateQuestMarkerWidget()
 {
 	FVector origin, extent;
-	GetOwner()->GetActorBounds(false, origin, extent);
+	GetOwner()->GetActorBounds(true, origin, extent);
 
 
 	QuestMarkerWidget = Cast<UWidgetComponent>(GetOwner()->AddComponentByClass(UWidgetComponent::StaticClass(), false, FTransform(), false));
