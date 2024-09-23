@@ -56,7 +56,7 @@ void UAQ_PlayerChannels::BeginPlay()
 	InitQuestWidgets();
 	SetPlayerInputComponent();
 
-	LoadInventory();
+	LoadPlayerData();
 }
 
 void UAQ_PlayerChannels::InitQuestWidgets()
@@ -403,5 +403,5 @@ void UAQ_PlayerChannels::SaveGame()
 	if (QuestManager)
 		QuestManager->SaveQuestData();
 
-	SaveInventory();
+	SavePlayerData();
 }
