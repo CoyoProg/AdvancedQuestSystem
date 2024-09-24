@@ -21,5 +21,4 @@ void UAQ_EnvironmentChannel::OnEnvironmentEventNotify(EAQ_EnvironmentEventType e
 		OnEnvironmentEventDelegate.Broadcast(entity, EAQ_NotifyEventType::MiniGame, DEFAULT_AMOUNT);
 		break;
 	}
-
 }

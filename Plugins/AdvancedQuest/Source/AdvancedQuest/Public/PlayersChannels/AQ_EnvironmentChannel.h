@@ -12,7 +12,7 @@ enum class EAQ_EnvironmentEventType : uint8
 {
 	Interact                UMETA(DisplayName = "Interact"),
 	Travel                  UMETA(DisplayName = "Travel"),
-	MiniGame                UMETA(DisplayName = "Mini-Game"),
+	MiniGame                UMETA(DisplayName = "Mini-Game")
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnEnvironmentEventDelegate, UObject*, entity, EAQ_NotifyEventType, eventType, float, amount);

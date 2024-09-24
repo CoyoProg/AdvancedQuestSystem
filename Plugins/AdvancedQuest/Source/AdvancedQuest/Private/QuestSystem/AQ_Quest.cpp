@@ -170,6 +170,14 @@ void UAQ_Quest::OnNotify(UObject* entity, EAQ_NotifyEventType eventTypeP, float 
 		}
 	}
 
+	bool retFlag;
+	CheckQuestCompletion(objectivesCount, retFlag);
+	if (retFlag) return;
+}
+
+void UAQ_Quest::CheckQuestCompletion(int objectivesCount, bool& retFlag)
+{
+	retFlag = true;
 	AllObjectivesCompleted = true;
 	for (int i = 0; i < objectivesCount; i++)
 	{
@@ -194,6 +202,29 @@ void UAQ_Quest::OnNotify(UObject* entity, EAQ_NotifyEventType eventTypeP, float 
 		if (QuestStateChangedDelegate.IsBound())
 			QuestStateChangedDelegate.Broadcast(this, QuestState);
 	}
+	retFlag = false;
+}
+
+void UAQ_Quest::OnQuestCompletionNotify(UAQ_Quest* Quest)
+{
+	int objectivesCount = QuestData->objectives.Num();
+	int amount = 1;
+
+	for (int i = 0; i < objectivesCount; i++)
+	{
+		if (QuestData->objectives[i].objectiveType != EAQ_ObjectivesType::QuestCompletion)
+			continue;
+
+		if (Quest->QuestData->QuestID != QuestData->objectives[i].questID)
+			continue;
+
+		UpdateCurrentObjective(i, amount);
+		break;
+	}
+
+	bool retFlag;
+	CheckQuestCompletion(objectivesCount, retFlag);
+	if (retFlag) return;
 }
 
 void UAQ_Quest::UpdateCurrentObjective(int CurrentIndex, float amount)
@@ -309,8 +340,30 @@ void UAQ_Quest::CheckIfRequirementsMet()
 
 bool UAQ_Quest::IsSameObject(int objectiveIndexP, UObject* entityP)
 {
+	FString DebugMessage;
+	float TimeToDisplay = 5.0f; // Display time in seconds
+	FColor TextColor = FColor::Green; // Message text color
+
+	DebugMessage = TEXT("Inside IsSameObject");
+	GEngine->AddOnScreenDebugMessage(-1, TimeToDisplay, TextColor, DebugMessage);
+	if (!entityP)
+	{
+		if (GEngine)
+		{
+			DebugMessage = TEXT("NO Entity");
+			GEngine->AddOnScreenDebugMessage(-1, TimeToDisplay, TextColor, DebugMessage);
+		}
+	}
+
 	/* Check if the entity Class is the same as the ObjectiveTarget Class */
 	UClass* ObjectiveTargetClass = QuestData->objectives[objectiveIndexP].objectTarget;
+
+	if (!ObjectiveTargetClass)
+	{
+		DebugMessage = TEXT("No Objective Target");
+		GEngine->AddOnScreenDebugMessage(-1, TimeToDisplay, TextColor, DebugMessage);
+	}
+
 	if (!entityP->GetClass()->IsChildOf(ObjectiveTargetClass))
 		return false;
 
@@ -366,6 +419,11 @@ bool UAQ_Quest::IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTy
 
 	case EAQ_NotifyEventType::Travel:
 		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Location)
+			return true;
+		break;
+
+	case EAQ_NotifyEventType::QuestCompletion:
+		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::QuestCompletion)
 			return true;
 		break;
 

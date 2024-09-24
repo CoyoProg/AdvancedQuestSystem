@@ -19,6 +19,8 @@ enum class EAQ_ObjectivesType : uint8
 	Location		UMETA(DisplayName = "Location"),
 	MiniGame        UMETA(DisplayName = "Mini-Game"),
 
+	QuestCompletion	UMETA(DisplayName = "Quest Completion"),
+
 	PlayerLevelUp   UMETA(DisplayName = "Player Level Up"),
 };
 

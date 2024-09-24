@@ -28,11 +28,14 @@ struct FAQ_Objectives
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest | Data")
 	EAQ_ObjectivesType objectiveType = EAQ_ObjectivesType::Interact;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest | Data", meta = (EditCondition = "objectiveType != EAQ_ObjectivesType::Collect && objectiveType != EAQ_ObjectivesType::Deliver", EditConditionHides))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest | Data", meta = (EditCondition = "objectiveType != EAQ_ObjectivesType::Collect && objectiveType != EAQ_ObjectivesType::Deliver && objectiveType != EAQ_ObjectivesType::QuestCompletion", EditConditionHides))
 	UClass* objectTarget = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest | Data", meta = (EditCondition = "objectiveType == EAQ_ObjectivesType::Collect || objectiveType == EAQ_ObjectivesType::Deliver", EditConditionHides))
 	class UAQ_ItemData* itemTarget = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest | Data", meta = (EditCondition = "objectiveType == EAQ_ObjectivesType::QuestCompletion", EditConditionHides))
+	int questID = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Advanced Quest | Quest | Data")
 	FString objectiveSummary = FString();

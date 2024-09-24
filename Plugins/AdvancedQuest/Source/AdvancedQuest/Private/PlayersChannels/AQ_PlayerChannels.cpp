@@ -295,7 +295,6 @@ void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 	quest->PositiveObjectiveUpdateDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestProgress);
 	quest->NegativeObjectiveUpdateDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestRegression);
 
-	/* Add the quest as Observer to the different channels */
 	for (auto& questObjectives : quest->QuestData->objectives)
 	{
 		EAQ_ObjectivesType eventType = questObjectives.objectiveType;
@@ -312,6 +311,20 @@ void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 			/* Check the Player stats (Can be anything from Player's Level,
 			to Achievements, Professions Level...) */
 			currentAmount = CheckForPlayerStats(questObjectives);
+
+			break;
+		}
+
+		case EAQ_ObjectivesType::QuestCompletion:
+		{
+			if (QuestManager->QueryQuest(questObjectives.questID)->QuestState == EAQ_QuestState::Archive)
+			{
+				currentAmount = 1;
+			}
+			else
+			{
+				QuestChannel->QuestCompletionDelegate.AddDynamic(quest, &UAQ_Quest::OnQuestCompletionNotify);
+			}
 
 			break;
 		}

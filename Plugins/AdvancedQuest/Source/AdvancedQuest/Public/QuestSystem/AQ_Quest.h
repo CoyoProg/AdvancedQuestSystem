@@ -86,6 +86,10 @@ public:
 	/* Event Listeners */
 	UFUNCTION()
 	void OnNotify(UObject* entity, EAQ_NotifyEventType eventTypeP, float amount = 1);
+	void CheckQuestCompletion(int objectivesCount, bool& retFlag);
+	UFUNCTION()
+	void OnQuestCompletionNotify(UAQ_Quest* Quest);
+
 	void UpdateCurrentObjective(int i, float amount = 1);
 
 	UFUNCTION()

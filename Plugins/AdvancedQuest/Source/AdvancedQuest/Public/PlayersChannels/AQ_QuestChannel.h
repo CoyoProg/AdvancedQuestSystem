@@ -17,6 +17,7 @@ class UWidgetComponent;
 class UUserWidget;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FLevelRequirementChangedDelegate, int, PlayerLevel);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FQuestCompletionDelegate, UAQ_Quest*, Quest);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSpecialEventTriggerDelegate, UAQ_SpecialEventData*, SpecialEvent);
 
 /**
@@ -58,6 +59,7 @@ public:
 
 	FLevelRequirementChangedDelegate LevelRequirementChangedDelegate;
 	FSpecialEventTriggerDelegate SpecialEventTriggerDelegate;
+	FQuestCompletionDelegate QuestCompletionDelegate;
 
 	/* References */
 	UAQ_AudioChannel* AudioChannel = nullptr;

@@ -24,6 +24,7 @@ enum class EAQ_NotifyEventType : uint8
     Interact                UMETA(DisplayName = "Interact"),
     Travel                  UMETA(DisplayName = "Travel"),
     MiniGame                UMETA(DisplayName = "Mini-Game"),
+    QuestCompletion         UMETA(DisplayName = "Mini-Game"),
 
 
     // Stats
