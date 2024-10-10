@@ -29,6 +29,23 @@ void UAQ_QuestListenerComponent::BeginPlay()
 
 	/* Get the quest manager */
 	QuestManager = localPlayer->FindComponentByClass<UAQ_QuestManager>();
+	ListenToQuests();
+}
+
+void UAQ_QuestListenerComponent::ListenToQuests()
+{
+	if (!QuestManager) return;
+
+	for (auto quest : QuestToFollow)
+	{
+		UAQ_Quest* questToFollow = QuestManager->QueryQuest(quest);
+		if (!questToFollow) continue;
+
+		questToFollow->QuestStateChangedDelegate.AddDynamic(
+			this,
+			&UAQ_QuestListenerComponent::OnQuestStateChangedWrapper
+		);
+	}
 }
 
 void UAQ_QuestListenerComponent::OnQuestStateChangedWrapper(UAQ_Quest* questUpdate, EAQ_QuestState QuestState)
@@ -54,9 +71,8 @@ void UAQ_QuestListenerComponent::OnQuestStateChangedWrapper(UAQ_Quest* questUpda
 
 void UAQ_QuestListenerComponent::BindFunctionsToQuestDelegates(UAQ_Quest* quest)
 {
-	/* Only bind to the delegate when the quest is active */
-	if (!QuestManager 
-		|| quest == nullptr 
+	if (!QuestManager
+		|| quest == nullptr
 		|| !quest->bIsRequirementMet)
 		return;
 

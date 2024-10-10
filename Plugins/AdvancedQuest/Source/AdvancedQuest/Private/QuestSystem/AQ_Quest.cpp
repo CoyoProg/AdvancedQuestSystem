@@ -340,32 +340,10 @@ void UAQ_Quest::CheckIfRequirementsMet()
 
 bool UAQ_Quest::IsSameObject(int objectiveIndexP, UObject* entityP)
 {
-	FString DebugMessage;
-	float TimeToDisplay = 5.0f; // Display time in seconds
-	FColor TextColor = FColor::Green; // Message text color
-
-	DebugMessage = TEXT("Inside IsSameObject");
-	GEngine->AddOnScreenDebugMessage(-1, TimeToDisplay, TextColor, DebugMessage);
-	if (!entityP)
-	{
-		if (GEngine)
-		{
-			DebugMessage = TEXT("NO Entity");
-			GEngine->AddOnScreenDebugMessage(-1, TimeToDisplay, TextColor, DebugMessage);
-		}
-	}
-
 	/* Check if the entity Class is the same as the ObjectiveTarget Class */
 	UClass* ObjectiveTargetClass = QuestData->objectives[objectiveIndexP].objectTarget;
 
-	if (!ObjectiveTargetClass)
-	{
-		DebugMessage = TEXT("No Objective Target");
-		GEngine->AddOnScreenDebugMessage(-1, TimeToDisplay, TextColor, DebugMessage);
-	}
-
-	if (!entityP->GetClass()->IsChildOf(ObjectiveTargetClass))
-		return false;
+	if (!entityP->GetClass()->IsChildOf(ObjectiveTargetClass)) return false;
 
 	/* Check if the Objective is a Unique Objective */
 	if (QuestData->objectives[objectiveIndexP].isUnique)
@@ -375,15 +353,13 @@ bool UAQ_Quest::IsSameObject(int objectiveIndexP, UObject* entityP)
 		UAQ_UniqueIDComponent* UniqueIDComponent = MyActor->FindComponentByClass<UAQ_UniqueIDComponent>();
 
 		int UniqueID = 0;
-		if (!UniqueIDComponent)
-			return false;
+		if (!UniqueIDComponent) return false;
 		
 		/* Get the entity's UniqueID*/
 		UniqueID = UniqueIDComponent->GetUniqueID();
 
 		/* And compare it with the Objective UniqueID*/
-		if (UniqueID != QuestData->objectives[objectiveIndexP].uniqueObjectID)
-			return false;
+		if (UniqueID != QuestData->objectives[objectiveIndexP].uniqueObjectID) return false;
 	}
 
 	return true;
@@ -392,11 +368,9 @@ bool UAQ_Quest::IsSameObject(int objectiveIndexP, UObject* entityP)
 bool UAQ_Quest::IsSameItem(int objectiveIndexP, UObject* entityP)
 {
 	UAQ_ItemData* itemData = Cast<UAQ_ItemData>(entityP);
-	if (!itemData)
-		return false;
+	if (!itemData) return false;
 
-	if (itemData != QuestData->objectives[objectiveIndexP].itemTarget)
-		return false;
+	if (itemData != QuestData->objectives[objectiveIndexP].itemTarget) return false;
 
 	return true;
 }
@@ -408,34 +382,28 @@ bool UAQ_Quest::IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTy
 	{
 		// ENVIRONMENT
 	case EAQ_NotifyEventType::Interact:
-		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Interact)
-			return true;
+		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Interact) return true;
 		break;
 
 	case EAQ_NotifyEventType::MiniGame:
-		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::MiniGame)
-			return true;
+		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::MiniGame) return true;
 		break;
 
 	case EAQ_NotifyEventType::Travel:
-		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Location)
-			return true;
+		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Location) return true;
 		break;
 
 	case EAQ_NotifyEventType::QuestCompletion:
-		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::QuestCompletion)
-			return true;
+		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::QuestCompletion) return true;
 		break;
 
 		// INVENTORY
 	case EAQ_NotifyEventType::Collect:
-		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Collect)
-			return true;
+		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Collect) return true;
 		break;
 
 	case EAQ_NotifyEventType::RemovedFromInventory:
-		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Collect)
-			return true;
+		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Collect) return true;
 		break;
 
 		// COMBAT
@@ -446,20 +414,17 @@ bool UAQ_Quest::IsSameEventType(int objectiveIndexP, EAQ_NotifyEventType eventTy
 		break;
 
 	case EAQ_NotifyEventType::Kill:
-		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Kill)
-			return true;
+		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Kill) return true;
 		break;
 
 	case EAQ_NotifyEventType::Protect:
-		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Protect)
-			return true;
+		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::Protect) return true;
 		break;
 
 
 		// PLAYER STATS
 	case EAQ_NotifyEventType::PlayerLevelUp:
-		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::PlayerLevelUp)
-			return true;
+		if (QuestData->objectives[objectiveIndexP].objectiveType == EAQ_ObjectivesType::PlayerLevelUp) return true;
 		break;
 	}
 

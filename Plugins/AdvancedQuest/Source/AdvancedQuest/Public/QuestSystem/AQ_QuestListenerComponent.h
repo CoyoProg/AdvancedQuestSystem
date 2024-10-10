@@ -18,8 +18,13 @@ class ADVANCEDQUEST_API UAQ_QuestListenerComponent : public UActorComponent
 public:	
 	UAQ_QuestListenerComponent();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Advanced Quest | Quest")
+	TArray<int> QuestToFollow;
+
 protected:
 	virtual void BeginPlay() override;
+
+	void ListenToQuests();
 
 	/* References */
 	UPROPERTY(BlueprintReadOnly, Category = "Advanced Quest | Quest")
