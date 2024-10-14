@@ -16,7 +16,10 @@ enum class EAQ_CombatEventType : uint8
     Protect    UMETA(DisplayName = "Protect"),
 };
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnCombatEventDelegate, UObject*, entity, EAQ_NotifyEventType, eventType, float, amount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnKillEventDelegate, UObject*, entity, EAQ_NotifyEventType, eventType, float, amount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnProtectEventDelegate, UObject*, entity, EAQ_NotifyEventType, eventType, float, amount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnHealEventDelegate, UObject*, entity, EAQ_NotifyEventType, eventType, float, amount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnDamageEventDelegate, UObject*, entity, EAQ_NotifyEventType, eventType, float, amount);
 
 /**
  * 
@@ -30,5 +33,8 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Advanced Quest | Events")
 	void OnCombatEventNotify(EAQ_CombatEventType eventType, UObject* entity, float amount = 1);
 
-    FOnCombatEventDelegate OnCombatEventDelegate;
+    FOnKillEventDelegate OnKillEventDelegate;
+    FOnProtectEventDelegate OnProtectEventDelegate;
+    FOnHealEventDelegate OnHealEventDelegate;
+    FOnDamageEventDelegate OnDamageEventDelegate;
 };

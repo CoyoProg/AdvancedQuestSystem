@@ -15,6 +15,8 @@ enum class EAQ_ObjectivesType : uint8
 
 	Kill			UMETA(DisplayName = "Kill"),
 	Protect			UMETA(DisplayName = "Protect"),
+	Heal			UMETA(DisplayName = "Heal"),
+	Damage			UMETA(DisplayName = "Damage"),
 
 	Location		UMETA(DisplayName = "Location"),
 	MiniGame        UMETA(DisplayName = "Mini-Game"),

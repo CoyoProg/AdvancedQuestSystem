@@ -109,9 +109,22 @@ void UAQ_PlayerChannels::AddObserver(UAQ_Quest* entity, EAQ_ObjectivesType event
 	{
 	/** Add Observer to Combat Channel */
 	case EAQ_ObjectivesType::Kill:
+	{
+		CombatChannel->OnKillEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify);
+	}
 	case EAQ_ObjectivesType::Protect:
 	{
-		CombatChannel->OnCombatEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify);
+		CombatChannel->OnProtectEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify);
+		break;
+	}
+	case EAQ_ObjectivesType::Heal:
+	{
+		CombatChannel->OnHealEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify);
+		break;
+	}
+	case EAQ_ObjectivesType::Damage:
+	{
+		CombatChannel->OnDamageEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify);
 		break;
 	}
 
@@ -125,10 +138,18 @@ void UAQ_PlayerChannels::AddObserver(UAQ_Quest* entity, EAQ_ObjectivesType event
 
 	/** Add Observer to Environment Channel */
 	case EAQ_ObjectivesType::Location:
+	{
+		EnvironmentChannel->OnTravelEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify);
+		break;
+	}
 	case EAQ_ObjectivesType::Interact:
+	{
+		EnvironmentChannel->OnInteractEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify);
+		break;
+	}
 	case EAQ_ObjectivesType::MiniGame:
 	{
-		EnvironmentChannel->OnEnvironmentEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify);
+		EnvironmentChannel->OnMiniGameEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify);
 		break;
 	}
 
@@ -147,9 +168,22 @@ void UAQ_PlayerChannels::RemoveObserver(UAQ_Quest* entity, EAQ_ObjectivesType ev
 	{
 	/** Remove Observer from Combat Channel */
 	case EAQ_ObjectivesType::Kill:
+	{
+		CombatChannel->OnKillEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify);
+	}
 	case EAQ_ObjectivesType::Protect:
 	{
-		CombatChannel->OnCombatEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify);
+		CombatChannel->OnProtectEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify);
+		break;
+	}
+	case EAQ_ObjectivesType::Heal:
+	{
+		CombatChannel->OnHealEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify);
+		break;
+	}
+	case EAQ_ObjectivesType::Damage:
+	{
+		CombatChannel->OnDamageEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify);
 		break;
 	}
 
@@ -163,10 +197,18 @@ void UAQ_PlayerChannels::RemoveObserver(UAQ_Quest* entity, EAQ_ObjectivesType ev
 
 	/** Remove Observer from Environment Channel */
 	case EAQ_ObjectivesType::Location:
+	{
+		EnvironmentChannel->OnTravelEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify);
+		break;
+	}
 	case EAQ_ObjectivesType::Interact:
+	{
+		EnvironmentChannel->OnInteractEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify);
+		break;
+	}
 	case EAQ_ObjectivesType::MiniGame:
 	{
-		EnvironmentChannel->OnEnvironmentEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify);
+		EnvironmentChannel->OnMiniGameEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify);
 		break;
 	}
 

@@ -8,19 +8,19 @@ void UAQ_CombatChannel::OnCombatEventNotify(EAQ_CombatEventType eventType, UObje
 	switch (eventType)
 	{
 	case EAQ_CombatEventType::Kill:
-		OnCombatEventDelegate.Broadcast(entity, EAQ_NotifyEventType::Kill, amount);
+		OnKillEventDelegate.Broadcast(entity, EAQ_NotifyEventType::Kill, amount);
 		break;
 
 	case EAQ_CombatEventType::Protect:
-		OnCombatEventDelegate.Broadcast(entity, EAQ_NotifyEventType::Protect, amount);
+		OnProtectEventDelegate.Broadcast(entity, EAQ_NotifyEventType::Protect, amount);
 		break;
 
 	case EAQ_CombatEventType::Heal:
-		OnCombatEventDelegate.Broadcast(entity, EAQ_NotifyEventType::Heal, amount);
+		OnHealEventDelegate.Broadcast(entity, EAQ_NotifyEventType::Heal, amount);
 		break;
 
 	case EAQ_CombatEventType::Damage:
-		OnCombatEventDelegate.Broadcast(entity, EAQ_NotifyEventType::Damage, amount);
+		OnDamageEventDelegate.Broadcast(entity, EAQ_NotifyEventType::Damage, amount);
 		break;
 	}
 }

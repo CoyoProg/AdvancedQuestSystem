@@ -15,7 +15,9 @@ enum class EAQ_EnvironmentEventType : uint8
 	MiniGame                UMETA(DisplayName = "Mini-Game")
 };
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnEnvironmentEventDelegate, UObject*, entity, EAQ_NotifyEventType, eventType, float, amount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnInteractEventDelegate, UObject*, entity, EAQ_NotifyEventType, eventType, float, amount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnTravelEventDelegate, UObject*, entity, EAQ_NotifyEventType, eventType, float, amount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnMiniGameEventDelegate, UObject*, entity, EAQ_NotifyEventType, eventType, float, amount);
 
 /**
  * 
@@ -30,5 +32,7 @@ public:
 	void OnEnvironmentEventNotify(EAQ_EnvironmentEventType eventType, UObject* entity);
 
 	/* Delegates */
-	FOnEnvironmentEventDelegate OnEnvironmentEventDelegate;
+	FOnInteractEventDelegate OnInteractEventDelegate;
+	FOnTravelEventDelegate OnTravelEventDelegate;
+	FOnMiniGameEventDelegate OnMiniGameEventDelegate;
 };

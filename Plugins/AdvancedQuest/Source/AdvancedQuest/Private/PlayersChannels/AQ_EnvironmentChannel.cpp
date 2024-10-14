@@ -10,15 +10,15 @@ void UAQ_EnvironmentChannel::OnEnvironmentEventNotify(EAQ_EnvironmentEventType e
 	switch (eventType)
 	{
 	case EAQ_EnvironmentEventType::Interact:
-		OnEnvironmentEventDelegate.Broadcast(entity, EAQ_NotifyEventType::Interact, DEFAULT_AMOUNT);
+		OnInteractEventDelegate.Broadcast(entity, EAQ_NotifyEventType::Interact, DEFAULT_AMOUNT);
 		break;
 
 	case EAQ_EnvironmentEventType::Travel:
-		OnEnvironmentEventDelegate.Broadcast(entity, EAQ_NotifyEventType::Travel, DEFAULT_AMOUNT);
+		OnTravelEventDelegate.Broadcast(entity, EAQ_NotifyEventType::Travel, DEFAULT_AMOUNT);
 		break;
 
 	case EAQ_EnvironmentEventType::MiniGame:
-		OnEnvironmentEventDelegate.Broadcast(entity, EAQ_NotifyEventType::MiniGame, DEFAULT_AMOUNT);
+		OnMiniGameEventDelegate.Broadcast(entity, EAQ_NotifyEventType::MiniGame, DEFAULT_AMOUNT);
 		break;
 	}
 }
