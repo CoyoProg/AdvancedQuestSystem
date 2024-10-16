@@ -11,6 +11,7 @@
 #include "GameFramework/Pawn.h"
 #include "Components/WidgetComponent.h"
 #include "Blueprint/UserWidget.h"
+#include "Materials/MaterialInterface.h"
 #include <Kismet/KismetMathLibrary.h>
 
 #if WITH_EDITOR

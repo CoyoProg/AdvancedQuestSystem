@@ -87,7 +87,9 @@ void UAQ_QuestChannel::OnQuestStateChanged(UAQ_Quest* QuestUpdate, EAQ_QuestStat
 		QuestUpdate->NegativeObjectiveUpdateDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestRegression);
 		QuestUpdate->QuestStateChangedDelegate.RemoveDynamic(this, &UAQ_QuestChannel::OnQuestStateChanged);
 
-		QuestCompletionDelegate.Broadcast(QuestUpdate);
+		if(QuestCompletionDelegate.IsBound())
+			QuestCompletionDelegate.Broadcast(QuestUpdate);
+
 		break;
 	}
 	}

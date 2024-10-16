@@ -12,6 +12,7 @@ class UUserWidget;
 class UAQ_QuestManager;
 class IAQ_PlayerChannelsFacade;
 class APlayerCameraManager;
+class UMaterialInterface;
 
 USTRUCT(Blueprintable, BlueprintType)
 struct FAQ_IsGiverOrReceiver
