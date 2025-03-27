@@ -38,7 +38,11 @@ void UAQ_QuestManager::InitializeComponent()
 	AssetRegistry.GetAssetsByClass(assetPath, QuestDataAssets, true);
 #endif
 
-	
+	verifyf(
+		!QuestDataAssets.IsEmpty(),
+		TEXT("No quest data found in the content drawer")
+	);
+
 	/* Create a quest for each Quest Data found */
 	for (auto assets : QuestDataAssets)
 	{
@@ -77,19 +81,33 @@ void UAQ_QuestManager::LateBeginPlay()
 {
 	/* Get the Player Channels component */
 	UAQ_PlayerChannels* playerChannels = GetOwner()->FindComponentByClass<UAQ_PlayerChannels>();
-	if (!playerChannels)
-		return;
+
+	verifyf(
+		IsValid(playerChannels),
+		TEXT("The player channel is missing on %s"), *GetOwner()->GetName()
+	);
 
 	/* Generate an array with all the quests in the QuestDataCenter */
 	TArray<UAQ_Quest*> temporaryQuests;
 	QuestDataCenter.GenerateValueArray(temporaryQuests);
 
+	verifyf(
+		!QuestDataCenter.IsEmpty(),
+		TEXT("No quest data found in the content drawer")
+	);
+
+	int iterations = 0;
 	/* Call On Quest Created for each quests */
 	for (auto quests : temporaryQuests)
 	{
+		verifyf(
+			IsValid(quests),
+			TEXT("Quest not valid! Iteration %i"), iterations);
+
 		/* According to the state of each quests, the Player Channels will update
 		the Quest channel and its book quest, and Functions will be bind to delegates */
 		playerChannels->OnQuestCreated(quests);
+		iterations++;
 	}
 }
 

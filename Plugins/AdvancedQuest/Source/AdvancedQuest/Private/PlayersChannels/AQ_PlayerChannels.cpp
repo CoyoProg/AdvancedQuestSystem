@@ -72,7 +72,7 @@ void UAQ_PlayerChannels::InitQuestWidgets()
 	if (QuestWidgets)
 	{
 		QuestWidgets->PlayerController = GetWorld()->GetFirstPlayerController();
-		QuestWidgets->OnQuestEnableDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestEnable_Implementation);
+		QuestWidgets->OnQuestEnableDelegate.AddUniqueDynamic(this, &UAQ_PlayerChannels::OnQuestEnable_Implementation);
 	}
 }
 
@@ -82,7 +82,7 @@ void UAQ_PlayerChannels::ForceInitQuestWidget()
 	if (QuestWidgets)
 	{
 		QuestWidgets->PlayerController = GetWorld()->GetFirstPlayerController();
-		QuestWidgets->OnQuestEnableDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestEnable_Implementation);
+		QuestWidgets->OnQuestEnableDelegate.AddUniqueDynamic(this, &UAQ_PlayerChannels::OnQuestEnable_Implementation);
 	}
 
 	SetPlayerInputComponent();
@@ -281,16 +281,25 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 	{
 		FAQ_RequiermentData& requirements = quest->QuestData->questRequirements;
 
+		verifyf(
+			IsValid(QuestChannel),
+			TEXT("Quest Channel not valid! CHANNELS NOT INITIALIZED PROPERLY")
+		);
+
+		verifyf(
+			IsValid(quest),
+			TEXT("Quest not valid! Quest Creation failed")
+		);
+
 		/* Check the requirements & bind delegates */
 		if (quest->bIsRequirementMet)
 			break;
 
 		if (!requirements.LevelMet)
-			QuestChannel->LevelRequirementChangedDelegate.AddDynamic(quest, &UAQ_Quest::OnLevelRequirementChange);
+			QuestChannel->LevelRequirementChangedDelegate.AddUniqueDynamic(quest, &UAQ_Quest::OnLevelRequirementChange);
 		
 		if (!requirements.AllEventsMet)
-			QuestChannel->SpecialEventTriggerDelegate.AddDynamic(quest, &UAQ_Quest::OnEventRequirementChange);
-
+			QuestChannel->SpecialEventTriggerDelegate.AddUniqueDynamic(quest, &UAQ_Quest::OnEventRequirementChange);
 
 		if (requirements.QuestID.Num() > 0)
 		{
@@ -313,8 +322,8 @@ void UAQ_PlayerChannels::OnQuestCreated(UAQ_Quest* quest)
 	case EAQ_QuestState::Valid:
 	{
 		/* Bind delegates & add the Quest to the Book Quest*/
-		quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
-		quest->QuestStateChangedDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestStateChanged);
+		quest->QuestStateChangedDelegate.AddUniqueDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
+		quest->QuestStateChangedDelegate.AddUniqueDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestStateChanged);
 
 		QuestChannel->QuestWidgets->OnLoadQuests(quest);
 		break;
@@ -330,12 +339,12 @@ void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 	QuestChannel->PlayQuestStartSound(quest);
 	
 	/* Subscribe the player Channel to the OnStateChanged delegate */
-	quest->QuestStateChangedDelegate.AddDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
+	quest->QuestStateChangedDelegate.AddUniqueDynamic(this, &UAQ_PlayerChannels::OnQuestStateChanged);
 
 	/* Subscribe the quest Channel to the ObjectivesUpdate & OnStateChanged delegate*/
-	quest->QuestStateChangedDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestStateChanged);
-	quest->PositiveObjectiveUpdateDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestProgress);
-	quest->NegativeObjectiveUpdateDelegate.AddDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestRegression);
+	quest->QuestStateChangedDelegate.AddUniqueDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestStateChanged);
+	quest->PositiveObjectiveUpdateDelegate.AddUniqueDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestProgress);
+	quest->NegativeObjectiveUpdateDelegate.AddUniqueDynamic(QuestChannel, &UAQ_QuestChannel::OnQuestRegression);
 
 	for (auto& questObjectives : quest->QuestData->objectives)
 	{
@@ -365,7 +374,7 @@ void UAQ_PlayerChannels::OnQuestEnable_Implementation(UAQ_Quest* quest)
 			}
 			else
 			{
-				QuestChannel->QuestCompletionDelegate.AddDynamic(quest, &UAQ_Quest::OnQuestCompletionNotify);
+				QuestChannel->QuestCompletionDelegate.AddUniqueDynamic(quest, &UAQ_Quest::OnQuestCompletionNotify);
 			}
 
 			break;

@@ -312,7 +312,7 @@ void UAQ_Quest::CheckIfRequirementsMet()
 	if (!requirements.LevelMet)
 		return;
 
-	/* Chech Events Requirements */
+	/* Check Events Requirements */
 	if (!requirements.AllEventsMet)
 	{
 		for (auto eventID = requirements.SpecialEvents.CreateConstIterator(); eventID; ++eventID)
@@ -324,7 +324,7 @@ void UAQ_Quest::CheckIfRequirementsMet()
 		requirements.AllEventsMet = true;
 	}
 
-	/* Chech Quest Requirements */
+	/* Check Quest Requirements */
 	for(auto questID = requirements.QuestID.CreateConstIterator(); questID; ++questID)
 	{
 		if (!questID.Value())
