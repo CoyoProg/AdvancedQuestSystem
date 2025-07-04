@@ -19,18 +19,18 @@
 #include "EnhancedInputSubsystems.h"
 
 
-UAQ_PlayerChannels::UAQ_PlayerChannels()
+UAQ_PlayerChannels::UAQ_PlayerChannels() : Super()
 {
 	/** Create all channels */
-	InventoryChannel = CreateDefaultSubobject<UAQ_InventoryChannel>(TEXT("Inventory Channel"));
-	EnvironmentChannel = CreateDefaultSubobject<UAQ_EnvironmentChannel>(TEXT("Environment Channel"));
-	CombatChannel = CreateDefaultSubobject<UAQ_CombatChannel>(TEXT("Combat Channel"));
-	StatsChannel = CreateDefaultSubobject<UAQ_StatsChannel>(TEXT("Stats Channel"));
-	AudioChannel = CreateDefaultSubobject<UAQ_AudioChannel>(TEXT("Audio Channel"));
-	QuestChannel = CreateDefaultSubobject<UAQ_QuestChannel>(TEXT("Quest Channel"));
+	InventoryChannel = CreateDefaultSubobject<UAQ_InventoryChannel>(TEXT("AQ_InventoryChannel"));
+	EnvironmentChannel = CreateDefaultSubobject<UAQ_EnvironmentChannel>(TEXT("AQ_EnvironmentChannel"));
+	CombatChannel = CreateDefaultSubobject<UAQ_CombatChannel>(TEXT("AQ_CombatChannel"));
+	StatsChannel = CreateDefaultSubobject<UAQ_StatsChannel>(TEXT("AQ_StatsChannel"));
+	AudioChannel = CreateDefaultSubobject<UAQ_AudioChannel>(TEXT("AQ_AudioChannel"));
+	QuestChannel = CreateDefaultSubobject<UAQ_QuestChannel>(TEXT("AQ_QuestChannel"));
 
-	PrimaryComponentTick.bCanEverTick = true;
-	PrimaryComponentTick.bStartWithTickEnabled = true;
+    PrimaryComponentTick.bCanEverTick = true;
+    PrimaryComponentTick.bStartWithTickEnabled = true;
 }
 
 UAQ_PlayerChannels::~UAQ_PlayerChannels()
@@ -111,6 +111,7 @@ void UAQ_PlayerChannels::AddObserver(UAQ_Quest* entity, EAQ_ObjectivesType event
 	case EAQ_ObjectivesType::Kill:
 	{
 		CombatChannel->OnKillEventDelegate.AddUniqueDynamic(entity, &UAQ_Quest::OnNotify);
+		break;
 	}
 	case EAQ_ObjectivesType::Protect:
 	{
@@ -170,6 +171,7 @@ void UAQ_PlayerChannels::RemoveObserver(UAQ_Quest* entity, EAQ_ObjectivesType ev
 	case EAQ_ObjectivesType::Kill:
 	{
 		CombatChannel->OnKillEventDelegate.RemoveDynamic(entity, &UAQ_Quest::OnNotify);
+		break;
 	}
 	case EAQ_ObjectivesType::Protect:
 	{
